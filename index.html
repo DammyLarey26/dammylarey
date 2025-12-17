@@ -12,28 +12,28 @@
             <img src="download.jpeg" alt="">
             <ul><a href="">HOME</a></ul>
             <ul><a href="">LOST AND FOUND LISTINGS</a></ul>
-            <button onclick="openLogin()">SIGN IN/UP</button>
+            <button class="js-show">SIGN IN/UP</button>
         </div>
         
-        <div id="loginModal" class="modal">
-  <div class="modal-content">
-    <span onclick="closeLogin()" class="close">&times;</span>
-    <h3>Login</h3>
-        <div class="log">
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <div class="fle">
-            <a class="a2" href="">Forgot password?</a> 
-            No account? <a class="a2" href="">Register</a>
-        </div>
-        <button class="btn2">Login</button>
-  </div>
-</div>
+        <div id="loginModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close js-close">&times;</span>
+                <h3>Login</h3>
+                <div class="log">
+                    <input type="text" placeholder="Username" class="username">
+                    <input type="password" placeholder="Password" class="password">
+                    <div class="fle">
+                        <a class="a2" href="">Forgot password?</a> 
+                        No account? <a class="a2" href="">Register</a>
+                    </div>
+                    <button class="btn2 js-loginBtn">Login</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="header2">
-        <p>LOST AND FOUND PORTAL</p>
-        <i>.......Helping you reunite with your lost items......</i>
+    <div class="header2 ">
+        <p class="showname">LOST AND FOUND PORTAL</p>
+        <i class="showintro">.......Helping you reunite with your lost items......</i>
         </div>
         <div class="mid">
         <p>NAVIGATE TO:</p><br>
@@ -47,6 +47,6 @@
             
                 </div>
         </div>
-        <script src="script/script.js"></script>
+        <script src="script/script.js" type="module"></script>
 </body>
 </html>
