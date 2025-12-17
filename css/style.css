@@ -30,7 +30,7 @@ img{
 .header2{
     height: 230px;
     max-width: 100%;
-    background-image:url('/IMG-20251215-WA0024.jpg');
+    background-image:url('../images/background.jpg');
     border-bottom: 30px solid;
     background-position: center;
     background-size: cover;
