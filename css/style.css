@@ -108,18 +108,14 @@ a:hover{
 }
 
 .flex{
-    padding: 20px;
-    margin: 30px;
-    width: 100%;
+    padding: 40px 20px;
     display: flex;
-
-    
+    gap: 10px;
+    justify-content: space-between;
 }
 
 .foot{
     display: flex;
-    
-    
 }
 .number{
     font-size: 60px;
@@ -281,11 +277,4 @@ h4{
     color: white;
     background-color: black;
     border-radius: 5px;
-}
-
-@media (max-width: 1050px) {
-    .header {
-        ;
-    }
-
 }
