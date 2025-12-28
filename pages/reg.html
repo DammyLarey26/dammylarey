@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost and Found Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script/script.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo"><img src="images/download.jpeg" alt=""></div>
+        <div class="nav-bar">
+            <div class="nav-bar-items">
+                <div class="home-icon"></div>
+                <a href="pages/index.html">HOME</a>
+            </div>
+            
+            <div class="nav-bar-items">
+                <div class="lost-icon"></div>
+                <a href="pages/lost.html">LOST & FOUND LISTINGS</a>
+            </div>
+            <button onclick="openLogin()">SIGN IN/UP</button>
+            
+            
+        </div>
+
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span onclick="closeLogin()" class="close">&times;</span>
+    <h3>Login</h3>
+        <div class="log">
+        <input type="text" placeholder="Username" class="log-form">
+        <input type="password" placeholder="Password" class="log-form">
+        <div class="fle">
+            <a class="a2" href="">Forgot password?</a> 
+        <p1>No account? <a class="a2" href="pages/reg.html">Register</a></p1>
+        </div>
+                <button class="btn2">Login</button>
+  </div>
+</div>
+        </div>
+    </div>
+    <div class="header2">
+        <p>LOST AND FOUND PORTAL</p>
+        <i>.......Helping you reunite with your lost items......</i>
+        </div>
+    <div class="form">
+        <h>REGISTRATION PAGE</h>
+        <p class="crt"><i>Create an account </i></p>
+        <input class="input-field" type="text" placeholder="Name" required>
+        <input class="input-field" type="email" placeholder="Email" required>
+        <input class="input-field" type="password" placeholder="Password" required>
+        <input class="input-field" type="password" placeholder="Confirm Password">
+        <button class="reg-btn">Register</button>
+            
+
+        
+    </div>
+
+
+</body>
+</html>
