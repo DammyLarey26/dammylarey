@@ -30,6 +30,7 @@ hideLogin.addEventListener('click', ()=>{
 // function closeLogin() {
 //   document.getElementById("loginModal").style.display = "none";
 // }
+
 const userName = document.querySelector('.showname')
 const intro = document.querySelector('.showintro')
 
