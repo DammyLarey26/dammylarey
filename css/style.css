@@ -281,3 +281,108 @@ h4{
     background-color: black;
     border-radius: 5px;
 }
+
+@media screen and (max-width: 1024px) {
+    .flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .foot {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .fot {
+        width: 90%;
+    }
+    .mid {
+        flex-direction: column;
+    }
+  .lost, .found {
+        width: 80%;
+        padding-left: 0;
+    }
+    .lost-items {
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0;
+    }
+    .nav-bar {
+        flex-direction: column;
+        align-items: center;
+        margin-right: 0;
+        padding-left: 0;
+    }
+    .nav-bar-items {
+        padding: 10px 0;
+    }
+    .logo {
+        padding-left: 0;
+        justify-content: center;
+    }
+        .header2 {
+        height: 200px;
+        padding: 10px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    p {
+        font-size: 20px;
+    }
+    .log {
+        width: 90%;
+        padding: 20px;
+        margin: 10px auto;
+    }
+    .btn2 {
+        margin-left: 0;
+        width: 80%;
+    }
+ button {
+        margin-left: 0;
+    }
+}
+@media screen and (max-width: 480px) {
+    .header2 {
+        height: 150px;
+        padding: 5px;
+    }
+    p {
+        font-size: 18px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    .flex {
+        padding: 20px 10px;
+    }
+    .fot {
+        width: 100%;
+        font-size: 14px;
+         }
+    .number {
+        font-size: 40px;
+        transform: rotate(0deg);
+        margin-bottom: 10px;
+    }
+    .lost, .found {
+        width: 100%;
+        margin-top: 20px;
+        padding-left: 0;
+    }
+    .mid {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .nav-bar-items a {
+        font-size: 16px;
+    }
+}
