@@ -34,6 +34,9 @@ img{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     text-align: center;
 }
+.nav-bar-items i {
+    color: white;
+}
 
 .nav-bar{
     margin-right: 2px;
