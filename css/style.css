@@ -56,10 +56,11 @@ img{
     text-align: center;
 
 }
-p{
+.showname{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 30px;
 }
+
 
 h2{
     text-align: center;
