@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continue Registration</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/cont.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">
+            <img src="../images/download.jpeg" alt="OOU Logo">
+            <a href="#">Home</a>
+            <a href="#">Lost & Found Listings</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </div>
+
+    <main class="cont-reg">
+        <div class="cont-main">
+
+            <div class="header-cont">
+                <h1>CONTINUE REGISTRATION</h1>
+                <p>Please fill in the remaining information to complete your registration</p>
+            </div>
+
+            <form class="body-cont">
+
+                <div class="passport pass2">
+                    <input type="file" accept="image/*">
+                    <p>Upload Passport</p>
+                </div>
+
+                <div class="container">
+                    <label>
+                        Full Name *
+                        <input class="input-form" type="text" required>
+                    </label>
+
+                    <label>
+                        Department *
+                        <input class="input-form" type="text" required>
+                    </label>
+
+                    <label>
+                        Gender *
+                        <div class="radio-group">
+                            <input type="radio" name="gender" value="male" required> Male
+                            <input type="radio" name="gender" value="female"> Female
+                        </div>
+                    </label>
+                </div>
+
+                <div class="container">
+                    <label>
+                        Matric No. / Staff ID *
+                        <input class="input-form" type="text" required>
+                    </label>
+
+                    <label>
+                        Level *
+                        <select required>
+                            <option value="">Select Level</option>
+                            <option>100 Level</option>
+                            <option>200 Level</option>
+                            <option>300 Level</option>
+                            <option>400 Level</option>
+                            <option>500 Level</option>
+                            <option>Staff</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Address *
+                        <input class="input-form" type="text" required>
+                    </label>
+
+                    <label>
+                        Email *
+                        <input class="input-form" type="email" required>
+                    </label>
+
+                    <label>
+                        Phone Number *
+                        <input class="input-form" type="tel" required>
+                    </label>
+                </div>
+
+            </form>
+
+            <button type="submit">Complete Registration</button>
+
+        </div>
+    </main>
+
+</body>
+</html>
