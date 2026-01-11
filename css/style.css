@@ -23,7 +23,6 @@ img{
 
 .logo{
     width: fit-content;
-    position: relative;
     display: flex;
     padding: 10px;
     padding-left: 30px;
