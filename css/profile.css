@@ -199,7 +199,7 @@ button:hover {
     }
 
     p{
-        font-size: smaller;
+        font-size: small;
     }
     .logo{
         flex-direction: column;
