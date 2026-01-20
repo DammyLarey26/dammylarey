@@ -38,19 +38,20 @@
                 <div class="container">
                     <label>
                         Full Name *
-                        <input class="input-form" type="text" required>
+                        <input class="input-form name" type="text" required>
                     </label>
 
                     <label>
                         Department *
-                        <input class="input-form" type="text" required>
+                        <input class="input-form department" type="text" required>
                     </label>
 
                     <label>
                         Gender *
                         <div class="radio-group">
-                            <input type="radio" name="gender" value="male" required> Male
-                            <input type="radio" name="gender" value="female"> Female
+                            <input type="radio" name="gender" value="male" class="radii"> 
+                            Male
+                            <input type="radio" name="gender" value="female" class="radii"> Female
                         </div>
                     </label>
                 </div>
@@ -58,44 +59,44 @@
                 <div class="container">
                     <label>
                         Matric No. / Staff ID *
-                        <input class="input-form" type="text" required>
+                        <input class="input-form matric" type="text" required>
                     </label>
 
                     <label>
                         Level *
-                        <select required>
-                            <option value="">Select Level</option>
-                            <option>100 Level</option>
-                            <option>200 Level</option>
-                            <option>300 Level</option>
-                            <option>400 Level</option>
-                            <option>500 Level</option>
-                            <option>Staff</option>
+                        <select required class="level">
+                            <option value="" disabled selected>Select Level</option>
+                            <option value="100">100 Level</option>
+                            <option value="200">200 Level</option>
+                            <option value="300">300 Level</option>
+                            <option value="400">400 Level</option>
+                            <option value="500">500 Level</option>
+                            <option value="staff">Staff</option>
                         </select>
                     </label>
 
                     <label>
                         Address *
-                        <input class="input-form" type="text" required>
+                        <input class="input-form address" type="text" required>
                     </label>
 
                     <label>
                         Email *
-                        <input class="input-form" type="email" required>
+                        <input class="input-form email" type="email" disabled>
                     </label>
 
                     <label>
                         Phone Number *
-                        <input class="input-form" type="tel" required>
+                        <input class="input-form phone" type="tel" required>
                     </label>
                 </div>
 
             </form>
 
-            <button type="submit">Complete Registration</button>
+            <button class="submit">Complete Registration</button>
 
         </div>
     </main>
-
+    <script src="/script/c-reg.js"></script>
 </body>
 </html>

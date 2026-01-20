@@ -1,0 +1,20 @@
+{  
+  "labels": "user data",
+  "description": "This file contains user credentials for authentication purposes.",
+  "users": [{
+    "username": "admin",
+    "password": "admin"
+  },
+  {
+    "username": "damilare",
+    "password": "admin"
+  },
+  {
+    "username": "olalekan",
+    "password": "admin"
+  },
+  {
+    "username": "james",
+    "password": "admin"
+  }]
+}
