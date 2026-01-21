@@ -1,17 +1,33 @@
 const uname = document.querySelector('.name');
 const email = document.querySelector('.email')
 const department = document.querySelector('.department')
-const genders = document.querySelector('.radii')
 const matric = document.querySelector('.matric');
 const level = document.querySelector('.level');
 const address = document.querySelector('.address')
 const phone =document.querySelector('.phone')
-
+const faculty = document.querySelector('.faculty')
 
 const tempData = JSON.parse(sessionStorage.getItem('tempData'))
 
+//stores the previous value in its field
 uname.value = tempData.uname
 email.value = tempData.email
+
+function getGender () {
+  const radios = document.querySelectorAll('input[name="gender"]'); 
+  let selectedValue = null; 
+  
+  radios.forEach(radio => { 
+    if (radio.checked) { 
+      selectedValue = radio.value; 
+    } 
+  });
+
+  if (selectedValue) { 
+    // console.log(selectedValue);
+    return selectedValue;
+  }
+}
 
 function register() {
   try {
@@ -24,21 +40,25 @@ function register() {
       fullname : uname.value,
       email : email.value,
       password : tempData.password,
+      faculty : faculty.value,
       department : department.value,
-      gender : 'Male' || 'Female',
+      gender : getGender(),
       matric : matric.value,
       level : level.value,
       address : address.value,
-      phone : phone.value
+      phone : phone.value,
+      userImg: '../images/download.jpeg'
     }
+    // console.log(data);
+    localStorage.setItem('mainuser', JSON.stringify(data))
+    sessionStorage.removeItem('tempData')
 
-    console.log(data);
-    localStorageStorage.setItem('mainuser', JSON.stringify(data))
-    
-  } catch (error) {
-    alert('Internal Server Error\nPlease ty again')
+    window.location.href = 'profile.html'
+
+  } catch (err) {
+    alert('Internal Server Error\n Please ty again')
+    console.error(err)
   }
-  window.location.href = 'profile.html'
 }
 
 document.querySelector('.submit').addEventListener('click', () => {
