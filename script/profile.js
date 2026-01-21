@@ -1,11 +1,16 @@
 const user = JSON.parse(localStorage.getItem('mainuser'));
 
 const userDetails = document.querySelector('.user-details');
-const userImg = document.querySelector('#user-img');
+const userImg = document.querySelectorAll('#user-img');
+const abstractImg = document.querySelector('.abstract-img');
+const abstractInfo = document.querySelector('.abstract-info');
 
-userImg.innerHTML = `
-  <img src="${user.userImg}" alt="user avatar">
-`;
+userImg.forEach(img => {
+  img.innerHTML = `
+    <img src="${user.userImg}" alt="user avatar">
+  `;
+});
+
 userDetails.innerHTML = `
   <p>${user.fullname.toUpperCase()}</p>
   <p>${user.matric.toUpperCase()}</p>
@@ -16,4 +21,9 @@ userDetails.innerHTML = `
   <p>${user.phone}</p>
   <p>${user.email}</p>
   <p>${user.address}</p>
+`;
+
+abstractInfo.innerHTML = `
+  <p>${user.fullname.toUpperCase().split(' ')[1]}</p>
+  <p>${user.matric.toUpperCase()}</p>
 `;
