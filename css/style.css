@@ -9,6 +9,7 @@ body{
       margin: 0;
 }
 
+
 .header{
     height: 60px;
     justify-content: space-between;
@@ -323,10 +324,19 @@ h4{
         padding-left: 0;
     }
     .nav-bar-items {
-        padding: 10px 0;
+        padding: 10px;
+        width: 100%;
+        background-color: beige;
+        margin-bottom: 20px;
     }
+        .nav-bar-items a {
+            color: black;
+        }
+            .nav-bar-items i{
+                color: black;
+            }
     .logo {
-        padding-left: 0;
+        align-items: center;
         justify-content: center;
     }
         .header2 {
@@ -350,6 +360,30 @@ h4{
     }
  button {
         margin-left: 0;
+        padding: 10px;
+        
+    }
+    img{
+        transform: scale(0.5);
+        border-radius: 30px;
+        display: block;
+        
+    }
+    .foot{
+        flex-direction: row;
+    }
+    .fot{
+        width: 300px;
+        margin: 40px 0;
+        text-align: center;
+        
+    }
+    .number{
+        transform: rotate(-90deg);
+    }
+    .fotr{
+        width: 150px;
+        text-align: center;
     }
 }
 @media screen and (max-width: 480px) {
@@ -387,4 +421,5 @@ h4{
     .nav-bar-items a {
         font-size: 16px;
     }
+    
 }
