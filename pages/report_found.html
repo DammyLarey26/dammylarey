@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Found</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/cont.css">
+</head>
+<body>
+           <div class="header">
+        <div class="logo">
+            <img src="../images/download.jpeg" alt="OOU Logo">
+            <a href="#">Home</a>
+            <a href="#">Lost & Found Listings</a>
+            <a href="#">Contact Us</a>
+    </div>
+
+        <div class="nav-bar">
+            <div class="right-hand-side">
+                <input class="search" type="search" placeholder="Search..">
+                <i class="fa-solid fa-bell top-btn"></i>
+                <i class="fa-solid fa-cog top-btn"></i>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="lower-part">
+
+        <div class="side-bar">
+            <div class="passport" id = "user-img"> 
+                <img src="../images/lekan.jpg" alt="">
+            </div>
+
+            <div class="name abstract-info"> 
+                <p>DAMILARE</p>
+                <p>SCI/22/23/0716</p>
+            </div>
+
+            <ul>
+                <li><i class="fas fa-home"></i><a href="../pages/das.html">Dashboard</a></li>                
+                <div class="active">
+                <li><i class="fas fa-hand-holding-heart"></i><a href="../pages/report_found.html">Report Found Items</a></li></div>
+                <li><i class="fas fa-list"></i><a href="../pages/view_lost.html">View Lost Items</a></li>
+                <li><i class="fas fa-box-open"></i><a href="../pages/view_found.html">View Found Items</a></li>
+                <li><i class="fas fa-id-card"></i><a href="../pages/profile.html">Profile</a></li>
+                <li><i class="fas fa-sign-out-alt"></i><a href="../index.html">Logout</a></li>
+            </ul>
+
+
+        </div>
+        
+    <main class="cont-reg">
+        <div class="cont-main">
+
+            <div class="header-cont">
+                <h1>REPORT FOUND</h1>
+                <p><i>Please fill in the information of the found items</i></p>
+            </div>
+
+            <form class="body-cont">
+
+                <div class="item-img pass2">
+                    <p>Upload Image</p>
+
+                    <input type="file" class="passport-input" required>
+                </div>
+
+                <div class="container">
+                    <label>
+                        Item Name *
+                        <select required class="item">
+                            <option value="" disabled selected>Select Item</option>
+                            <option value="">Id Card </option>
+                            <option value="">Key</option>
+                            <option value="">Purse</option>
+                            <option value="">Files</option>
+                            <option value="">Books</option>
+                            <option value="">others</option>
+                        </select>                    
+                    </label>
+                    
+                
+
+                    <label>
+                        Address Found *
+                        <input class="input-form department" type="text" required>
+                    </label>
+                    <label>
+                        Tel. No. *
+                        <input class="input-form id matric" type="tel" required>
+                    </label>
+                    
+                    <label>
+                        Date Found *
+                        <input class="input-form id matric" type="date" required>
+                    </label>
+
+                    
+                </div>
+
+                <div class="container">
+                    
+                    <label>
+                        Campus *
+                        <div class="radio-group2">
+                            <input type="radio" name="campus" value="ago" class="radii"> 
+                            Ago-Iwoye
+                            <input type="radio" name="campus" value="ayetoro" class="radii"> Ayetoro
+                            <input type="radio" name="campus" value="ibogun" class="radii"> Ibogun
+                            <input type="radio" name="campus" value="badagry" class="radii"> Badagry
+                            <input type="radio" name="campus" value="sagamu" class="radii"> Sagamu
+                            <input type="radio" name="campus" value="mini-campus" class="radii"> Mini-Campus
+                            
+
+                        </div>
+                    </label>
+
+                    
+                </div>
+
+            </form>
+
+            <button class="submit">Report</button>
+
+        </div>
+    </main>
+
+        
+
+    </div>
+
+    <script src="../script/profile.js"></script>
+</body>
+</html>

@@ -25,7 +25,7 @@
     align-items: flex-start;
 }
 
-.passport {
+.item-img {
     width: 250px;
     height: 300px;
     border: 2px dashed #333;
@@ -69,6 +69,13 @@ select {
     gap: 15px;
     margin-top: 8px;
 }
+.radio-group2{
+    flex-direction: column;
+    gap: 5px;
+    display: flex;
+    
+    
+}
 
 button {
     margin-top: 30px;
@@ -87,6 +94,7 @@ button:hover {
 @media screen and (max-width: 768px) {
     .cont-reg {
         margin: 20px;
+        width: 100%;
     }
 
     .body-cont {
