@@ -130,6 +130,7 @@ button:hover {
     padding: 15px;
     border-bottom: 1px solid white;
     cursor: pointer;
+    width: 100;
     
 }
 
@@ -177,6 +178,15 @@ button:hover {
 
 .nav-bar-item:hover a {
     color: #333;
+}
+.active{
+    border-right: 10px solid;
+    margin-top: 10px;
+}
+
+.passport img{
+    height: 100%;
+    width: 100%;
 }
 
 @media screen and (max-width: 768px) {
