@@ -46,7 +46,7 @@ function register() {
       level : level.value,
       address : address.value,
       phone : phone.value,
-      userImg: 'https://officialpurpledragon01.github.io/online-voting-system/images/avatar.jpg'
+      userImg: 'https://officialpurpledragon01.github.io/online-voting-system/images/avatar.jpg' || '../images/lekan.jpg'
     }
     // console.log(data);
     localStorage.setItem('mainuser', JSON.stringify(data))
