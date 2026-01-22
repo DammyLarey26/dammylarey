@@ -283,6 +283,9 @@ h4{
     background-color: black;
     border-radius: 5px;
 }
+.adewunmir{
+    flex-direction: column;
+}
 
 @media screen and (max-width: 1024px) {
     .flex {

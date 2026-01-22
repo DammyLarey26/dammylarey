@@ -7,28 +7,36 @@
 }
 
 .lost-item, .found-item {
-    width: 300px;
+    width: 400px;
     border: 2px solid black;
     border-radius: 12px;
     padding: 15px;
+    display: flex;
+    height: 200px;
     background-color: beige;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.lost-item img{
+    height: 50%;
+    
 }
 
 .lost-item h4, .found-item h4 {
     margin: 0 0 10px 0;
     font-size: 18px;
-    text-align: center;
+    padding-left: 20px;
 }
 
 .lost-item p, .found-item p {
     font-size: 14px;
-    text-align: center;
+    padding-left: 20px;
 }
 
 .lo-adewunmi{
     flex-direction: column;
 }
+
 
 
 @media screen and (max-width: 768px) {

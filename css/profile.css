@@ -107,14 +107,14 @@ button:hover {
 .side-bar {
     color: white;
     background-color: #333;
-    width: 17%;
-    height: 100vh;
+    width: 16%;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
     position: relative;
+    
 
 }
 .side-bar p{
@@ -148,7 +148,7 @@ button:hover {
     color: white;
     padding: 10px 30px;
     font-size: 1.5em;
-    width: max-content;
+    max-width: 100%;
 }
 
 .name {
@@ -195,6 +195,10 @@ button:hover {
     }
     body{
         font-size: small;
+        width: 100%;
+    }
+    .pass2{
+        display: none;
     }
 
     .ore {
@@ -202,10 +206,6 @@ button:hover {
     }
     .user-details user-informations{
         width: fit-content;
-    }
-
-    .side-bar {
-        display: none;
     }
 
     p{
@@ -219,6 +219,10 @@ button:hover {
     }
     .header{
         align-items: center;
+        width: 100%;
+    }
+    .oou-header{
+        width: max-content;
     }
 
     .logo ul{

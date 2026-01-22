@@ -14,7 +14,8 @@
     <div class="header">
         <div class="logo">
             <img src="../images/download.jpeg" alt="OOU Logo">
-            <a href="#">Home</a>
+            
+            <a class="head-top" href="#">Home</a>
             <a href="#">Lost & Found Listings</a>
             <a href="#">Contact Us</a>
         </div>
@@ -44,7 +45,15 @@
                     
                     <label>
                         Faculty *
-                        <input class="input-form faculty" type="text" required>
+                        <select required class="level">
+                            <option value="" disabled selected>Select Faculty</option>
+                            <option value="100">100 Level</option>
+                            <option value="200">200 Level</option>
+                            <option value="300">300 Level</option>
+                            <option value="400">400 Level</option>
+                            <option value="500">500 Level</option>
+                            <option value="staff">Staff</option>
+                        </select>
                     </label>
 
                     <label>

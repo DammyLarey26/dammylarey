@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/cont.css">
 </head>
 <body>
            <div class="header">
@@ -52,6 +53,82 @@
 
 
         </div>
+        
+    <main class="cont-reg">
+        <div class="cont-main">
+
+            <div class="header-cont">
+                <h1>REPORT FOUND</h1>
+                <p><i>Please fill in the information of the found items</i></p>
+            </div>
+
+            <form class="body-cont">
+
+                <div class="item-img pass2">
+                    <p>Upload Image</p>
+
+                    <input type="file" class="passport-input" required>
+                </div>
+
+                <div class="container">
+                    <label>
+                        Item Name *
+                        <select required class="item">
+                            <option value="" disabled selected>Select Item</option>
+                            <option value="">Id Card </option>
+                            <option value="">Key</option>
+                            <option value="">Purse</option>
+                            <option value="">Files</option>
+                            <option value="">Books</option>
+                            <option value="">others</option>
+                        </select>                    
+                    </label>
+                    
+                
+
+                    <label>
+                        Address Found *
+                        <input class="input-form department" type="text" required>
+                    </label>
+                    <label>
+                        Tel. No. *
+                        <input class="input-form id matric" type="tel" required>
+                    </label>
+                    
+                    <label>
+                        Date Found *
+                        <input class="input-form id matric" type="date" required>
+                    </label>
+
+                    
+                </div>
+
+                <div class="container">
+                    
+                    <label>
+                        Campus *
+                        <div class="radio-group2">
+                            <input type="radio" name="campus" value="ago" class="radii"> 
+                            Ago-Iwoye
+                            <input type="radio" name="campus" value="ayetoro" class="radii"> Ayetoro
+                            <input type="radio" name="campus" value="ibogun" class="radii"> Ibogun
+                            <input type="radio" name="campus" value="badagry" class="radii"> Badagry
+                            <input type="radio" name="campus" value="sagamu" class="radii"> Sagamu
+                            <input type="radio" name="campus" value="mini-campus" class="radii"> Mini-Campus
+                            
+
+                        </div>
+                    </label>
+
+                    
+                </div>
+
+            </form>
+
+            <button class="submit">Report</button>
+
+        </div>
+    </main>
 
         
 
