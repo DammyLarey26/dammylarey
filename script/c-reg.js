@@ -24,7 +24,6 @@ function getGender () {
   });
 
   if (selectedValue) { 
-    // console.log(selectedValue);
     return selectedValue;
   }
 }
@@ -56,7 +55,7 @@ function register() {
     window.location.href = 'profile.html'
 
   } catch (err) {
-    alert('Internal Server Error\n Please ty again')
+    alert('Internal Server Error\nPlease ty again')
     console.error(err)
   }
 }
