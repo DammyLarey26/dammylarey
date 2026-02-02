@@ -395,10 +395,10 @@ h4{
         padding: 5px;
     }
     p {
-        font-size: 18px;
+        font-size: small;
     }
     h2 {
-        font-size: 20px;
+        font-size: small;
     }
     .flex {
         padding: 20px 10px;
