@@ -24,7 +24,6 @@ function getGender () {
   });
 
   if (selectedValue) { 
-    // console.log(selectedValue);
     return selectedValue;
   }
 }
@@ -47,7 +46,7 @@ function register() {
       level : level.value,
       address : address.value,
       phone : phone.value,
-      userImg: 'https://officialpurpledragon01.github.io/online-voting-system/images/avatar.jpg'
+      userImg: 'https://officialpurpledragon01.github.io/online-voting-system/images/avatar.jpg' || '../images/lekan.jpg'
     }
     // console.log(data);
     localStorage.setItem('mainuser', JSON.stringify(data))
@@ -56,7 +55,7 @@ function register() {
     window.location.href = 'profile.html'
 
   } catch (err) {
-    alert('Internal Server Error\n Please ty again')
+    alert('Internal Server Error\nPlease ty again')
     console.error(err)
   }
 }

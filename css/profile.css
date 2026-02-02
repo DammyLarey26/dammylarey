@@ -44,7 +44,7 @@ body {
 
 
 .passport {
-    width: 100px;
+    width: 120px;
     height: 150px;
     border: 1px solid black solid black;
     border-radius: 5px;
@@ -54,10 +54,15 @@ body {
     justify-content: center;
     text-align: center;
     cursor: pointer;
+    border: rgb(109, 62, 5) 1.5px solid;;
+    overflow: hidden;
+}
+.passport > img {
+    width: 100%;
 }
 .pass2{
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 350px;
 }
 .top-btn{
     color: white;

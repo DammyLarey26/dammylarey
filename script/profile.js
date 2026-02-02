@@ -1,14 +1,11 @@
 const user = JSON.parse(localStorage.getItem('mainuser'));
 
 const userDetails = document.querySelector('.user-details');
-const userImg = document.querySelectorAll('#user-img');
-const abstractImg = document.querySelector('.abstract-img');
 const abstractInfo = document.querySelector('.abstract-info');
 
-userImg.forEach(img => {
-  img.innerHTML = `
-    <img src="${user.userImg}" alt="user avatar">
-  `;
+document.querySelectorAll('#user-img img').forEach(img => {
+  img.src = user.userImg;
+  img.alt = user.fullname.split(' ')[1] + '-Profile Image';
 });
 
 userDetails.innerHTML = `
