@@ -44,8 +44,8 @@ body {
 
 
 .passport {
-    width: 120px;
-    height: 150px;
+    width: 50px;
+    height: 70px;
     border: 1px solid black solid black;
     border-radius: 5px;
     background-color: beige;
@@ -128,7 +128,7 @@ button:hover {
     
 }
 .side-bar p{
-    text-align: center;
+    text-align: left;
 }
 
 .side-bar ul {
@@ -137,11 +137,19 @@ button:hover {
 }
 
 .side-bar ul li {
-    padding: 15px;
-    border-bottom: 1px solid white;
+    padding: 10px;
     cursor: pointer;
     width: 100%;
     
+}
+.darp{
+    display: flex;
+    width: 100%;
+    margin-left: 30px;
+}
+.darp p{
+    font-size: smaller;
+    padding: 5px;
 }
 
 .side-bar ul li:hover {
@@ -201,6 +209,15 @@ button:hover {
     height: 100%;
     width: 100%;
 }
+.mobile_view{
+    display: none;
+}
+
+.desktop_view{
+    display: block;
+}
+
+
 
 @media screen and (max-width: 768px) {
     .profile-container {
@@ -210,9 +227,13 @@ button:hover {
         font-size: small;
         width: 100%;
         flex-direction: column;
+        white-space: nowrap;
     }
-    .pass2{
+    .desktop_view{
         display: none;
+    }
+    .mobile_view{
+        display: block;
     }
 
     .ore {
@@ -231,10 +252,7 @@ button:hover {
         justify-content: center;
         margin: 10px;
     }
-    .header{
-        align-items: center;
-        width: 100%;
-    }
+    
     .oou-header{
         width: max-content;
     }
@@ -253,12 +271,47 @@ button:hover {
     .logo li a{
         color: #333;
     }
-    .right-hand-side{
-        display: none;
+    
+    .mobile-header{
+        position: fixed;
+        top: 0;
+        background-color: #333;
+        height: 25%;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        padding: 10px;
+        color: beige;
     }
-    .side-bar{
-        display: none;
+    .mob-view{
+        margin: 30px;
+        margin-top: 25%;
+        
+        
+        
     }
+    .mob-profile{
+        display: flex;
+        
+        
+    }
+    .mob-pass{
+        height: 200px;
+        width: 300px;
+        display: flex
+    
+    }
+    .mob-top{
+        display: flex;
+        height: 30px;
+        padding: 10px;
+    }
+    .mob-top img{
+        border-radius: 30px;
+        padding-right: 20px;
+    }
+    
+    
     .mobile-nav{
         display: flex;
         justify-content: space-around;
@@ -266,10 +319,20 @@ button:hover {
         position: fixed;
         bottom: 0;
         left: 0;
+        overflow-y: auto;
         width: 100%;
         background: white;
         border-top: 1px solid #ccc;
         height: 60px;
         box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+    .mobile-nav a{
+        text-decoration: none;
+        color: beige;
+        font-size: 14px;
+        background-color: #333;
+        padding: 9px;
+        border-radius: 10px;
+        margin: 20px;
     }
 }
