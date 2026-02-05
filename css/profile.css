@@ -226,6 +226,7 @@ button:hover {
     body{
         font-size: small;
         width: 100%;
+        background-color: beige;
         flex-direction: column;
         white-space: nowrap;
     }
