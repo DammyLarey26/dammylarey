@@ -273,19 +273,27 @@ button:hover {
         position: fixed;
         top: 0;
         background-color: #333;
-        height: 25%;
+        height: 20%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         width: 100%;
         padding: 10px;
         color: beige;
     }
+    .det{
+        flex-direction: row;
+    }
     .mob-view{
-        margin: 20px;
-        margin-top: 35%;
-        width: max-content;
+        margin-top: 30%;
+        width: 100%;
         
         
+    }
+    .dare{
+        color: white;
+        background-color: white;
+        font-size: 70px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
     .mob-profile{
         display: flex;
@@ -300,8 +308,8 @@ button:hover {
     }
     .mob-top{
         display: flex;
-        height: 30px;
-        padding: 10px;
+        height: 50%;
+    
     }
     .mob-top img{
         border-radius: 30px;
