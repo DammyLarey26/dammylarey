@@ -252,10 +252,6 @@ button:hover {
         justify-content: center;
         margin: 10px;
     }
-    
-    .oou-header{
-        width: max-content;
-    }
 
     .logo ul{
     cursor: pointer;
@@ -284,9 +280,9 @@ button:hover {
         color: beige;
     }
     .mob-view{
-        margin: 30px;
-        margin-top: 25%;
-        
+        margin: 20px;
+        margin-top: 35%;
+        width: max-content;
         
         
     }
@@ -298,7 +294,7 @@ button:hover {
     .mob-pass{
         height: 200px;
         width: 300px;
-        display: flex
+        display: flex;
     
     }
     .mob-top{
@@ -308,7 +304,6 @@ button:hover {
     }
     .mob-top img{
         border-radius: 30px;
-        padding-right: 20px;
     }
     
     
