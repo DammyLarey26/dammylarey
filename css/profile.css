@@ -290,10 +290,11 @@ button:hover {
         
     }
     .dare{
-        color: white;
+        color: beige;
         background-color: white;
         font-size: 70px;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin-top: 20px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
     .mob-profile{
         display: flex;
@@ -308,11 +309,13 @@ button:hover {
     }
     .mob-top{
         display: flex;
-        height: 50%;
+        height: 40%;
+        
     
     }
     .mob-top img{
         border-radius: 30px;
+        
     }
     
     
