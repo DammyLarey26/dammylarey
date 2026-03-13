@@ -49,28 +49,47 @@ img{
     
 }
 .header2{
-    height: 230px;
-    width: 100%;
+    height: 50%;
     background-image:url('../images/adewunmi.jpg');
     border-bottom: 30px solid;
     background-position: center;
     background-size: cover;
-    padding: 3px;
-    text-align: center;
+    padding: 50px;
 
 }
 .showname{
+    width: 20%;
+    padding: 40px;
+}
+
+.showname h{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 30px;
 }
+.showname i{
+    width: fit-content;
+}
+.shownamebtn1{
+    color: white;
+    padding: 10px;
+    border-radius: 2px;
+    background-color: black;
+}
+.shownamebtn2{
+    color: black;
+    padding: 10px;
+    border-radius: 2px;
+    background-color: white;
+    border: 2px solid;
+}
 
 
-h2{
+hj2{
     text-align: center;
     color: black;
     background-color: beige;
 }
-h3{
+h3h{
     color: black;
     text-align: center;
     border-radius: 10px;
@@ -81,7 +100,7 @@ h3{
     margin-left: 40%;
 }
 
-h{
+hj{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
     font-size: larger;
@@ -108,36 +127,46 @@ a:hover{
     text-align: center;
     background-color: black;
     color: white;
+    padding: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    margin-top: 30px;
-    padding-top: 30px;
-    max-height: 100%;
+
+}
+.footer h2{
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+.steps{
+    display: flex;
+    padding: 20px;
+    margin: 2px;
+}
+.stepflex{
+    display: flex;
+}
+.step{
+    padding: 20px;
+    width: 70%;
+
+}
+.step h1{
+    font-size: 40px;
+    color: white;
+    transform: rotate(-90deg);    
 }
 
-.flex{
-    padding: 40px 20px;
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
+.step h3{
+    font-size: 18px;
+    color: white;
+    width: 70%;
+
+}
+.step p{
+    font-size: 14px;
+    color: white;
+    line-height: 1.6;
+    width: 70%;
 }
 
-.foot{
-    display: flex;
-}
-.number{
-    font-size: 60px;
-    transform: rotate(-90deg);
-}
-.fot{
-    width: 200px;
-    
-}
-
-.mid{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 .modal {
   display: none;
   position: fixed;
@@ -288,6 +317,42 @@ h4{
 .adewunmir{
     flex-direction: column;
 }
+.benefits-section {
+            background: linear-gradient(135deg, beige 0%, black 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .benefits-section h4 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .benefit-item {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid white;
+        }
+
+        .benefit-item strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            color: black;
+        }
+.mobile-nav{
+    display: none;
+}
 
 @media screen and (max-width: 1024px) {
     .flex {
@@ -391,10 +456,32 @@ h4{
         text-align: center;
     }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
     .header2 {
-        height: 150px;
-        padding: 5px;
+        height: 50%;
+        width: fit-content;
+    }
+    .showname{
+        width: 70%;
+    }
+        .mobile-nav{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: black;
+        height: 50px;
+        font-size: x-large;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .header{
+        
+    }
+    .nav-bar{
+        display: grid;
     }
     p {
         font-size: small;
@@ -402,22 +489,13 @@ h4{
     h2 {
         font-size: small;
     }
-    .flex {
-        padding: 20px 10px;
-    }
-    .fot {
-        width: 100%;
-        font-size: 14px;
-         }
-    .number {
-        font-size: 40px;
-        transform: rotate(0deg);
-        margin-bottom: 10px;
-    }
     .lost, .found {
         width: 100%;
         margin-top: 20px;
         padding-left: 0;
+    }
+    .footer{
+        display: none;
     }
     .mid {
         flex-direction: column;
