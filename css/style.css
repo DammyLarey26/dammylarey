@@ -9,7 +9,6 @@ body{
       margin: 0;
 }
 
-
 .header{
     height: 60px;
     justify-content: space-between;
@@ -20,8 +19,7 @@ body{
     width: 100%;
 }
 img{
-    border-radius: 10px;
-    
+    border-radius: 5px;
 }
 
 .logo{
@@ -383,31 +381,13 @@ h4{
 @media screen and (max-width: 768px) {
     .header {
         flex-direction: column;
-        height: auto;
         padding: 10px 0;
     }
 
-    .nav-bar {
-        flex-direction: column;
-        align-items: center;
-        margin-right: 0;
-        padding-left: 0;
-    }
-    .nav-bar-items {
-        padding: 10px;
-        width: 100%;
-        background-color: beige;
-        margin-bottom: 20px;
-    }
-        .nav-bar-items a {
-            color: black;
-        }
-            .nav-bar-items i{
-                color: black;
-            }
     .logo {
         align-items: center;
         justify-content: center;
+        display: none;
     }
         .header2 {
         height: 200px;
@@ -436,29 +416,14 @@ h4{
     img{
         transform: scale(0.5);
         border-radius: 30px;
-        display: block;
+        
         
     }
-    .foot{
-        flex-direction: row;
-    }
-    .fot{
-        width: 300px;
-        margin: 40px 0;
-        text-align: center;
-        
-    }
-    .number{
-        transform: rotate(-90deg);
-    }
-    .fotr{
-        width: 150px;
-        text-align: center;
-    }
+
 }
 @media screen and (max-width: 768px) {
     .header2 {
-        height: 50%;
+        height: 35%;
         width: fit-content;
     }
     .showname{
@@ -474,15 +439,14 @@ h4{
         width: 100%;
         background: black;
         height: 50px;
-        font-size: x-large;
+        font-size: large;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     .header{
-        display: none;
+        position: relative;
+        padding: 0;
     }
-    .nav-bar{
-        display: grid;
-    }
+
     p {
         font-size: small;
     }
@@ -501,8 +465,39 @@ h4{
         flex-direction: column;
         gap: 10px;
     }
-    .nav-bar-items a {
-        font-size: 16px;
-    }
-    
+   .nav-bar{
+    position: absolute;
+    top:60px;
+    right:-100%;
+    width:200px;
+    height:100vh;
+    background:black;
+    flex-direction:column;
+    align-items:center;
+    transition:0.4s;
+}
+
+.nav-bar a{
+    display:block;
+    padding:20px;
+}
+
+.nav-bar button{
+    margin-top:20px;
+}
+
+.nav-bar.active{
+    right:0;
+}
+
+.hamburger{
+    display:block;
+    position:absolute;
+    right:20px;
+    top:30%;
+    font-size:28px;
+    cursor:pointer;
+    color: white;
+}
+
 }

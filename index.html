@@ -10,16 +10,17 @@
 <body>
     <div class="header">
         <div class="logo"><img src="images/download.jpeg" alt=""></div>
-        <div class="nav-bar">
-           <a href="#">Home</a>
-            <a href="#">Lost & Found Listings</a>
-            <a href="/pages/features.html">Features</a>
-            <a href="#">Contact Us</a>
-            <button class="js-show">SIGN IN/UP</button>
-            
-            
-            
-        </div>
+       <div class="nav-bar" id="navLinks">
+   <a href="#">Home</a>
+   <a href="#">Lost & Found Listings</a>
+   <a href="/pages/features.html">Features</a>
+   <a href="#">Contact Us</a>
+   <button class="js-show">SIGN IN/UP</button>
+</div>
+
+<div class="hamburger" id="hamburger">
+   <i class="fa fa-bars"></i>
+</div>
 
 <div id="loginModal" class="modal">
   <div class="modal-content">
@@ -115,7 +116,8 @@
 
         </section>
         
-<script src="script/script.js" type="module"></script>
+        <script src="/script/ham.js"></script>
+        <script src="script/script.js" type="module"></script>
 </body>
 
 </html>
