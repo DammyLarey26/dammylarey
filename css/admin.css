@@ -1,0 +1,114 @@
+.admin-top{
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    letter-spacing: 3px;
+}
+.admin-top p1{
+    font-size: 30px;
+}
+.overview{
+    padding: 10px 40px 10px 30px;
+    border-radius: 12px;
+    margin: 30px;
+    width: auto;
+    margin-bottom: 80px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 15px rgb(222, 181, 181);
+}
+.overview button{
+    padding: 20px;
+    margin: 30px;
+    background-color: grey;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+}
+.overview-el{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 10px;
+    margin-left: 30px;
+    margin-bottom: 40px;
+}
+.overview-items{
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    font-size: 40px;
+    gap: 20px;
+    color: white;
+}
+.adminoptions{
+    color: black;
+    border: 2px solid;
+}
+.coloruser{
+    background: linear-gradient(130deg, #98baef 0%, purple);
+
+}
+.purple{
+    color: purple;
+}
+.blue{
+    color: rgb(14, 14, 193);
+}
+.green{
+    color: green;
+}
+.orange{
+    color: orange;
+}
+.colorlost{
+    background: linear-gradient(130deg, #e4f5c4 0%, green);
+}
+.colorfound{
+    background: linear-gradient(130deg, #c4d8f5 0%, rgb(14, 14, 193));
+
+}
+.colorpend{
+    background: linear-gradient(130deg, #ffeaa5 0%, orange);
+
+}
+.fig{
+    display: flex;
+    flex-direction: column;
+    
+}
+/* Bottom Navigation */
+.bottom-nav{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+    background: white;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Each item */
+.nav-item{
+    text-decoration: none;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+
+/* Icon */
+.nav-item i{
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+/* Active item */
+.nav-item.active{
+    color: purple;
+}
