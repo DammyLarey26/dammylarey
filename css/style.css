@@ -504,6 +504,9 @@ body{
         flex-direction: column;
         gap: 10px;
     }
+    .nav-bar{
+        display: none;
+    }
    .nav-bar{
     position: absolute;
     top:60px;
