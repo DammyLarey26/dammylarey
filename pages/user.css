@@ -3,6 +3,15 @@ body{
     margin: 0;
     background-color: beige;
 }
+.header{
+    background-color: black;
+    height: 60px;
+    position: relative;
+    color: white;
+    padding: 10PX;
+    display: flex;
+    justify-content: space-between;
+}
 .faq-item{
 background:beige;
 border-radius:10px;
