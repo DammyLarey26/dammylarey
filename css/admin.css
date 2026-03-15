@@ -35,6 +35,9 @@ body{
 .admin-top p1{
     font-size: 30px;
 }
+a{
+    text-decoration: none;
+}
 .overview{
     padding: 10px 40px 10px 30px;
     border-radius: 12px;
