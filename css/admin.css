@@ -1,3 +1,30 @@
+body{
+    background-color: bisque;
+    margin: 0;
+    padding: 0;
+}
+.user{
+    margin: 20px;
+    padding: 10px;
+    border-radius: 20px; 
+}
+.admin{
+    width: max-content;
+}
+.header{
+    background-color: black;
+    height: 60px;
+    position: relative;
+    color: white;
+    padding: 10PX;
+    display: flex;
+    justify-content: space-between;
+}
+.header i{
+    color: white;
+    font-size: x-large;
+    padding: 20px;
+}
 .admin-top{
     font-family: 'Courier New', Courier, monospace;
     display: flex;
@@ -27,25 +54,34 @@
     border: none;
     border-radius: 10px;
 }
+.overview-items:hover{
+     transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+}
 .overview-el{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 10px;
+    padding: auto;
     margin-left: 30px;
     margin-bottom: 40px;
 }
 .overview-items{
     background-color: white;
     padding: 20px;
+    margin: 10px;
     border-radius: 20px;
     display: flex;
-    font-size: 40px;
+    font-size: 30px;
     gap: 20px;
     color: white;
 }
 .adminoptions{
     color: black;
     border: 2px solid;
+}
+.adminoptions a{
+    color: black;
 }
 .coloruser{
     background: linear-gradient(130deg, #98baef 0%, purple);
@@ -111,4 +147,61 @@
 /* Active item */
 .nav-item.active{
     color: purple;
+}
+.top{
+    padding: 3px;
+}
+.top input{
+    padding: 10px;
+    border-radius: 30px;
+    margin-bottom: 10px;
+    
+}
+.top button{
+    padding: 10px;
+    border-radius: 15px;
+    margin: 5px;
+    background-color: white;
+    border: none;
+}
+.top button.active{
+    color: white;
+    background-color: purple;
+}
+.top button:hover{
+    cursor: pointer;
+    background-color: #555;
+    color: #98baef;
+}
+.itembox{
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+.status{
+    color: white;
+    background-color: green;
+    border-radius: 15px;
+    padding: 0 20px;
+    height: max-content;
+}
+.item-action{
+    border-top: 2px solid black;
+    padding: 20px;
+}
+.item-action button{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+}
+.verify{
+    color: white;
+    background-color: purple;
+}
+.delete{
+    color: red;
 }
