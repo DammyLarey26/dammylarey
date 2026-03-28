@@ -22,10 +22,6 @@ img{
     border-radius: 5px;
 }
 
-.hamburger{
-    display: none;
-}
-
 .logo{
     width: fit-content;
     display: flex;
@@ -389,20 +385,32 @@ h4{
 }
 
 @media screen and (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        padding: 10px 0;
+    .header{
+        display: block;
+        margin: auto;
+        height: fit-content;
     }
-
+    .header2 {
+        height: 35%;
+        margin: auto;
+        width: fit-content;
+    }
     .logo {
         align-items: center;
         justify-content: center;
-        display: none;
+        margin: auto;
     }
-        .header2 {
-        height: 200px;
-        padding: 10px;
+    .nav-bar{
+        display: block;
+        text-align: center;
     }
+    .nav-bar a{
+        display: block;
+    }
+    .nav-bar:hover{
+        cursor: pointer;
+    }
+
     h2 {
         font-size: 24px;
     }
@@ -463,16 +471,13 @@ h4{
     color: white;
     border-radius: 20px;
     padding: 10px;
-    width: ;
+
 }
 
 
 }
 @media screen and (max-width: 768px) {
-    .header2 {
-        height: 35%;
-        width: fit-content;
-    }
+
     .showname{
         width: 70%;
     }
@@ -512,34 +517,6 @@ h4{
         flex-direction: column;
         gap: 10px;
     }
-    .nav-bar{
-        display: none;
-    }
-   .nav-bar{
-    position: absolute;
-    top:60px;
-    right:-100%;
-    width:200px;
-    height:100vh;
-    background:black;
-    flex-direction:column;
-    align-items:center;
-    transition:0.4s;
-}
-
-
-.nav-bar a{
-    display:block;
-    padding:20px;
-}
-
-.nav-bar button{
-    margin-top:20px;
-}
-
-.nav-bar.active{
-    right:0;
-}
 
 .hamburger{
     display:block;

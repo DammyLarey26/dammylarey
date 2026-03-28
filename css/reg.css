@@ -1,46 +1,36 @@
 .cont-reg {
+    margin: auto;
     border-radius: 10px;
-    margin: 80px auto;
     padding: 20px;
-    max-width: 1100px;
     background-color: white;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    width: max-content;
 }
 
 .cont-main {
     text-align: center;
+    margin: auto;
 }
 
 .header-cont {
     background-color: beige;
     padding: 15px;
     border-radius: 5px;
+    margin: auto;
 }
-
 .body-cont {
     display: flex;
-    gap: 30px;
-    padding: 30px;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: space-between;
+    margin: auto;
+    gap: 40px;
 }
-
-.item-img {
-    width: 250px;
-    height: 300px;
-    border: 2px dashed #333;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+.passport-photo{
+    border: 1px solid black;
+    display: block;
+    border-radius: 20px;
 }
 
 .container {
-    width: 100%;
-    max-width: 400px;
     text-align: left;
 }
 
@@ -64,19 +54,17 @@ select {
     border: 1px solid #ccc;
 }
 
+.passport-input{
+    font-size: larger;
+    width: 100%;
+    height: 100%;
+}
+
 .radio-group {
     display: flex;
     gap: 15px;
-    margin-top: 8px;
+    margin: auto;
 }
-.radio-group2{
-    flex-direction: column;
-    gap: 5px;
-    display: flex;
-    
-    
-}
-
 button {
     margin-top: 30px;
     padding: 12px 25px;
@@ -88,26 +76,12 @@ button {
 }
 
 button:hover {
-    background-color: #333;
+    background-color: #ccc;
 }
 
 @media screen and (max-width: 768px) {
-    .cont-reg {
-        margin: 20px;
-        width: 100%;
-    }
+.body-cont{
+    display: grid;
+}
 
-    .body-cont {
-        flex-direction: column;
-        padding: 20px;
-    }
-
-    .passport {
-        width: 100%;
-        height: 250px;
-    }
-
-    .container {
-        max-width: 100%;
-    }
 }
