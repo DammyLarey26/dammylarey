@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Found Items</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../css/admin.css">
@@ -11,11 +11,8 @@
     <link rel="stylesheet" href="./user.css">
 </head>
 <body>
-
-</div>
-
     <header class="header">
-        <h2>Dashboard</h2>
+        <h2>Found Items</h2>
         <div class="right-handside">
         <i class="fa-solid fa-bell"></i>
         <i class="fa-solid fa-cog"></i> 
@@ -23,6 +20,9 @@
     </header>
     <div class="user">
     <section class="admin-top">
+        <div class="passport">
+            <img src="/images/lekan.jpg" alt="">
+        </div>
         <p1>Welcome,Damilare!</p1>
     </section>
     <div class="overview ovwidth">
@@ -53,7 +53,7 @@ Displays all items reported as lost.
 
 <div class="faq-item">
 <div class="faq-question">
-<span><a href=""><i class="fa-solid fa-folder"></i> Found Items</a></span>
+<span><a href="./found.html"><i class="fa-solid fa-folder"></i> Found Items</a></span>
 <i class="fa-solid fa-chevron-down"></i>
 </div>
 
@@ -90,43 +90,64 @@ Allows users to safely exit their account after using the system.</div>
     
     
     <section class=" quick-action">
-        <h1>Quick Action</h1>
-    <div class="overview-el">
-        <div class="overview-items coloruser">
-            <div class="overview-itemsfig">
-                <div class="fig center">
-                <i class="fa-solid fa-briefcase"></i>
-                
-                Report Lost Item
-                </div>
+        <h1>Found Items</h1>
+<div class="itembox">
+    <div class="items">
+            <div class="flex">
+            <div class="item-details">
+            <h1>Hp Laptop</h1>
+            <p>Reported: Mar. 20, 2026</p>
             </div>
-        </div>
-        <div class="overview-items colorlost">
-            <div class="overview-itemsfig">
-                <div class="fig center">
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-                Report Found Item
-                </div>
+            <div class="status">
+                <p>Available </p>
             </div>
-        </div>
-        <div class="overview-items colorlost">
-            <div class="overview-itemsfig">
-                <div class="fig center">
-                <i class="fa-solid fa-eye"></i>
-                View Lost Items
-                </div>
             </div>
-        </div>
-        <div class="overview-items colorfound">
-            <div class="overview-itemsfig">
-                <div class="fig center">
-                <i class="fa-solid fa-eye"></i>
-                View Found Item
-                </div>
-            </div>
+            <div class="item-action">
+                <button onclick="openModal()" class="verify"><i class="fa-solid fa-check "></i> Request</button>
+                <button>Details</button>
+            </div>        
         </div>
 
-    </div>
+        <!-- Button -->
+<!-- Modal -->
+<div id="proofModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <h2>Submit Proof of Ownership</h2>
+    <p>Please provide valid details to verify this item.</p>
+
+    <form>
+      <label>Item Description</label>
+      <textarea placeholder="Describe unique features of the item" required></textarea>
+
+      <label>Proof (Upload Image/Receipt)</label>
+      <input type="file" required>
+
+      <label>Additional Information</label>
+      <textarea placeholder="Any extra details"></textarea>
+
+      <button type="submit" class="submit-btn">Submit Proof</button>
+    </form>
+  </div>
+</div>
+
+        <div class="items">
+            <div class="flex">
+            <div class="item-details">
+            <h1>Hp Laptop</h1>
+            <p>Reported: Mar. 20, 2026</p>
+            </div>
+            <div class="status">
+                <p>Available </p>
+            </div>
+            </div>
+            <div class="item-action">
+                <button onclick="openModal()" class="verify"><i class="fa-solid fa-check "></i> Request</button>
+                <button>Details</button>
+            </div>        
+        </div>
+</div>
     </section>
 </div>
 
@@ -155,6 +176,7 @@ Allows users to safely exit their account after using the system.</div>
 
         </div>
         <script src="../script/faq.js"></script>
+        <script src="../script/proof.js"></script>
         <script src="script/script.js" type="module"></script>
 </body>
 

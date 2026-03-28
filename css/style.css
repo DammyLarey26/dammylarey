@@ -1,5 +1,4 @@
 body{
-      font-family: Arial, sans-serif;
       background-color: #f5f5f5;
       justify-content: center;
       align-items: center;
@@ -10,16 +9,21 @@ body{
 }
 
 .header{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     height: 60px;
-    justify-content: space-between;
     background-color: black;
-    display: flex;
     position: fixed;
+    display: flex;
+    justify-content: space-between;
     top: 0;
     width: 100%;
 }
 img{
     border-radius: 5px;
+}
+
+.hamburger{
+    display: none;
 }
 
 .logo{
@@ -77,36 +81,9 @@ img{
     color: black;
     padding: 10px;
     border-radius: 2px;
-    background-color: white;
+    background-color: beige;
     border: 2px solid;
 }
-
-
-hj2{
-    text-align: center;
-    color: black;
-    background-color: beige;
-}
-h3h{
-    color: black;
-    text-align: center;
-    border-radius: 10px;
-    width: fit-content;
-    padding: 3px;
-    justify-content: center;
-    align-items: center;
-    margin-left: 40%;
-}
-
-hj{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-align: center;
-    font-size: larger;
-}
-.crt{
-    font-size: small;
-}
-
 a{
     color: white;
     text-decoration: none;
@@ -196,39 +173,34 @@ a:hover{
 .log-form{
     border: none;
     border-radius: 50px;
-    padding: 10px;
+    padding: 20px;
     text-align: center;
     margin: 10px;
     display: flex;
+    justify-content: space-around;
 
 }
 .log{
     align-items: center;
     justify-content: center;
     background-color: beige;
-    margin: 10px;
+    margin: auto;
     width: fit-content;
     border-radius: 30px;
     padding: 30px;
 
 }
-button{
-    color: black;
-    background-color: beige;
+.passport{
+    width: 100px;
     border: none;
-
-    border-radius: 10px;
-    max-width: fit-content;
-    position: relative;
-    margin-left: 10px;
-    
+    border-radius: 50%;
+    margin: 10px;
+    overflow: hidden;
 }
-button:hover{
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-    background-color: black;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.passport img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .btn2{
     margin-left: 40%;
@@ -283,25 +255,23 @@ h4{
 }
 
 .form{
-    position: absolute;
-    top: 50%;
-    left: 50%;
     border: 5px solid white;
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
     background-color: white;
     font-family: 'Times New Roman', Times, serif;
-    padding: 10px;
-    text-align: center;
-    max-width: max-content;
-    margin-top: 20px;
-    
+    padding: 50px;
+    text-align: center; 
+    width: fit-content;
+    margin: auto;
 }
 
 .input-field{
     display: flex;
+    justify-content: space-around;
+    flex-direction: column;
     padding: 10px;
-    margin: 20px;
+    margin: auto;
     border-radius: 20px;
     text-align: center;
 }
@@ -351,14 +321,35 @@ h4{
 .mobile-nav{
     display: none;
 }
-
-body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
+.bottom-nav{
+    display: none;
 }
 
-/* Bottom Navigation */
-.bottom-nav{
+@media screen and (max-width: 1024px) {
+    .flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .foot {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .fot {
+        width: 90%;
+    }
+    .mid {
+        flex-direction: column;
+    }
+  .lost, .found {
+        width: 80%;
+        padding-left: 0;
+    }
+    .lost-items {
+        height: auto;
+    }
+    .bottom-nav{
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -395,30 +386,6 @@ body{
     width: ;
 }
 
-@media screen and (max-width: 1024px) {
-    .flex {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-    .foot {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .fot {
-        width: 90%;
-    }
-    .mid {
-        flex-direction: column;
-    }
-  .lost, .found {
-        width: 80%;
-        padding-left: 0;
-    }
-    .lost-items {
-        height: auto;
-    }
 }
 
 @media screen and (max-width: 768px) {
@@ -462,6 +429,43 @@ body{
         
         
     }
+    .bottom-nav{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 65px;
+    background: white;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Each item */
+.nav-item{
+    text-decoration: none;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+}
+
+/* Icon */
+.nav-item i{
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+/* Active item */
+.nav-item.active i{
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+    width: ;
+}
+
 
 }
 @media screen and (max-width: 768px) {

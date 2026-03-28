@@ -3,58 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost and Found Portal</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/bottomnav.css">
+    <link rel="stylesheet" href="./user.css">
 </head>
 <body>
-    <div class="header">
-        <div class="logo"><img src="/images/download.jpeg" alt="OOU LOST & FOUND MANAGEMENT SYSTEM"></div>
-        <div class="nav-bar">
-                <div class="nav-bar-items">
-                    <i class="fa-solid fa-circle-question"></i>   
-                <a href="../index.html">Report Lost Item</a>
-            </div>
-            
-            <div class="nav-bar-items">
-                <i class="fa-solid fa-hand-holding-heart"></i>
 
-                <a href="./lost.html">Report Found Item</a>
-            </div>
-            
-                        <div class="nav-bar-items">
-                <i class="fa-solid fa-list"></i>
-                <a href="./view-lost.html">View Lost Items</a>
-            </div>
-
-                        <div class="nav-bar-items">
-                <i class="fa-solid fa-box-open"></i>
-                <a href="./lost.html">View Found Items</a>
-            </div>
-
-                        <div class="nav-bar-items">
-                <i class="fa-solid fa-id-card"></i>
-                <a href="./profile.html">Profile</a>
-            </div>
-
-                        <div class="nav-bar-items">
-                <i class="fa-solid fa-sign-out-alt"></i>
-                <a href="./lost.html">Logout</a>
-            </div>
-            
-            
+    <header class="header">
+        <h2>Dashboard</h2>
+        <div class="right-handside">
+        <i class="fa-solid fa-bell"></i>
+        <i class="fa-solid fa-cog"></i> 
+        </div>          
+    </header>
+    <div class="user">
+    <section class="admin-top">
+        <div class="passport">
+            <img src="/images/lekan.jpg" alt="">
         </div>
+        <p1>Welcome,Damilare!</p1>
+    </section>
+    <div class="overview ovwidth">
+<div class="faq-container">
+
+<div class="faq-item">
+<div class="faq-question">
+<span><a href=""><i class="fa-solid fa-home"></i> Dashboard</a></span>
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="faq-answer">
+Serves as the main control panel of the system.
+</div>
+</div>
+
+
+<div class="faq-item">
+<div class="faq-question">
+<span><a href=""><i class="fa-solid fa-list"></i> Lost Items</a></span>
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="faq-answer">
+Displays all items reported as lost.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question">
+<span><a href="./found.html"><i class="fa-solid fa-folder"></i> Found Items</a></span>
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="faq-answer">
+Shows items that have been found and reported by users within the campus.</div>
+</div>
+
+
+<div class="faq-item">
+<div class="faq-question">
+<span><a href="/pages/profile.html"><i class="fa-solid fa-user"></i> Profile</a></span>
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="faq-answer">
+Allows users to view and manage their personal information such as name, matric/staff ID, department, phone number, and email.
+</div>
+</div>
+<div class="faq-item">
+<div class="faq-question">
+<span><a href=""><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></span>
+<i class="fa-solid fa-chevron-down"></i>
+</div>
+
+<div class="faq-answer">
+Allows users to safely exit their account after using the system.</div>
+</div>
+</div>
+
+</div>
+    
+
+
+    
+    
+    <section class=" quick-action">
+        <h1>Found Items</h1>
+    <div class="overview-el">
+        <div class="overview-items coloruser">
+            <div class="overview-itemsfig">
+                <div class="fig center">
+                <i class="fa-solid fa-briefcase"></i>
+                
+                Report Lost Item
+                </div>
+            </div>
         </div>
+        <div class="overview-items colorlost">
+            <div class="overview-itemsfig">
+                <div class="fig center">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                Report Found Item
+                </div>
+            </div>
+        </div>
+        <div class="overview-items colorlost">
+            <div class="overview-itemsfig">
+                <div class="fig center">
+                <i class="fa-solid fa-eye"></i>
+                View Lost Items
+                </div>
+            </div>
+        </div>
+        <div class="overview-items colorfound">
+            <div class="overview-itemsfig">
+                <div class="fig center">
+                <i class="fa-solid fa-eye"></i>
+                View Found Item
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="header2">
-        <p class="showname">''WELCOME, OLUWADAMILARE''</p>
-        <i class="showintro">.......here you find all lost items......</i>
+    </section>
+</div>
+
+    
+    
+
+        <div class="bottom-nav">
+    <a href="#" class="nav-item active">
+        <i class="fa fa-home"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="#" class="nav-item">
+        <i class="fa fa-search"></i>
+        <span>Lost</span>
+    </a>
+
+    <a href="#" class="nav-item">
+        <i class="fa fa-plus-circle"></i>
+        <span>Report</span>
+    </a>
+    <a href="#" class="nav-item ">
+        <i class="fa fa-ellipsis-h"></i>
+        <span>More</span>
+    </a>
+
         </div>
-
-
-<script src="script/script.js" type="module"></script>
+        <script src="../script/faq.js"></script>
+        <script src="script/script.js" type="module"></script>
 </body>
 
 </html>
