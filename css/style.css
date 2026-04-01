@@ -128,25 +128,26 @@ a:hover{
 }
 
 .footer{
-    text-align: center;
     background-color: black;
     color: beige;
-    padding: 10px;
+    text-align: center;
     display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
     gap: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: auto;
 }
-b
+
 .footer-icons{
     width: 20px;
-    margin: auto;
     display: flex;
     gap: 30px;
-    padding: 10px;
+    margin: auto;
 }
 .footer p{
     border-right: 2px solid beige; 
-    padding: 10px;
+    padding: 1px;
 }
 .footer-icons:hover{
     cursor: pointer;
