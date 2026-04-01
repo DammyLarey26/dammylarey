@@ -1,5 +1,5 @@
 body{
-      background-color: #f5f5f5;
+      background-color: beige;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -29,21 +29,11 @@ img{
     padding-left: 30px;
 
 }
-.nav-bar-items{
-    padding: auto;
-    width: fit-content;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    text-align: center;
-}
-.nav-bar-items i {
-    color: white;
-}
-
 .nav-bar{
     margin-right: 2px;
     align-items: center;
     display: flex;
-    padding-left: 10px;
+    padding: 20px;
     
 }
 .header2{
@@ -56,8 +46,9 @@ img{
 
 }
 .showname{
-    width: 20%;
+    width: 25%;
     padding: 40px;
+    margin-bottom: 40px;
 }
 
 .showname h{
@@ -93,51 +84,73 @@ a{
 a:hover{
     color: aqua;
 }
-
-.footer{
+.mid{
+    background-color: rgb(42, 31, 31);
     text-align: center;
-    background-color: black;
-    color: white;
-    padding: 0;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-
-}
-.footer h2{
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-}
-.steps{
-    display: flex;
     padding: 20px;
-    margin: 2px;
+}
+.mid h2{
+    color: beige;
+}
+
+.steps{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 90%;
+    margin-bottom: 40px;
 }
 .stepflex{
     display: flex;
 }
 .step{
-    padding: 20px;
-    width: 70%;
-
+    margin: auto;
+    width: 80%;
+    
 }
 .step h1{
     font-size: 40px;
-    color: white;
+    color: beige;
+    text-align: center;
     transform: rotate(-90deg);    
 }
 
 .step h3{
     font-size: 18px;
-    color: white;
-    width: 70%;
+    color: beige;
 
 }
 .step p{
     font-size: 14px;
-    color: white;
+    color: beige;
     line-height: 1.6;
-    width: 70%;
 }
 
+.footer{
+    text-align: center;
+    background-color: black;
+    color: beige;
+    padding: 10px;
+    display: flex;
+    gap: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.footer-icons{
+    width: 20px;
+    margin: auto;
+    display: flex;
+    gap: 30px;
+    padding: 10px;
+}
+.footer p{
+    border-right: 2px solid beige; 
+    padding: 10px;
+}
+.footer-icons:hover{
+    cursor: pointer;
+}
 .modal {
   display: none;
   position: fixed;
@@ -285,7 +298,6 @@ h4{
             background: linear-gradient(135deg, beige 0%, black 100%);
             color: white;
             padding: 40px;
-            border-radius: 12px;
             margin-bottom: 40px;
         }
 
@@ -320,6 +332,81 @@ h4{
 .bottom-nav{
     display: none;
 }
+.damilare{
+    margin-bottom: 100px;
+}
+
+/* ===== ANIMATIONS (ADDED) ===== */
+
+/* Hero text animation */
+.header, .top{
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 3s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.showname h, .showname i, .showname button {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 5s ease forwards;
+}
+
+.showname, .logo {
+      animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.showname i {
+    animation-delay: 0.3s;
+}
+
+.showname button {
+    animation-delay: 0.6s;
+}
+
+
+/* Fade up keyframes */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Button hover */
+button {
+    transition: all 0.5s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* Scroll animation */
+.benefit-item, .step, .mid-box {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease;
+}
+
+.benefit-item.show, .step.show, .mid-box.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
 
 @media screen and (max-width: 1024px) {
     .flex {
@@ -346,15 +433,7 @@ h4{
         height: auto;
     }
     .bottom-nav{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 65px;
-    background: white;
-    border-top: 1px solid #ddd;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: none;
 }
 
 /* Each item */
@@ -440,7 +519,7 @@ h4{
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 65px;
+    height: max-content;
     background: white;
     border-top: 1px solid #ddd;
     display: flex;
@@ -480,19 +559,6 @@ h4{
     .showname{
         width: 70%;
     }
-        .mobile-nav{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: black;
-        height: 50px;
-        font-size: large;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
     .header{
         position: relative;
         padding: 0;
@@ -509,13 +575,7 @@ h4{
         margin-top: 20px;
         padding-left: 0;
     }
-    .footer{
-        display: none;
-    }
-    .mid {
-        flex-direction: column;
-        gap: 10px;
-    }
+
 
 .hamburger{
     display:block;

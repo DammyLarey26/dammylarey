@@ -11,12 +11,12 @@
 </head>
 <body>
     <div class="header">
-        <div class="logo"><img src="images/download.jpeg" alt=""></div>
+        <div class="logo"><img src="images/download.png" alt=""></div>
        <div class="nav-bar">
-   <a href="#">Home</a>
-   <a href="#">Lost & Found Listings</a>
+   <a class="active" href="#">Home</a>
+   <a href="./pages/pagecont.html">Lost & Found Listings</a>
    <a href="./pages/features.html">Features</a>
-   <a href="#">Contact Us</a>
+   <a href="./pages/contact.html">Contact Us</a>
    <button class="shownamebtn2 js-show">SIGN IN/UP</button>
 </div>
 
@@ -53,28 +53,24 @@
                     <h4>🎁 Key Benefits of This System</h4>
                     <div class="benefits-list">
                         <div class="benefit-item">
-                            <strong>Explore Data More Intuitively</strong>
-                            Advanced search filters and visual item cards make it easy to browse and discover lost or found items in your community.
-                        </div>
+                            <strong>Improved Item Recovery Rate</strong>
+                            The system increases the chances of recovering lost items by connecting users who lost items with those who found them through a centralized platform                        </div>
                         <div class="benefit-item">
-                            <strong>Understand Trends Better</strong>
-                            Admin dashboard provides insights into claim patterns, popular item categories, and system usage statistics.
-                        </div>
+                            <strong>Time Efficiency</strong>
+                            Instead of physically searching or asking around campus, users can quickly report and search for items online, saving time and effort                        </div>
                         <div class="benefit-item">
-                            <strong>Easily Save or Share</strong>
-                            Export functionality allows users to save item information and share details with others in the community.
-                        </div>
+                            <strong>Easy Accessibility</strong>
+                            Users can access the system anytime and anywhere, making it convenient for students and staff within the university environment                        </div>
                         <div class="benefit-item">
-                            <strong>Secure & Verified</strong>
-                            Ownership verification process ensures items are returned to the correct owners with admin oversight.
-                        </div>
+                            <strong>User-Friendly Interaction</strong>
+                            The platform is designed to be simple and easy to use, allowing even non-technical users to use                        </div>
                     </div>
                 </div>
             </section>
+            <main class="damilare">
             <a class="shownamebtn1" href="./pages/admin.html">ADMIN</a>
             <a class="shownamebtn2" href="./pages/dashboard.html">Dashboard</a>
-
-
+            </main>
         <div class="bottom-nav">
     <a href="#" class="nav-item">
         <i class="fa fa-list"></i>
@@ -96,15 +92,15 @@
 
 <!-- Font Awesome -->
         
-        <section class="footer">
+        <section class="mid">
             <h2>HOW IT WORKS</h2>
             <div class="steps">
             <div class="step">
                 <div class="stepflex">
                 <h1>01</h1>
                 <div class="jt">
-                <h3>LOGIN TO YOUR ACCOUNT</h3>
-                <p>To submit a listing, please create an account on our portal and login </p>
+                <h3>LOGIN</h3>
+                <p>Users begin by creating an account or logging into the system.<br>This ensures that all activities are tracked and linked to a verified user.</p>
                 </div>
                 </div>
             </div>
@@ -114,7 +110,7 @@
                 <h1>02</h1>
                 <div class="jt">
                 <h3>CREATE A LISTING</h3>
-                <p>Create a Listing for the list or found item </p>
+                <p>After logging in, the user creates a listing depending on their situation if they misplaced or discovered an item</p>
                 </div>
                 </div>
             </div>
@@ -123,16 +119,70 @@
                 <div class="stepflex">
                 <h1>03</h1>
                 <div class="jt">
-                <h3>WAIT FOR MAGIC</h3>
-                <p>Your listing will be live on our portal to be viewed by thousands of students</p>
+                <h3>SEARCH</h3>
+                <p>Users can explore available listings by Searching with keywords & Filtering by location or item type</p>
+                </div></div>
+            </div>
+
+            <div class="step">
+                <div class="stepflex">
+                <h1>04</h1>
+                <div class="jt">
+                <h3>MATCH & CLAIM</h3>
+                <p>When a user finds a matching item they initiate a claim request providing proof of ownership (details only the real owner would know)</p>
+                </div></div>
+            </div>
+
+            <div class="step">
+                <div class="stepflex">
+                <h1>05</h1>
+                <div class="jt">
+                <h3>ADMIN VERIFICATION</h3>
+                <p>An administrator reviews the claim to:Confirm ownership authenticity, Prevent false claims & Ensure system integrity</p>
+                </div></div>
+            </div>
+
+            <div class="step">
+                <div class="stepflex">
+                <h1>06</h1>
+                <div class="jt">
+                <h3>ITEM RECOVERY</h3>
+                <p>Once approved, The rightful owner is notified, A pickup or meeting is arranged</p>
                 </div></div>
             </div>
             </div>
 
         </section>
+    <footer class="footer">
+        <div class="footer-icons">
+            <img src="../images/icon/instagram.svg" alt="">
+            <img src="../images/icon/whatsapp.svg" alt="">
+            <img src="../images/icon/x.svg" alt="">
+        </div>
+         <p>&copy; 2026 Lost & Found Management System</p>
+            <p>Olabisi Onabanjo University</p>
+            <p>All rights reserved.</p>
+
+    </footer>
         
         <script src="script/ham.js"></script>
         <script src="script/script.js" type="module"></script>
+
+        <script>
+/* Scroll Animation */
+const elements = document.querySelectorAll('.benefit-item, .step');
+
+window.addEventListener('scroll', () => {
+    elements.forEach(el => {
+        const position = el.getBoundingClientRect().top;
+        const screenHeight = window.innerHeight;
+
+        if (position < screenHeight - 100) {
+            el.classList.add('show');
+        }
+    });
+});
+</script>
 </body>
 
 </html>

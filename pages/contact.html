@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/contact.css">
+</head>
+<body>
+    <header class="top">
+        <div class="logo">
+            <img src="/images/download.png" alt="">
+        </div>
+        <h2>LOST & FOUND MANAGEMENT SYSTEM</h2>
+        <i>.....helping you reunite with your lost items.......</i>
+    </header>
+    <section>
+    </div>
+        <div class="mid">
+            <div class="mid-box">
+                <div class="mid-header">
+                    <h2>Quick Links</h2>
+                </div>
+            <a href="../index.html">Home</a>
+            <a href="../pages/pagecont.html">Lost & Found Listings</a>
+            <a href="../pages/features.html">Features</a>
+            </div>
+            
+            <div class="mid-box">
+                <div class="mid-header">
+                    <h2>Contact Us</h2>
+                </div>
+            <i class="fa fa-message"></i> ovodubela@gmail.com
+            <p><i class="fa fa-phone"></i> +234 911 751 856</p>
+            </div>
+
+            <div class="mid-box">
+                <div class="mid-header">
+                    <h2>Follow us</h2>
+                </div>
+            <img src="../images/icon/x.svg" alt=""> @dammylarey_26
+            <p><img src="../images/icon/instagram.svg" alt=""> Oluwa Dammy Larey</p>
+            </div>
+        </div>
+    </section>
+    
+
+    <footer class="footer">
+        <div class="footer-icons">
+            <img src="../images/icon/instagram.svg" alt="">
+            <img src="../images/icon/whatsapp.svg" alt="">
+            <img src="../images/icon/x.svg" alt="">
+        </div>
+         <p>&copy; 2026 Lost & Found Management System</p>
+            <p>Olabisi Onabanjo University</p>
+            <p>All rights reserved.</p>
+
+    </footer>
+            <script>
+/* Scroll Animation */
+const elements = document.querySelectorAll('.benefit-item, .step, .mid-box');
+
+window.addEventListener('scroll', () => {
+    elements.forEach(el => {
+        const position = el.getBoundingClientRect().top;
+        const screenHeight = window.innerHeight;
+
+        if (position < screenHeight - 100) {
+            el.classList.add('show');
+        }
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+       Task : <input type="text" class="task"> <br>
+        complete: <input type="checkbox" class="check"> <br>
+        <button>Submit</button>
+    </div>
+
+    <div class="container">
+
+    </div>
+    <script>
+        // let data;
+        const task = document.querySelector(".task")
+        const checked = document.querySelector(".check")
+        const cont = document.querySelector(".container")
+        
+        function sendTodo() {
+            if (!task.value) {
+                console.log('err') 
+            }
+                
+            const todo = {
+                task : task.value,
+                completed : true
+            }                
+                fetch("https://week3-crud-todo-api-pxia.onrender.com/todos", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "aplication/json"
+                    },
+                    body: JSON.stringify(todo)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    cont.innerHTML = `
+                        <p> Id : ${data.id} </p>
+                        <p> Task : ${data.task} </p>
+                        <p> Comp : ${data.completed} </p>
+                    `
+                    console.log(data)
+                })
+            }    
+
+        document.querySelector("button").addEventListener("click", sendTodo)
+
+    </script>
+</body>
+</html>
