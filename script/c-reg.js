@@ -10,8 +10,9 @@ const faculty = document.querySelector('.faculty')
 const tempData = JSON.parse(sessionStorage.getItem('tempData'))
 
 //stores the previous value in its field
-uname.value = tempData.uname
-email.value = tempData.email
+//uname.value = tempData.uname
+//email.value = tempData.email
+
 
 function getGender () {
   const radios = document.querySelectorAll('input[name="gender"]'); 
@@ -38,7 +39,7 @@ function register() {
     const data = {
       fullname : uname.value,
       email : email.value,
-      password : tempData.password,
+      password : password.value,
       faculty : faculty.value,
       department : department.value,
       gender : getGender(),
@@ -52,7 +53,7 @@ function register() {
     localStorage.setItem('mainuser', JSON.stringify(data))
     sessionStorage.removeItem('tempData')
 
-    window.location.href = 'profile.html'
+    window.location.href = 'dashboard.html'
 
   } catch (err) {
     alert('Internal Server Error\nPlease ty again')
@@ -60,6 +61,6 @@ function register() {
   }
 }
 
-document.querySelector('.submit').addEventListener('click', () => {
+document.querySelector('.form').addEventListener('click', () => {
   register();
 })
