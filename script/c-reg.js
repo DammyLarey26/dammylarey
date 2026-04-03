@@ -13,7 +13,6 @@ const tempData = JSON.parse(sessionStorage.getItem('tempData'))
 //uname.value = tempData.uname
 //email.value = tempData.email
 
-
 function getGender () {
   const radios = document.querySelectorAll('input[name="gender"]'); 
   let selectedValue = null; 
@@ -39,7 +38,7 @@ function register() {
     const data = {
       fullname : uname.value,
       email : email.value,
-      password : password.value,
+      password : tempData.password,
       faculty : faculty.value,
       department : department.value,
       gender : getGender(),
@@ -56,11 +55,11 @@ function register() {
     window.location.href = 'dashboard.html'
 
   } catch (err) {
-    alert('Internal Server Error\nPlease ty again')
+    alert('Internal Server Error\nPlease try again')
     console.error(err)
   }
 }
 
-document.querySelector('.form').addEventListener('click', () => {
+document.querySelector('.submit').addEventListener('click', () => {
   register();
 })
