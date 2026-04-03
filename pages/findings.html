@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/user.css">
+    <link rel="stylesheet" href="../css/findings.css">
+    <link rel="stylesheet" href="../css/view.css">
+    
+</head>
+<body>
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('lost')">Lost Items</button>
+        <button class="tab" onclick="showTab('found')">Found Items</button>
+    </div>
+
+    <div class="itemms">
+        <div id="lost" class="tab-items active">
+            <div class="search-top">
+            <input type="search" placeholder="Search by category,date or location">
+            <select>
+                <option value="">All Categories</option>
+                <option value="">Books</option>
+                <option value="">Card</option>
+                <option value="">Electronics</option>
+            </select>
+            <button>Search</button>
+        </div>    
+        <div class="items-box">
+            <div class="items-box-item">
+                <div class="items-details">
+                    <div class="item-img">
+                        <img src="../images/Laptop.png" alt="">
+                    </div>
+                    <div class="items-det">
+                    <h2>Hp Laptop</h2>
+                    <span>Damilare O.</span>
+                    <span>Library. 26 April 2026</span>
+                    </div>                
+                </div>
+                <div class="status">
+                <p>Available </p>
+                </div>
+                <button>View Details</button>
+            </div>
+        </div>
+         <div class="items-box-item">
+                <div class="items-details">
+                    <div class="item-img">
+                        <img src="../images/Laptop.png" alt="">
+                    </div>
+                    <div class="items-det">
+                    <h2>Hp Laptop</h2>
+                    <span>Damilare O.</span>
+                    <span>Library. 26 April 2026</span>
+                    </div>                
+                </div>
+                <div class="status claimed">
+                <p>Claimed </p>
+                </div>
+                <button>View Details</button>
+            </div>               
+
+        </div>
+        </div>
+    <div id="found" class="tab-items ">
+            <div class="search-top">
+            <input type="search" placeholder="Search by category,date or location">
+            <select>
+                <option value="">All Categories</option>
+                <option value="">Books</option>
+                <option value="">Card</option>
+                <option value="">Electronics</option>
+            </select>
+            <button>Search</button>
+        </div>
+        
+
+        <div class="items-box">
+            <div class="items-box-item">
+                <div class="items-details">
+                    <div class="item-img">
+                        <img src="../images/Laptop.png" alt="">
+                    </div>
+                    <div class="items-det">
+                    <h2>Hp Laptop</h2>
+                    <span>Damilare O.</span>
+                    <span>Library. 26 April 2026</span>
+                    </div>                
+                </div>
+                <div class="status">
+                <p>Available </p>
+                </div>
+                <button>View Details</button>
+            </div>
+        </div>
+         <div class="items-box-item">
+                <div class="items-details">
+                    <div class="item-img">
+                        <img src="../images/Laptop.png" alt="">
+                    </div>
+                    <div class="items-det">
+                    <h2>Hp Laptop</h2>
+                    <span>Damilare O.</span>
+                    <span>Library. 26 April 2026</span>
+                    </div>                
+                </div>
+                <div class="status claimed">
+                <p>Claimed </p>
+                </div>
+                <button>View Details</button>
+            </div>               
+    </div>
+    </div>
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll(".tab").forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            document.querySelectorAll(".tab-items").forEach(tab => {
+                tab.classList.remove("active");
+            });
+
+            document.getElementById(tabId).classList.add("active");
+
+            event.target.classList.add("active")
+        }
+    </script>
+</body>
+</html>

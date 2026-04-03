@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Found</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/reg.css">
+</head>
+<body>
+    <section class="cont-reg">
+        <div class="cont-main">
+            <div class="header-cont">
+                <h1>Report Found</h1>
+            </div>
+
+            <form class="body-cont">
+                <div class="container">
+                    <label>
+                        Item name
+                        <input class="input-form" type="text" required>
+                    </label>
+                    
+                    <label>
+                        Categories
+                        <select required>
+                            <option value="">Electronics</option>
+                            <option value="">Books</option>
+                            <option value="">Card</option>
+                            <option value="">Accessories</option>
+                        </select>                    
+                    </label>
+
+                    <label>
+                        Date Found
+                       <input class="input-form" type="date">
+                    </label>
+
+                    <label>
+                        Location Found
+                       <input class="input-form" type="text">
+                    </label>
+                </div>
+
+                <div class="container">
+                   <label>
+                        Item Description
+                       <input class="input-form" type="text">
+                    </label>
+
+                    <div class="img">
+                        <img src="../images/Laptop.png" alt="">
+                    </div>
+
+                     <div class="passport-photo">
+                    <h4>Upload photo</h4>
+                    <input type="file" class="passport-input" required>
+                </div>
+            </form>
+
+            <button class="submit">Submit Report</button>
+
+        </div>
+    </main>
+    <script src="../script/c-reg.js"></script>
+</body>
+</html>

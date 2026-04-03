@@ -25,9 +25,20 @@
     gap: 40px;
 }
 .passport-photo{
-    border: 1px solid black;
+    padding: 10px;
     display: block;
-    border-radius: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin: auto;
+    background-color: beige;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.img{
+    width: 100%;
+}
+img{
+    width: 100%;
+    height: 100%;
 }
 
 .container {
@@ -52,6 +63,7 @@ select {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    height: fit-content;
 }
 
 .passport-input{
@@ -78,7 +90,6 @@ button {
 button:hover {
     background-color: #ccc;
 }
-
 @media screen and (max-width: 768px) {
 .body-cont{
     display: grid;

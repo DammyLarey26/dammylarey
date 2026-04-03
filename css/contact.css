@@ -29,5 +29,7 @@
 .mid-box{
     padding: 30px;
     text-align: justify;
+    width: 40%;
+    border-right: 2px solid beige;
 }
 

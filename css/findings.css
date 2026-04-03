@@ -1,0 +1,26 @@
+.tabs{
+    background-color: black;
+    display: flex;
+    padding: 30px 0 0 ;
+    justify-content: center;
+}
+.tabs button{
+    padding: 10px;
+    width: fit-content;
+    height: fit-content;
+    background-color: rgb(176, 154, 154);
+    border: none;
+}
+
+.tab.active{
+    background-color: white;
+    color: black;
+}
+
+.tab-items{
+    display: none;
+}
+
+.tab-items.active{
+    display: block;
+}

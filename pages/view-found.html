@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lost Items</title>
+    <title>Found Items</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../css/admin.css">
@@ -32,7 +32,29 @@
                 <option value="">Electronics</option>
             </select>
             <button>Search</button>
-        </div>    
+        </div>
+        
+        <div id="proofModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+
+    <h2>Submit Proof of Ownership</h2>
+    <p>Please provide valid details to verify this item.</p>
+
+    <form>
+      <label>Item Description</label>
+      <textarea placeholder="Describe unique features of the item" required></textarea>
+
+      <label>Proof (Upload Image/Receipt)</label>
+      <input type="file" required>
+
+      <label>Additional Information</label>
+      <textarea placeholder="Any extra details"></textarea>
+
+      <button type="submit" class="submit-btn">Submit Proof</button>
+    </form>
+  </div>
+</div>
         <div class="items-box">
             <div class="items-box-item">
                 <div class="items-details">
@@ -49,6 +71,7 @@
                 <p>Available </p>
                 </div>
                 <button>View Details</button>
+                <button onclick="openModal()" class="verify"><i class="fa-solid fa-check "></i> Request</button>
             </div>
         </div>
          <div class="items-box-item">
@@ -66,6 +89,7 @@
                 <p>Claimed </p>
                 </div>
                 <button>View Details</button>
+                <button onclick="openModal()" class="verify"><i class="fa-solid fa-check "></i> Request</button>
             </div>               
     </div>
     
@@ -84,7 +108,7 @@
         <span>Dashboard</span>
     </a>
 
-    <a href="./view-lost.html" class="nav-item active">
+    <a href="./view-lost.html" class="nav-item ">
         <i class="fa fa-search"></i>
         <span>Lost</span>
     </a>
@@ -93,13 +117,14 @@
         <i class="fa fa-plus-circle"></i>
         <span>Report</span>
     </a>
-    <a href="#" class="nav-item ">
-        <i class="fa fa-ellipsis-h"></i>
-        <span>More</span>
+    <a href="./view-found.html" class="nav-item active">
+        <i class="fa fa-eye"></i>
+        <span>Found</span>
     </a>
 
         </div>
         <script src="../script/faq.js"></script>
+        <script src="../script/proof.js"></script>
         <script src="script/script.js" type="module"></script>
 </body>
 
