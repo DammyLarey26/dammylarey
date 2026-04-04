@@ -52,10 +52,10 @@ function register() {
     localStorage.setItem('mainuser', JSON.stringify(data))
     sessionStorage.removeItem('tempData')
 
-    window.location.href = 'dashboard.html'
+    window.location.href = 'profile.html'
 
   } catch (err) {
-    alert('Internal Server Error\nPlease try again')
+    alert('Internal Server Error\nPlease ty again')
     console.error(err)
   }
 }
