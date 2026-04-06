@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing</title>
+    <link rel="stylesheet" href="../css/findings.css">
+    <link rel="stylesheet" href="../css/reg.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+</head>
+<body>
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('lost')">Report Lost</button>
+        <button class="tab" onclick="showTab('found')">Report Found</button>
+    </div>
+
+    <div class="itemms">
+        <div id="lost" class="tab-items active">
+            <section class="cont-reg">
+        <div class="cont-main">
+            <div class="header-cont">
+                <h1>Report Lost</h1>
+            </div>
+
+            <div class="body-cont">
+                <div class="container">
+                    <label>
+                        Item name
+                        <input class="input-form" type="text" required>
+                    </label>
+                    
+                    <label>
+                        Categories
+                        <select required>
+                            <option value="">Electronics</option>
+                            <option value="">Books</option>
+                            <option value="">Card</option>
+                            <option value="">Accessories</option>
+                        </select>                    
+                    </label>
+
+                    <label>
+                        Date Lost
+                       <input class="input-form" type="date">
+                    </label>
+
+                    <label>
+                        Location Lost
+                       <input class="input-form" type="text">
+                    </label>
+                </div>
+
+                <div class="container">
+                   <label>
+                        Item Description
+                       <input class="input-form" type="text">
+                    </label>
+
+                    <div class="img">
+                        <img src="../images/Laptop.png" alt="">
+                    </div>
+
+                     <div class="passport-photo">
+                    <h4>Upload photo</h4>
+                    <input type="file" class="passport-input" required>
+                </div>
+                </div>
+
+            <button class="submit">Submit Report</button>
+
+        </div> 
+        
+                 
+
+        </div>
+        </div>
+
+
+    <div id="found" class="tab-items ">
+            <section class="cont-reg">
+        <div class="cont-main">
+            <div class="header-cont">
+                <h1>Report Found</h1>
+            </div>
+
+            <div class="body-cont">
+                <div class="container">
+                    <label>
+                        Item name
+                        <input class="input-form" type="text" required>
+                    </label>
+                    
+                    <label>
+                        Categories
+                        <select required>
+                            <option value="">Electronics</option>
+                            <option value="">Books</option>
+                            <option value="">Card</option>
+                            <option value="">Accessories</option>
+                        </select>                    
+                    </label>
+
+                    <label>
+                        Date Found
+                       <input class="input-form" type="date">
+                    </label>
+
+                    <label>
+                        Location Found
+                       <input class="input-form" type="text">
+                    </label>
+                </div>
+
+                <div class="container">
+                   <label>
+                        Item Description
+                       <textarea name="" placeholder="Describe unique features of the item" id=""></textarea>
+                    </label>
+
+                    <div class="img">
+                        <img src="../images/Laptop.png" alt="">
+                    </div>
+
+                     <div class="passport-photo">
+                    <h4>Upload photo</h4>
+                    <input type="file" class="passport-input" required>
+                </div>
+            </div>
+
+            <button class="submit">Submit Report</button>
+
+        </div>
+    </div>
+    </div>
+
+ <div class="bottom-nav">
+    <a href="./dashboard.html" class="nav-item ">
+        <i class="fa fa-home"></i>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="./view-lost.html" class="nav-item">
+        <i class="fa fa-search"></i>
+        <span>Lost</span>
+    </a>
+
+    <a href="./report.html" class="nav-item active">
+        <i class="fa fa-plus-circle"></i>
+        <span>Report</span>
+    </a>
+    <a href="./view-found.html" class="nav-item ">
+        <i class="fa fa-ellipsis-h"></i>
+        <span>Found</span>
+    </a>
+
+        </div>
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll(".tab").forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            document.querySelectorAll(".tab-items").forEach(tab => {
+                tab.classList.remove("active");
+            });
+
+            document.getElementById(tabId).classList.add("active");
+
+            event.target.classList.add("active")
+        }
+    </script>
+</body>
+</html>

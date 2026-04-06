@@ -9,13 +9,18 @@
     <link rel="stylesheet" href="../css/reg.css">
 </head>
 <body>
+    <header class="header">
+        <marquee behavior="" direction="left">
+            <h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
+        </marquee>
+    </header>
     <section class="cont-reg">
         <div class="cont-main">
             <div class="header-cont">
                 <h1>Report Found</h1>
             </div>
 
-            <form class="body-cont">
+            <div class="body-cont">
                 <div class="container">
                     <label>
                         Item name
@@ -46,7 +51,7 @@
                 <div class="container">
                    <label>
                         Item Description
-                       <input class="input-form" type="text">
+                       <textarea name="" placeholder="Describe unique features of the item" id=""></textarea>
                     </label>
 
                     <div class="img">
@@ -57,12 +62,12 @@
                     <h4>Upload photo</h4>
                     <input type="file" class="passport-input" required>
                 </div>
-            </form>
+                </div>
+            </div>
 
             <button class="submit">Submit Report</button>
 
         </div>
-    </main>
     <script src="../script/c-reg.js"></script>
 </body>
 </html>

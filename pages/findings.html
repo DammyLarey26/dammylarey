@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing</title>
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/user.css">
     <link rel="stylesheet" href="../css/findings.css">
     <link rel="stylesheet" href="../css/view.css">
+    <link rel="stylesheet" href="../css/style.css">
     
 </head>
 <body>
@@ -15,7 +14,7 @@
         <button class="tab active" onclick="showTab('lost')">Lost Items</button>
         <button class="tab" onclick="showTab('found')">Found Items</button>
     </div>
-
+<section class="body-container">
     <div class="itemms">
         <div id="lost" class="tab-items active">
             <div class="search-top">
@@ -114,6 +113,7 @@
             </div>               
     </div>
     </div>
+</section>
     <script>
         function showTab(tabId) {
             document.querySelectorAll(".tab").forEach(btn => {

@@ -8,7 +8,6 @@ body{
     height: 60px;
     position: relative;
     color: white;
-    padding: 10PX;
     display: flex;
     justify-content: space-between;
 }
@@ -52,22 +51,31 @@ padding:16px;
 }
 
 .faq-item.active i{
-transform:rotate(180deg);
+transform:rotate(360deg);
 }
 .center{
     justify-content: center;
     align-items: center;
 }
-.ovwidth{
-    width: fit-content;
-    margin: auto;
-}
-fo
+
 .user{
     background-color: white;
     margin: 30px;
     padding: 20px;
     border-radius: 20px; 
+}
+.user-top{
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    letter-spacing: 3px;
+}
+.admin-top p1{
+    font-size: 30px;
+}
+a{
+    text-decoration: none;
 }
 .modal {
   display: none;

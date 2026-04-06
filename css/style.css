@@ -2,11 +2,33 @@ body{
       background-color: beige;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       padding: 0;
       position: relative;
-      margin: 0;
+      margin: auto;
       
+}
+.body-container{
+    padding: 10px 40px 10px 30px;
+    border-radius: 12px;
+    margin: 20px;
+    width: auto;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 0 15px rgb(64, 62, 62);
+}
+.status{
+    color: white;
+    border-radius: 15px;
+    padding: 0 20px;
+    height: fit-content;
+    width: fit-content;
+    background-color: green;
+}
+.claimed{
+    background-color: orange;
+}
+.delete{
+    background-color: red;
 }
 
 .header{
@@ -19,6 +41,22 @@ body{
     top: 0;
     width: 100%;
     z-index: 999;
+}
+header marquee{
+    width: 60%;
+    
+}
+.header-marquee h2{
+    color: beige;
+    letter-spacing: 1em;
+}
+.header i{
+    color: beige;
+    font-size: x-large;
+    padding: 15px;
+}
+.right-handside{
+    display: flex;
 }
 img{
     border-radius: 5px;
@@ -84,7 +122,7 @@ a{
     padding: 0;
 }
 a:hover{
-    color: aqua;
+    color: rgb(3, 49, 49);
     background-color: #ddd;
     border-radius: 20px;
 }
@@ -109,7 +147,6 @@ a:hover{
     display: flex;
 }
 .step{
-    margin: auto;
     width: 80%;
     
 }
@@ -179,32 +216,45 @@ a:hover{
 .fle{
     display: flex;
     justify-content: space-between;
-    font-size: 11px;
+    font-size: ;
     padding-bottom: 10px;
 }
-.log-form{
+.log{
+    background-color: beige;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 20px;
+    padding: 40px;
+    margin: auto;
+}
+.log input{
     border: none;
     border-radius: 50px;
     padding: 20px;
     text-align: center;
-    margin: 10px;
-    display: flex;
+    margin: 20px;
+    display: block;
+    width: max-content;
     justify-content: space-around;
-
 }
-.log{
+.log button{
+    color: beige;
     align-items: center;
-    justify-content: center;
-    background-color: beige;
+    background-color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
     margin: auto;
-    width: fit-content;
-    border-radius: 30px;
-    padding: 30px;
-
+    width: 100%;
+}
+.log button:hover{
+    background-color: #ddd;
+    cursor: pointer;
 }
 .passport{
-    width: 100px;
-    border: none;
+    width: 150px;
+    height: 150px;
+    border: 1px solid;
     border-radius: 50%;
     margin: 10px;
     overflow: hidden;
@@ -214,71 +264,30 @@ a:hover{
     height: 100%;
     object-fit: cover;
 }
-.btn2{
-    margin-left: 40%;
-    color: beige;
-    background-color: black;
-    border: none;
+.dar{
+    margin: auto;
+}
+.passport:hover{
+    cursor: pointer;
+}
+form{
+    padding: 20px;
+}
+form input{
     padding: 10px;
-    border-radius: 10px;
-}
-
-.items{
-    border: 5px solid white;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    background-color: white;
-    margin: 40px;
-    font-family: 'Times New Roman', Times, serif;
-    padding: 0;
+    background-color: beige;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    
-}
-.lost{
-    margin-top: 40px;
-    width: 40%;
-}
-.found{
-    padding-left: 70px;
-    width: 40%;
-    margin-top: 40px;
-}
-h4{
-    padding: 0;
-    margin: 0;
-}
-.lost-header{
-    display: flex;
-    justify-content: space-between;
-    width: 50%;
-
-}
-.lost-items{
-    padding: 10px;
-    margin: 0;
-    height: 10vh;
-    margin-bottom: 30px;
-    background-color: rgba(0,0,0,0.1);
-    box-shadow: 0 0 15px black;
-    max-width: 100%;
-    border-radius: 20px;
-}
-
-.form{
-    border: 5px solid white;
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    background-color: white;
-    font-family: 'Times New Roman', Times, serif;
-    padding: 50px;
-    text-align: center; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    flex-direction: column;
+    border-radius: 0;
     width: fit-content;
     margin: auto;
 }
-
-.input-field{
+.damilare{
+    width: fit-content;
+    margin: auto;
+}
+.input-fieald{
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -294,8 +303,24 @@ h4{
     background-color: black;
     border-radius: 5px;
 }
-.adewunmir{
-    flex-direction: column;
+.itembox-proof-items{
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.prof-btn1, .prof-btn2{
+    padding: 5px;
+    color: white;
+    background-color: green;
+    border: none;
+    margin: 10px;
+    width: fit-content;
+
+}
+.prof-btn2{
+    background-color: orange;
 }
 .benefits-section {
             background: linear-gradient(135deg, beige 0%, black 100%);
@@ -381,7 +406,7 @@ h4{
     }
 }
 
-/* Button hover */
+
 button {
     transition: all 0.5s ease;
 }
@@ -390,7 +415,6 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Scroll animation */
 .benefit-item, .step, .mid-box {
     opacity: 0;
     transform: translateY(40px);
@@ -413,23 +437,8 @@ html {
         align-items: center;
         gap: 20px;
     }
-    .foot {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .fot {
-        width: 90%;
-    }
     .mid {
         flex-direction: column;
-    }
-  .lost, .found {
-        width: 80%;
-        padding-left: 0;
-    }
-    .lost-items {
-        height: auto;
     }
     .bottom-nav{
     display: none;
@@ -463,13 +472,22 @@ html {
 
 @media screen and (max-width: 768px) {
     body{
-        padding-bottom: 200px;
+        margin-bottom: 20px;
+        font-size: small;
+    }
+    button{
+        width: fit-content;
     }
     .header{
-        display: block;
         margin: auto;
+        position: relative;
+        padding: 5px;
         height: fit-content;
     }
+    .index-header{
+        display: block;
+    }
+    
     .header2 {
         height: 35%;
         margin: auto;
@@ -479,6 +497,12 @@ html {
         align-items: center;
         justify-content: center;
         margin: auto;
+    }
+    .logo img{
+        transform: scale(0.5);
+        border-radius: 30px;
+        
+        
     }
     .nav-bar{
         display: block;
@@ -509,12 +533,6 @@ html {
  button {
         margin-left: 0;
         padding: 10px;
-        
-    }
-    img{
-        transform: scale(0.5);
-        border-radius: 30px;
-        
         
     }
     .bottom-nav{
@@ -551,35 +569,12 @@ html {
     background-color: black;
     color: beige;
     border-radius: 20px;
-    padding: 10px;
-
+    padding: 5px;
+    margin: 5px;
 }
-
-
-}
-@media screen and (max-width: 768px) {
-
-    .showname{
-        width: 70%;
+.showname{
+    width: 70%;
     }
-    .header{
-        position: relative;
-        padding: 0;
-    }
-
-    p {
-        font-size: small;
-    }
-    h2 {
-        font-size: small;
-    }
-    .lost, .found {
-        width: 100%;
-        margin-top: 20px;
-        padding-left: 0;
-    }
-    
-
 
 .hamburger{
     display:block;

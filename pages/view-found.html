@@ -6,15 +6,18 @@
     <title>Found Items</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="../css/bottomnav.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/user.css">
     <link rel="stylesheet" href="../css/view.css">
 </head>
 <body>
 
     <header class="header">
-        <h2></h2>
+        <div class="header-marquee">
+            <marquee behavior="" direction="left">
+                <h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
+            </marquee>
+        </div>
         <div class="right-handside">
         <i class="fa-solid fa-bell"></i>
         <i class="fa-solid fa-cog"></i> 
@@ -22,7 +25,7 @@
     </header>
 
 
-    <div class="overview">
+    <div class="body-container">
         <div class="search-top">
             <input type="search" placeholder="Search by category,date or location">
             <select>
@@ -113,7 +116,7 @@
         <span>Lost</span>
     </a>
 
-    <a href="./report-lost.html" class="nav-item">
+    <a href="./report.html" class="nav-item">
         <i class="fa fa-plus-circle"></i>
         <span>Report</span>
     </a>

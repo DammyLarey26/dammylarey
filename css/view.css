@@ -12,18 +12,26 @@ input, select  {
   border-radius: 8px;
   border: 1px solid #ccc;
 }
+input, textarea {
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
 .search-top button, .items-box-item button{
     margin-top: 30px;
     padding: 12px 25px;
     border: none;
-    background-color: black;
     color: white;
     border-radius: 8px;
     margin: 8px 0;
     cursor: pointer;
     height: fit-content;
 }
-
+.search-top button{
+    background-color: black;
+}
 button:hover {
     background-color: #ccc;
     

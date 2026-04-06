@@ -1,0 +1,59 @@
+.open-btn {
+  margin: 100px;
+  padding: 15px 25px;
+  background: purple;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+}
+
+/* Bottom Sheet */
+.bottom-sheet {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  transition: 0.4s ease;
+  margin: auto;
+}
+
+/* Active State */
+.bottom-sheet.active {
+  bottom: 0;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* Header */
+.sheet-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-btn {
+  cursor: pointer;
+  font-size: 24px;
+}
+.sheet-content{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    
+}
