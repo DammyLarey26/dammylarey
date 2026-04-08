@@ -35,6 +35,7 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     height: 60px;
     background-color: black;
+    color: beige;
     position: fixed;
     display: flex;
     justify-content: space-between;
@@ -46,7 +47,7 @@ header marquee{
     width: 60%;
     
 }
-.header-marquee h2{
+header marquee h2{
     color: beige;
     letter-spacing: 1em;
 }
@@ -57,6 +58,13 @@ header marquee{
 }
 .right-handside{
     display: flex;
+}
+.backbtn{
+    background-color: black;
+    color: beige;
+    border: none;
+    width: fit-content;
+    padding: 20px;
 }
 img{
     border-radius: 5px;
@@ -140,15 +148,16 @@ a:hover{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    width: 90%;
-    margin-bottom: 40px;
+    width: 100%;
+    margin: 30px;
+    text-align: center;
 }
 .stepflex{
     display: flex;
 }
 .step{
-    width: 80%;
-    
+    width: 100%;
+    max-width: 80%;    
 }
 .step h1{
     font-size: 40px;
@@ -165,7 +174,6 @@ a:hover{
 .step p{
     font-size: 14px;
     color: beige;
-    line-height: 1.6;
 }
 
 .footer{
@@ -173,20 +181,18 @@ a:hover{
     color: beige;
     text-align: center;
     justify-content: space-around;
-    padding: 10px;
+    padding: 3px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin: auto;
+    height: fit-content;
 }
 
 .footer-icons{
     width: fit-content;
     margin: auto;
-    height: 20px;
+    height: 15px;
     display: flex;
     gap: 30px;
-}
-.footer p{
-    padding: 1px;
 }
 .footer-icons:hover{
     cursor: pointer;
@@ -472,14 +478,13 @@ html {
 
 @media screen and (max-width: 768px) {
     body{
-        margin-bottom: 20px;
         font-size: small;
+
     }
     button{
         width: fit-content;
     }
     .header{
-        margin: auto;
         position: relative;
         padding: 5px;
         height: fit-content;
@@ -569,8 +574,7 @@ html {
     background-color: black;
     color: beige;
     border-radius: 20px;
-    padding: 5px;
-    margin: 5px;
+
 }
 .showname{
     width: 70%;
@@ -584,6 +588,12 @@ html {
     font-size:28px;
     cursor:pointer;
     color: white;
+}
+.footer{
+    margin-bottom: 40px;
+}
+.footer p{
+    font-size: small;
 }
 
 }

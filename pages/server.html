@@ -22,7 +22,7 @@
         const cont = document.querySelector(".container")
         
         function sendTodo() {
-            if (!task.value) {
+            if (!task.value || task.value === "") {
                 console.log('err') 
             }
                 

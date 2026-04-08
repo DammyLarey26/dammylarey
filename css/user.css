@@ -102,13 +102,21 @@ a{
   font-size: 22px;
   cursor: pointer;
 }
-
-input, textarea {
-  width: 100%;
-  margin: 8px 0;
+.det{
+  display: grid;
+}
+.det span{
   padding: 10px;
+  color: beige;
+  margin: 10px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  background-color: rgba(0,0,0,0.5);
+}
+.det button{
+  padding: 10px;
+  border: none;
+  background-color: beige;
+
 }
 
 .verify-btn {

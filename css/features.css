@@ -6,7 +6,7 @@
         }
 
         .feature-card {
-            background: linear-gradient(135deg, #e1e6ec 0%, beige 100%);
+            background: linear-gradient(135deg, #5b636d 0%, beige 100%);
             padding: 30px;
             border-radius: 12px;
             border-left: 5px solid black;
@@ -19,7 +19,7 @@
         }
 
         .feature-card h3 {
-            color: white;
+            color: beige;
             margin-bottom: 15px;
             font-size: 1.3em;
         }

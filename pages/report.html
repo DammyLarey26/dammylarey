@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listing</title>
     <link rel="stylesheet" href="../css/findings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../css/reg.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/upload.css">
     
 </head>
 <body>
@@ -54,19 +56,24 @@
                 <div class="container">
                    <label>
                         Item Description
-                       <input class="input-form" type="text">
+                       <textarea name="" placeholder="Describe unique features of the item" id=""></textarea>
                     </label>
 
-                    <div class="img">
-                        <img src="../images/Laptop.png" alt="">
+                     <div class="upload-container">
+                    <label for="fileInput" class="upload-box" id="uploadBox">
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+
+                        <div class="upload-content" id="uploadContent">
+                            <div class="plus">+</div>
+                            <p class="subtitle">Upload item's image</p>
+                        </div>
+
+                        <img id="previewImage" class="preview" />
+                    </label>
                     </div>
 
-                     <div class="passport-photo">
-                    <h4>Upload photo</h4>
-                    <input type="file" class="passport-input" required>
                 </div>
-                </div>
-
+            </div>
             <button class="submit">Submit Report</button>
 
         </div> 
@@ -118,14 +125,19 @@
                        <textarea name="" placeholder="Describe unique features of the item" id=""></textarea>
                     </label>
 
-                    <div class="img">
-                        <img src="../images/Laptop.png" alt="">
-                    </div>
+                     <div class="upload-container">
+                    <label for="fileInput" class="upload-box" id="uploadBox">
+                        <input type="file" id="fileInput" accept="image/*" hidden>
 
-                     <div class="passport-photo">
-                    <h4>Upload photo</h4>
-                    <input type="file" class="passport-input" required>
-                </div>
+                        <div class="upload-content" id="uploadContent">
+                            <div class="plus">+</div>
+                            <p class="subtitle">Upload item's image</p>
+                        </div>
+
+                        <img id="previewImage" class="preview" />
+                    </label>
+                    </div>
+            </div>
             </div>
 
             <button class="submit">Submit Report</button>
@@ -170,5 +182,6 @@
             event.target.classList.add("active")
         }
     </script>
+    <script src="../script/upload.js"></script>
 </body>
 </html>

@@ -11,6 +11,9 @@
 
 </head>
 <body>
+    <header class="header">
+        <button class="backbtn" onclick="history.back()">&#8592</button>
+    </header>
     <div class="body-container">
         <div class="search-top">
             <input type="search" placeholder="Search by Id,name or matic no.">
@@ -28,8 +31,11 @@
                     <p>400 Level</p></h2>
                     </div>                
                 </div>
-                <button class="delete">Delete Account</button>
-                <button  onclick="openSheet()" class="open-btn status">View Details</button>
+                <div class="items-det-btn">
+                    <button class="delete">Delete Account</button>
+                    <button  onclick="openSheet()" class="open-btn status">View Details</button>
+                </div>
+
             </div>
         </div>
         <div id="overlay" class="overlay" onclick="closeSheet()"></div>
@@ -45,8 +51,10 @@
                     <p>400 Level</p></h2>
                     </div>                
                 </div>
-                <button class="delete">Delete Account</button>
-                <button  onclick="openSheet()" class="open-btn status">View Details</button>
+                <div class="items-det-btn">
+                    <button class="delete">Delete Account</button>
+                    <button  onclick="openSheet()" class="open-btn">View Details</button>
+                </div>
             </div>
         </div>
         <div id="overlay" class="overlay" onclick="closeSheet()"></div>

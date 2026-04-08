@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/upload.css">
+</head>
+<body>
+
+    <div class="upload-container">
+    <label for="fileInput" class="upload-box" id="uploadBox">
+        <input type="file" id="fileInput" accept="image/*" hidden>
+
+        <div class="upload-content" id="uploadContent">
+            <div class="plus">+</div>
+            <p class="title">Upload Utility Bill or Bank Statement</p>
+            <p class="subtitle">Containing your address • Clear • Within 3 months</p>
+        </div>
+
+        <img id="previewImage" class="preview" />
+    </label>
+</div>
+<script>
+const fileInput = document.getElementById("fileInput");
+const previewImage = document.getElementById("previewImage");
+const uploadContent = document.getElementById("uploadContent");
+
+fileInput.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            previewImage.style.display = "block";
+            uploadContent.style.display = "none";
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+</body>
+</html>

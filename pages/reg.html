@@ -3,38 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Page</title>
+    <title>Report Lost</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/reg.css">
+    <link rel="stylesheet" href="../css/upload.css">
 </head>
 <body>
-    <header class="header">
+       <header class="header">
+        <button class="backbtn" onclick="history.back()">&#8592</button>
         <div class="header-marquee">
             <marquee behavior="" direction="left">
                 <h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
             </marquee>
-        </div>         
-    </header>
+        </div>
+       </header></header>
 
     <section class="cont-reg">
         <div class="cont-main">
             <div class="header-cont">
-                <h1>REGISTRATION PAGE</h1>
-                <p>Please fill in the remaining information to complete your registration</p>
+                <h2>REGISTRATION PAGE</h2>
             </div>
 
-            <form class="body-cont">
-                <div class="passport-photo">
-                    <p>Upload Passport</p>
-                    <input type="file" class="passport-input" required>
-                </div>
-
+            <div class="body-cont">
                 <div class="container">
                     <label>
                         Username *
                         <input class="input-form" type="text" required>
                     </label>
-                    
+
                     <label>
                         Faculty *
                         <select required>
@@ -60,18 +56,33 @@
                     <label>
                         Gender *
                         <div class="radio-group">
-                            <input type="radio" name="gender" value="male">Male
+                            <input type="radio" name="gender" value="male"> Male
                             <input type="radio" name="gender" value="female"> Female
                         </div>
                     </label>
-                </div>
 
-                <div class="container">
+                    <label>
+                        Passport *
+                    <div class="upload-container">
+                    <label for="fileInput" class="pass" id="uploadBox">
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+
+                        <div class="upload-content" id="uploadContent">
+                            <div class="plus">+</div>
+                            <p class="subtitle">passport</p>
+                        </div>
+
+                        <img id="previewImage" class="preview" />
+                    </label>
+                    </div>
+
+            </div>
+            <div class="container">
                     <label>
                         Matric No. / Staff ID *
                         <input class="input-form" type="text" required>
                     </label>
-
+                    
                     <label>
                         Level *
                         <select required>
@@ -92,21 +103,20 @@
 
                     <label>
                         Email *
-                        <input class="input-form" type="email" disabled>
+                        <input class="input-form" type="email">
                     </label>
 
                     <label>
                         Phone Number *
                         <input class="input-form" type="tel" required>
                     </label>
-                </div>
+            </div>
 
-            </form>
-
+            </div>
             <button class="submit">Register</button>
-
         </div>
-    </main>
-    <script src="../script/c-reg.js"></script>
+    </section>
+                  
+    <script src="../script/upload.js"></script>
 </body>
 </html>

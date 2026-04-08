@@ -4,19 +4,9 @@ margin:0;
 background:#f4f4f4;
 }
 
-.header{
-background:black;
-color:white;
-text-align:center;
-padding:15px;
-position:fixed;
-top:0;
-width:100%;
-}
-
 .faq-container{
-margin-top:80px;
-padding:15px;
+    margin: 20px;
+    
 }
 
 .faq-item{

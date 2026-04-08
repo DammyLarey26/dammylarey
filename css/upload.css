@@ -1,0 +1,60 @@
+.upload-container {
+    width: 100%;
+}
+
+.upload-box{
+    display: block;
+    border: 2px dashed #ccc;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    background: beige;
+    margin: auto;
+    overflow: hidden;
+}
+.pass{
+    display: block;
+    border: 2px dashed #ccc;
+    text-align: center;
+    cursor: pointer;
+    background: beige;
+    margin: auto;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+.upload-box:hover {
+    border-color: black;
+    border: 5px dashed;
+}
+
+.plus {
+    width: 50px;
+    height: 50px;
+    background: black;
+    color: white;
+    font-size: 30px;
+    border-radius: 50%;
+    line-height: 50px;
+    margin: 0 auto 10px;
+}
+
+.title {
+    color: black;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #888;
+    font-size: 14px;
+}
+
+.preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    display: none;
+    
+}

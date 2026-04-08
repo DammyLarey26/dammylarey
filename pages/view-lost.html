@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost Items</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/user.css">
     <link rel="stylesheet" href="../css/view.css">
@@ -12,6 +13,7 @@
 <body>
 
     <header class="header">
+        <button class="backbtn" onclick="history.back()">&#8592</button>
         <div class="header-marquee">
             <marquee behavior="" direction="left">
                 <h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
@@ -50,7 +52,7 @@
                 <div class="status">
                 <p>Available </p>
                 </div>
-                <button>View Details</button>
+                <button class="view-btn">View Details</button>
             </div>
         </div>
          <div class="items-box-item">
@@ -67,7 +69,7 @@
                 <div class="status claimed">
                 <p>Claimed </p>
                 </div>
-                <button>View Details</button>
+                <button class="view-btn">View Details</button>
             </div>               
     </div>
     
@@ -103,6 +105,7 @@
         </div>
         <script src="../script/faq.js"></script>
         <script src="script/script.js" type="module"></script>
+        <script src="../script/upload.js"></script>
 </body>
 
 </html>

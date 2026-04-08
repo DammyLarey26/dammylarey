@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Lost</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/reg.css">
+    <link rel="stylesheet" href="../css/upload.css">
+</head>
+<body>
+<header class="header">
+        <marquee behavior="" direction="left">
+            <h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
+        </marquee>
+    </header>
+
+    <section class="cont-reg">
+        <div class="cont-main">
+            <div class="header-cont">
+                <h2>REGISTRATION PAGE</h2>
+            </div>
+
+            <div class="body-cont">
+                <div class="container">
+                    <label>
+                        Username *
+                        <input class="input-form" type="text" required>
+                    </label>
+
+                    <label>
+                        Faculty *
+                        <select required>
+                            <option value="" disabled selected>Select Faculty</option>
+                            <option value="">Science</option>
+                            <option value="">Engineering</option>
+                            <option value="">Agriculture</option>
+                            <option value="">Education</option>
+                        </select>                    
+                    </label>
+
+                    <label>
+                        Department *
+                        <select required>
+                            <option value="">Computer Science</option>
+                            <option value="">Microbiology</option>
+                            <option value="">Mathematics</option>
+                            <option value="">Statistic</option>
+                            <option value="">Chemistry</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Gender *
+                        <div class="radio-group">
+                            <input type="radio" name="gender" value="male">Male
+                            <input type="radio" name="gender" value="female"> Female
+                        </div>
+                    </label>
+
+                        <div class="upload-container">
+                    <label for="fileInput" class="pass" id="uploadBox">
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+
+                        <div class="upload-content" id="uploadContent">
+                            <div class="plus">+</div>
+                            <p class="subtitle">passport</p>
+                        </div>
+
+                        <img id="previewImage" class="preview" />
+                    </label>
+                    </div>
+
+            </div>
+            <div class="container">
+                    <label>
+                        Matric No. / Staff ID *
+                        <input class="input-form" type="text" required>
+                    </label>
+                    
+                    <label>
+                        Level *
+                        <select required>
+                            <option value="" disabled selected>Select Level</option>
+                            <option value="100">100 Level</option>
+                            <option value="200">200 Level</option>
+                            <option value="300">300 Level</option>
+                            <option value="400">400 Level</option>
+                            <option value="500">500 Level</option>
+                            <option value="staff">Staff</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Address *
+                        <input class="input-form" type="text" required>
+                    </label>
+
+                    <label>
+                        Email *
+                        <input class="input-form" type="email">
+                    </label>
+
+                    <label>
+                        Phone Number *
+                        <input class="input-form" type="tel" required>
+                    </label>
+            </div>
+
+            </div>
+            <button class="submit">Register</button>
+        </div>
+    </section>
+                  
+    <script src="../script/upload.js"></script>
+</body>
+</html>

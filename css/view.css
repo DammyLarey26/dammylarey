@@ -29,7 +29,7 @@ input, textarea {
     cursor: pointer;
     height: fit-content;
 }
-.search-top button{
+.search-top button, .view-btn{
     background-color: black;
 }
 button:hover {
