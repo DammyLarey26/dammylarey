@@ -66,6 +66,10 @@ header marquee h2{
     width: fit-content;
     padding: 20px;
 }
+.backbtn:hover{
+    background-color: black;
+    color: rgb(243, 188, 188);
+}
 img{
     border-radius: 5px;
 }
@@ -120,7 +124,7 @@ img{
     border: 2px solid;
 }
 a{
-    color: white;
+    color: black;
     text-decoration: none;
     padding: 10px;
 }
