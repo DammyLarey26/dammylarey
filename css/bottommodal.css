@@ -51,9 +51,11 @@
   cursor: pointer;
   font-size: 24px;
 }
-.sheet-content{
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    
+
+.sheet-content-par{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: justify;
+  text-transform: unset;
 }
