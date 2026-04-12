@@ -1,22 +1,24 @@
-const showLogin = document.querySelector('.js-show')
-const hideLogin = document.querySelector(".js-close")
+const showLogin = document.querySelectorAll('#js-show')
+const hideLogin = document.querySelector("#js-close")
 
 let isActive = false;
 
-export function displayLogin(param) {
+export function displayLogin(status) {
   if (!isActive) {
     document.querySelector('.modal').style.display = 'block'
-    isActive = param
+    isActive = status
     console.log('login display : ' + isActive)
   } else {
     document.querySelector('.modal').style.display = 'none'
-    isActive = param
+    isActive = status
     console.log('login display : ' + isActive)
   }
 }
 
-showLogin.addEventListener('click', () => {
-  displayLogin(true);
+showLogin.forEach(button => {
+  button.addEventListener('click', () => {
+    displayLogin(true);
+  })
 })
 // function openLogin() {
 //   document.getElementById("loginModal").style.display = "block";
