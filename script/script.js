@@ -1,6 +1,7 @@
 import { displayLogin } from "./utils/show-modal.js";
 
-const API_KEY = "http://localhost:5030" 
+const API_KEY = "https://ooulostandfoundportal.onrender.com"
+// const API_KEY = "http://localhost:5030"  
 
 async function login() {
   const email = document.querySelector('#email');

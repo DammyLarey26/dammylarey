@@ -1,6 +1,7 @@
 import { renderImgPrev } from "./utils/upload.js";
 
-const API_KEY = "http://localhost:5030" 
+const API_KEY = "https://ooulostandfoundportal.onrender.com"
+// const API_KEY = "http://localhost:5030" 
 
 const uname = document.querySelector('#name');
 const email = document.querySelector('#email')
