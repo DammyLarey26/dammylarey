@@ -4,7 +4,7 @@ const department = document.querySelector('.department')
 const matric = document.querySelector('.matric');
 const level = document.querySelector('.level');
 const address = document.querySelector('.address')
-const phone =document.querySelector('.phone')
+const phone = document.querySelector('.phone')
 const faculty = document.querySelector('.faculty')
 
 const tempData = JSON.parse(sessionStorage.getItem('tempData'))
@@ -13,39 +13,39 @@ const tempData = JSON.parse(sessionStorage.getItem('tempData'))
 //uname.value = tempData.uname
 //email.value = tempData.email
 
-function getGender () {
-  const radios = document.querySelectorAll('input[name="gender"]'); 
-  let selectedValue = null; 
-  
-  radios.forEach(radio => { 
-    if (radio.checked) { 
-      selectedValue = radio.value; 
-    } 
+function getGender() {
+  const radios = document.querySelectorAll('input[name="gender"]');
+  let selectedValue = null;
+
+  radios.forEach(radio => {
+    if (radio.checked) {
+      selectedValue = radio.value;
+    }
   });
 
-  if (selectedValue) { 
+  if (selectedValue) {
     return selectedValue;
   }
 }
 
 function register() {
   try {
-    if (level.value == ''){
+    if (level.value == '') {
       alert('pick ur level')
       return;
     }
 
     const data = {
-      fullname : uname.value,
-      email : email.value,
-      password : tempData.password,
-      faculty : faculty.value,
-      department : department.value,
-      gender : getGender(),
-      matric : matric.value,
-      level : level.value,
-      address : address.value,
-      phone : phone.value,
+      fullname: uname.value,
+      email: email.value,
+      password: tempData.password,
+      faculty: faculty.value,
+      department: department.value,
+      gender: getGender(),
+      matric: matric.value,
+      level: level.value,
+      address: address.value,
+      phone: phone.value,
       userImg: 'https://officialpurpled.github.io/online-voting-system/images/avatar.jpg' || '../images/lekan.jpg'
     }
     // console.log(data);

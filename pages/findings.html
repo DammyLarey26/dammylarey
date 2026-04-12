@@ -1,121 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listing</title>
-    <link rel="stylesheet" href="../css/findings.css">
-    <link rel="stylesheet" href="../css/view.css">
-    <link rel="stylesheet" href="../css/style.css">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listing</title>
+  <link rel="stylesheet" href="../css/findings.css">
+  <link rel="stylesheet" href="../css/view.css">
+  <link rel="stylesheet" href="../css/style.css">
+
 </head>
+
 <body>
-    <div class="header">
-    </div>
-    <div class="tabs">
-        <button class="tab active" onclick="showTab('lost')">Lost Items</button>
-        <button class="tab" onclick="showTab('found')">Found Items</button>
-    </div>
-<section class="body-container">
+  <div class="header">
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('lost')">Lost Items</button>
+    <button class="tab" onclick="showTab('found')">Found Items</button>
+  </div>
+  <section class="body-container">
     <div class="itemms">
-        <div id="lost" class="tab-items active">
-            <div class="search-top">
-            <input type="search" placeholder="Search by category,date or location">
-            <select>
-                <option value="">All Categories</option>
-                <option value="">Books</option>
-                <option value="">Card</option>
-                <option value="">Electronics</option>
-            </select>
-            <button>Search</button>
-        </div>    
+      <div id="lost" class="tab-items active">
+        <div class="search-top">
+          <input type="search" placeholder="Search by category,date or location">
+          <select>
+            <option value="">All Categories</option>
+            <option value="">Books</option>
+            <option value="">Card</option>
+            <option value="">Electronics</option>
+          </select>
+          <button>Search</button>
+        </div>
         <div class="items-box">
-            <div class="items-box-item">
-                <div class="items-details">
-                    <div class="item-img">
-                        <img src="../images/Laptop.png" alt="">
-                    </div>
-                    <div class="items-det">
-                    <h2>Hp Laptop</h2>
-                    <span>Damilare O.</span>
-                    <span>Library. 26 April 2026</span>
-                    </div>                
-                </div>
-                <div class="status">
-                <p>Available </p>
-                </div>
-                <button class="view-btn">View Details</button>
+          <div class="items-box-item">
+            <div class="items-details">
+              <div class="item-img">
+                <img src="../images/Laptop.png" alt="">
+              </div>
+              <div class="items-det">
+                <h2>Hp Laptop</h2>
+                <span>Damilare O.</span>
+                <span>Library. 26 April 2026</span>
+              </div>
             </div>
+            <div class="status">
+              <p>Available </p>
+            </div>
+            <button class="view-btn">View Details</button>
+          </div>
         </div>
-         <div class="items-box-item">
-                <div class="items-details">
-                    <div class="item-img">
-                        <img src="../images/Laptop.png" alt="">
-                    </div>
-                    <div class="items-det">
-                    <h2>Hp Laptop</h2>
-                    <span>Damilare O.</span>
-                    <span>Library. 26 April 2026</span>
-                    </div>                
-                </div>
-                <div class="status claimed">
-                <p>Claimed </p>
-                </div>
-                <button class="view-btn">View Details</button>
-            </div>               
+        <div class="items-box-item">
+          <div class="items-details">
+            <div class="item-img">
+              <img src="../images/Laptop.png" alt="">
+            </div>
+            <div class="items-det">
+              <h2>Hp Laptop</h2>
+              <span>Damilare O.</span>
+              <span>Library. 26 April 2026</span>
+            </div>
+          </div>
+          <div class="status claimed">
+            <p>Claimed </p>
+          </div>
+          <button class="view-btn">View Details</button>
+        </div>
 
-        </div>
-        </div>
+      </div>
+    </div>
     <div id="found" class="tab-items ">
-            <div class="search-top">
-            <input type="search" placeholder="Search by category,date or location">
-            <select>
-                <option value="">All Categories</option>
-                <option value="">Books</option>
-                <option value="">Card</option>
-                <option value="">Electronics</option>
-            </select>
-            <button>Search</button>
-        </div>
-        
+      <div class="search-top">
+        <input type="search" placeholder="Search by category,date or location">
+        <select>
+          <option value="">All Categories</option>
+          <option value="">Books</option>
+          <option value="">Card</option>
+          <option value="">Electronics</option>
+        </select>
+        <button>Search</button>
+      </div>
 
-        <div class="items-box">
-            <div class="items-box-item">
-                <div class="items-details">
-                    <div class="item-img">
-                        <img src="../images/Laptop.png" alt="">
-                    </div>
-                    <div class="items-det">
-                    <h2>Hp Laptop</h2>
-                    <span>Damilare O.</span>
-                    <span>Library. 26 April 2026</span>
-                    </div>                
-                </div>
-                <div class="status">
-                <p>Available </p>
-                </div>
-                <button class="view-btn">View Details</button>
+
+      <div class="items-box">
+        <div class="items-box-item">
+          <div class="items-details">
+            <div class="item-img">
+              <img src="../images/Laptop.png" alt="">
             </div>
+            <div class="items-det">
+              <h2>Hp Laptop</h2>
+              <span>Damilare O.</span>
+              <span>Library. 26 April 2026</span>
+            </div>
+          </div>
+          <div class="status">
+            <p>Available </p>
+          </div>
+          <button class="view-btn">View Details</button>
         </div>
-         <div class="items-box-item">
-                <div class="items-details">
-                    <div class="item-img">
-                        <img src="../images/Laptop.png" alt="">
-                    </div>
-                    <div class="items-det">
-                    <h2>Hp Laptop</h2>
-                    <span>Damilare O.</span>
-                    <span>Library. 26 April 2026</span>
-                    </div>                
-                </div>
-                <div class="status claimed">
-                <p>Claimed </p>
-                </div>
-                <button class="view-btn">View Details</button>
-            </div>               
+      </div>
+      <div class="items-box-item">
+        <div class="items-details">
+          <div class="item-img">
+            <img src="../images/Laptop.png" alt="">
+          </div>
+          <div class="items-det">
+            <h2>Hp Laptop</h2>
+            <span>Damilare O.</span>
+            <span>Library. 26 April 2026</span>
+          </div>
+        </div>
+        <div class="status claimed">
+          <p>Claimed </p>
+        </div>
+        <button class="view-btn">View Details</button>
+      </div>
     </div>
     </div>
-</section>
-<script src="../script/toggle.js"></script>
+  </section>
+  <script src="../script/toggle.js"></script>
 </body>
+
 </html>

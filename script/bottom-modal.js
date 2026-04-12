@@ -1,4 +1,4 @@
-    function openSheet() {
+function openSheet() {
   document.getElementById("bottomSheet").classList.add("active");
   document.getElementById("overlay").classList.add("active");
 }

@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    <div>
-       Task : <input type="text" class="task"> <br>
-        complete: <input type="checkbox" class="check"> <br>
-        <button>Submit</button>
-    </div>
+  <div>
+    Task : <input type="text" class="task"> <br>
+    complete: <input type="checkbox" class="check"> <br>
+    <button>Submit</button>
+  </div>
 
-    <div class="container">
+  <div class="container">
 
-    </div>
-    <script>
-       const url = "https://week3-crud-todo-api-pxia.onrender.com/todos"
-       const api = "http://localhost:4010/todos"
-        const tasks = document.querySelector(".task")
-        const checked = document.querySelector(".check")
-        const cont = document.querySelector(".container")
-        
-        function sendTodo() {
-            if (!tasks.value || tasks.value === "") {
-                console.log('err') 
-            }
-                
-            const todo = {
-                task : tasks.value,
-                completed : checked.checked
-            }                
-                fetch(api, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(todo)
-                })
-                .then(res => res.json())
-                .then(data => {
-                    cont.innerHTML = `
+  </div>
+  <script>
+    const url = "https://week3-crud-todo-api-pxia.onrender.com/todos"
+    const api = "http://localhost:4010/todos"
+    const tasks = document.querySelector(".task")
+    const checked = document.querySelector(".check")
+    const cont = document.querySelector(".container")
+
+    function sendTodo() {
+      if (!tasks.value || tasks.value === "") {
+        console.log('err')
+      }
+
+      const todo = {
+        task: tasks.value,
+        completed: checked.checked
+      }
+      fetch(api, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(todo)
+      })
+        .then(res => res.json())
+        .then(data => {
+          cont.innerHTML = `
                         <p> Id : ${data.id} </p>
                         <p> Task : ${data.task} </p>
                         <p> Comp : ${data.completed} </p>
                     `
-                    console.log(data)
-                })
-            }    
+          console.log(data)
+        })
+    }
 
-        document.querySelector("button").addEventListener("click", sendTodo)
+    document.querySelector("button").addEventListener("click", sendTodo)
 
-    </script>
+  </script>
 </body>
+
 </html>

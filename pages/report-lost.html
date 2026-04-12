@@ -1,80 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report Lost</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/reg.css">
-    <link rel="stylesheet" href="../css/upload.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Lost</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/reg.css">
+  <link rel="stylesheet" href="../css/upload.css">
 </head>
+
 <body>
-<header class="header">
+  <header class="header">
     <button class="backbtn" onclick="history.back()">&#8592</button>
-        <marquee behavior="" direction="left">
-            <h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
-        </marquee>
-    </header>
+    <marquee behavior="" direction="left">
+      <h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
+    </marquee>
+  </header>
 
-    <section class="cont-reg">
-        <div class="cont-main">
-            <div class="header-cont">
-                <h1>Report Lost</h1>
-            </div>
+  <section class="cont-reg">
+    <div class="cont-main">
+      <div class="header-cont">
+        <h1>Report Lost</h1>
+      </div>
 
-            <div class="body-cont">
-                <div class="container">
-                    <label>
-                        Item name
-                        <input class="input-form" type="text" required>
-                    </label>
-                    
-                    <label>
-                        Categories
-                        <select required>
-                            <option value="">Electronics</option>
-                            <option value="">Books</option>
-                            <option value="">Card</option>
-                            <option value="">Accessories</option>
-                        </select>                    
-                    </label>
+      <div class="body-cont">
+        <div class="container">
+          <label>
+            Item name
+            <input class="input-form" type="text" required>
+          </label>
 
-                    <label>
-                        Date Lost
-                       <input class="input-form" type="date">
-                    </label>
+          <label>
+            Categories
+            <select required>
+              <option value="">Electronics</option>
+              <option value="">Books</option>
+              <option value="">Card</option>
+              <option value="">Accessories</option>
+            </select>
+          </label>
 
-                    <label>
-                        Location Lost
-                       <input class="input-form" type="text">
-                    </label>
-                </div>
+          <label>
+            Date Lost
+            <input class="input-form" type="date">
+          </label>
 
-                <div class="container">
-                   <label>
-                        Item Description
-                       <input class="input-form" type="text">
-                    </label>
-
-                    <div class="upload-container">
-                    <label for="fileInput" class="upload-box" id="uploadBox">
-                        <input type="file" id="fileInput" accept="image/*" hidden>
-
-                        <div class="upload-content" id="uploadContent">
-                            <div class="plus">+</div>
-                            <p class="subtitle">Upload item's image</p>
-                        </div>
-
-                        <img id="previewImage" class="preview" />
-                    </label>
-                    </div>
-            </div>
-            </div>
-
-            <button class="submit">Submit Report</button>
-
+          <label>
+            Location Lost
+            <input class="input-form" type="text">
+          </label>
         </div>
+
+        <div class="container">
+          <label>
+            Item Description
+            <input class="input-form" type="text">
+          </label>
+
+          <div class="upload-container">
+            <label for="fileInput" class="upload-box" id="uploadBox">
+              <input type="file" id="fileInput" accept="image/*" hidden>
+
+              <div class="upload-content" id="uploadContent">
+                <div class="plus">+</div>
+                <p class="subtitle">Upload item's image</p>
+              </div>
+
+              <img id="previewImage" class="preview" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button class="submit">Submit Report</button>
+
+    </div>
     </main>
     <script src="../script/upload.js"></script>
 </body>
+
 </html>

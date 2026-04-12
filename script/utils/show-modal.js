@@ -1,5 +1,5 @@
-const showLogin =  document.querySelector('.js-show')
-const hideLogin =  document.querySelector(".js-close")
+const showLogin = document.querySelector('.js-show')
+const hideLogin = document.querySelector(".js-close")
 
 let isActive = false;
 
@@ -15,14 +15,14 @@ export function displayLogin(param) {
   }
 }
 
-showLogin.addEventListener('click', ()=>{
+showLogin.addEventListener('click', () => {
   displayLogin(true);
 })
 // function openLogin() {
-  //   document.getElementById("loginModal").style.display = "block";
-  // }
+//   document.getElementById("loginModal").style.display = "block";
+// }
 
-hideLogin.addEventListener('click', ()=>{
+hideLogin.addEventListener('click', () => {
   displayLogin(false)
 })
 // function closeLogin() {
