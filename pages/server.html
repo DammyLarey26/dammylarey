@@ -16,24 +16,25 @@
 
     </div>
     <script>
-        // let data;
-        const task = document.querySelector(".task")
+       const url = "https://week3-crud-todo-api-pxia.onrender.com/todos"
+       const api = "http://localhost:4010/todos"
+        const tasks = document.querySelector(".task")
         const checked = document.querySelector(".check")
         const cont = document.querySelector(".container")
         
         function sendTodo() {
-            if (!task.value || task.value === "") {
+            if (!tasks.value || tasks.value === "") {
                 console.log('err') 
             }
                 
             const todo = {
-                task : task.value,
-                completed : true
+                task : tasks.value,
+                completed : checked.checked
             }                
-                fetch("https://week3-crud-todo-api-pxia.onrender.com/todos", {
+                fetch(api, {
                     method: "POST",
                     headers: {
-                        "Content-Type": "aplication/json"
+                        "Content-Type": "application/json"
                     },
                     body: JSON.stringify(todo)
                 })
