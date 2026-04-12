@@ -1,26 +1,20 @@
-const user = JSON.parse(localStorage.getItem('mainuser'));
+const user = JSON.parse(localStorage.getItem('cuser'));
 
-const userDetails = document.querySelector('.user-details');
-const abstractInfo = document.querySelector('.abstract-info');
-
-document.querySelectorAll('#user-img img').forEach(img => {
-  img.src = user.userImg;
-  img.alt = user.fullname.split(' ')[1] + '-Profile Image';
-});
+const userDetails = document.querySelector('#profile-box');
 
 userDetails.innerHTML = `
-  <p>${user.fullname.toUpperCase()}</p>
-  <p>${user.matric.toUpperCase()}</p>
-  <p>${user.faculty}</p>
-  <p>${user.department}</p>
-  <p>${user.level} Level</p>
-  <p>${user.gender.toUpperCase()[0] + user.gender.slice(1)}</p>
-  <p>${user.phone}</p>
-  <p>${user.email}</p>
-  <p>${user.address}</p>
-`;
-
-abstractInfo.innerHTML = `
-  <p>${user.fullname.toUpperCase().split(' ')[1]}</p>
-  <p>${user.matric.toUpperCase()}</p>
+  <div class="passport dar">
+    <img src="${user.imgUrl}" alt="">
+  </div>
+  <div class="det">
+    <span>👨‍🎓 ${user.name}</span>
+    <span style="font-size: 11px; color: red;">🔐 *Password can not be displayed in an html element </span>
+    <span>💼 ${user.faculty.toUpperCase()[0] + user.faculty.slice(1)}</span>
+    <span>📞 ${user.phone}</span>
+    <span>📩 ${user.email}</span>
+    <div class="det-btn">
+      <button>🖍 Edit Profile</button>
+      <button>⚙ Change Password</button>
+    </div>
+  </div>
 `;

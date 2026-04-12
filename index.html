@@ -18,21 +18,21 @@
 			<a href="./pages/findings.html">Lost & Found Listings</a>
 			<a href="./pages/features.html">Features</a>
 			<a href="./pages/contact.html">Contact Us</a>
-			<button class="shownamebtn2 js-show">SIGN IN/UP</button>
+			<button class="shownamebtn2" id="js-show">SIGN IN/UP</button>
 		</div>
 
 
 		<div id="loginModal" class="modal">
 			<div class="modal-content">
-				<span class="close js-close">&times;</span>
+				<span class="close" id="js-close">&times;</span>
 				<div class="log">
-					<input type="text" placeholder="Username" class="log-form username">
-					<input type="password" placeholder="Password" class="log-form password">
+					<input type="text" placeholder="Email" class="log-form username" id="email">
+					<input type="password" placeholder="Password" class="log-form password" id="password">
 					<div class="fle">
-						<a href="">Forgot password?</a>
-						<a href="pages/reg.html">Register</a>
+						<a>Forgot password?</a>
+						<a href="./pages/reg.html">Register</a>
 					</div>
-					<button class="btn2 js-loginBtn">Login</button>
+					<button class="btn2" id="loginBtn">Login</button>
 				</div>
 			</div>
 		</div>
@@ -41,10 +41,8 @@
 		<div class="showname">
 			<h>Lost And Found Management System For Olabisi Onabanjo University Community</h><br>
 			<i>Helping you reunite with your lost items</i><br>
-			<button class="shownamebtn1">SIGN IN/UP</button>
-			<button onclick="" class="shownamebtn2">Learn More</button>
-
-
+			<button class="shownamebtn1" id="js-show">SIGN IN/UP</button>
+			<button class="shownamebtn2" >Learn More</button>
 		</div>
 	</div>
 
@@ -184,7 +182,7 @@
 
 
 
-	<script src="script/script.js" type="module"></script>
+	<script src="./script/script.js" type="module"></script>
 
 	<script>
 		/* Scroll Animation */

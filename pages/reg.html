@@ -31,28 +31,29 @@
         <div class="container">
           <label>
             Username *
-            <input class="input-form" type="text" required>
+            <input class="input-form" id="name" type="text" required>
           </label>
 
           <label>
             Faculty *
-            <select required>
+            <select id="faculty" required>
               <option value="" disabled selected>Select Faculty</option>
-              <option value="">Science</option>
-              <option value="">Engineering</option>
-              <option value="">Agriculture</option>
-              <option value="">Education</option>
+              <option value="science">Science</option>
+              <option value="engineer">Engineering</option>
+              <option value="agriculture">Agriculture</option>
+              <option value="education">Education</option>
             </select>
           </label>
 
           <label>
             Department *
-            <select required>
-              <option value="">Computer Science</option>
-              <option value="">Microbiology</option>
-              <option value="">Mathematics</option>
-              <option value="">Statistic</option>
-              <option value="">Chemistry</option>
+            <select id="department" required>
+              <option value="" disabled selected>Select Department</option>
+              <option value="computer science">Computer Science</option>
+              <option value="micriobiology">Microbiology</option>
+              <option value="mathematics">Mathematics</option>
+              <option value="statistics">Statistic</option>
+              <option value="chemistry">Chemistry</option>
             </select>
           </label>
 
@@ -61,6 +62,7 @@
             <div class="radio-group">
               <input type="radio" name="gender" value="male"> Male
               <input type="radio" name="gender" value="female"> Female
+              <input type="radio" name="gender" value="trans"> Trans
             </div>
           </label>
 
@@ -83,12 +85,12 @@
         <div class="container">
           <label>
             Matric No. / Staff ID *
-            <input class="input-form" type="text" required>
+            <input class="input-form" id="matric" type="text" required>
           </label>
 
           <label>
             Level *
-            <select required>
+            <select id="level" required>
               <option value="" disabled selected>Select Level</option>
               <option value="100">100 Level</option>
               <option value="200">200 Level</option>
@@ -101,26 +103,31 @@
 
           <label>
             Address *
-            <input class="input-form" type="text" required>
+            <input class="input-form" id="address" type="text" required>
           </label>
 
           <label>
             Email *
-            <input class="input-form" type="email">
+            <input class="input-form" id="email" type="email">
           </label>
 
           <label>
             Phone Number *
-            <input class="input-form" type="tel" required>
+            <input class="input-form" id="phone" type="tel" required>
+          </label>
+
+          <label>
+            Password *
+            <input class="input-form" id="password" type="password" required>
           </label>
         </div>
 
       </div>
-      <button class="submit">Register</button>
+      <button class="submit" id="signupBtn">Register</button>
     </div>
   </section>
 
-  <script src="../script/upload.js"></script>
+  <script src="../script/signup.js" type="module"></script>
 </body>
 
 </html>

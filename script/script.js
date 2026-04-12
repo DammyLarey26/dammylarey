@@ -1,39 +1,40 @@
 import { displayLogin } from "./utils/show-modal.js";
 
-const userName = document.querySelector('.showname')
-const intro = document.querySelector('.showintro')
-
-sessionStorage.removeItem('tempData')
+const API_KEY = "http://localhost:5030" 
 
 async function login() {
+  const email = document.querySelector('#email');
+  const password = document.querySelector('#password')
+
   try {
-    const username = document.querySelector('.username').value.slice()
-    const password = document.querySelector('.password').value.slice()
-
-    const data = await fetch('../data/user.json')
-    const jsonData = await data.json()
-    const users = jsonData.users
-
-    const matchedUser = users.find(u => u.username === username && u.password === password);
-
-    if (matchedUser) {
-      document.querySelector('.modal').style.display = 'none'
-      displayLogin(false)
-
-      userName.innerHTML = `Welcome, ${matchedUser.username}`
-      intro.innerHTML = 'Here you will find all your lost item'
-
-      localStorage.setItem('mainuser', JSON.stringify(matchedUser))
-    } else {
-      alert('user not found')
+    if(email.value.trim === "" || password.value.trim === ""){
+      alert("All Field Is Required")
+      return;
     }
-  } catch (error) {
-    alert('Internal Error \n Please try again')
-    console.error('Error: ', error);
+
+    const response = await fetch(`${API_KEY}/auth/login`, {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({email: email.value, password: password.value})
+     });
+
+    const data = await response.json();
+    if (data.status !== 200){
+      alert(data.message)
+      return
+    }
+ 
+    localStorage.setItem('cuser', JSON.stringify(data.profile))
+
+    window.location.href = './pages/profile.html'
+  }
+  catch (err) {
+    alert('Unknown Error \n Please try again')
+    console.error(err)
   }
 }
 
-document.querySelector('.js-loginBtn').addEventListener('click', () => {
+document.querySelector('#loginBtn').addEventListener('click', () => {
   login()
 })
 
