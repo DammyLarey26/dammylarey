@@ -39,24 +39,39 @@ button:hover {
 .items-box{
     background-color: rgb(251, 251, 243);
     margin-bottom: 30px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    overflow-y: auto;
+    height: fit-content;
+    justify-content: center;
+    align-items: center;
 }
 
 .items-box-item{
-    background-color: rgb(239, 239, 219);
-    padding: 10px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
+    background-color: white;
+    padding: 30px;
+    width: fit-content;
+    text-align: center;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgb(64, 62, 62);
 }
 .items-details{
-    display: flex;
+    display: block;
     gap: 5px;
 }
 .item-img{
-    width: 150px;
+    width: 200px;
+    height: 100px;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(251, 251, 243);
 }
 .item-img img{
-    width: 100%;
+    width: 50%;
     height: 100%;
 }
 .items-det{

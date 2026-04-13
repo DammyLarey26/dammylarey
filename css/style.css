@@ -269,7 +269,7 @@ a:hover{
 .passport{
     width: 150px;
     height: 150px;
-    border: 1px solid;
+    border: none;
     border-radius: 50%;
     margin: 10px;
     overflow: hidden;

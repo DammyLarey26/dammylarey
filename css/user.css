@@ -106,11 +106,14 @@ a{
   display: grid;
 }
 .det span{
-  padding: 10px;
-  color: beige;
+  padding: 20px;
+  color: black;
   margin: 10px;
   border-radius: 8px;
-  background-color: rgba(0,0,0,0.5);
+}
+.det span:hover{
+  background-color: rgba(207, 206, 206, 0.976);
+  cursor: pointer;
 }
 .det button{
   padding: 10px;
