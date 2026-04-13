@@ -46,7 +46,7 @@ function register() {
       level: level.value,
       address: address.value,
       phone: phone.value,
-      imgUrl: '../images/lekan.jpg'
+      imgUrl: 'https://officialpurpled.github.io/online-voting-system/images/avatar.jpg'
     }
 
     fetch(`${API_KEY}/auth/signup`, {
@@ -63,7 +63,7 @@ function register() {
 
       localStorage.setItem('cuser', JSON.stringify(data.profile))
 
-      window.location.href = './profile.html'
+      window.location.href = './dashboard.html'
     })
   } catch (err) {
     alert('Unknown Error \n Please try again')

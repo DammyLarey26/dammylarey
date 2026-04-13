@@ -27,7 +27,7 @@ async function login() {
  
     localStorage.setItem('cuser', JSON.stringify(data.profile))
 
-    window.location.href = './pages/profile.html'
+    window.location.href = './pages/dashboard.html'
   }
   catch (err) {
     alert('Unknown Error \n Please try again')
