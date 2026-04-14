@@ -42,7 +42,7 @@ async function forgetPassword() {
 
     const data = await response.json();
 
-    if (data.status !== 200) {
+    if (!data.success) {
       resetMsg.textContent = data.message || "Something went wrong";
       resetMsg.classList.add("error");
 
@@ -57,7 +57,7 @@ async function forgetPassword() {
     resetMsg.classList.add("success");
 
     setTimeout(() => {
-      window.location.href = "./login.html";
+      window.location.href = "../index.html";
     }, 1500);
 
   } catch (err) {
