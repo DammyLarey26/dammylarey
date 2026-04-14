@@ -53,7 +53,7 @@ button:hover {
     padding: 30px;
     width: fit-content;
     text-align: center;
-    margin: 30px;
+    margin: auto;
     border-radius: 20px;
     box-shadow: 0 0 15px rgb(64, 62, 62);
 }
@@ -65,7 +65,6 @@ button:hover {
     width: 200px;
     height: 100px;
     border-radius: 20px;
-    padding: 10px;
     display: flex;
     justify-content: space-between;
     background-color: rgb(251, 251, 243);

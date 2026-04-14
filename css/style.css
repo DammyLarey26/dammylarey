@@ -266,6 +266,41 @@ a:hover{
     background-color: #ddd;
     cursor: pointer;
 }
+
+.btn2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Spinner hidden by default */
+.spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* Show spinner when loading */
+.btn2.loading .spinner {
+  display: inline-block;
+}
+
+/* Optional: fade text a bit */
+.btn2.loading .btn-text {
+  opacity: 0.7;
+}
+
+/* Rotation animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .passport{
     width: 150px;
     height: 150px;

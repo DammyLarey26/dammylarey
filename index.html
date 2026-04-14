@@ -29,10 +29,13 @@
 					<input type="text" placeholder="Enter Email" class="log-form username" id="email">
 					<input type="password" placeholder="EnterPassword" class="log-form password" id="password">
 					<div class="fle">
-						<a>Forgot password?</a>
+						<a href="./pages/password-reset.html">Forgot password?</a>
 						<a href="./pages/reg.html">Register</a>
 					</div>
-					<button class="btn2" id="loginBtn">Login</button>
+					<button class="btn2" id="loginBtn">
+                        <span class="btn-text">Login</span>
+                        <span class="spinner"></span>
+                    </button>
 				</div>
 			</div>
 		</div>
@@ -183,6 +186,7 @@
 
 
 	<script src="./script/script.js" type="module"></script>
+    <script src="./script/fogot-password.js"></script>
 
 	<script>
 		/* Scroll Animation */
