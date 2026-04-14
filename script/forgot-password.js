@@ -1,7 +1,7 @@
 const API_KEY = "https://ooulostandfoundportal.onrender.com";
 // const API_KEY = "http://localhost:5030";
 
-async function resetPassword() {
+async function forgetPassword() {
   const email = document.querySelector('#email');
   const newPassword = document.querySelector('#newPassword');
   const resetBtn = document.querySelector('#resetBtn');
@@ -74,4 +74,4 @@ async function resetPassword() {
   }
 }
 
-document.querySelector('#resetBtn').addEventListener('click', resetPassword);
+document.querySelector('#resetBtn').addEventListener('click', forgetPassword);
