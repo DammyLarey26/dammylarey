@@ -1,7 +1,7 @@
 const API_KEY = "https://ooulostandfoundportal.onrender.com";
 // const API_KEY = "http://localhost:5030";
 
-async function uforgetPassword() {
+async function forgetPassword() {
   const email = document.querySelector('#email');
   const newPassword = document.querySelector('#newPassword');
   const resetBtn = document.querySelector('#resetBtn');
@@ -85,8 +85,8 @@ async function uforgetPassword() {
       return;
     }
 
-    const response = await fetchWithRetry(`${API_KEY}/auth/forget-password`, {
-      method: "PATCH",
+    const response = await fetchWithRetry(`${API_KEY}/auth/reset-password`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
@@ -142,7 +142,7 @@ async function uforgetPassword() {
   }
 }
 
-function forgetPassword() {
+function uforgetPassword() {
   const email = document.querySelector('#email');
   const newPassword = document.querySelector('#newPassword');
   // const resetBtn = document.querySelector('#resetBtn');
