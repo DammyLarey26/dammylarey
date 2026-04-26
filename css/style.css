@@ -127,7 +127,7 @@ img{
     background-color: beige;
     border: 2px solid;
 }
-a{
+.header a{
     color: beige;
     text-decoration: none;
     padding: 10px;
@@ -139,7 +139,6 @@ a{
 }
 a:hover{
     cursor: pointer;
-    border-radius: 20px;
 }
 .mid{
     background-color: rgb(42, 31, 31);
@@ -149,6 +148,7 @@ a:hover{
 .mid h2{
     color: beige;
 }
+
 
 .steps{
     padding: 10px;
@@ -338,7 +338,11 @@ form input{
     margin: auto;
 }
 .fjh{
-    margin-top: 100px;
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
+.nav-bar .active{
+    border-bottom: 3px solid beige;
 }
 .input-fieald{
     display: flex;
@@ -407,9 +411,6 @@ form input{
             font-size: 1.1em;
             color: black;
         }
-.mobile-nav{
-    display: none;
-}
 .bottom-nav{
     display: none;
 }
@@ -497,30 +498,6 @@ html {
     display: none;
 }
 
-/* Each item */
-.nav-item{
-    text-decoration: none;
-    color: #555;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 12px;
-}
-
-/* Icon */
-.nav-item i{
-    font-size: 20px;
-    margin-bottom: 3px;
-}
-
-/* Active item */
-.nav-item.active i{
-    background-color: black;
-    color: white;
-    border-radius: 20px;
-    padding: 10px;
-}
-
 }
 
 @media screen and (max-width: 768px) {
@@ -566,6 +543,9 @@ html {
     .nav-bar:hover{
         cursor: pointer;
     }
+    .nav-bar-mob{
+        display: none;
+    }
 
     h2 {
         font-size: 24px;
@@ -609,21 +589,21 @@ html {
     flex-direction: column;
     align-items: center;
     font-size: 12px;
+    padding: 5px;
+}
+.nav-item.active i{
+    background-color: #555;
+    color: beige;
 }
 
-/* Icon */
-.nav-item i{
-    font-size: 10px;
-    margin-bottom: 3px;
+.nav-item.active i{
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
 }
 
 /* Active item */
-.nav-item.active i{
-    background-color: black;
-    color: beige;
-    border-radius: 20px;
-
-}
 .showname{
     width: 70%;
     }
@@ -639,6 +619,16 @@ html {
 }
 .footer p{
     font-size: small;
+}
+.lower-footer{
+    margin-bottom: 30px;
+}
+.user-new{
+    margin: 0;
+    margin-bottom: 40px;
+}
+.fjh{
+    margin: 0;
 }
 
 }

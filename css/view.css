@@ -47,13 +47,12 @@ button:hover {
     justify-content: center;
     align-items: center;
 }
-
 .items-box-item{
     background-color: white;
     padding: 30px;
     width: fit-content;
     text-align: center;
-    margin: auto;
+    margin: 20px;
     border-radius: 20px;
     box-shadow: 0 0 15px rgb(64, 62, 62);
 }
@@ -73,11 +72,6 @@ button:hover {
     width: 50%;
     height: 100%;
 }
-.items-det{
-    display: flex;
-    flex-direction: column;
-}
-
 @media screen and (max-width: 768px) {
     .items-box-item{
         flex-direction: column;
