@@ -217,6 +217,19 @@ a:hover{
   visibility: hidden;
   transition: all 0.3s ease;
 }
+.login{
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    color: beige;
+    margin: auto;
+    width: fit-content;
+    position: relative;
+}
+.login h2{
+    color: beige;
+}
 
 .modal.active {
   opacity: 1;
@@ -224,7 +237,7 @@ a:hover{
 }
 
 /* Glass effect */
-.modal-content {
+.modal-content{
   position: relative;
   width: 320px;
   padding: 25px;
@@ -261,12 +274,12 @@ a:hover{
 .log-form {
   width: 100%;
   padding: 12px;
-  margin: 10px 0;
+  margin: 15px 0;
   border-radius: 8px;
   border: none;
   outline: none;
   background: rgba(255,255,255,0.2);
-  color: white;
+  color: beige;
   text-align: center;
 }
 
