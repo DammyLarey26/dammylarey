@@ -1,32 +1,39 @@
-const showLogin = document.querySelectorAll('#js-show')
-const hideLogin = document.querySelector("#js-close")
-
-let isActive = false;
+const showLogin = document.querySelectorAll('#js-show');
+const hideLogin = document.querySelector("#js-close");
+const modal = document.querySelector('.modal');
 
 export function displayLogin(status) {
-  if (!isActive) {
-    document.querySelector('.modal').style.display = 'block'
-    isActive = status
-    console.log('login display : ' + isActive)
+  if (status) {
+    modal.classList.add('active');
   } else {
-    document.querySelector('.modal').style.display = 'none'
-    isActive = status
-    console.log('login display : ' + isActive)
+    modal.classList.remove('active');
   }
 }
 
 showLogin.forEach(button => {
   button.addEventListener('click', () => {
     displayLogin(true);
-  })
-})
-// function openLogin() {
-//   document.getElementById("loginModal").style.display = "block";
-// }
+  });
+});
 
 hideLogin.addEventListener('click', () => {
-  displayLogin(false)
-})
-// function closeLogin() {
-//   document.getElementById("loginModal").style.display = "none";
-// }
+  displayLogin(false);
+});
+
+/* Close when clicking outside */
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    displayLogin(false);
+  }
+});
+
+const loginBtn = document.getElementById("loginBtn");
+
+loginBtn.addEventListener("click", () => {
+  loginBtn.classList.add("loading");
+
+  // simulate API call
+  setTimeout(() => {
+    loginBtn.classList.remove("loading");
+  }, 2000);
+});
