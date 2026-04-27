@@ -204,6 +204,7 @@ a:hover{
 .modal {
   position: fixed;
   top: 0;
+  margin-top: 500px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -553,6 +554,10 @@ html {
     body{
         font-size: small;
 
+    }
+    .modal{
+        margin: 0;
+        top: 50%;
     }
     button{
         width: fit-content;
