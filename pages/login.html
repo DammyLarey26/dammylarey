@@ -10,7 +10,12 @@
 <body>
     	<div class="header index-header">
             <button class="backbtn" onclick="history.back()">&#8592</button>
-		<div class="nav-bar">
+            <button class="hamburger-toggle" id="menuToggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+		<div class="nav-bar" id="navBar">
 			<a href="../index.html">Home</a>
 			<a href="./findings.html">Lost & Found Listings</a>
 			<a href="./features.html">Features</a>
@@ -34,5 +39,15 @@
 	</div>
     </div>
     <script src="../script/script.js" type="module"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menuToggle");
+    const navBar = document.getElementById("navBar");
+
+    menuToggle.addEventListener("click", () => {
+        navBar.classList.toggle("show-menu");
+    });
+});
+    </script>
 </body>
 </html>

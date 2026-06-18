@@ -509,6 +509,9 @@ button:hover {
 html {
     scroll-behavior: smooth;
 }
+.hamburger-toggle {
+    display: none;
+}
 
 @media screen and (max-width: 1024px) {
     .flex {
@@ -537,14 +540,62 @@ html {
     button{
         width: fit-content;
     }
-    .header{
-        position: fixed;
-        padding: 12px;
-        height: fit-content;
+    .header {
+        position: fixed; /* Keeps your header fixed at the top */
+        align-items: center;
+        padding: 0 10px; /* Gives the logo and hamburger breathing room from the edges */
     }
-    .index-header{
-        display: block;
+
+    /* 2. Turn your desktop navbar into the mobile dropdown drawer */
+    .nav-bar {
+        display: flex !important; /* Force flexbox layout over desktop settings */
+        flex-direction: column !important; /* Force vertical stacking */
+        position: absolute;
+        top: 60px; /* Sits directly beneath your 60px header */
+        left: 0;
+        width: 100%;
+        background-color: beige !important; /* Keep it solid black */
+        max-height: 0; 
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+        z-index: 1000;
+    }
+
+    /* 3. Class triggered by JavaScript to slide the menu open */
+    .nav-bar.show-menu {
+        max-height: fit-content; /* Adjust if you need more space for links */
+    }
+
+    /* 4. Style the links to stack cleanly inside the mobile drawer */
+    .nav-bar a {
+        display: block !important; 
+        color: black !important; /* Force text color to show up against black background */
+        padding: 15px 0 !important;
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* 5. Make the hamburger button visible and style the icon bars */
+    .hamburger-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 25px;
+        height: 18px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
         padding: 0;
+    }
+
+    .hamburger-toggle .bar {
+        height: 3px;
+        width: 100%;
+        background-color: beige; /* Matches your text color */
+        border-radius: 2px;
     }
     
     .header2 {
