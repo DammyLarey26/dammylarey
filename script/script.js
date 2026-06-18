@@ -1,5 +1,3 @@
-import { displayLogin } from "./utils/show-modal.js";
-
 const API_KEY = "https://ooulostandfoundportal.onrender.com"
 // const API_KEY = "http://localhost:5030"  
 
@@ -41,7 +39,7 @@ async function login() {
 
     localStorage.setItem('cuser', JSON.stringify(data.profile));
 
-    window.location.href = './pages/dashboard.html';
+    window.location.href = './dashboard.html';
 
   } catch (err) {
     alert('Unknown Error \n Please try again');

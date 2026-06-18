@@ -191,11 +191,15 @@ transform:rotate(180deg);
     border-radius: 20px;
     overflow-x: auto;
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 }
 .dare button{
-    padding: 13px;
+    padding: 5px;
     border: none;
     color: white;
+    border-radius: 10px;
 }
 .dare button{
     cursor: pointer;

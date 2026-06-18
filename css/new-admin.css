@@ -29,7 +29,7 @@ body{
     background-color: rgb(65, 17, 17);
 }
 .sidebar h3{
-    padding-top: 50px;
+    padding-top: 100px;
 }
 nav-bar{
     color: beige;
@@ -68,13 +68,14 @@ nav-bar button{
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
 }
-.box{
+.box, .faq-question{
     background-color: rgb(65, 17, 17);
     color: beige;
     padding: 20px;
     margin: 3px;
     text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
 }
 .box:hover{
     transform: translateY(-5px);
@@ -120,3 +121,25 @@ nav-bar button{
 .item-name h, .date-rep span {
     font-weight: bolder;
 }
+.admin-box{
+    display: flex;
+}
+.itembox-proof{
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    text-align: center;
+}
+.img{
+    border: 2px solid rgb(65, 17, 17);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.active{
+    border-right: 2px solid beige;
+}
+.users-box{
+    background-color: aliceblue;
+}
+.

@@ -36,6 +36,8 @@ overflow:hidden;
 padding:0 16px;
 transition:0.3s;
 font-size:14px;
+display: flex;
+justify-content: space-between;
 color:#555;
 }
 

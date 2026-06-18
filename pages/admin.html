@@ -7,105 +7,138 @@
   <title>Admin Panel</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="../css/admin.css">
-  <link rel="stylesheet" href="../css/actions.css">
-  <link rel="stylesheet" href="../css/bottomnav.css">
+  <link rel="stylesheet" href="../css/new-admin.css">
 </head>
 
 <body>
-
-  </div>
-
-  <header class="header"></header>
-  <section class="admin-top">
-    <p1>Welcome,Admin!</p1>
-    <p2>Accessble only to system admnistrators</p2>
-  </section>
-
-  <section class="overview">
-    <h1>Overview</h1>
-    <div class="overview-el">
-      <div class="overview-items coloruser">
-        <i class="fa-solid fa-user"></i>
-        <div class="overview-itemsfig">
-          <div class="fig">
-            <h>1,320</h>
-            <h7>Users</h7>
-          </div>
-        </div>
-      </div>
-      <div class="overview-items colorlost">
-        <i class="fa-solid fa-list"></i>
-        <div class="overview-itemsfig">
-          <div class="fig">
-            <h>45</h>
-            <h7>Lost Items</h7>
-          </div>
-        </div>
-      </div>
-      <div class="overview-items colorfound">
-        <i class="fa-solid fa-user"></i>
-        <div class="overview-itemsfig">
-          <div class="fig">
-            <h>57</h>
-            <h7>Found Items</h7>
-          </div>
-        </div>
-      </div>
-      <div class="overview-items colorpend">
-        <i class="fa-solid fa-user"></i>
-        <div class="overview-itemsfig">
-          <div class="fig">
-            <h>29</h>
-            <h7>Pending Claims</h7>
-          </div>
-        </div>
-      </div>
-
+    <header class="header">
+        <h3>ADMIN DASHBOARD</h3>
+    </header>
+    
+    <div class="sidebar">
+        <h3>Admin Options</h3>
+        <nav-bar>
+          <div class="options">
+            <a href="./users.html"> Users</a>
+            <a href="">Found Items</a>
+            <a href="">Lost Items</a>
+            <a href="">Verify Claims</a>
+            <button>Generate Report</button>
+          </div> 
+        </nav-bar>
     </div>
-  </section>
+      <section class="admin-top">
+        <span>Welcome,Admin!</span>
+        <span>Accessble only to system admnistrators</span>
+      </section>
 
-  <section class="overview">
-    <h1>Admin Options</h1>
-    <div class="overview-el">
-      <div class="overview-items adminoptions">
-        <i class="fa-solid fa-users purple"></i>
-        <div class="overview-itemsfig">
-          <div class="fig">
-            <a href="./users.html">Manage Users</a>
+      <section class="det-top">
+        <h3>Overview</h3>
+        <div class="overview-box">
+          <div class="box">
+          <span>1320</span>
+          <span>Users</span>
+          </div>
+
+          <div class="box">
+          <span>45</span>
+          <span>Lost Items</span>
+          </div>
+
+          <div class="box">
+          <span>57</span>
+          <span>Found Items</span>
+          </div>
+
+          <div class="box">
+          <span>57</span>
+          <span>Pending Claims</span>
           </div>
         </div>
-      </div>
-      <div class="overview-items adminoptions">
-        <i class="fa-solid fa-box-open green"></i>
-        <div class="overview-itemsfig">
-          <div class="fig">
-            <a href="./verify-lost.html">Manage Lost Items</a>
-          </div>
-        </div>
-      </div>
-      <div class="overview-items adminoptions">
-        <i class="fa-solid fa-clipboard-list blue"></i>
-        <div class="overview-itemsfig">
-          <div class="fig">
-            <a href="./verify-found.html">Manage Found Items</a>
-          </div>
-        </div>
-      </div>
-      <div class="overview-items adminoptions">
-        <i class="fa-solid fa-user-check orange"></i>
-        <div class="overview-itemsfig">
-          <div class="fig">
-            <a href="./verify-claim.html">Verify Claims</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-  <div class="overview"><button class="admin-btn"><i class="fa-solid fa-chart-bar"></i> Generate Report</button></div>
 
 
+        <h3>Recently Reported</h3>
+        <div class="recenty-reported">
+          <button class="view-btn">View All</button>
+          <div class="items">
+            <div class="item-box">
+              <div class="item-img">
+                <img src="../inmages/Laptop.png" alt="">
+              </div>
+              <div class="item-det">
+                <div class="item-name">
+                  <h>HP Laptop</h>
+                </div>
+                <div class="item-ID">
+                  <span>456-879</span>
+                </div>
+                <div class="item-loc">
+                  <span>LLT 3</span>
+                </div>
+                <div class="user-ID">
+                  <span>346-756-397</span>
+                </div>
+                <div class="date-rep">
+                  <span>Feb. 26, 2026 17:31</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="items">
+            <div class="item-box">
+              <div class="item-img">
+                <img src="../inmages/Laptop.png" alt="">
+              </div>
+              <div class="item-det">
+                <div class="item-name">
+                  <h>HP Laptop</h>
+                </div>
+                <div class="item-ID">
+                  <span>456-879</span>
+                </div>
+                <div class="item-loc">
+                  <span>LLT 3</span>
+                </div>
+                <div class="user-ID">
+                  <span>346-756-397</span>
+                </div>
+                <div class="date-rep">
+                  <span>Feb. 26, 2026 17:31</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="items">
+            <div class="item-box">
+              <div class="item-img">
+                <img src="../inmages/Laptop.png" alt="">
+              </div>
+              <div class="item-det">
+                <div class="item-name">
+                  <h>HP Laptop</h>
+                </div>
+                <div class="item-ID">
+                  <span>456-879</span>
+                </div>
+                <div class="item-loc">
+                  <span>LLT 3</span>
+                </div>
+                <div class="user-ID">
+                  <span>346-756-397</span>
+                </div>
+                <div class="date-rep">
+                  <span>Feb. 26, 2026 17:31</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>        
+        </div>
+      </section>
+
+      
 
   <div class="bottom-nav">
     <a href="#" class="nav-item active">

@@ -114,7 +114,7 @@ async function forgetPassword() {
     resetMsg.classList.add("success");
 
     setTimeout(() => {
-      window.location.href = "./login.html";
+      window.location.href = "./dashboard.html";
     }, 1500);
 
   } catch (err) {

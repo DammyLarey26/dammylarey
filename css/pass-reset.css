@@ -2,6 +2,7 @@ body{
       background-color: beige;
       padding-top: 200px;
     }
+    /*
 #submitBtn {
   position: relative;
   padding: 10px 20px;
@@ -32,4 +33,28 @@ body{
   100% {
     transform: rotate(360deg);
   }
+}*/
+
+.spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 3px solid #fff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+#loginBtn.loading .spinner {
+    display: inline-block;
+}
+
+#loginBtn.loading .btn-text {
+    display: none;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
