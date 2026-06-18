@@ -8,7 +8,16 @@
     <link rel="stylesheet" href="../css/pass-reset.css">
 </head>
 <body>
-    <button class="backbtn" onclick="history.back()">&#8592</button>
+    	<div class="header index-header">
+            <button class="backbtn" onclick="history.back()">&#8592</button>
+		<div class="nav-bar">
+			<a href="../index.html">Home</a>
+			<a href="./findings.html">Lost & Found Listings</a>
+			<a href="./features.html">Features</a>
+			<a href="./contact.html">Contact Us</a>
+			<a  class="active" href="">SIGN IN/UP</a>
+		</div>
+	    </div>
     <div class="auth-container login">
     <div class="log">
 		<input type="text" placeholder="Enter Email" class="log-form username" id="email">
@@ -17,6 +26,7 @@
 		    <a href="./password-reset.html">Forgot password?</a>
 			<a href="./reg.html">Register</a>
 		</div>
+        <a href="./admin-log.html">Login as admin</a>
 			<button class="btn2" id="loginBtn">
             <span class="btn-text">Login</span>
             <span class="spinner"></span>

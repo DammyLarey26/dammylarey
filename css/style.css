@@ -1,9 +1,11 @@
 body{
       background-color: beige;
-      margin: 0;
-}
-* {
-  box-sizing: border-box;
+      padding-top: 50px;
+    }
+    * { 
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
 }
 .body-container{
     padding: 10px 40px 10px 30px;
@@ -41,7 +43,8 @@ body{
     display: flex;
     justify-content: space-between;
     top: 0;
-    width: 100%;
+    left: 0;
+    right: 0;
     z-index: 999;
 }
 header marquee{
@@ -65,7 +68,7 @@ header marquee h2{
     color: beige;
     border: none;
     width: fit-content;
-    padding: 20px;
+    padding: 10px;
 }
 .backbtn:hover{
     background-color: black;
@@ -95,8 +98,8 @@ img{
     border-bottom: 30px solid;
     background-position: center;
     background-size: cover;
-    padding: 50px;
-    width: 100%;
+    /* padding: 50px; */
+    max-width: 100%;
 
 }
 .showname{
@@ -201,102 +204,48 @@ a:hover{
 .footer-icons:hover{
     cursor: pointer;
 }
-.modal {
-  position: fixed;
-  top: 0;
-  margin-top: 500px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-}
 .login{
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 30px;
+    padding: 20px;
     transition: all 0.3s ease;
     border-radius: 20px;
     color: beige;
     margin: auto;
-    width: fit-content;
     position: relative;
+    width: fit-content;
 }
-.login h2{
+.login a{
     color: beige;
 }
-
-.modal.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Glass effect */
-.modal-content{
-  position: relative;
-  width: 320px;
-  padding: 25px;
-
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-
-  color: white;
-
-  transform: translateY(-30px) scale(0.9);
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.modal.active .modal-content {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-
-/* Close button */
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 22px;
-  cursor: pointer;
-}
-
 /* Inputs */
 .log-form {
-  width: 100%;
+  width: 300px;
   padding: 12px;
-  margin: 15px 0;
   border-radius: 8px;
   border: none;
   outline: none;
   background: rgba(255,255,255,0.2);
   color: beige;
   text-align: center;
+  display: flex;
+  margin-bottom: 20px;
+  
 }
 
 .log-form::placeholder {
-  color: rgba(255,255,255,0.7);
+  color: beige;
 }
 
 /* Links */
 .fle {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 15px;
   margin-bottom: 15px;
 }
 
 .fle a {
-  color: #ddd;
+  color: black;
   text-decoration: none;
 }
 
@@ -308,7 +257,7 @@ a:hover{
   border-radius: 8px;
 
   background: linear-gradient(135deg, #323132, beige);
-  color: white;
+  color: beige;
   cursor: pointer;
 
   display: flex;
@@ -327,7 +276,7 @@ a:hover{
 .spinner {
   width: 16px;
   height: 16px;
-  border: 2px solid white;
+  border: 2px solid beige;
   border-top: 2px solid transparent;
   border-radius: 50%;
   display: none;
@@ -375,9 +324,23 @@ a:hover{
     transform: rotate(360deg);
   }
 }
+.prof-det{
+    position: fixed;
+    right: 0;
+    display: flex;
+    background-color: beige;
+    border: 2px solid;
+    padding: 10px;
+    top: 60px;
+    z-index: 999;
+}
+.prof-det span{
+    display: block;
+    text-align: right;
+}
 .passport{
-    width: 150px;
-    height: 150px;
+    width: 50px;
+    height: 50px;
     border: none;
     border-radius: 50%;
     margin: 10px;
@@ -412,7 +375,6 @@ form input{
     margin: auto;
 }
 .fjh{
-    margin-top: 70px;
     margin-bottom: 30px;
 }
 .nav-bar .active{
@@ -568,20 +530,21 @@ html {
         font-size: small;
 
     }
-    .modal{
-        margin: 0;
-        top: 50%;
+    .header2{
+        padding-top: 70%;
     }
+
     button{
         width: fit-content;
     }
     .header{
-        position: relative;
-        padding: 5px;
+        position: fixed;
+        padding: 12px;
         height: fit-content;
     }
     .index-header{
         display: block;
+        padding: 0;
     }
     
     .header2 {

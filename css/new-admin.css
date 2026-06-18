@@ -1,0 +1,122 @@
+body{
+    box-sizing: border-box;
+    margin: 0;
+}
+.header{
+    background-color: rgb(65, 17, 17);
+    padding: 20px;
+    margin: 0;
+}
+.header h3{
+    margin: auto;
+    text-align: end;
+    color: beige;
+}
+.admin-top span{
+    display: block;
+    text-align: end;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.sidebar{
+    position: fixed;
+    width: 20%;
+    height: 100vh;
+    color: beige;
+    padding: 15px;
+    left: 0;
+    top: 0;
+    text-align: center;
+    background-color: rgb(65, 17, 17);
+}
+.sidebar h3{
+    padding-top: 50px;
+}
+nav-bar{
+    color: beige;
+    z-index: 999;
+}
+nav-bar a{
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    color: beige;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+nav-bar a:hover, button:hover{
+    color: rgb(65, 17, 17);
+    background-color: beige;
+    transform: translateY(-5px);
+}
+
+nav-bar button{
+    background: none;
+    border: none;
+    color: beige;
+    padding: 20px;
+}
+.det-top{
+    padding: 10px;
+    position: relative;
+    left: 320px;
+    width: 70%;
+    background-color: beige;
+    margin: 30px;
+    border-radius: 20px;
+}
+.overview-box{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+.box{
+    background-color: rgb(65, 17, 17);
+    color: beige;
+    padding: 20px;
+    margin: 3px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.box:hover{
+    transform: translateY(-5px);
+}
+.box span{
+    display: block;
+    width: 300px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: x-large;
+}
+
+.recenty-reported{
+    background-color: rgb(65, 17, 17);
+    padding: 10px;
+}
+.items{
+    background-color: beige;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    
+}
+.item-box{
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+}
+.item-img{
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgb(65, 17, 17);
+    border-radius: 50%;
+}
+.view-btn{
+    background-color: beige;
+    color: rgb(65, 17, 17);
+    margin: 10px;
+    padding: 2px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: none;
+    display: flex;
+    font-weight: bolder;
+}
+.item-name h, .date-rep span {
+    font-weight: bolder;
+}

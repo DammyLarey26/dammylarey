@@ -144,7 +144,6 @@ a{
 }
 .user-new{
   box-shadow: skyblue;
-  margin: 70px 20px 40px 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
@@ -154,5 +153,5 @@ a{
 .user-rhs{
   padding: 20px;
   width: fit-content;
-  background-color: white;
+  
 }

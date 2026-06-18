@@ -1,3 +1,7 @@
+body{
+      background-color: beige;
+      padding-top: 200px;
+    }
 #submitBtn {
   position: relative;
   padding: 10px 20px;
@@ -20,7 +24,6 @@
 }
 
 .auth-container{
-    width: fit-content;
     margin: auto;
     text-align: center;
 }

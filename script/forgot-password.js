@@ -166,7 +166,7 @@ function uforgetPassword() {
     // resetMsg.classList.add("success");
 
     setTimeout(() => {
-      window.location.href = "../index.html";
+      window.location.href = "./index.html";
     }, 1500);
   } catch (error) {
     console.log(error)
