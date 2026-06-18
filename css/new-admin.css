@@ -15,6 +15,9 @@ body{
 .admin-top span{
     display: block;
     text-align: end;
+    color: black;
+    font-style: italic;
+    font-weight: bolder;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .sidebar{
@@ -27,6 +30,7 @@ body{
     top: 0;
     text-align: center;
     background-color: rgb(65, 17, 17);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .sidebar h3{
     padding-top: 100px;
@@ -53,6 +57,7 @@ nav-bar button{
     border: none;
     color: beige;
     padding: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .det-top{
     padding: 10px;
@@ -120,6 +125,9 @@ nav-bar button{
 }
 .item-name h, .date-rep span {
     font-weight: bolder;
+}
+.item-det span{
+    color: black;
 }
 .admin-box{
     display: flex;
