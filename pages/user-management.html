@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../css/new-admin.css">
   <link rel="stylesheet" href="../css/bottomnav.css">
+  <link rel="stylesheet" href="../css/bottommmodal.css">
 </head>
 
 <body>
@@ -20,10 +21,10 @@
         <h3>Admin Options</h3>
         <nav-bar>
           <div class="options">
-            <a class="active" href="./user-management.html"> Users</a>
+            <a class="active" href=""> Users</a>
             <a href="">Found Items</a>
             <a href="">Lost Items</a>
-            <a href="">Verify Claims</a>
+            <a href="./new-verify.html">Verify Claims</a>
             <button>Generate Report</button>
           </div> 
         </nav-bar>
@@ -35,21 +36,70 @@
 
       <section class="det-top">
         <div class="users-box">
-			<div class="items-box-item">
-				<div class="items-details">
+			<div class="user-box-item">
+				<div class="user-details">
 					<div class="user-img">
-						<img src="../imamges/lekan.jpg" alt="">
 					</div>
-					<div class="items-det">
-						<h2>Odubela Damilare
-							<p>Sci/22/23/0716</p>
-							<p>400 Level</p>
-						</h2>
+					<div class="user-det">
+						<h>Odubela Damilare</h>
+						<span>Sci/22/23/0716</span>
+						<span>400 Level</span>
 					</div>
 				</div>
-				<div class="items-det-btn">
-					<button class="delete">Delete Account</button>
-					<button onclick="openSheet()" class="open-btn status">View Details</button>
+				<div class="user-det-btn">
+					<button class="reject">Delete Account</button>
+					<button onclick="openSheet()" class="open-btn accept">View Details</button>
+				</div>
+
+			</div>
+
+            <div class="user-box-item">
+				<div class="user-details">
+					<div class="user-img">
+					</div>
+					<div class="user-det">
+						<h>Odubela Damilare</h>
+						<span>Sci/22/23/0716</span>
+						<span>400 Level</span>
+					</div>
+				</div>
+				<div class="user-det-btn">
+					<button class="reject">Delete Account</button>
+					<button onclick="openSheet()" class="open-btn accept">View Details</button>
+				</div>
+
+			</div>
+
+            <div class="user-box-item">
+				<div class="user-details">
+					<div class="user-img">
+					</div>
+					<div class="user-det">
+						<h>Odubela Damilare</h>
+						<span>Sci/22/23/0716</span>
+						<span>400 Level</span>
+					</div>
+				</div>
+				<div class="user-det-btn">
+					<button class="reject">Delete Account</button>
+					<button onclick="openSheet()" class="open-btn accept">View Details</button>
+				</div>
+
+			</div>
+
+            <div class="user-box-item">
+				<div class="user-details">
+					<div class="user-img">
+					</div>
+					<div class="user-det">
+						<h>Odubela Damilare</h>
+						<span>Sci/22/23/0716</span>
+						<span>400 Level</span>
+					</div>
+				</div>
+				<div class="user-det-btn">
+					<button class="reject">Delete Account</button>
+					<button onclick="openSheet()" class="open-btn accept">View Details</button>
 				</div>
 
 			</div>
@@ -82,6 +132,7 @@
 
   </div>
   <script src="script/script.js" type="module"></script>
+  <script src="../script/bottom-modal.js"></script>
 </body>
 
 </html>
