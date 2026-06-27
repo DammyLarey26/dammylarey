@@ -10,16 +10,17 @@
 </head>
 
 <body>
-<div class="header index-header">
-    <button class="backbtn" onclick="history.back()">&#8592</button>
-		<div class="nav-bar">
-			<a href="../index.html">Home</a>
-			<a href="./findings.html">Lost & Found Listings</a>
-			<a class="active" href="">Features</a>
-			<a href="./contact.html">Contact Us</a>
-			<a href="./login.html">SIGN IN/UP</a>
-		</div>
-	    </div>
+<div class="header">
+    <div class="logo"><button class="backbtn" onclick="history.back()">&#8592</button></div>
+    <div class="nav-bar" id="navBar">
+		<button class="close-btn" id="closeBtn">&times;</button>
+        <a href="../index.html">Home</a>
+        <a href="./findings.html">Lost & Found Listings</a>
+        <a class="active" href="">Features</a>
+        <a href="./contact.html">Contact Us</a>
+        <a href="./login.html">SIGN IN/UP</a>
+    </div><button class="menu-btn" id="menuBtn">☰</button>
+</div>
     <h2>✨ Core Features </h2>
     <div class="features-grid">
       <div class="feature-card">
@@ -51,6 +52,7 @@
         <p>Automated owner notifications for new items, claims, and status updates to enable quick response times.</p>
       </div>
     </div>
+    <script src="../script/ham.js"></script>
 </body>
 
 </html>

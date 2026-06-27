@@ -146,12 +146,12 @@ a{
   box-shadow: skyblue;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  justify-content: space-between;
   padding: 30px;
 }
 .user-rhs{
   padding: 20px;
   width: fit-content;
+  padding-top: 70px;
+
   
 }

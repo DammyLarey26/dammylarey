@@ -13,16 +13,17 @@
 </head>
 
 <body>
-  <div class="header index-header">
-            <button class="backbtn" onclick="history.back()">&#8592</button>
-		<div class="nav-bar">
-			<a href="../index.html">Home</a>
-			<a  class="active" href="">Lost & Found Listings</a>
-			<a href="./features.html">Features</a>
-			<a href="./contact.html">Contact Us</a>
-			<a href="">SIGN IN/UP</a>
-		</div>
-	    </div>
+  <div class="header">
+    <div class="logo"><button class="backbtn" onclick="history.back()">&#8592</button></div>
+    <div class="nav-bar" id="navBar">
+		<button class="close-btn" id="closeBtn">&times;</button>
+        <a href="../index.html">Home</a>
+        <a class="active" href="">Lost & Found Listings</a>
+        <a href="./features.html">Features</a>
+        <a href="./contact.html">Contact Us</a>
+        <a href="./login.html">SIGN IN/UP</a>
+    </div><button class="menu-btn" id="menuBtn">☰</button>
+</div>
   <div class="tabs">
     <button class="tab active" onclick="showTab('lost')">Lost Items</button>
     <button class="tab" onclick="showTab('found')">Found Items</button>
@@ -295,6 +296,7 @@
   </section>
   <script src="../script/toggle.js"></script>
   <script src="../script/bottom-modal.js"></script>
+  <script src="../script/ham.js"></script>
 </body>
 
 </html>

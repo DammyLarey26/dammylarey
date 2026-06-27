@@ -1,6 +1,11 @@
-const hamburger = document.getElementById("hamburger");
-const nav = document.getElementById("navLinks");
+const menuBtn = document.getElementById("menuBtn");
+const closeBtn = document.getElementById("closeBtn");
+const navBar = document.getElementById("navBar");
 
-hamburger.addEventListener("click", () => {
-    nav.classList.toggle("active");
+menuBtn.addEventListener("click", () => {
+    navBar.classList.add("active");
+});
+
+closeBtn.addEventListener("click", () => {
+    navBar.classList.remove("active");
 });

@@ -70,8 +70,14 @@ header marquee h2{
     width: fit-content;
     padding: 10px;
 }
+.back{
+    margin: auto;
+    color: beige;
+    background: none;
+    border: none;
+}
 .backbtn:hover{
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.5);
     color: rgb(243, 188, 188);
 }
 img{
@@ -82,8 +88,6 @@ img{
     width: fit-content;
     display: flex;
     padding: 10px;
-    padding-left: 30px;
-
 }
 .nav-bar{
     margin-right: 2px;
@@ -255,7 +259,6 @@ a:hover{
   padding: 12px;
   border: none;
   border-radius: 8px;
-
   background: linear-gradient(135deg, #323132, beige);
   color: beige;
   cursor: pointer;
@@ -331,7 +334,7 @@ a:hover{
     background-color: beige;
     border: 2px solid;
     padding: 10px;
-    top: 60px;
+    top: 52px;
     z-index: 999;
 }
 .prof-det span{
@@ -509,7 +512,8 @@ button:hover {
 html {
     scroll-behavior: smooth;
 }
-.hamburger-toggle {
+.menu-btn,
+.close-btn {
     display: none;
 }
 
@@ -533,101 +537,44 @@ html {
         font-size: small;
 
     }
-    .header2{
-        padding-top: 70%;
-    }
+
 
     button{
         width: fit-content;
     }
-    .header {
-        position: fixed; /* Keeps your header fixed at the top */
-        align-items: center;
-        padding: 0 10px; /* Gives the logo and hamburger breathing room from the edges */
-    }
 
-    /* 2. Turn your desktop navbar into the mobile dropdown drawer */
-    .nav-bar {
-        display: flex !important; /* Force flexbox layout over desktop settings */
-        flex-direction: column !important; /* Force vertical stacking */
-        position: absolute;
-        top: 60px; /* Sits directly beneath your 60px header */
-        left: 0;
-        width: 100%;
-        background-color: beige !important; /* Keep it solid black */
-        max-height: 0; 
-        overflow: hidden;
-        transition: max-height 0.5s ease-in-out;
-        z-index: 1000;
-    }
-
-    /* 3. Class triggered by JavaScript to slide the menu open */
-    .nav-bar.show-menu {
-        max-height: fit-content; /* Adjust if you need more space for links */
-    }
-
-    /* 4. Style the links to stack cleanly inside the mobile drawer */
-    .nav-bar a {
-        display: block !important; 
-        color: black !important; /* Force text color to show up against black background */
-        padding: 15px 0 !important;
-        text-align: center;
-        text-decoration: none;
-        width: 100%;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-
-    /* 5. Make the hamburger button visible and style the icon bars */
-    .hamburger-toggle {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 25px;
-        height: 18px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-    }
-
-    .hamburger-toggle .bar {
-        height: 3px;
-        width: 100%;
-        background-color: beige; /* Matches your text color */
-        border-radius: 2px;
-    }
-    
     .header2 {
         height: 35%;
         margin: auto;
         width: fit-content;
-    }
-    .logo {
-        align-items: center;
-        justify-content: center;
-        margin: auto;
-    }
-    .logo img{
-        transform: scale(0.5);
-        border-radius: 30px;
-        
         
     }
     .nav-bar{
-        display: block;
-        text-align: center;
-    }
-    .nav-bar a{
-        display: block;
-    }
-    .nav-bar:hover{
-        cursor: pointer;
-    }
-    .nav-bar-mob{
-        display: none;
+        position:fixed;
+        top:0;
+        left:-100%;
+        width:260px;
+        height:100vh;
+        background:black;
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        padding:60px 20px;
+        transition:.3s ease;
+        z-index:1000;
     }
 
+    .nav-bar.active{
+        left:0;
+    }
+
+    .nav-bar a{
+        width:100%;
+        padding:15px 0;
+        border-bottom:1px solid rgba(255,255,255,.2);
+        color:beige;
+        text-decoration:none;
+    }
     h2 {
         font-size: 24px;
     }
@@ -689,15 +636,7 @@ html {
     width: 70%;
     }
 
-.hamburger{
-    display:block;
-    position:absolute;
-    right:20px;
-    top:30%;
-    font-size:28px;
-    cursor:pointer;
-    color: white;
-}
+
 .footer p{
     font-size: small;
 }
@@ -708,8 +647,29 @@ html {
     margin: 0;
     margin-bottom: 40px;
 }
-.fjh{
-    margin: 0;
-}
+.backbtn{
+        color: beige;
+        font-size: larger;
+    }
 
+    .menu-btn{
+        display:block;
+        background:none;
+        border:none;
+        color:beige;
+        font-size:30px;
+        cursor:pointer;
+    }
+
+    .close-btn{
+        display:block;
+        position:absolute;
+        top:15px;
+        right:20px;
+        background:none;
+        border:none;
+        color:beige;
+        font-size:35px;
+        cursor:pointer;
+    }
 }

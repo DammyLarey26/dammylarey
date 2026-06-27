@@ -10,27 +10,38 @@
   <link rel="stylesheet" href="../css/actions.css">
   <link rel="stylesheet" href="../css/user.css">
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/prof.css">
 </head>
 <body>
-      <header class="header">
-    <button class="backbtn" onclick="history.back()">&#8592</button>
-    <div class="header-marquee">
-      <marquee behavior="" direction="left">
-        <h2>DASHBOARD</h2>
-      </marquee>
-    </div>
-    <div class="nav-bar-mob nav-bar">
-			<a href="../index.html">Home</a>
+    <header class="user-header">
+       <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="marquee">
+            <marquee behavior="" direction="left">
+                <h2>DASHBOARD</h2>
+            </marquee>
+        </div>
+    </header>
+    
+    <div class="sidebar" id="sidebar">
+    <button class="close-btn" id="closeBtn">&times;</button>
+        <button class="backbtn" onclick="history.back()">&#8592</button>
+        <div class="user-options">
+            <div class="dash-logo">
+            <img src="../images/download.png" alt="">
+        </div>
+            <a href="../index.html">Home</a>
 			<a href="./profile.html">Profile</a>
 			<a class="active" href="">Dashboard</a>
 			<a href="./login.html">Logout</a>
-		</div>
-    <div class="right-handside">
-      <i class="fa-solid fa-bell"></i>
-      <i class="fa-solid fa-cog"></i>
+        </div>
+        <div class="right-handside">
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-cog"></i>
+        </div>
     </div>
-  </header>
-    <div class="user-new">
+
+    <main class="main-content">
+        <div class="user-new">
         <div class="user-lhs">
             <h1>Quick Actions</h1>
              <div class="overview-el">
@@ -72,12 +83,11 @@
 
         <div class="prof-det">
         <div class="prof-detname">
-          <span id="name"></span>
+          <span id="name">Dammy Larey</span>
           <span>478-564</span> 
         </div>
         <div class="passport">
         <img id="img" src="../images/lekan.jpg" alt="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round-icon lucide-circle-user-round"><path d="M17.925 20.056a6 6 0 0 0-11.851.001"/><circle cx="12" cy="11" r="4"/><circle cx="12" cy="12" r="10"/></svg>
       </div>
       </div>
     <div class="user-rhs">
@@ -172,8 +182,25 @@
     </a>
 
   </div>
+    </main>
+    
+
+    
   <script src="../script/faq.js"></script>
   <script src="../script/dashboard.js" type="module"></script>
+  <script>
+    const sidebar = document.getElementById("sidebar");
+const menuBtn = document.getElementById("menuBtn");
+const closeBtn = document.getElementById("closeBtn");
+
+menuBtn.addEventListener("click", () => {
+    sidebar.classList.add("active");
+});
+
+closeBtn.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+});
+  </script>
 </body>
 
 </html>

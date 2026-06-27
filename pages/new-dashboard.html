@@ -2,28 +2,27 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Profile</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="stylesheet" href="../css/user.css">
-	<link rel="stylesheet" href="../css/prof.css">
-	<link rel="stylesheet" href="../css/profile.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/actions.css">
+  <link rel="stylesheet" href="../css/user.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/prof.css">
 </head>
-
 <body>
-	<header class="user-header">
+    <header class="user-header">
        <button class="menu-btn" id="menuBtn">☰</button>
         <div class="marquee">
             <marquee behavior="" direction="left">
-                <h2>Profile</h2>
+                <h2>DASHBOARD</h2>
             </marquee>
         </div>
     </header>
-
-	 <div class="sidebar" id="sidebar">
+    
+    <div class="sidebar" id="sidebar">
     <button class="close-btn" id="closeBtn">&times;</button>
         <button class="backbtn" onclick="history.back()">&#8592</button>
         <div class="user-options">
@@ -42,27 +41,14 @@
     </div>
 
     <main class="main-content">
-		<section class="profile-card" id="profile-box">
-		<div class="passport">
-			<img src="../images/lekan.jpg" alt="">
-		</div>
-		<div class="det">
-			<span>👨‍🎓 Odubela Damilare</span>
-			<span>🔐 Dammy123 </span>
-			<span>💼 Science</span>
-			<span>📞 09117515856</span>
-			<span>📩 ovodubela@gmail.com"</span>
-			<div class="det-btn">
-				<button>🖍 Edit Profile</button>
-				<button>⚙ Change Password</button>
-			</div>
-		</div>
-		</section>        
+        
     </main>
+    
 
-
-	<script src="../script/profile.js"></script>
-	<script>
+    
+  <script src="../script/faq.js"></script>
+  <script src="../script/dashboard.js" type="module"></script>
+  <script>
     const sidebar = document.getElementById("sidebar");
 const menuBtn = document.getElementById("menuBtn");
 const closeBtn = document.getElementById("closeBtn");
