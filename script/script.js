@@ -1,6 +1,11 @@
 const API_KEY = "https://ooulostandfoundportal.onrender.com"
 // const API_KEY = "http://localhost:5030"  
 
+const currentUser = JSON.parse(localStorage.getItem("cuser"));
+
+if (currentUser) {
+    window.location.replace("./dashboard.html");
+}
 async function login() {
   const email = document.querySelector('#email');
   const password = document.querySelector('#password');
@@ -38,7 +43,7 @@ async function login() {
     }
 
     localStorage.setItem('cuser', JSON.stringify(data.profile));
-
+    sessionStorage.setItem("loggedIn", "true");
     window.location.href = './dashboard.html';
 
   } catch (err) {

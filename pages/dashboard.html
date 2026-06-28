@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/user.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/prof.css">
+  
 </head>
 <body>
     <header class="user-header">
@@ -32,7 +33,7 @@
             <a href="../index.html">Home</a>
 			<a href="./profile.html">Profile</a>
 			<a class="active" href="">Dashboard</a>
-			<a href="./login.html">Logout</a>
+			<a href="#" id="sidebarLogout">Logout</a>
         </div>
         <div class="right-handside">
             <i class="fa-solid fa-bell"></i>
@@ -141,7 +142,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-question">
-            <span><a href="./login.html"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></span>
+            <span><a href="#" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></span>
             <i class="fa-solid fa-chevron-down"></i>
           </div>
 
@@ -187,7 +188,8 @@
 
     
   <script src="../script/faq.js"></script>
-  <script src="../script/dashboard.js" type="module"></script>
+  <script src="../script/dashboard.js"></script>
+  
   <script>
     const sidebar = document.getElementById("sidebar");
 const menuBtn = document.getElementById("menuBtn");
