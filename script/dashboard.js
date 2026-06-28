@@ -28,26 +28,43 @@ window.forceLogout = function(e) {
 // ==========================================
 // 2. FETCH PROFILE DYNAMICALLY FROM DATABASE
 // ==========================================
+// ==========================================
+// 2. FETCH PROFILE DYNAMICALLY FROM DATABASE
+// ==========================================
 async function loadDashboardProfile() {
     const nameElem = document.querySelector('#name'); 
     const idElem = document.querySelector('#userId'); 
     const imgElem = document.querySelector('#img'); 
+    
+    const token = localStorage.getItem('token');
+    const loggedInEmail = localStorage.getItem('loggedInEmail'); // 🌟 Get the current user's email
 
     try {
         // Fetching the user list from your Render database backend
-        const response = await fetch('https://ooulostandfoundportal.onrender.com/admin/get-users');
+        const response = await fetch('https://ooulostandfoundportal.onrender.com/admin/get-users', {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
         const result = await response.json();
 
         if (result.success && Array.isArray(result.data)) {
-            // Grab a user account from your database array to display
-            // (Using the second user index matching your previous backend picture)
-            const currentUser = result.data[1] || result.data[0]; 
+            
+            // 🕵️‍♂️ FIND THE SPECIFIC USER MATCHING THE LOGGED-IN EMAIL
+            const currentUser = result.data.find(user => user.email === loggedInEmail); 
 
             if (currentUser) {
-                // Send data directly to your HTML elements
+                // Save it locally as backup
+                localStorage.setItem('cuser', JSON.stringify(currentUser));
+
+                // Send the actual account data directly to your HTML elements
                 if (nameElem && currentUser.name) nameElem.innerText = currentUser.name;
                 if (idElem && currentUser.matric) idElem.innerText = currentUser.matric;
-                if (imgElem && currentUser.imgUrl) imgElem.src = currentUser.imgUrl;
+                
+                if (imgElem) {
+                    imgElem.src = currentUser.imgUrl || "https://officialpurpled.github.io/online-voting-system/images/avatar.jpg";
+                }
                 return;
             }
         }
@@ -59,8 +76,8 @@ async function loadDashboardProfile() {
 }
 
 function fallbackToDefaults(nameElem, idElem) {
-    if (nameElem) nameElem.innerText = "Dammy Larey";
-    if (idElem) idElem.innerText = "USER002";
+    if (nameElem) nameElem.innerText = "User Profile";
+    if (idElem) idElem.innerText = "No ID Loaded";
 }
 
 // Run the profile load immediately

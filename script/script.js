@@ -41,6 +41,7 @@ async function login() {
     // 💾 SAVE THE AUTHENTICATION TOKEN
     if (data.token) {
         localStorage.setItem('token', data.token);
+        localStorage.setItem('loggedInEmail', email.value); // 🌟 Save the email used to log in
         sessionStorage.setItem("loggedIn", "true");
         
         alert("Login successfully!");

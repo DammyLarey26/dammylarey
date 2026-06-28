@@ -346,6 +346,7 @@ a:hover{
 .prof-det span{
     display: block;
     text-align: right;
+    padding-top: 15px;
 }
 .passport{
     width: 50px;
