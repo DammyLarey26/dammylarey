@@ -1,43 +1,53 @@
-// Check if the user is logged in
-const user = JSON.parse(localStorage.getItem("cuser"));
+//const nameElem = document.querySelector('#name'); 
+//const imgElem = document.querySelector('#img'); 
 
-if (!user) {
-    alert("Please login first.");
-    window.location.replace("./login.html");
-}
+//const user = JSON.parse(localStorage.getItem('cuser')) 
 
-// Display user's name
-const nameElem = document.getElementById("name");
-if (nameElem && user.name) {
-    const names = user.name.split(" ");
-    nameElem.textContent = names.length > 1 ? names[1] : names[0];
-}
+//nameElem.innerText = user.name.split(' ')[1] 
+//imgElem.src = user.imgUrl
+// ==========================================
+// 1. GLOBAL LOGOUT HANDLER
+// ==========================================
+window.forceLogout = function(e) {
+    if (e) e.preventDefault();
 
-// Display user's profile image
-const imgElem = document.getElementById("img");
-if (imgElem && user.imgUrl) {
-    imgElem.src = user.imgUrl;
-}
+    const confirmLogout = confirm("Are you sure you want to log out?");
+    
+    if (confirmLogout) {
+        sessionStorage.removeItem("loggedIn");
+        sessionStorage.removeItem("welcomeShown"); // Reset welcome flag on logout
+        localStorage.removeItem("cuser");
+        window.location.replace('./login.html');
+    }
+};
 
-// Logout function
-function logout(e) {
-    e.preventDefault();
+// ==========================================
+// 2. LOAD USER PROFILE & WELCOME ALERT
+// ==========================================
+const user = JSON.parse(localStorage.getItem('cuser'));
 
-    localStorage.removeItem("cuser");
+if (user) {
+    const nameElem = document.querySelector('#name'); 
+    const imgElem = document.querySelector('#img'); 
 
-    alert("Logged out successfully.");
+    // Grab the first word of the name safely
+    const firstName = user.name ? user.name.split(' ')[0] : "User";
 
-    window.location.replace("./login.html");
-}
+    if (nameElem) {
+        nameElem.innerText = firstName; 
+    }
+    if (imgElem && user.imgUrl) {
+        imgElem.src = user.imgUrl;
+    }
 
-// Logout buttons
-const logoutBtn = document.getElementById("logoutBtn");
-const sidebarLogout = document.getElementById("sidebarLogout");
+    // Check what is currently stored in your browser console
+    console.log("Welcome Alert Flag Status:", sessionStorage.getItem("showWelcomeAlert"));
 
-if (logoutBtn) {
-    logoutBtn.addEventListener("click", logout);
-}
-
-if (sidebarLogout) {
-    sidebarLogout.addEventListener("click", logout);
+    // 🎉 TRIGGER WELCOME ALERT
+    if (sessionStorage.getItem("showWelcomeAlert") === "true") {
+        alert("Welcome back, " + firstName + "! Glad to have you here.");
+        sessionStorage.removeItem("showWelcomeAlert");
+    }
+} else {
+    console.log("No user object found in localStorage");
 }
