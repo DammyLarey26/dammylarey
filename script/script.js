@@ -26,10 +26,11 @@ async function login() {
       body: JSON.stringify({ email: email.value, password: password.value })
     });
 
-    const data = await response.json();
+   const data = await response.json();
 
-    if (data.status !== 200) {
-      alert(data.message);
+    // Checks both status 200 or a success flag from your backend
+    if (data.status !== 200 && data.success !== true) {
+      alert(data.message || "Login failed");
 
       // ❌ Stop spinner
       loginBtn.classList.remove("loading");
@@ -37,10 +38,21 @@ async function login() {
       return;
     }
 
-    localStorage.setItem('cuser', JSON.stringify(data.profile));
-    sessionStorage.setItem("loggedIn", "true");
-    alert("Login successfully!");
-    window.location.href = './dashboard.html';
+    // 💾 SAVE THE AUTHENTICATION TOKEN
+    if (data.token) {
+        localStorage.setItem('token', data.token);
+        sessionStorage.setItem("loggedIn", "true");
+        
+        alert("Login successfully!");
+        window.location.href = './dashboard.html';
+    } else {
+        // Fallback warning if backend configuration changes unexpectedly
+        alert("Login succeeded, but no authorization token was received.");
+        console.log("Full backend response:", data);
+        
+        sessionStorage.setItem("loggedIn", "true");
+        window.location.href = './dashboard.html';
+    }
 
   } catch (err) {
     alert('Unknown Error \n Please try again');
