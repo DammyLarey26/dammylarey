@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/new-admin.css">
+</head>
+<body>
+    <section class="det-top">
+    <div class="users-box" id="adminUsersContainer">
+        <div style="text-align: center; width: 100%; padding: 20px; color: #555;">
+            Loading registered student accounts...
+        </div>
+    </div>
+    
+    <div id="overlay" class="overlay" onclick="closeSheet()"></div>
+</section>
+
+<script>
+    // ===================================================
+// FETCH AND RENDER USERS INTO YOUR BOX CARDS DYNAMICALLY
+// ===================================================
+async function loadAdminUsersDashboard() {
+    const container = document.querySelector('#adminUsersContainer');
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        if (container) container.innerHTML = `<p style="color: red; text-align: center; width: 100%;">Unauthorized. Please log in first.</p>`;
+        return;
+    }
+
+    try {
+        const response = await fetch('https://ooulostandfoundportal.onrender.com/admin/get-users', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const result = await response.json();
+
+        if (result.success && Array.isArray(result.data)) {
+            // Clear out the loading status notice
+            container.innerHTML = '';
+
+            result.data.forEach(user => {
+                // Set up default fallbacks if database parameters are missing
+                const avatar = user.imgUrl || "https://officialpurpled.github.io/online-voting-system/images/avatar.jpg";
+                const name = user.name || "Unknown User";
+                const matric = user.matric || "No Matric Number";
+                const level = user.level || "400 Level"; // Default fallback if level isn't in API yet
+
+                // Build your exact box-item HTML component structure
+                const userCard = document.createElement('div');
+                userCard.className = 'user-box-item';
+                
+                userCard.innerHTML = `
+                    <div class="user-details">
+                        <div class="user-img" style="background-image: url('${avatar}'); background-size: cover; background-position: center; border-radius: 50%; width: 50px; height: 50px;">
+                        </div>
+                        <div class="user-det">
+                            <h3>${name}</h3>
+                            <span>${matric}</span>
+                            <span>${level}</span>
+                        </div>
+                    </div>
+                    <div class="user-det-btn">
+                        <button class="reject" onclick="deleteUserAccount('${user.email}')">Delete Account</button>
+                        <button onclick="viewUserDetails('${user.email}')" class="open-btn accept">View Details</button>
+                    </div>
+                `;
+
+                container.appendChild(userCard);
+            });
+
+            if (result.data.length === 0) {
+                container.innerHTML = `<p style="text-align: center; width: 100%;">No registered users found in database directory.</p>`;
+            }
+
+        } else {
+            container.innerHTML = `<p style="color: orange; text-align: center; width: 100%;">Error processing records: ${result.message}</p>`;
+        }
+    } catch (error) {
+        console.error("Failed to load admin directory data layout:", error);
+        container.innerHTML = `<p style="color: red; text-align: center; width: 100%;">Network connection failed. Server offline.</p>`;
+    }
+}
+
+// ===================================================
+// BUTTON INTERACTION STUBS (View details / Delete)
+// ===================================================
+function viewUserDetails(email) {
+    console.log("Opening context sheet for user email ID:", email);
+    // Call your existing openSheet() function here
+    if (typeof openSheet === "function") {
+        openSheet(); 
+    }
+}
+
+function deleteUserAccount(email) {
+    if (confirm(`Are you sure you want to permanently delete user account: ${email}?`)) {
+        alert("Delete operation triggered! Integration with backend DELETE route is pending.");
+    }
+}
+
+// Trigger initialization process when page finishes document structural styling loads
+document.addEventListener('DOMContentLoaded', loadAdminUsersDashboard);
+</script>
+</body>
+</html>
