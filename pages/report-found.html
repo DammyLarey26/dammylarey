@@ -2,82 +2,79 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Report Found</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Found</title>
 
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="stylesheet" href="../css/reg.css">
-	<link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/reg.css">
+    <link rel="stylesheet" href="../css/upload.css">
 </head>
 
 <body>
-	<header class="header">
-		<button class="backbtn" onclick="history.back()">&#8592</button>
-		<marquee behavior="" direction="left">
-			<h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
-		</marquee>
-	</header>
-	<section class="cont-reg">
-		<div class="cont-main">
-			<div class="header-cont">
-				<h1>Report Found</h1>
-			</div>
+    <header class="header">
+        <button class="backbtn" onclick="history.back()">&#8592;</button>
+        <marquee behavior="" direction="left">
+            <h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
+        </marquee>
+    </header>
 
-			<div class="body-cont">
-				<div class="container">
-					<label>
-						Item name
-						<input class="input-form" type="text" required>
-					</label>
+    <section class="cont-reg">
+        <div class="cont-main">
+            <div class="header-cont">
+                <h1>Report Found</h1>
+            </div>
 
-					<label>
-						Categories
-						<select required>
-							<option value="">Electronics</option>
-							<option value="">Books</option>
-							<option value="">Card</option>
-							<option value="">Accessories</option>
-						</select>
-					</label>
+            <div class="body-cont">
+                <div class="container">
+                    <label for="itemName">Item name</label>
+                    <input class="input-form" type="text" id="itemName" required>
 
-					<label>
-						Date Found
-						<input class="input-form" type="date">
-					</label>
+                    <label for="itemCategory">Categories</label>
+                    <select id="itemCategory" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="books">Books</option>
+                        <option value="card">Card</option>
+                        <option value="accessories">Accessories</option>
+                    </select>
 
-					<label>
-						Location Found
-						<input class="input-form" type="text">
-					</label>
-				</div>
+                   <label for="dateFound">Date Found</label>
+<input class="input-form" type="date" id="dateFound"> <!-- 🌟 Make sure id="dateFound" is present! -->
 
-				<div class="container">
-					<label>
-						Item Description
-						<textarea name="" placeholder="Describe unique features of the item" id=""></textarea>
-					</label>
-					<div class="upload-container">
-						<label for="fileInput" class="upload-box" id="uploadBox">
-							<input type="file" id="fileInput" accept="image/*" hidden>
+<!-- Check this input -->
+<label for="locationFound">Location Found</label>
+<input class="input-form" type="text" id="locationFound">
+                </div>
 
-							<div class="upload-content" id="uploadContent">
-								<div class="plus">+</div>
-								<p class="title">File Upload</p>
-								<p class="subtitle">Upload Item Image</p>
-							</div>
+                <div class="container">
+                    <label for="itemDescription">Item Description</label>
+                    <textarea placeholder="Describe unique features of the item" id="itemDescription"></textarea>
+                    
+                    <div class="upload-container">
+                        <label for="fileInput" class="upload-box" id="uploadBox">
+                            <input type="file" id="fileInput" accept="image/*" hidden>
 
-							<img id="previewImage" class="preview" />
-						</label>
-					</div>
-				</div>
-			</div>
+                            <div class="upload-content" id="uploadContent">
+                                <div class="plus">+</div>
+                                <p class="title">File Upload</p>
+                                <p class="subtitle">Upload Item Image</p>
+                            </div>
 
-			<button class="submit">Submit Report</button>
+                            <img id="previewImage" class="preview" alt="Preview Image" />
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-		</div>
-		<script src="../script/c-reg.js"></script>
-		<script src="../script/upload.js"></script>
+            <button id="submitFoundBtn" class="submit">Submit Found Report</button>
+        </div>
+    </section>
+
+    <!-- Script Resource Configurations -->
+    <script src="../script/c-reg.js"></script>
+<script src="../script/upload.js"></script>
+<script src="../script/reportFound.js"></script>
 </body>
 
 </html>

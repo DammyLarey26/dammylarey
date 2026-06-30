@@ -28,34 +28,35 @@
         <div class="container">
           <label>
             Item name
-            <input class="input-form" type="text" required>
+            <input id="itemName" class="input-form" type="text" required>
           </label>
 
           <label>
             Categories
-            <select required>
-              <option value="">Electronics</option>
-              <option value="">Books</option>
-              <option value="">Card</option>
-              <option value="">Accessories</option>
+            <select id="itemCategory" required>
+              <option value="" disabled selected>Select category</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Books">Books</option>
+              <option value="Card">Card</option>
+              <option value="Accessories">Accessories</option>
             </select>
           </label>
 
           <label>
             Date Lost
-            <input class="input-form" type="date">
+            <input id="dateLost" class="input-form" type="date">
           </label>
 
           <label>
             Location Lost
-            <input class="input-form" type="text">
+            <input id="locationLost" class="input-form" type="text">
           </label>
         </div>
 
         <div class="container">
           <label>
             Item Description
-            <input class="input-form" type="text">
+            <input id="itemDescription" class="input-form" type="text">
           </label>
 
           <div class="upload-container">
@@ -67,16 +68,16 @@
                 <p class="subtitle">Upload item's image</p>
               </div>
 
-              <img id="previewImage" class="preview" />
+              <img id="previewImage" class="preview" style="display: none; max-width: 100%; height: auto;" />
             </label>
           </div>
         </div>
       </div>
 
-      <button class="submit">Submit Report</button>
+      <button id="submitLostBtn" class="submit">Submit Lost Report</button>
 
     </div>
-    </main>
+</section>
     <script src="../script/reportLost.js" type="module"></script>
 </body>
 

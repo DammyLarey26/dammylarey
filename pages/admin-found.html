@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Found Items Approval Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/new-admin.css">
+   <style>
+        body {
+            background-color: bisque;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: black;
+            height: 60px;
+            position: relative;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header i {
+            color: white;
+            font-size: x-large;
+            padding: 20px;
+            cursor: pointer;
+        }
+        .admin-top {
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+            letter-spacing: 3px;
+        }
+        .admin-top p1 {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        a {
+            text-decoration: none;
+        }
+        .overview {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px;
+            width: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgb(64, 62, 62);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .overview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+        .user {
+            margin: 0;
+            padding: 10px;
+            border-radius: 20px; 
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .passport {
+            width: 150px;
+            height: 150px;
+            border: 1px solid;
+            border-radius: 50%;
+            margin: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .passport img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .passport:hover {
+            cursor: pointer;
+        }
+        .dar {
+            flex: 1;
+            min-width: 250px;
+        }
+        .dar h3 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+        }
+        .dar p {
+            margin: 5px 0;
+            color: #333;
+        }
+        .action-container {
+            display: flex;
+            gap: 10px;
+        }
+        .admin-btn {
+            padding: 12px 25px;
+            margin: 10px 0;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .btn-approve {
+            background-color: #2e7d32; /* Green for Approval */
+        }
+        .btn-approve:hover {
+            background-color: #1b5e20;
+        }
+        .btn-delete {
+            background-color: #c62828; /* Red for Deletion */
+        }
+        .btn-delete:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div style="display: flex; align-items: center;">
+            <a href="admin-dashboard.html"><i class="fa-solid fa-arrow-left"></i></a>
+            <h2>OOU Portal Administration</h2>
+        </div>
+        <i class="fa-solid fa-user-shield"></i>
+    </div>
+
+    <div class="admin-top">
+        <p1>FOUND ITEMS MANAGER</p1>
+        <span>Review, approve, or clear reported items below.</span>
+    </div>
+
+    <div id="adminFoundContainer">
+        <p style="text-align: center; margin-top: 40px;">Initializing admin terminal data streams...</p>
+    </div>
+
+    <script src="../script/adminFound.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<script>
+    // 1. Core Authentication Check (Token & Session Safe)
+    if (sessionStorage.getItem("loggedIn") !== "true" || !localStorage.getItem("token")) {
+        window.location.replace('./login.html'); 
+    }
+
+    // 2. Inactivity Timeout (15 minutes of no movement)
+    let idleTimeout;
+    const TIMEOUT_LIMIT = 15 * 60 * 1000; // 15 minutes in milliseconds
+
+    function resetIdleTimer() {
+        clearTimeout(idleTimeout);
+        idleTimeout = setTimeout(() => {
+            // Clear session data cleanly
+            sessionStorage.clear();
+            localStorage.removeItem("token");
+            localStorage.removeItem("cuser");
+            
+            // Alert the user and boot them out
+            alert("Your session has expired due to inactivity. Please log in again.");
+            window.location.replace('./login.html');
+        }, TIMEOUT_LIMIT);
+    }
+
+    // Listen for any user activity to reset the countdown clock
+    window.onload = resetIdleTimer;
+    window.onmousemove = resetIdleTimer;
+    window.onmousedown = resetIdleTimer; 
+    window.ontouchstart = resetIdleTimer; 
+    window.onclick = resetIdleTimer;     
+    window.onkeydown = resetIdleTimer;   
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/actions.css">
+  <link rel="stylesheet" href="../css/user.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/prof.css">
+  
+</head>
+<body>
+    <header class="user-header">
+       <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="marquee">
+            <marquee behavior="" direction="left">
+                <h2>HISTORY</h2>
+            </marquee>
+        </div>
+    </header>
+    
+    <div class="sidebar" id="sidebar">
+    <button class="close-btn" id="closeBtn">&times;</button>
+        <button class="backbtn" onclick="history.back()">&#8592</button>
+        <div class="user-options">
+            <div class="dash-logo">
+            <img src="../images/download.png" alt="">
+        </div>
+            <a href="../index.html">Home</a>
+			<a href="./profile.html">Profile</a>
+			<a href="./dashboard.html">Dashboard</a>
+        </div>
+        <div class="right-handside">
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-cog"></i>
+        </div>
+    </div>
+
+   <div class="dashboard-layout">
+    <main class="main-content">
+        <div class="history-header">
+            <h1>History</h1>
+            <p>View and manage all the items you have reported to the Lost & Found system.</p>
+        </div>
+
+        <div class="tab-navigation">
+            <button id="lostTabBtn" class="tab-btn active">Reported Items (Lost)</button>
+            <button id="foundTabBtn" class="tab-btn">Found Items</button>
+        </div>
+
+        <div class="filters-row">
+            <input type="text" id="searchBar" placeholder="Search by item name, location, or status...">
+            <select id="statusFilter">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+        </div>
+
+        <div id="historyCardsContainer" class="history-cards-list">
+            </div>
+    </main>
+</div>
+
+
+    <script type="module" src="../script/history.js"></script>
+
+
+
+
+  <div class="bottom-nav">
+    <a href="#" class="nav-item active">
+      <i class="fa fa-home"></i>
+      <span>Dashboard</span>
+    </a>
+
+    <a href="./view-lost.html" class="nav-item">
+      <i class="fa fa-search"></i>
+      <span>Lost</span>
+    </a>
+
+    <a href="./report.html" class="nav-item">
+      <i class="fa fa-plus-circle"></i>
+      <span>Report</span>
+    </a>
+    <a href="./view-found.html" class="nav-item ">
+      <i class="fa fa-ellipsis-h"></i>
+      <span>Found</span>
+    </a>
+
+  </div>
+    </main>
+    
+
+    
+  <script src="../script/faq.js"></script>
+  <script src="../script/dashboard.js"></script>
+  
+  <script>
+    const sidebar = document.getElementById("sidebar");
+const menuBtn = document.getElementById("menuBtn");
+const closeBtn = document.getElementById("closeBtn");
+
+menuBtn.addEventListener("click", () => {
+    sidebar.classList.add("active");
+});
+
+closeBtn.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+});
+  </script>
+</body>
+
+</html>
