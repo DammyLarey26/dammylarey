@@ -63,6 +63,32 @@ body{
     width: calc(100% - 350px);
     margin-left: 270px;
 }
+.history-header{
+    padding: 20px;
+    margin-top: 40px;
+}
+.filters-row{
+    width: 100%;
+
+}
+.filters-row input{
+    padding: 10px;
+    border: none;
+    width: 50%;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+#statusFilter{
+    padding: 10px;
+    border: none;
+    background-color: black;
+    color: beige;
+    border-radius: 5px;
+}
+#historyCardsContainer{
+    padding: 20px;
+    overflow-x: auto;
+}
 @media (max-width: 768px) {
 
     .sidebar {
@@ -82,7 +108,6 @@ body{
         margin-left: 0;
         padding: 20px;
         width: 100%;
-        display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;

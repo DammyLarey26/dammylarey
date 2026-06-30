@@ -338,22 +338,21 @@ a:hover{
     right: 0;
     display: flex;
     background-color: beige;
-    border: 2px solid;
+    border: none;
     padding: 10px;
     top: 52px;
+    margin: 10px;
     z-index: 999;
 }
 .prof-det span{
     display: block;
-    text-align: right;
-    padding-top: 15px;
+    margin-left: 10px;
 }
 .passport{
     width: 50px;
     height: 50px;
     border: none;
     border-radius: 50%;
-    margin: 10px;
     overflow: hidden;
 }
 .passport img{
