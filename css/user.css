@@ -3,15 +3,7 @@ body{
     margin: 0;
     background-color: beige;
 }
-/*
-.header{
-    background-color: black;
-    height: 60px;
-    position: relative;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-}*/
+
 .faq-item{
 background:beige;
 border-radius:10px;

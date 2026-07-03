@@ -11,24 +11,40 @@
   <link rel="stylesheet" href="../css/user.css">
   <link rel="stylesheet" href="../css/view.css">
   <link rel="stylesheet" href="../css/bottommodal.css">
+  <link rel="stylesheet" href="../css/prof.css">
 </head>
 
 <body>
 
-  <header class="header">
-    <button class="backbtn" onclick="history.back()">&#8592</button>
-    <div class="header-marquee">
-      <marquee behavior="" direction="left">
-        <h2>OOU LOST & FOUND MANAGEMENT SYSTEM</h2>
-      </marquee>
-    </div>
-    <div class="right-handside">
-      <i class="fa-solid fa-bell"></i>
-      <i class="fa-solid fa-cog"></i>
-    </div>
-  </header>
+  <header class="user-header">
+       <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="marquee">
+            <marquee behavior="" direction="left">
+                <h2>Report Lost</h2>
+            </marquee>
+        </div>
+    </header>
 
-  <div class="body-container">
+    <div class="sidebar" id="sidebar">
+    <button class="close-btn" id="closeBtn">&times;</button>
+        <button class="backbtn" onclick="history.back()">&#8592</button>
+        <div class="user-options">
+            <div class="dash-logo">
+            <img src="../images/download.png" alt="">
+        </div>
+            <a href="../index.html">Home</a>
+			<a href="./profile.html">Profile</a>
+			<a class="active" href="">Dashboard</a>
+			<a href="#" onclick="forceLogout(event)"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+        </div>
+        <div class="right-handside">
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-cog"></i>
+        </div>
+    </div>
+    
+    <main class="main-content">
+    <div class="body-container">
     <div class="search-top">
       <input type="search" placeholder="Search by category,date or location">
       <select>
@@ -83,7 +99,15 @@
             <p id="sheetDescription">---</p>
         </div>
     </div>
-</div>
+</div></div></main>
+<div class="prof-det">
+            <div class="passport">
+        <img id="img" src="../images/lekan.jpg" alt="">
+      </div>
+        <div class="prof-detname">
+          <span  id="name">Loading...</span>
+          <span id="userId">Loading...</span> 
+        </div>
 
 
 
@@ -119,6 +143,19 @@
   <script src="../script/upload.js"></script>
   <script src="../script/bottom-modal.js"></script>
   <script src="../script/lost-items.js"></script>
+  <script>
+    const sidebar = document.getElementById("sidebar");
+const menuBtn = document.getElementById("menuBtn");
+const closeBtn = document.getElementById("closeBtn");
+
+menuBtn.addEventListener("click", () => {
+    sidebar.classList.add("active");
+});
+
+closeBtn.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+});
+  </script>
 </body>
 
 </html>
