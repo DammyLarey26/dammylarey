@@ -22,7 +22,7 @@ document.getElementById('proofForm').addEventListener('submit', async (e) => {
             body: {
                 itemId: document.getElementById('modalItemId').value,
                 description: document.getElementById('proofDescription').value,
-                file: document.getElementById('proofFile').files[0],
+                file: "https://placehold.co/600x400?text=No+Image+Provided",
                 additional: document.getElementById('proofAdditional').value
             }
         });
