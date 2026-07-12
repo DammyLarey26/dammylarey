@@ -33,9 +33,9 @@
             <img src="../images/download.png" alt="">
         </div>
             <a href="../index.html">Home</a>
-			<a href="./profile.html">Profile</a>
-			<a class="active" href="">Dashboard</a>
-			<a href="#" onclick="forceLogout(event)"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+            <a href="./profile.html">Profile</a>
+            <a class="active" href="">Dashboard</a>
+            <a href="#" onclick="forceLogout(event)"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
         </div>
         <div class="right-handside">
             <i class="fa-solid fa-bell"></i>
@@ -64,6 +64,30 @@
 
     <!-- Backdrop Overlay -->
     <div id="overlay" class="overlay" onclick="closeSheet()"></div>
+</div>
+
+<!-- 🙋‍♂️ Injected Claim / Request Proof Modal Structure -->
+<div id="proofModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Submit Proof of Ownership</h2>
+    <p>Please provide valid details to verify this item.</p>
+
+    <form id="proofForm">
+      <input type="hidden" id="modalItemId">
+      
+      <label for="proofDescription">Item Description</label>
+      <textarea id="proofDescription" placeholder="Describe unique features of the item" required></textarea>
+
+      <label for="proofFile">Proof (Upload Image/Receipt)</label>
+      <input type="file" id="proofFile" required>
+
+      <label for="proofAdditional">Additional Information</label>
+      <textarea id="proofAdditional" placeholder="Any extra details"></textarea>
+
+      <button type="submit" class="submit-btn">Submit Proof</button>
+    </form>
+  </div>
 </div>
 
 <!-- 📦 Dynamic Bottom Sheet -->
@@ -109,14 +133,6 @@
           <span id="userId">Loading...</span> 
         </div>
 
-
-
-
-
-
-
-
-
   <div class="bottom-nav">
     <a href="./dashboard.html" class="nav-item">
       <i class="fa fa-home"></i>
@@ -139,22 +155,21 @@
 
   </div>
   <script src="../script/faq.js"></script>
-  <script src="script/script.js" type="module"></script>
   <script src="../script/upload.js"></script>
   <script src="../script/bottom-modal.js"></script>
   <script src="../script/lost-items.js"></script>
   <script>
     const sidebar = document.getElementById("sidebar");
-const menuBtn = document.getElementById("menuBtn");
-const closeBtn = document.getElementById("closeBtn");
+    const menuBtn = document.getElementById("menuBtn");
+    const closeBtn = document.getElementById("closeBtn");
 
-menuBtn.addEventListener("click", () => {
-    sidebar.classList.add("active");
-});
+    menuBtn.addEventListener("click", () => {
+        sidebar.classList.add("active");
+    });
 
-closeBtn.addEventListener("click", () => {
-    sidebar.classList.remove("active");
-});
+    closeBtn.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+    });
   </script>
 </body>
 

@@ -20,7 +20,7 @@
             localStorage.removeItem("token");
             localStorage.removeItem("cuser");
             
-            // Alert the user and boot them out
+            // Alert the user and immediately redirect once they click "OK"
             alert("Your session has expired due to inactivity. Please log in again.");
             window.location.replace('./login.html');
         }, TIMEOUT_LIMIT);
@@ -82,7 +82,7 @@
                     <i class="fa-solid fa-briefcase"></i>
                 <div class="overview-itemsfig">
                     <div class="fig">
-                        <a href="./report-lost.html">Report Lost Item</a>
+                        <a href="./report-lost.html">Report Item</a>
                     </div>
                 </div>
                 </div>
@@ -90,7 +90,7 @@
           <i class="fa-solid fa-screwdriver-wrench"></i>
           <div class="overview-itemsfig">
             <div class="fig">
-              <a href="./report-found.html">Report Found Item</a>
+              <a href="">Approved Items</a>
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@
           <i class="fa-solid fa-eye"></i>
           <div class="overview-itemsfig">
             <div class="fig center">
-              <a href="./view-found.html">View Found Item</a>
+              <a href="./view-items.html">View Items</a>
             </div>
           </div>
         </div>

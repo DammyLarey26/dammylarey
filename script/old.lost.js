@@ -64,7 +64,7 @@ async function handleReportSubmission(reportType) {
     const data = await response.json();
 
     if (response.ok || data.success) {
-      alert(`Item reported successfully!`);
+      alert(`Item reported as ${reportType} successfully!`);
       window.location.href = './history.html'; // Redirect to tracking logs
     } else {
       alert(data.message || "Submission rejected by portal server");

@@ -1,137 +1,187 @@
+// Local cache array to store the fetched items payload
+let lostItemsCache = [];
 const API_URL = "https://ooulostandfoundportal.onrender.com";
-let allFoundItems = []; 
 
-document.addEventListener("DOMContentLoaded", () => {
-    fetchFoundItems();
-    document.getElementById("searchBtn").addEventListener("click", handleSearchAndFilter);
-    document.getElementById("proofForm").addEventListener("submit", handleProofSubmission);
-});
+async function fetchAndDisplayLostItems() {
+    const container = document.querySelector('#lostItemsContainer');
+    let token = localStorage.getItem('token');
+    
+    if (!token && localStorage.getItem('cuser')) {
+        token = JSON.parse(localStorage.getItem('cuser')).token;
+    }
 
-// 🔄 Fetch and Filter Pipeline
-async function fetchFoundItems() {
-    const container = document.getElementById("itemsContainer");
-    container.innerHTML = `<p style="text-align:center; width:100%;">Loading found items...</p>`;
+    if (!token) {
+        if (container) container.innerHTML = `<p style="color: red; text-align: center; width: 100%;">Authentication required. Please log in.</p>`;
+        return;
+    }
 
+    try {
+        // 🔄 Updated endpoint route path from /user/lost-items to /user/report
+        const response = await fetch(`${API_URL}/user/report`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const result = await response.json();
+
+        // Check for common backend response arrays
+        const itemsList = result.data || result.items || result;
+
+        if (Array.isArray(itemsList)) {
+            lostItemsCache = itemsList;
+            container.innerHTML = '';
+
+            itemsList.forEach((item, index) => {
+                const itemImg = item.imgUrl || "../images/Laptop.png";
+                const itemName = item.name || item.itemName || "Unnamed Item";
+                const finderName = item.founderName || item.reporterName || "Anonymous";
+                const status = item.status || "Available";
+                const idString = item._id || index.toString();
+
+                const card = document.createElement('div');
+                card.className = 'items-box-item';
+
+                // ✨ Injected Request button targeting the global modal launcher element pattern
+                card.innerHTML = `
+                    <div class="items-details">
+                        <div class="item-img">
+                            <img src="${itemImg}" alt="${itemName}">
+                            <p class="status ${status.toLowerCase()}">${status}</p>
+                        </div>
+                        <h2>${itemName}</h2>
+                        <span>${finderName}</span>
+                    </div>
+                    <button onclick="viewItemDetails('${idString}')" class="open-btn">View Details</button>
+                    <button onclick="openRequestModal('${idString}')" class="view-btn"><i class="fa-solid fa-check"></i> Request</button>
+                `;
+
+                container.appendChild(card);
+            });
+
+            if (itemsList.length === 0) {
+                container.innerHTML = `<p style="text-align: center; width: 100%; color: gray;">No reported items listed in the database directory yet.</p>`;
+            }
+
+        } else {
+            container.innerHTML = `<p style="color: orange; text-align: center; width: 100%;">Invalid dataset response layout from server.</p>`;
+        }
+    } catch (error) {
+        console.error("Failed to query lost items feed data:", error);
+        container.innerHTML = `<p style="color: red; text-align: center; width: 100%;">Server network offline or under construction.</p>`;
+    }
+}
+
+// ===================================================
+// DYNAMIC BOTTOM SHEET ENGINE ACTIONS
+// ===================================================
+function viewItemDetails(identifier) {
+    const item = lostItemsCache.find((u, index) => (u._id === identifier || index.toString() === identifier));
+
+    if (!item) {
+        console.error("Item mapping data missing from memory stack matrix.");
+        return;
+    }
+
+    document.querySelector('#sheetItemName').innerText = item.name || item.itemName || 'N/A';
+    document.querySelector('#sheetCategory').innerText = item.category || 'General Electronics';
+    document.querySelector('#sheetDate').innerText = item.dateFound || item.createdAt || 'N/A';
+    document.querySelector('#sheetLocation').innerText = item.locationFound || item.location || 'N/A';
+    document.querySelector('#sheetDescription').innerText = item.description || 'No descriptive details submitted.';
+
+    openSheet();
+}
+
+function openSheet() {
+    const sheet = document.querySelector('#bottomSheet');
+    const overlay = document.querySelector('#overlay');
+    
+    if (sheet) sheet.classList.add('active'); 
+    if (overlay) overlay.style.display = 'block';
+}
+
+function closeSheet() {
+    const sheet = document.querySelector('#bottomSheet');
+    const overlay = document.querySelector('#overlay');
+    
+    if (sheet) sheet.classList.remove('active');
+    if (overlay) overlay.style.display = 'none';
+}
+
+// ===================================================
+// 🙋‍♂️ PROOF / CLAIM INTERACTION MODAL FUNCTIONS
+// ===================================================
+window.openRequestModal = function(itemId) {
+    const modal = document.getElementById("proofModal");
+    const inputId = document.getElementById("modalItemId");
+    if (inputId) inputId.value = itemId;
+    if (modal) modal.style.display = "block";
+};
+
+window.closeModal = function() {
+    const modal = document.getElementById("proofModal");
+    const form = document.getElementById("proofForm");
+    if (modal) modal.style.display = "none";
+    if (form) form.reset();
+};
+
+async function handleProofSubmission(e) {
+    e.preventDefault();
+
+    const itemId = document.getElementById("modalItemId").value;
+    const description = document.getElementById("proofDescription").value;
+    const additionalInfo = document.getElementById("proofAdditional").value;
+    const fileInput = document.getElementById("proofFile");
+    
     let token = localStorage.getItem('token');
     if (!token && localStorage.getItem('cuser')) {
         token = JSON.parse(localStorage.getItem('cuser')).token;
     }
 
+    // Wrap elements inside FormData format to support uploaded image attachments gracefully
+    const formData = new FormData();
+    formData.append("itemId", itemId);
+    formData.append("proofDescription", description);
+    formData.append("additionalInfo", additionalInfo);
+
+    if (fileInput && fileInput.files.length > 0) {
+        formData.append("proofFile", fileInput.files[0]);
+    }
+
     try {
-        const response = await fetch(`${API_URL}/user/lost-items`, {
-            method: "GET",
-            headers: { "Authorization": `Bearer ${token}` }
+        // 📤 POST claim data transaction block
+        const response = await fetch(`${API_URL}/user/claim-item`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`
+                // Note: Content-Type omitted dynamically to protect the automatic boundary layout values
+            },
+            body: formData
         });
+
         const result = await response.json();
-        const items = result.data || result.items || result || [];
 
-        // 🎯 INCLUSIVE FILTER: Captures everything to ensure your items appear
-        // This removes the strict "type === 'found'" requirement that was hiding your data
-        allFoundItems = items.filter(item => {
-            return true; // Shows all items returned by the backend
-        });
-
-        renderItemGrid(allFoundItems);
-    } catch (err) {
-        console.error(err);
-        container.innerHTML = `<p style="text-align:center; color:red;">Failed to load items list.</p>`;
-    }
-}
-
-// 🖼️ Card Grid Rendering Template Engine
-function renderItemGrid(itemsList) {
-    const container = document.getElementById("itemsContainer");
-    container.innerHTML = "";
-
-    if (itemsList.length === 0) {
-        container.innerHTML = `<p style="text-align:center; width:100%;">No items found.</p>`;
-        return;
-    }
-
-    itemsList.forEach(item => {
-        const imgUrl = item.imgUrl && !item.imgUrl.includes("ssss") ? item.imgUrl : "https://placehold.co/600x400?text=No+Image+Provided";
-        const founderName = item.founderName || "Staff/Admin"; 
-
-        let displayDescription = item.description || "No description provided.";
-        if (displayDescription.includes("[FOUND_ITEM]")) {
-            displayDescription = displayDescription.split("Details:").pop().trim();
+        if (response.ok || result.success) {
+            alert("Claim request submitted successfully!");
+            closeModal();
+            fetchAndDisplayLostItems(); // Hot reload feed data status structures
+        } else {
+            alert(`Submission failed: ${result.message || "Rejected by portal system"}`);
         }
-
-        const updatedItem = { ...item, cleanDescription: displayDescription };
-
-        const card = document.createElement("div");
-        card.className = "items-box-item";
-        card.innerHTML = `
-            <div class="items-details">
-                <div class="item-img">
-                    <img src="${imgUrl}" alt="${item.name}">
-                    <p class="status">Available</p>
-                </div>
-                <h2>${item.name}</h2>
-                <span>Found by: ${founderName}</span>
-            </div>
-            <button class="open-btn" onclick='openItemDetails(${JSON.stringify(updatedItem)})'>View Details</button>
-            <button class="view-btn" onclick="openRequestModal('${item._id}')"><i class="fa-solid fa-check"></i> Request</button>
-        `;
-        container.appendChild(card);
-    });
+    } catch (err) {
+        console.error("Error submitting request proof parameters:", err);
+        alert("A network operational failure disrupted verification communication.");
+    }
 }
 
-// 📑 Dynamic Bottom Sheet Control
-window.openItemDetails = function(item) {
-    const sheetContent = document.getElementById("sheetDetailsContent");
-    const formattedDate = new Date(item.createdAt || item.foundDate).toLocaleDateString("en-GB", {
-        day: 'numeric', month: 'long', year: 'numeric'
-    });
-
-    sheetContent.innerHTML = `
-      <div class="sheet-content-par"><p>Item name:</p><p>${item.name}</p></div>
-      <div class="sheet-content-par"><p>Categories:</p><p>${item.category || 'General'}</p></div>
-      <div class="sheet-content-par"><p>Date Found:</p><p>${formattedDate}</p></div>
-      <div class="sheet-content-par"><p>Location Found:</p><p>${item.foundLocation || 'Not Specified'}</p></div>
-      <div class="sheet-content-par"><p>Item description:</p><p>${item.cleanDescription || item.description || 'No description provided.'}</p></div>
-    `;
-
-    document.getElementById("bottomSheet").classList.add("active");
-    document.getElementById("overlay").classList.add("active");
-};
-
-window.closeSheet = function() {
-    document.getElementById("bottomSheet").classList.remove("active");
-    document.getElementById("overlay").classList.remove("active");
-};
-
-// 🙋‍♂️ Claim Modal
-window.openRequestModal = function(itemId) {
-    document.getElementById("modalItemId").value = itemId;
-    document.getElementById("proofModal").style.display = "block";
-};
-
-window.closeModal = function() {
-    document.getElementById("proofModal").style.display = "none";
-    document.getElementById("proofForm").reset();
-};
-
-async function handleProofSubmission(e) {
-    e.preventDefault();
-    const itemId = document.getElementById("modalItemId").value;
-    alert(`Claim validation payload generated for Item Ref ID: ${itemId}`);
-    closeModal();
-}
-
-// 🔍 Search Handling
-function handleSearchAndFilter() {
-    const query = document.getElementById("searchInput").value.toLowerCase().trim();
-    const category = document.getElementById("categoryFilter").value.toLowerCase();
-
-    const filtered = allFoundItems.filter(item => {
-        const matchesCategory = !category || item.category?.toLowerCase() === category;
-        const matchesQuery = !query || 
-            item.name?.toLowerCase().includes(query) || 
-            item.foundLocation?.toLowerCase().includes(query) ||
-            item.description?.toLowerCase().includes(query);
-        return matchesCategory && matchesQuery;
-    });
-
-    renderItemGrid(filtered);
-}
+// Initial Data Pull initialization listener
+document.addEventListener('DOMContentLoaded', () => {
+    fetchAndDisplayLostItems();
+    
+    const proofForm = document.getElementById("proofForm");
+    if (proofForm) {
+        proofForm.addEventListener("submit", handleProofSubmission);
+    }
+});

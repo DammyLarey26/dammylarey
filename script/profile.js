@@ -10,16 +10,18 @@ if (user) {
       <img src="${user.imgUrl || '../images/lekan.jpg'}" id="profileImg" alt="Profile Picture">
     </div>
     <div class="det">
-      <span>👨‍🎓 <span id="pName">${user.name}</span></span>
-      <span style="font-size: 11px; color: red;">🔐 *Password can not be displayed in an html element </span>
-      <span>💼 <span id="pFaculty">${user.faculty ? (user.faculty.toUpperCase()[0] + user.faculty.slice(1)) : 'N/A'}</span></span>
-      <span>📞 <span id="pPhone">${user.phone || 'N/A'}</span></span>
-      <span>📩 <span id="pEmail">${user.email}</span></span>
-      <div class="det-btn">
-        <button id="editBtn">🖍 Edit Profile</button>
-        <button id="passwordBtn">⚙ Change Password</button>
-      </div>
-    </div>
+  <span>👨‍🎓 <span id="pName">${user.name}</span></span>
+  <span>🆔 <span id="pMatric">${user.matricNumber || user.matric || 'N/A'}</span></span>
+  <span>💼 <span id="pFaculty">${user.faculty ? (user.faculty.toUpperCase()[0] + user.faculty.slice(1)) : 'N/A'}</span></span>
+  <span>📞 <span id="pPhone">${user.phone || 'N/A'}</span></span>
+  <span>📩 <span id="pEmail">${user.email}</span></span>
+
+  <div class="det-btn">
+    <button id="editBtn">🖍 Edit Profile</button>
+    <button id="passwordBtn">⚙ Change Password</button>
+    <button id="deleteAccountBtn" class="delete-btn">🗑 Delete Account</button>
+  </div>
+</div>
   `;
 } else {
   console.log("No profile information cached.");

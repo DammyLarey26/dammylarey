@@ -1,112 +1,288 @@
 // Local cache array to store the fetched items payload
 let lostItemsCache = [];
+const API_URL = "https://ooulostandfoundportal.onrender.com";
 
+// ===================================================
+// AUTH TOKEN
+// ===================================================
+function getSessionToken() {
+    let token = localStorage.getItem("token");
+
+    if (!token && localStorage.getItem("cuser")) {
+        const parsedUser = JSON.parse(localStorage.getItem("cuser"));
+        token = parsedUser.token || parsedUser.accessToken;
+    }
+
+    return token;
+}
+
+// ===================================================
+// FETCH LOST ITEMS
+// ===================================================
 async function fetchAndDisplayLostItems() {
-    const container = document.querySelector('#lostItemsContainer');
-    const token = localStorage.getItem('token');
+    const container = document.querySelector("#lostItemsContainer");
+    const token = getSessionToken();
 
     if (!token) {
-        if (container) container.innerHTML = `<p style="color: red; text-align: center; width: 100%;">Authentication required. Please log in.</p>`;
+        container.innerHTML =
+            `<p style="color:red;text-align:center;width:100%;">
+                Authentication required. Please log in.
+            </p>`;
         return;
     }
 
     try {
-        // Fetch items array from your Render server API path
-        const response = await fetch('https://ooulostandfoundportal.onrender.com/user/lost-items', {
-            method: 'GET',
+        const response = await fetch(`${API_URL}/user/lost-items`, {
+            method: "GET",
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
             }
         });
 
         const result = await response.json();
-
-        // Check for common backend response arrays (adjust if backend key differs)
         const itemsList = result.data || result.items || result;
 
-        if (Array.isArray(itemsList)) {
-            // Store it into the local cache map
-            lostItemsCache = itemsList;
-            container.innerHTML = '';
-
-            itemsList.forEach((item, index) => {
-                // Safe data fallbacks matching your structural layout
-                const itemImg = item.imgUrl || "../images/Laptop.png";
-                const itemName = item.name || item.itemName || "Unnamed Item";
-                const finderName = item.finderName || item.reporterName || "Anonymous";
-                const status = item.status || "Available";
-
-                // Generate structural template cards matching your native design rules
-                const card = document.createElement('div');
-                card.className = 'items-box-item';
-
-                card.innerHTML = `
-                    <div class="items-details">
-                        <div class="item-img">
-                            <img src="${itemImg}" alt="${itemName}">
-                            <p class="status ${status.toLowerCase()}">${status}</p>
-                        </div>
-                        <h2>${itemName}</h2>
-                        <span>${finderName}</span>
-                    </div>
-                    <button onclick="viewItemDetails('${item._id || index}')" class="open-btn">View Details</button>
-                `;
-
-                container.appendChild(card);
-            });
-
-            if (itemsList.length === 0) {
-                container.innerHTML = `<p style="text-align: center; width: 100%; color: gray;">No reported items listed in the database directory yet.</p>`;
-            }
-
-        } else {
-            container.innerHTML = `<p style="color: orange; text-align: center; width: 100%;">Invalid dataset response layout from server.</p>`;
+        if (!Array.isArray(itemsList)) {
+            container.innerHTML =
+                `<p style="color:orange;text-align:center;">
+                    Invalid response from server.
+                </p>`;
+            return;
         }
+
+        lostItemsCache = itemsList;
+        container.innerHTML = "";
+
+        itemsList.forEach((item, index) => {
+
+            const itemImg = item.imgUrl || "../images/Laptop.png";
+            const itemName = item.name || item.itemName || "Unnamed Item";
+            const finderName = item.founderName || item.reporterName || "Anonymous";
+            const status = item.status || "Available";
+            const idString = item._id || index.toString();
+
+            const card = document.createElement("div");
+            card.className = "items-box-item";
+
+            card.innerHTML = `
+                <div class="items-details">
+                    <div class="item-img">
+                        <img src="${itemImg}" alt="${itemName}">
+                        <p class="status ${status.toLowerCase()}">${status}</p>
+                    </div>
+
+                    <h2>${itemName}</h2>
+                    <span>${finderName}</span>
+                </div>
+
+                <button
+                    onclick="viewItemDetails('${idString}')"
+                    class="open-btn">
+                    View Details
+                </button>
+
+                <button
+                    class="view-btn"
+                    data-item-id="${idString}"
+                    onclick="openRequestModal('${idString}')">
+                    <i class="fa-solid fa-check"></i>
+                    Request
+                </button>
+            `;
+
+            container.appendChild(card);
+        });
+
+        if (itemsList.length === 0) {
+            container.innerHTML =
+                `<p style="text-align:center;color:gray;">
+                    No reported items found.
+                </p>`;
+        }
+
     } catch (error) {
-        console.error("Failed to query lost items feed data:", error);
-        container.innerHTML = `<p style="color: red; text-align: center; width: 100%;">Server network offline or under construction.</p>`;
+
+        console.error(error);
+
+        container.innerHTML =
+            `<p style="color:red;text-align:center;">
+                Unable to connect to server.
+            </p>`;
     }
 }
 
 // ===================================================
-// DYNAMIC BOTTOM SHEET ENGINE ACTIONS
+// VIEW DETAILS
 // ===================================================
 function viewItemDetails(identifier) {
-    // Search the cache by MongoDB _id, or index fallback matching array assignments
-    const item = lostItemsCache.find((u, index) => (u._id === identifier || index.toString() === identifier));
 
-    if (!item) {
-        console.error("Item mapping data missing from memory stack matrix.");
-        return;
-    }
+    const item = lostItemsCache.find(
+        (u, index) => u._id === identifier || index.toString() === identifier
+    );
 
-    // Assign text updates directly into the sheet placeholder elements
-    document.querySelector('#sheetItemName').innerText = item.name || item.itemName || 'N/A';
-    document.querySelector('#sheetCategory').innerText = item.category || 'General Electronics';
-    document.querySelector('#sheetDate').innerText = item.dateFound || item.createdAt || 'N/A';
-    document.querySelector('#sheetLocation').innerText = item.locationFound || item.location || 'N/A';
-    document.querySelector('#sheetDescription').innerText = item.description || 'No descriptive details submitted.';
+    if (!item) return;
 
-    // Execute structural interface view opening animations
+    document.getElementById("sheetItemName").innerText =
+        item.name || item.itemName || "N/A";
+
+    document.getElementById("sheetCategory").innerText =
+        item.category || "N/A";
+
+    document.getElementById("sheetDate").innerText =
+        item.dateFound || item.createdAt || "N/A";
+
+    document.getElementById("sheetLocation").innerText =
+        item.locationFound || item.location || "N/A";
+
+    document.getElementById("sheetDescription").innerText =
+        item.description || "No description.";
+
     openSheet();
 }
 
 function openSheet() {
-    const sheet = document.querySelector('#bottomSheet');
-    const overlay = document.querySelector('#overlay');
-    
-    if (sheet) sheet.classList.add('active'); // Assumes your style utilizes an '.active' transition flag
-    if (overlay) overlay.style.display = 'block';
+
+    document.getElementById("bottomSheet").classList.add("active");
+    document.getElementById("overlay").style.display = "block";
+
 }
 
 function closeSheet() {
-    const sheet = document.querySelector('#bottomSheet');
-    const overlay = document.querySelector('#overlay');
-    
-    if (sheet) sheet.classList.remove('active');
-    if (overlay) overlay.style.display = 'none';
+
+    document.getElementById("bottomSheet").classList.remove("active");
+    document.getElementById("overlay").style.display = "none";
+
 }
 
-// Initial Data Pull initialization listener
-document.addEventListener('DOMContentLoaded', fetchAndDisplayLostItems);
+// ===================================================
+// CLAIM MODAL
+// ===================================================
+window.openRequestModal = function (itemId) {
+
+    document.getElementById("modalItemId").value = itemId;
+    document.getElementById("proofModal").style.display = "block";
+
+};
+
+window.closeModal = function () {
+
+    document.getElementById("proofModal").style.display = "none";
+    document.getElementById("proofForm").reset();
+
+};
+
+// ===================================================
+// SUBMIT CLAIM
+// ===================================================
+async function submitProof(e) {
+
+    e.preventDefault();
+
+    const token = getSessionToken();
+
+    if (!token) {
+        alert("Please login.");
+        return;
+    }
+
+    const itemId = document.getElementById("modalItemId").value;
+
+    const description =
+        document.getElementById("claimDescription").value.trim();
+
+    const proof =
+        document.getElementById("claimProof").files[0];
+
+    const additionalInfo =
+        document.getElementById("claimAdditional").value.trim();
+
+    if (!description) {
+        alert("Please describe the item.");
+        return;
+    }
+
+    if (!proof) {
+        alert("Please upload proof of ownership.");
+        return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("itemId", itemId);
+    formData.append("description", description);
+    formData.append("proof", proof);
+    formData.append("additionalInfo", additionalInfo);
+
+    const submitBtn =
+        document.querySelector("#proofForm button[type='submit']");
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    try {
+
+        const response = await fetch(`${API_URL}/user/claim-item`, {
+
+            method: "POST",
+
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+
+            body: formData
+
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.message || "Submission failed.");
+        }
+
+        alert(result.message || "Proof submitted successfully.");
+
+        const btn = document.querySelector(
+            `button[data-item-id="${itemId}"]`
+        );
+
+        if (btn) {
+
+            btn.innerHTML =
+                `<i class="fa-solid fa-clock"></i> Pending Verification`;
+
+            btn.disabled = true;
+            btn.style.background = "#888";
+            btn.style.cursor = "not-allowed";
+
+        }
+
+        closeModal();
+
+    } catch (err) {
+
+        console.error(err);
+        alert(err.message);
+
+    } finally {
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit Proof";
+
+    }
+}
+
+// ===================================================
+// INITIALIZE
+// ===================================================
+document.addEventListener("DOMContentLoaded", () => {
+
+    fetchAndDisplayLostItems();
+
+    const form = document.getElementById("proofForm");
+
+    if (form) {
+        form.addEventListener("submit", submitProof);
+    }
+
+});
