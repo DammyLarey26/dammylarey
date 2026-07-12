@@ -17,9 +17,14 @@ document.getElementById('proofForm').addEventListener('submit', async (e) => {
 
     try {
         // REPLACE THE URL BELOW WITH THE EXACT ROUTE FOUND IN YOUR BACKEND
-        const response = await fetch('https://ooulostandfoundportal.onrender.com/YOUR_CORRECT_ROUTE', {
+        const response = await fetch('https://ooulostandfoundportal.onrender.com/user/claim-item', {
             method: 'POST',
-            body: formData
+            body: {
+                itemId: document.getElementById('modalItemId').value,
+                description: document.getElementById('proofDescription').value,
+                file: document.getElementById('proofFile').files[0],
+                additional: document.getElementById('proofAdditional').value
+            }
         });
 
         if (!response.ok) {
@@ -28,7 +33,7 @@ document.getElementById('proofForm').addEventListener('submit', async (e) => {
 
         const result = await response.json();
         alert("Success: " + result.message);
-        window.location.href = '/admin/verify-claim.html';
+        // window.location.href = '/admin/verify-claim.html';
     } catch (error) {
         console.error("Submission failed:", error);
         alert("Submission failed. Check Console (F12) for details.");
