@@ -2,7 +2,16 @@
 <html lang="en">
 
 <head>
-<script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/actions.css">
+  <link rel="stylesheet" href="../css/user.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/prof.css">
+  <script>
     // 1. Core Authentication Check (Token & Session Safe)
     if (sessionStorage.getItem("loggedIn") !== "true" || !localStorage.getItem("token")) {
         window.location.replace('./login.html'); 
@@ -34,16 +43,6 @@
     window.onclick = resetIdleTimer;     
     window.onkeydown = resetIdleTimer;   
 </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="../css/actions.css">
-  <link rel="stylesheet" href="../css/user.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/prof.css">
-  
 </head>
 <body>
     <header class="user-header">
