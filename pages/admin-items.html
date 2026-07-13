@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminItems</title>
+
+    <link rel="stylesheet" href="../css/new-admin.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+<div class="admin-box">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo">
+            <img src="../images/download.png">
+        </div>
+
+        <h3>ADMIN PANEL</h3>
+
+        <nav-bar>
+
+            <a href="dashboard.html">
+                <i class="fa-solid fa-chart-line"></i>
+                Dashboard
+            </a>
+
+            <a href="users.html">
+                <i class="fa-solid fa-users"></i>
+                Users
+            </a>
+
+            <a href="lost-items.html" class="active">
+                <i class="fa-solid fa-box-open"></i>
+                Lost Items
+            </a>
+
+            <a href="found-items.html">
+                <i class="fa-solid fa-box"></i>
+                Found Items
+            </a>
+
+            <a href="verify-claim.html">
+                <i class="fa-solid fa-circle-check"></i>
+                Verify Claims
+            </a>
+
+            <button id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+
+        </nav-bar>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="det-top">
+
+        <div class="admin-top">
+
+            <h2>Lost Items</h2>
+
+            <span id="adminName">Administrator</span>
+
+        </div>
+
+        <br>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search Lost Item..."
+            style="
+                width:100%;
+                padding:12px;
+                border-radius:10px;
+                border:2px solid rgb(65,17,17);
+                margin-bottom:25px;
+            ">
+
+        <div id="loading">
+            <h3 style="text-align:center;">Loading...</h3>
+        </div>
+
+        <div id="emptyState" style="display:none;text-align:center;">
+            No Lost Items Found.
+        </div>
+
+        <div id="lostItemsContainer">
+
+            <!-- JavaScript will insert items here -->
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../script/admin-items.js"></script>
+
+</body>
+</html>

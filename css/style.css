@@ -214,6 +214,32 @@ a:hover{
 .footer p{
     margin:5px 0;
 }
+/* Status Base Rules */
+.status {
+    color: #ffffff !important; /* Forces text color to white */
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Color Mappings */
+.status.available {
+    background-color: #0056b3 !important; /* Blue */
+}
+
+.status.claimed {
+    background-color: #ff8c00 !important; /* Orange */
+}
+
+.status.approved {
+    background-color: #28a745 !important; /* Green */
+}
+
+.status.rejected {
+    background-color: #dc3545 !important; /* Red */
+}
 .login{
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;

@@ -78,19 +78,23 @@ function renderFilteredItems() {
     // Grab live values from your HTML layout elements safely
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
     const categorySelect = document.getElementById('dashboardCategoryFilter') || document.querySelector('.search-top select');
+    // ✨ Target status dropdown filter dynamically
+    const statusSelect = document.getElementById('dashboardStatusFilter');
 
     const searchQuery = searchInput ? searchInput.value.toLowerCase() : '';
     const selectedCategory = categorySelect ? categorySelect.value.toLowerCase() : '';
+    const selectedStatus = statusSelect ? statusSelect.value.toLowerCase() : '';
 
     // Retrieve locally saved proof-submitted items array
     const submittedClaims = JSON.parse(localStorage.getItem("submittedClaims") || "[]");
 
-    // Apply conditional text & category selector filters
+    // Apply conditional text, category selector, & status filters
     const filtered = lostItemsCache.filter(item => {
         const itemName = (item.name || item.itemName || '').toLowerCase();
         const itemLocation = (item.locationFound || item.location || item.foundLocation || '').toLowerCase();
         const itemCategory = (item.category || '').toLowerCase();
         const itemDate = (item.dateFound || item.createdAt || '').toLowerCase();
+        const itemStatus = (item.status || 'available').toLowerCase();
 
         const matchesSearch = itemName.includes(searchQuery) || 
                               itemLocation.includes(searchQuery) || 
@@ -98,8 +102,11 @@ function renderFilteredItems() {
                               itemDate.includes(searchQuery);
 
         const matchesCategory = !selectedCategory || selectedCategory === 'all' || itemCategory === selectedCategory;
+        
+        // ✨ New Status Filtering Check
+        const matchesStatus = !selectedStatus || selectedStatus === 'all' || itemStatus === selectedStatus;
 
-        return matchesSearch && matchesCategory;
+        return matchesSearch && matchesCategory && matchesStatus;
     });
 
     container.innerHTML = "";
@@ -182,6 +189,12 @@ function viewItemDetails(identifier) {
 
     const formattedDate = new Date(itemDate).toLocaleDateString(undefined, { dateStyle: 'medium' });
 
+    // Helper functions to give correct layout background colors inside info sheet
+    let statusBg = "#0056b3"; // available
+    if (itemStatus.toLowerCase() === 'claimed') statusBg = "#ff8c00";
+    if (itemStatus.toLowerCase() === 'approved') statusBg = "#28a745";
+    if (itemStatus.toLowerCase() === 'rejected') statusBg = "#dc3545";
+
     bottomSheet.innerHTML = `
         <div style="padding: 24px;">
             <div class="sheet-header" style="margin-bottom: 20px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 12px;">
@@ -193,7 +206,7 @@ function viewItemDetails(identifier) {
                 
                 <div style="position: relative; width: 100%; height: 200px; border-radius: 12px; overflow: hidden; background: #fafafa; display: flex; align-items: center; justify-content: center; border: 1px solid #eaeaea;">
                     <img src="${itemImg}" alt="${itemName}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                    <span style="position: absolute; top: 12px; right: 12px; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; background: ${itemStatus.toLowerCase() === 'available' ? '#e6f4ea' : '#feefe3'}; color: ${itemStatus.toLowerCase() === 'available' ? '#137333' : '#b06000'}; border: 1px solid currentColor;">
+                    <span style="position: absolute; top: 12px; right: 12px; padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; background: ${statusBg}; color: #ffffff;">
                         ${itemStatus}
                     </span>
                 </div>
@@ -321,7 +334,6 @@ async function submitProof(e) {
 
         alert(result.message || "Proof submitted successfully!");
         
-        // 🔒 Save the item ID into localStorage so it displays as requested right away
         const submittedClaims = JSON.parse(localStorage.getItem("submittedClaims") || "[]");
         if (!submittedClaims.includes(itemId)) {
             submittedClaims.push(itemId);
@@ -348,6 +360,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
     const categorySelect = document.getElementById('dashboardCategoryFilter') || document.querySelector('.search-top select');
+    // ✨ Target status element
+    const statusSelect = document.getElementById('dashboardStatusFilter');
     const searchBtn = document.getElementById('dashboardSearchBtn') || document.querySelector('.search-top button');
 
     if (searchInput) {
@@ -355,6 +369,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (categorySelect) {
         categorySelect.addEventListener("change", renderFilteredItems);
+    }
+    // ✨ Handle state change for status filter drop-down
+    if (statusSelect) {
+        statusSelect.addEventListener("change", renderFilteredItems);
     }
     if (searchBtn) {
         searchBtn.addEventListener("click", renderFilteredItems);

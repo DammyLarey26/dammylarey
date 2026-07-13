@@ -31,12 +31,30 @@ async function handleReportSubmission(reportType) {
     return;
   }
 
-  // 👤 User Profile Identifier Extraction
+  // 👤 Extracting Real User Profile Details Safely
   const cachedUser = localStorage.getItem('user') || localStorage.getItem('cuser');
   let reporterId = null;
+  let reporterName = "";
+  let reporterEmail = "";
+  let reporterMatricId = "";
+  let reporterPhone = "";
+
   if (cachedUser) {
-    const parsedUser = JSON.parse(cachedUser);
-    reporterId = parsedUser._id || parsedUser.id; 
+    try {
+      const parsedData = JSON.parse(cachedUser);
+      
+      // Detour logic: check if data is nested inside a ".user" object, otherwise use root
+      const userProfile = parsedData.user || parsedData;
+
+      // Map out your real data fields cleanly
+      reporterId = userProfile._id || userProfile.id || userProfile.userId; 
+      reporterName = userProfile.name || userProfile.fullName || userProfile.username || "";
+      reporterEmail = userProfile.email || "";
+      reporterMatricId = userProfile.matricId || userProfile.staffId || userProfile.matricNo || userProfile.matricNumber || "";
+      reporterPhone = userProfile.phone || userProfile.phoneNumber || "";
+    } catch (e) {
+      console.error("Error reading profile data from storage:", e);
+    }
   }
 
   // 📦 Build Unified Payload Layout
@@ -44,11 +62,22 @@ async function handleReportSubmission(reportType) {
     name: itemName.value.trim(),
     description: itemDescription?.value || "No description provided.",
     imgUrl: "https://placehold.co/600x400?text=No+Image+Provided", 
-    founder: reporterId,              
+    
+    // 🔑 Identity mapping
+    founder: reporterId, 
+    reporterId: reporterId,
+    
+    // ✨ Real User Meta Details
+    reporterName: reporterName,
+    reporterEmail: reporterEmail,
+    reporterMatricId: reporterMatricId,
+    reporterPhone: reporterPhone,
+
     foundLocation: itemLocation?.value || "Unknown Location", 
     foundDate: itemDate?.value || new Date().toISOString().split('T')[0], 
     category: itemCategory.value,
-    type: reportType // ✨ Dynamically sets 'lost' or 'found'
+    type: reportType, 
+    status: "Available" 
   };
 
   try {
@@ -65,7 +94,7 @@ async function handleReportSubmission(reportType) {
 
     if (response.ok || data.success) {
       alert(`Item reported successfully!`);
-      window.location.href = './history.html'; // Redirect to tracking logs
+      window.location.href = './history.html'; 
     } else {
       alert(data.message || "Submission rejected by portal server");
     }
@@ -80,15 +109,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const lostBtn = document.querySelector('#submitLostBtn');
   const foundBtn = document.querySelector('#submitFoundBtn');
 
+  // Naming your event handlers explicitly removes the "(anonymous)" tag from the stack!
   if (lostBtn) {
-    lostBtn.addEventListener('click', (e) => {
+    lostBtn.addEventListener('click', function submitLostForm(e) {
       e.preventDefault();
       handleReportSubmission('lost');
     });
   }
 
   if (foundBtn) {
-    foundBtn.addEventListener('click', (e) => {
+    foundBtn.addEventListener('click', function submitFoundForm(e) {
       e.preventDefault();
       handleReportSubmission('found');
     });

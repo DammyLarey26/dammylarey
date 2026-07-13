@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Claims</title>
+    <link rel="stylesheet" href="my-claims.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="page-header">
+        <div>
+            <h1>My Claims</h1>
+            <p>Track every item you've claimed.</p>
+        </div>
+        <button class="history-btn" onclick="window.location.href='./history.html'">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            Claim History
+        </button>
+    </div>
+
+    <!-- STATS (IDs added for targeting metrics) -->
+    <div class="stats">
+        <div class="stat-card">
+            <i class="fa-solid fa-file-circle-check"></i>
+            <h2 id="totalClaimsCount">0</h2>
+            <span>Total Claims</span>
+        </div>
+
+        <div class="stat-card pending">
+            <i class="fa-solid fa-clock"></i>
+            <h2 id="pendingClaimsCount">0</h2>
+            <span>Pending</span>
+        </div>
+
+        <div class="stat-card approved">
+            <i class="fa-solid fa-circle-check"></i>
+            <h2 id="approvedClaimsCount">0</h2>
+            <span>Approved</span>
+        </div>
+
+        <div class="stat-card rejected">
+            <i class="fa-solid fa-circle-xmark"></i>
+            <h2 id="rejectedClaimsCount">0</h2>
+            <span>Rejected</span>
+        </div>
+    </div>
+
+    <!-- TOOLBAR (IDs added for filters) -->
+    <div class="toolbar">
+        <div class="search-box">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" id="claimsSearchInput" placeholder="Search item...">
+        </div>
+
+        <select id="claimsStatusFilter">
+            <option value="all">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+        </select>
+    </div>
+
+    <!-- DYNAMIC GRID PANELS -->
+    <div class="claims-grid" id="claimsGridContainer">
+        <!-- JS inserts layout maps here dynamically -->
+    </div>
+
+    <!-- EMPTY STATE BOX -->
+    <div class="empty" id="emptyClaimsState" style="display: none;">
+        <i class="fa-regular fa-folder-open"></i>
+        <h2>No Claims Found</h2>
+        <p>You haven't claimed any item matching this category yet.</p>
+    </div>
+
+</div>
+
+<!-- Linked Script Engine -->
+<script src="../script/my-claims.js"></script>
+</body>
+</html>
