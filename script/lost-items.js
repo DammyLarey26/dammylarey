@@ -183,45 +183,21 @@ async function submitProof(e) {
 
     if (!token) {
         alert("Please login.");
+        window.location = './login.html';
         return;
     }
 
-    const itemId = document.getElementById("modalItemId").value;
-
-    const description =
-        document.getElementById("claimDescription").value.trim();
-
-    const proof =
-        document.getElementById("claimProof").files[0];
-
-    const additionalInfo =
-        document.getElementById("claimAdditional").value.trim();
-
-    if (!description) {
-        alert("Please describe the item.");
-        return;
-    }
-
-    if (!proof) {
-        alert("Please upload proof of ownership.");
-        return;
-    }
-
-    const formData = new FormData();
-
-    formData.append("itemId", itemId);
-    formData.append("description", description);
-    formData.append("proof", proof);
-    formData.append("additionalInfo", additionalInfo);
-
-    const submitBtn =
-        document.querySelector("#proofForm button[type='submit']");
+    const modalItemIdInput = document.getElementById('modalItemId');
+    const descriptionInput = document.getElementById('proofDescription');
+    const fileInput = document.getElementById('proofFile');
+    const additionalInput = document.getElementById('proofAdditional');
+    
+    const submitBtn = document.querySelector("#proofForm button[type='submit']");
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
 
     try {
-
         const response = await fetch(`${API_URL}/user/claim-item`, {
 
             method: "POST",
@@ -230,7 +206,12 @@ async function submitProof(e) {
                 Authorization: `Bearer ${token}`
             },
 
-            body: formData
+            body: {
+                itemId: "sci/22/23/0697",
+                description: descriptionInput.value,
+                file: "https://placehold.co/600x400?text=No+Image+Provided",
+                additional: additionalInput.value
+            }
 
         });
 
