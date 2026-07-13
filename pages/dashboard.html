@@ -11,38 +11,6 @@
   <link rel="stylesheet" href="../css/user.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/prof.css">
-  <script>
-    // 1. Core Authentication Check (Token & Session Safe)
-    if (sessionStorage.getItem("loggedIn") !== "true" || !localStorage.getItem("token")) {
-        window.location.replace('./login.html'); 
-    }
-
-    // 2. Inactivity Timeout (15 minutes of no movement)
-    let idleTimeout;
-    const TIMEOUT_LIMIT = 15 * 60 * 1000; // 15 minutes in milliseconds
-
-    function resetIdleTimer() {
-        clearTimeout(idleTimeout);
-        idleTimeout = setTimeout(() => {
-            // Clear session data cleanly
-            sessionStorage.clear();
-            localStorage.removeItem("token");
-            localStorage.removeItem("cuser");
-            
-            // Alert the user and immediately redirect once they click "OK"
-            alert("Your session has expired due to inactivity. Please log in again.");
-            window.location.replace('./login.html');
-        }, TIMEOUT_LIMIT);
-    }
-
-    // Listen for any user activity to reset the countdown clock
-    window.onload = resetIdleTimer;
-    window.onmousemove = resetIdleTimer;
-    window.onmousedown = resetIdleTimer; 
-    window.ontouchstart = resetIdleTimer; 
-    window.onclick = resetIdleTimer;     
-    window.onkeydown = resetIdleTimer;   
-</script>
 </head>
 <body>
     <header class="user-header">
@@ -64,7 +32,7 @@
             <a href="../index.html">Home</a>
 			<a href="./profile.html">Profile</a>
 			<a class="active" href="">Dashboard</a>
-			<a href="#" onclick="forceLogout(event)"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+			<a href="#" onclick="forceLogout(event)">Logout</a>
         </div>
         <div class="right-handside">
             <i class="fa-solid fa-bell"></i>
@@ -97,7 +65,7 @@
           <i class="fa-solid fa-eye"></i>
           <div class="overview-itemsfig">
             <div class="fig center">
-              <a href="./view-lost.html">View Lost Items</a>
+              <a href="./view-lost.html">View Items</a>
             </div>
           </div>
         </div>
@@ -105,7 +73,7 @@
           <i class="fa-solid fa-eye"></i>
           <div class="overview-itemsfig">
             <div class="fig center">
-              <a href="./view-items.html">View Items</a>
+              <a href="">View</a>
             </div>
           </div>
         </div>
@@ -140,7 +108,7 @@
 
         <div class="faq-item">
           <div class="faq-question">
-            <span><a href="./view-lost.html"><i class="fa-solid fa-list"></i> Lost Items</a></span>
+            <span><a href="./view-lost.html"><i class="fa-solid fa-list"></i> Items</a></span>
             <i class="fa-solid fa-chevron-down"></i>
           </div>
 
@@ -151,12 +119,11 @@
 
         <div class="faq-item">
           <div class="faq-question">
-            <span><a href="./view-found.html"><i class="fa-solid fa-folder"></i> Found Items</a></span>
+            <span><a href="./view-found.html"><i class="fa-solid fa-folder"></i> Approved Items</a></span>
             <i class="fa-solid fa-chevron-down"></i>
           </div>
 
           <div class="faq-answer">
-            Shows items that have been found and reported by users within the campus.</div>
         </div>
 
 
@@ -178,7 +145,6 @@
           </div>
 
           <div class="faq-answer">
-            Allows users to safely exit their account after using the system.</div>
         </div>
       </div>
 
@@ -186,34 +152,8 @@
 
         </div>
     </div>
- <div class="lower-footer">
-    
-  </div>
 
 
-
-
-  <div class="bottom-nav">
-    <a href="#" class="nav-item active">
-      <i class="fa fa-home"></i>
-      <span>Dashboard</span>
-    </a>
-
-    <a href="./view-lost.html" class="nav-item">
-      <i class="fa fa-search"></i>
-      <span>Lost</span>
-    </a>
-
-    <a href="./report.html" class="nav-item">
-      <i class="fa fa-plus-circle"></i>
-      <span>Report</span>
-    </a>
-    <a href="./view-found.html" class="nav-item ">
-      <i class="fa fa-ellipsis-h"></i>
-      <span>Found</span>
-    </a>
-
-  </div>
     </main>
     
 
@@ -234,6 +174,7 @@ closeBtn.addEventListener("click", () => {
     sidebar.classList.remove("active");
 });
   </script>
+  <script src="../script/session.js"></script>
 </body>
 
 </html>

@@ -20,7 +20,7 @@
        <button class="menu-btn" id="menuBtn">☰</button>
         <div class="marquee">
             <marquee behavior="" direction="left">
-                <h2>Report Lost</h2>
+                <h2>Found Items</h2>
             </marquee>
         </div>
     </header>
@@ -35,7 +35,6 @@
             <a href="../index.html">Home</a>
             <a href="./profile.html">Profile</a>
             <a class="active" href="">Dashboard</a>
-            <a href="#" onclick="forceLogout(event)"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
         </div>
         <div class="right-handside">
             <i class="fa-solid fa-bell"></i>
@@ -46,15 +45,18 @@
     <main class="main-content">
     <div class="body-container">
     <div class="search-top">
-      <input type="search" placeholder="Search by category,date or location">
-      <select>
-        <option value="">All Categories</option>
-        <option value="">Books</option>
-        <option value="">Card</option>
-        <option value="">Electronics</option>
-      </select>
-      <button>Search</button>
-    </div>
+  <!-- Added an ID here for reliable script targeting -->
+  <input type="search" id="dashboardSearch" placeholder="Search by category, date or location">
+  
+  <!-- Added values to options so the script can filter cleanly -->
+  <select id="dashboardCategoryFilter">
+    <option value="all">All Categories</option>
+    <option value="books">Books</option>
+    <option value="card">Card</option>
+    <option value="electronics">Electronics</option>
+  </select>
+  <button id="dashboardSearchBtn">Search</button>
+</div>
     
     <div class="items-box-wrapper">
     <!-- 🛒 The Live Feed Container -->
@@ -128,10 +130,7 @@
             <div class="passport">
         <img id="img" src="../images/lekan.jpg" alt="">
       </div>
-        <div class="prof-detname">
-          <span  id="name">Loading...</span>
-          <span id="userId">Loading...</span> 
-        </div>
+        
 
   <div class="bottom-nav">
     <a href="./dashboard.html" class="nav-item">
@@ -171,6 +170,7 @@
         sidebar.classList.remove("active");
     });
   </script>
+  <script src="../script/session.js"></script>
 </body>
 
 </html>

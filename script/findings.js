@@ -3,41 +3,18 @@ let lostItemsCache = [];
 const API_URL = "https://ooulostandfoundportal.onrender.com";
 
 // ===================================================
-// AUTH TOKEN
-// ===================================================
-function getSessionToken() {
-    let token = localStorage.getItem("token");
-
-    if (!token && localStorage.getItem("cuser")) {
-        const parsedUser = JSON.parse(localStorage.getItem("cuser"));
-        token = parsedUser.token || parsedUser.accessToken;
-    }
-
-    return token;
-}
-
-// ===================================================
-// FETCH LOST ITEMS
+// FETCH LOST ITEMS (PUBLIC ROUTE ACCESS)
 // ===================================================
 async function fetchAndDisplayLostItems() {
     const container = document.querySelector("#lostItemsContainer");
-    const token = getSessionToken();
-
-    if (!token) {
-        container.innerHTML =
-            `<p style="color:red;text-align:center;width:100%;">
-                Authentication required. Please log in.
-            </p>`;
-        return;
-    }
 
     try {
         container.innerHTML = `<p style="text-align:center;color:gray;width:100%;">Loading available items...</p>`;
         
+        // Fetching without standard Authorization headers so it's fully open
         const response = await fetch(`${API_URL}/user/lost-items`, {
             method: "GET",
             headers: {
-                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json"
             }
         });
@@ -82,9 +59,6 @@ function renderFilteredItems() {
     const searchQuery = searchInput ? searchInput.value.toLowerCase() : '';
     const selectedCategory = categorySelect ? categorySelect.value.toLowerCase() : '';
 
-    // Retrieve locally saved proof-submitted items array
-    const submittedClaims = JSON.parse(localStorage.getItem("submittedClaims") || "[]");
-
     // Apply conditional text & category selector filters
     const filtered = lostItemsCache.filter(item => {
         const itemName = (item.name || item.itemName || '').toLowerCase();
@@ -92,11 +66,13 @@ function renderFilteredItems() {
         const itemCategory = (item.category || '').toLowerCase();
         const itemDate = (item.dateFound || item.createdAt || '').toLowerCase();
 
+        // 1. Text Search matching keywords across Title, Location, Category, and Date fields
         const matchesSearch = itemName.includes(searchQuery) || 
                               itemLocation.includes(searchQuery) || 
                               itemCategory.includes(searchQuery) ||
                               itemDate.includes(searchQuery);
 
+        // 2. Dropdown Category layout parameter filter
         const matchesCategory = !selectedCategory || selectedCategory === 'all' || itemCategory === selectedCategory;
 
         return matchesSearch && matchesCategory;
@@ -116,12 +92,9 @@ function renderFilteredItems() {
     filtered.forEach((item, index) => {
         const itemImg = item.imgUrl || "../images/Laptop.png";
         const itemName = item.name || item.itemName || "Unnamed Item";
-        const finderName = item.founderName || item.reporterName || "Anonymous";
+        const finderName = item.reportedBy || item.createdBy || item.userId || item.founderName || item.reporterName || "Anonymous";
         const status = item.status || "Available";
         const idString = item._id || index.toString();
-
-        // Check if proof has already been submitted for this item
-        const isClaimed = submittedClaims.includes(idString);
 
         const card = document.createElement("div");
         card.className = "items-box-item";
@@ -139,24 +112,14 @@ function renderFilteredItems() {
 
             <button
                 onclick="viewItemDetails('${idString}')"
-                class="open-btn">
+                class="open-btn" style="width: 100%;">
                 View Details
-            </button>
-
-            <button
-                class="view-btn"
-                data-item-id="${idString}"
-                onclick="openRequestModal('${idString}')"
-                ${isClaimed ? 'disabled style="background: #ccc; cursor: not-allowed;"' : ''}>
-                <i class="fa-solid ${isClaimed ? 'fa-lock' : 'fa-check'}"></i>
-                ${isClaimed ? 'Requested' : 'Request'}
             </button>
         `;
 
         container.appendChild(card);
     });
 }
-
 // ===================================================
 // VIEW DETAILS (ADAPTED FOR YOUR CSS CLASSES)
 // ===================================================
@@ -180,15 +143,20 @@ function viewItemDetails(identifier) {
     const itemDescription = item.description || "No description provided.";
     const reporterId = item.reportedBy || item.createdBy || item.userId || "Anonymous";
 
+    // Format Date beautifully
     const formattedDate = new Date(itemDate).toLocaleDateString(undefined, { dateStyle: 'medium' });
 
+    // Inject layout structural frames matching your exact CSS names
     bottomSheet.innerHTML = `
         <div style="padding: 24px;">
+            <!-- Matches your .sheet-header class -->
             <div class="sheet-header" style="margin-bottom: 20px; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 12px;">
                 <h2 style="margin: 0; font-size: 1.4rem; color: purple;">Item Specifications</h2>
+                <!-- Matches your .close-btn class -->
                 <span class="close-btn" onclick="closeSheet()">&times;</span>
             </div>
 
+            <!-- Card Showcase Viewport Structure -->
             <div style="display: grid; grid-template-columns: 1fr; gap: 20px; max-height: 65vh; overflow-y: auto; padding-right: 4px;">
                 
                 <div style="position: relative; width: 100%; height: 200px; border-radius: 12px; overflow: hidden; background: #fafafa; display: flex; align-items: center; justify-content: center; border: 1px solid #eaeaea;">
@@ -200,6 +168,7 @@ function viewItemDetails(identifier) {
 
                 <h1 style="margin: 0; font-size: 1.6rem; font-weight: 700; color: #111;">${itemName}</h1>
 
+                <!-- Matches your .sheet-content-par flex distribution layout patterns -->
                 <div class="sheet-content-par">
                     <strong style="color: #555;">Category:</strong>
                     <span>${itemCategory}</span>
@@ -235,108 +204,28 @@ function viewItemDetails(identifier) {
     openSheet();
 }
 
+// Fixed display adjustments parsing active state overrides safely 
 function openSheet() {
     const sheet = document.getElementById("bottomSheet");
     const overlay = document.getElementById("overlay");
-    if (sheet) sheet.style.bottom = "0";
-    if (overlay) overlay.style.display = "block";
+    
+    if (sheet) {
+        sheet.style.bottom = "0"; // Smooth override wrapper safety
+    }
+    if (overlay) {
+        overlay.style.display = "block";
+    }
 }
 
 function closeSheet() {
     const sheet = document.getElementById("bottomSheet");
     const overlay = document.getElementById("overlay");
-    if (sheet) sheet.style.bottom = "-100%";
-    if (overlay) overlay.style.display = "none";
-}
-
-// ===================================================
-// CLAIM MODAL
-// ===================================================
-window.openRequestModal = function (itemId) {
-    document.getElementById("modalItemId").value = itemId;
-    document.getElementById("proofModal").style.display = "block";
-};
-
-window.closeModal = function () {
-    document.getElementById("proofModal").style.display = "none";
-    document.getElementById("proofForm").reset();
-};
-
-// ===================================================
-// SUBMIT CLAIM (WITH AUTOMATIC REDIRECT)
-// ===================================================
-async function submitProof(e) {
-    e.preventDefault();
-
-    const token = getSessionToken();
-
-    if (!token) {
-        alert("Please login.");
-        window.location = './login.html';
-        return;
-    }
-
-    const modalItemIdInput = document.getElementById('modalItemId');
-    const descriptionInput = document.getElementById('proofDescription');
-    const additionalInput = document.getElementById('proofAdditional');
-    const placeholderFile = "https://placehold.co/600x400?text=No+Image+Provided";
     
-    const submitBtn = document.querySelector("#proofForm button[type='submit']");
-    const itemId = modalItemIdInput.value;
-
-    const matchedItem = lostItemsCache.find(item => item._id === itemId);
-    const actualItemName = matchedItem ? (matchedItem.name || matchedItem.itemName) : "Unknown Item";
-
-    let actualClaimerName = "Registered User";
-    if (localStorage.getItem("cuser")) {
-        const parsedUser = JSON.parse(localStorage.getItem("cuser"));
-        actualClaimerName = parsedUser.name || parsedUser.username || parsedUser.fullName || "Registered User";
+    if (sheet) {
+        sheet.style.bottom = "-100%";
     }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
-
-    try {
-        const response = await fetch(`${API_URL}/user/claim-item`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                itemId: itemId,
-                itemName: actualItemName,      
-                claimerName: actualClaimerName, 
-                description: descriptionInput.value,
-                file: placeholderFile, 
-                additional: additionalInput.value
-            })
-        });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-            throw new Error(result.message || "Submission failed.");
-        }
-
-        alert(result.message || "Proof submitted successfully!");
-        
-        // 🔒 Save the item ID into localStorage so it displays as requested right away
-        const submittedClaims = JSON.parse(localStorage.getItem("submittedClaims") || "[]");
-        if (!submittedClaims.includes(itemId)) {
-            submittedClaims.push(itemId);
-            localStorage.setItem("submittedClaims", JSON.stringify(submittedClaims));
-        }
-
-        closeModal();
-        window.location.href = "./history.html";
-
-    } catch (err) {
-        console.error(err);
-        alert(err.message);
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Submit Proof";
+    if (overlay) {
+        overlay.style.display = "none";
     }
 }
 
@@ -344,24 +233,24 @@ async function submitProof(e) {
 // INITIALIZE & INPUT EVENT LISTENERS
 // ===================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // Run public items fetch immediately on page load
     fetchAndDisplayLostItems();
 
+    // Bind inputs automatically based on ID configurations or hierarchy wrappers
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
     const categorySelect = document.getElementById('dashboardCategoryFilter') || document.querySelector('.search-top select');
     const searchBtn = document.getElementById('dashboardSearchBtn') || document.querySelector('.search-top button');
 
+    // Run filters immediately when text fields modify
     if (searchInput) {
         searchInput.addEventListener("input", renderFilteredItems);
     }
+    // Filter on dropdown change events
     if (categorySelect) {
         categorySelect.addEventListener("change", renderFilteredItems);
     }
+    // Button submit trigger assignment
     if (searchBtn) {
         searchBtn.addEventListener("click", renderFilteredItems);
-    }
-
-    const form = document.getElementById("proofForm");
-    if (form) {
-        form.addEventListener("submit", submitProof);
     }
 });
