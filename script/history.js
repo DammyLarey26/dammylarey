@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusFilter = document.querySelector('#statusFilter');
 
   // --- DYNAMICALLY INJECT THE CLAIMS TOGGLE BUTTON ---
-  // This automatically inserts the "My Claims" tab into your tab container if it doesn't exist in HTML
   const tabContainer = lostTabBtn?.parentElement;
   if (tabContainer && !document.querySelector('#claimsTabBtn')) {
     const claimsBtn = document.createElement('button');
@@ -62,7 +61,6 @@ async function fetchUserHistory() {
     return;
   }
 
-  // 👤 Get the current logged-in user's data (Uses 'user' key matching postman.html)
   const cachedUser = localStorage.getItem('user') || localStorage.getItem('cuser');
   if (!cachedUser) {
     container.innerHTML = `<p style="color: #ef4444; text-align: center; padding: 20px; font-weight: 500;">User profile missing. Please log in again.</p>`;
@@ -70,7 +68,7 @@ async function fetchUserHistory() {
   }
   
   const currentUser = JSON.parse(cachedUser);
-  const currentUserId = currentUser._id || currentUser.id; // Target user's unique MongoDB ID
+  const currentUserId = currentUser._id || currentUser.id;
 
   try {
     container.innerHTML = `<p style="text-align: center; color: #64748b; padding: 20px;">Loading history records...</p>`;
@@ -90,7 +88,6 @@ async function fetchUserHistory() {
     }
 
     // 2. FETCH USER'S SUBMITTED CLAIM REQUESTS
-    // Reaches out to the verification endpoint to display items requested by this user
     try {
       const claimsResponse = await fetch(`${API_KEY}/admin/claim-request`, {
         method: 'GET',
@@ -102,15 +99,12 @@ async function fetchUserHistory() {
       const claimsData = await claimsResponse.json();
       if (claimsResponse.ok) {
         const allClaims = claimsData.data || claimsData.claims || claimsData || [];
-        // Optional filter if backend doesn't filter by user automatically:
-        // claimedItemsList = allClaims.filter(c => c.userId === currentUserId || c.claimerName === (currentUser.name || currentUser.username));
         claimedItemsList = allClaims;
       }
     } catch (claimErr) {
       console.error("Could not populate claim history metrics:", claimErr);
     }
 
-    // Direct data feed into visual compiler mapping active layout rules
     renderFilteredHistory();
 
   } catch (error) {
@@ -119,7 +113,6 @@ async function fetchUserHistory() {
   }
 }
 
-// Controls shifting active navigation style toggles
 function switchTab(type) {
   currentTypeFilter = type;
   
@@ -127,7 +120,6 @@ function switchTab(type) {
   const foundTabBtn = document.querySelector('#foundTabBtn');
   const claimsTabBtn = document.querySelector('#claimsTabBtn');
 
-  // Clear states across elements 
   lostTabBtn?.classList.remove('active');
   foundTabBtn?.classList.remove('active');
   claimsTabBtn?.classList.remove('active');
@@ -183,17 +175,19 @@ function renderFilteredHistory() {
       const rawStatus = claim.status || 'Pending';
       const cleanStatus = rawStatus.toLowerCase();
       
-      let badgeClass = 'status-pending'; // Yellow/Orange
-      if (cleanStatus === 'approved' || cleanStatus === 'verified') badgeClass = 'status-found'; // Green
-      if (cleanStatus === 'rejected' || cleanStatus === 'denied') badgeClass = 'status-closed'; // Red
+      // Match with your CSS file's class names
+      let badgeClass = 'claimed'; 
+      if (cleanStatus === 'approved' || cleanStatus === 'verified') badgeClass = 'approved';
+      if (cleanStatus === 'rejected' || cleanStatus === 'denied') badgeClass = 'rejected';
+      if (cleanStatus === 'available') badgeClass = 'available';
 
       return `
         <div class="history-card" style="border: 1px solid #e2e8f0; padding: 16px; border-radius: 10px; margin-bottom: 12px; background: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
           <div class="card-details">
-            <span class="status-badge ${badgeClass}" style="display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">
+            <span class="status ${badgeClass}">
               Claim: ${rawStatus}
             </span>
-            <h3 style="margin: 0 0 6px 0; color: #1e293b; font-size: 18px;">${claim.itemName || "Claimed Item"}</h3>
+            <h3 style="margin: 0 0 6px 0; color: #1e293b; font-size: 18px; margin-top: 6px;">${claim.itemName || "Claimed Item"}</h3>
             <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>📝 Submitted Proof:</strong> ${claim.description}</p>
             <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>ℹ️ Additional Info:</strong> ${claim.additional || "None Provided"}</p>
           </div>
@@ -208,7 +202,7 @@ function renderFilteredHistory() {
     return;
   }
 
-  // --- LOGIC ROUTE B: RENDER REPORTED ITEMS (YOUR ORIGINAL CODE) ---
+  // --- LOGIC ROUTE B: RENDER REPORTED ITEMS ---
   if (reportedItemsList.length === 0) {
     container.innerHTML = `
       <div style="text-align: center; padding: 60px 20px; color: #64748b; width: 100%;">
@@ -246,51 +240,34 @@ function renderFilteredHistory() {
     const rawStatus = item.status || 'Pending';
     const cleanStatus = rawStatus.toLowerCase();
     
-    let badgeClass = 'status-pending';
-    if (cleanStatus === 'approved' || cleanStatus === 'found') badgeClass = 'status-found';
-    if (cleanStatus === 'rejected' || cleanStatus === 'closed') badgeClass = 'status-closed';
+    // Exact color maps as specified in your CSS
+    let badgeClass = 'claimed'; // fallback status defaults to Orange style
+    
+    if (cleanStatus === 'available') {
+      badgeClass = 'available'; // Blue style
+    } else if (cleanStatus === 'claimed' || cleanStatus === 'pending') {
+      badgeClass = 'claimed'; // Orange style
+    } else if (cleanStatus === 'approved' || cleanStatus === 'found') {
+      badgeClass = 'approved'; // Green style
+    } else if (cleanStatus === 'rejected' || cleanStatus === 'closed') {
+      badgeClass = 'rejected'; // Red style
+    }
 
     return `
       <div class="history-card" style="border: 1px solid #e2e8f0; padding: 16px; border-radius: 10px; margin-bottom: 12px; background: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
         <div class="card-details">
-          <span class="status-badge ${badgeClass}" style="display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px;">
-            ${rawStatus}
-          </span>
           <h3 style="margin: 0 0 6px 0; color: #1e293b; font-size: 18px;">${item.name}</h3>
           <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>📍 Location:</strong> ${item.foundLocation || "Not Specified"}</p>
           <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>📅 Date Logged:</strong> ${item.foundDate ? item.foundDate.split('T')[0] : 'N/A'}</p>
           <p class="item-description" style="margin: 6px 0 0 0; font-size: 13px; color: #475569; font-style: italic;">"${item.description}"</p>
         </div>
         <div class="card-actions">
-          <button class="btn-delete" onclick="deleteHistoryItem('${item._id}')" style="background: transparent; border: 1px solid #ef4444; color: #ef4444; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500;">
-            🗑️ Delete Report
-          </button>
+          <!-- Replaced the old delete button with the actual status badge styled with your CSS -->
+          <span class="status ${badgeClass}">
+            ${rawStatus}
+          </span>
         </div>
       </div>
     `;
   }).join('');
 }
-
-// --- SELF-DELETION HANDLER ---
-window.deleteHistoryItem = async (itemId) => {
-  if (!confirm("Are you sure you want to permanently delete this item report?")) return;
-
-  const token = getSessionToken();
-  try {
-    const response = await fetch(`${API_KEY}/user/items/${itemId}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
-    
-    const result = await response.json();
-    if (response.ok || result.success) {
-      alert("Report successfully deleted.");
-      fetchUserHistory(); 
-    } else {
-      alert(result.message || "Failed to delete item from system records.");
-    }
-  } catch (err) {
-    console.error("Deletion network error context:", err);
-    alert("Network response timeout while executing delete transaction.");
-  }
-};
