@@ -2,6 +2,13 @@
 let lostItemsCache = [];
 const API_URL = "https://ooulostandfoundportal.onrender.com";
 
+
+// ===================================================
+// CHECK LOGIN STATUS
+// ===================================================
+function isUserLoggedIn() {
+    return !!getSessionToken();
+}
 // ===================================================
 // AUTH TOKEN
 // ===================================================
@@ -23,23 +30,15 @@ async function fetchAndDisplayLostItems() {
     const container = document.querySelector("#lostItemsContainer");
     const token = getSessionToken();
 
-    if (!token) {
-        container.innerHTML =
-            `<p style="color:red;text-align:center;width:100%;">
-                Authentication required. Please log in.
-            </p>`;
-        return;
-    }
-
     try {
         container.innerHTML = `<p style="text-align:center;color:gray;width:100%;">Loading available items...</p>`;
         
         const response = await fetch(`${API_URL}/user/lost-items`, {
             method: "GET",
             headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    "Content-Type": "application/json"
+}
         });
 
         const result = await response.json();
@@ -171,13 +170,13 @@ function renderFilteredItems() {
             </button>
 
             <button
-                class="view-btn"
-                data-item-id="${idString}"
-                onclick="openRequestModal('${idString}')"
-                ${isClaimed ? 'disabled style="background: #ccc; cursor: not-allowed;"' : ''}>
-                <i class="fa-solid ${isClaimed ? 'fa-lock' : 'fa-check'}"></i>
-                ${isClaimed ? 'Requested' : 'Request'}
-            </button>
+    class="view-btn"
+    data-item-id="${idString}"
+    onclick="openRequestModal('${idString}')"
+    ${isClaimed ? 'disabled style="background:#ccc;cursor:not-allowed;"' : ''}>
+    <i class="fa-solid ${isClaimed ? 'fa-lock' : 'fa-check'}"></i>
+    ${isClaimed ? 'Requested' : 'Request'}
+</button>
         `;
 
         container.appendChild(card);
@@ -287,18 +286,19 @@ function closeSheet() {
     if (sheet) sheet.style.bottom = "-100%";
     if (overlay) overlay.style.display = "none";
 }
-
 // ===================================================
 // CLAIM MODAL
 // ===================================================
 window.openRequestModal = function (itemId) {
+
+    // Check if user is logged in
+    if (!isUserLoggedIn()) {
+        alert("Please log in first.");
+        return;
+    }
+
     document.getElementById("modalItemId").value = itemId;
     document.getElementById("proofModal").style.display = "block";
-};
-
-window.closeModal = function () {
-    document.getElementById("proofModal").style.display = "none";
-    document.getElementById("proofForm").reset();
 };
 
 // ===================================================

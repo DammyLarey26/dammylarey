@@ -45,7 +45,10 @@ async function fetchUserClaims() {
 
         const result = await response.json();
         // Standardize different possible payload structural layouts safely
-        const claimsList = result.data || result.claims || result;
+        const claimsList = result.data 
+        console.log (claimsList)
+
+        return
 
         if (!Array.isArray(claimsList)) {
             container.innerHTML = `
