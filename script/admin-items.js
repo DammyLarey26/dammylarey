@@ -15,7 +15,7 @@ async function loadLostItems() {
 
         // Fetched publicly from the endpoint
         const response = await fetch(
-            "https://ooulostandfoundportal.onrender.com/user/lost-items"
+            "https://ooulostandfoundportal.onrender.com/admin/lost-items"
         );
 
         const result = await response.json();

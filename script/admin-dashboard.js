@@ -31,7 +31,7 @@ async function loadAdminDashboardData() {
     // --- 2. FETCH DATA CONCURRENTLY (Using corrected claim-request route) ---
     const [usersResult, itemsResult, claimsResult] = await Promise.all([
         safeFetch('https://ooulostandfoundportal.onrender.com/admin/get-users'),
-        safeFetch('https://ooulostandfoundportal.onrender.com/user/lost-items'),
+        safeFetch('https://ooulostandfoundportal.onrender.com/admin/lost-items'),
         safeFetch('https://ooulostandfoundportal.onrender.com/admin/claim-request') // <-- Path Updated!
     ]);
 
