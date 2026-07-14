@@ -379,7 +379,7 @@ async function submitProof(e) {
         }
 
         closeModal();
-        window.location.href = "./history.html";
+        window.location.href = "./my-claims.html";
 
     } catch (err) {
         console.error(err);
