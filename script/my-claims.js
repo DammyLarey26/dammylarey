@@ -102,8 +102,11 @@ function renderClaimsEngine() {
 
     // Processing criteria calculations locally
     const filteredClaims = userClaimsCache.filter(claim => {
-        const itemName = (claim.itemName || claim.name || '').toLowerCase();
-        const itemLocation = (claim.locationFound || claim.foundLocation || claim.location || '').toLowerCase();
+        // Resolve target source (either nested object like claim.itemId / claim.item OR the flat object itself)
+        const targetItem = claim.itemId || claim.item || claim;
+
+        const itemName = (targetItem.itemName || targetItem.name || '').toLowerCase();
+        const itemLocation = (targetItem.locationFound || targetItem.foundLocation || targetItem.location || '').toLowerCase();
         const claimStatus = (claim.status || 'pending').toLowerCase();
 
         const matchesSearch = itemName.includes(searchQuery) || itemLocation.includes(searchQuery);
@@ -123,10 +126,13 @@ function renderClaimsEngine() {
     }
 
     filteredClaims.forEach(claim => {
+        // Safe extraction target mapping (check nested payload item objects first)
+        const targetItem = claim.itemId || claim.item || claim;
+
         // Fallbacks for data structures
-        const itemImg = claim.imgUrl || claim.file || "https://placehold.co/500x350?text=No+Image+Provided";
-        const itemName = claim.itemName || claim.name || "Unnamed Item";
-        const itemLocation = claim.locationFound || claim.foundLocation || "Not Specified";
+        const itemImg = targetItem.imgUrl || targetItem.file || targetItem.imageUrl || "https://placehold.co/500x350?text=No+Image+Provided";
+        const itemName = targetItem.itemName || targetItem.name || "Unnamed Item";
+        const itemLocation = targetItem.locationFound || targetItem.foundLocation || targetItem.location || "Not Specified";
         
         // Formatting status badges accurately
         const rawStatus = (claim.status || 'Pending').toLowerCase();
@@ -135,7 +141,7 @@ function renderClaimsEngine() {
         if (rawStatus === 'rejected') displayStatusText = "Rejected";
 
         // Date calculation fallbacks
-        const dateFoundRaw = claim.foundDate || claim.dateFound || new Date();
+        const dateFoundRaw = targetItem.foundDate || targetItem.dateFound || targetItem.createdAt || new Date();
         const dateClaimedRaw = claim.claimedDate || claim.createdAt || new Date();
 
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -164,7 +170,7 @@ function renderClaimsEngine() {
                     Claimed: ${formattedClaimedDate}
                 </p>
                 <div class="buttons">
-                    <button class="view" onclick="alert('Viewing specifications for item ID: ${claim._id || claim.id}')">
+                    <button class="view" onclick="alert('Viewing specifications for item ID: ${targetItem._id || targetItem.id || claim._id}')">
                         View Details
                     </button>
                 </div>

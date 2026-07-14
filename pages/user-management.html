@@ -22,50 +22,59 @@
         <nav-bar>
           <div class="options">
             <a class="active" href=""> Users</a>
-            <a href="./verify-found.html">Found Items</a>
-            <a href="./verify-lost.html">Lost Items</a>
-            <a href="./new-verify.html">Verify Claims</a>
+            <a href="./admin-items.html">Items</a>
+            <a href="./admin-verify.html">Verify Claims</a>
             <button>Generate Report</button>
           </div> 
         </nav-bar>
     </div>
-      <section class="admin-top">
-        <span>Users</span>
-      </section>
-
-      <section class="det-top">
-        <div class="search-container" style="margin-bottom: 20px; text-align: center;">
-    <input type="text" id="userSearchInput" placeholder="Search by name or matric..." 
-           style="padding: 10px; width: 80%; max-width: 400px; border-radius: 5px; border: 1px solid #ccc;">
-</div>
-<div id="adminUsersContainer"></div>
-    <div class="users-box" id="adminUsersContainer"></div>
-    <div id="overlay" class="overlay" onclick="closeSheet()"></div>
-</section>
-
-<div id="detailsSheet" class="details-sheet" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: beige; padding: 25px; border-radius: 12px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 90%; max-width: 450px;">
-    <h3 style="margin-bottom: 15px; color: #800000; border-bottom: 2px solid #f0f0f0; padding-bottom: 8px;">📋 Profile Card</h3>
     
-    <div style="text-align: center; margin-bottom: 15px;">
-        <img id="modalImg" src="" alt="Student Passport" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #800000;">
-    </div>
+    <section class="admin-top">
+        <span>Users</span>
+    </section>
 
-    <div class="modal-info-list" style="display: flex; flex-direction: column; gap: 10px; font-family: sans-serif;">
-        <p><strong>Name:</strong> <span id="modalName">---</span></p>
-        <p><strong>Matric No:</strong> <span id="modalMatric">---</span></p>
-        <p><strong>Faculty:</strong> <span id="modalFaculty">---</span></p>
-        <p><strong>Phone:</strong> <span id="modalPhone">---</span></p>
-        <p><strong>Email:</strong> <span id="modalEmail">---</span></p>
-    </div>
+    <section class="det-top">
+        <div class="search-container" style="margin-bottom: 20px; text-align: center;">
+            <input type="text" id="userSearchInput" placeholder="Search by name or matric..." 
+                   style="padding: 10px; width: 80%; max-width: 400px; border-radius: 5px; border: 1px solid #ccc;">
+        </div>
+        
+        <!-- Render target container -->
+        <div class="users-box" id="adminUsersContainer"></div>
+        <div id="overlay" class="overlay" onclick="closeSheet()"></div>
+    </section>
 
-    <button onclick="closeSheet()" style="margin-top: 20px; width: 100%; background: #800000; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold;">Close Card</button>
-</div>
+    <!-- Updated Details Sheet Modal -->
+    <div id="detailsSheet" class="details-sheet" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: beige; padding: 25px; border-radius: 12px; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 90%; max-width: 450px;">
+        <h3 style="margin-bottom: 15px; color: #800000; border-bottom: 2px solid #f0f0f0; padding-bottom: 8px;">📋 Profile Card</h3>
+        
+        <div style="text-align: center; margin-bottom: 15px;">
+            <img id="modalImg" src="" alt="Student Passport" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #800000;">
+        </div>
+
+        <!-- scroll-friendly container for the extensive list of info fields -->
+        <div class="modal-info-list" style="display: flex; flex-direction: column; gap: 10px; font-family: sans-serif; max-height: 350px; overflow-y: auto; padding-right: 5px;">
+            <p><strong>Name:</strong> <span id="modalName">---</span></p>
+            <p><strong>Matric No:</strong> <span id="modalMatric">---</span></p>
+            <p><strong>Gender:</strong> <span id="modalGender">---</span></p>
+            <p><strong>Role:</strong> <span id="modalRole">---</span></p>
+            <p><strong>Level:</strong> <span id="modalLevel">---</span></p>
+            <p><strong>Faculty:</strong> <span id="modalFaculty">---</span></p>
+            <p><strong>Department:</strong> <span id="modalDepartment">---</span></p>
+            <p><strong>Phone:</strong> <span id="modalPhone">---</span></p>
+            <p><strong>Email:</strong> <span id="modalEmail">---</span></p>
+            <p><strong>Address:</strong> <span id="modalAddress">---</span></p>
+            <p><strong>WhatsApp:</strong> <span id="modalWhatsapp">---</span></p>
+            <p><strong>Registered On:</strong> <span id="modalCreatedAt">---</span></p>
+            <p><strong>Last Updated:</strong> <span id="modalUpdatedAt">---</span></p>
+        </div>
+
+        <button onclick="closeSheet()" style="margin-top: 20px; width: 100%; background: #800000; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold;">Close Card</button>
+    </div>
       
-
- 
-  <script src="../script/script.js" type="module"></script>
-  <script src="../script/bottom-modal.js"></script>
-  <script src="../script/user-management.js"></script>
+    <script src="../script/script.js" type="module"></script>
+    <script src="../script/bottom-modal.js"></script>
+    <script src="../script/user-management.js"></script>
 </body>
 
 </html>

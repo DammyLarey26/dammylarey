@@ -45,17 +45,28 @@
     <main class="main-content">
     <div class="body-container">
     <div class="search-top">
-  <!-- Added an ID here for reliable script targeting -->
-  <input type="search" id="dashboardSearch" placeholder="Search by category, date or location">
-  
-  <!-- Added values to options so the script can filter cleanly -->
-  <select id="dashboardStatusFilter">
-    <option value="all">All Statuses</option>
-    <option value="available">Available</option>
-    <option value="claimed">Claimed</option>
-    <option value="approved">Approved</option>
-    <option value="rejected">Rejected</option>
-</select></div>
+    <!-- Text Search input -->
+    <input type="search" id="dashboardSearch" placeholder="Search items...">
+    <button id="dashboardSearchBtn">Search</button>
+
+    <!-- Status Dropdown Sorting Component -->
+    <label for="dashboardStatusFilter">Status:</label>
+    <select id="dashboardStatusFilter">
+        <option value="all">All Statuses</option>
+        <option value="available">Available</option>
+        <option value="claimed">Claimed</option>
+        <option value="approved">Approved</option>
+    </select>
+
+    <!-- Checkbox Category Component -->
+    <div class="category-checkbox-container" style="margin-top: 10px; display: flex; gap: 15px;">
+        <strong>Categories:</strong>
+        <label><input type="checkbox" class="category-checkbox" value="electronics"> Electronics</label>
+        <label><input type="checkbox" class="category-checkbox" value="documents"> Documents</label>
+        <label><input type="checkbox" class="category-checkbox" value="books"> Books</label>
+        <label><input type="checkbox" class="category-checkbox" value="clothing"> Clothing</label>
+    </div>
+</div>
     
     <div class="items-box-wrapper">
     <!-- 🛒 The Live Feed Container -->

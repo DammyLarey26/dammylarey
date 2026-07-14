@@ -75,38 +75,58 @@ function renderFilteredItems() {
     const container = document.querySelector("#lostItemsContainer");
     if (!container) return;
 
-    // Grab live values from your HTML layout elements safely
+    // Grab inputs safely
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
-    const categorySelect = document.getElementById('dashboardCategoryFilter') || document.querySelector('.search-top select');
-    // Target status dropdown filter dynamically
-    const statusSelect = document.getElementById('dashboardStatusFilter');
+    const statusSelect = document.getElementById('dashboardStatusFilter') || document.querySelector('.search-top select');
+    const categorySelect = document.getElementById('dashboardCategoryFilter');
 
-    const searchQuery = searchInput ? searchInput.value.toLowerCase() : '';
-    const selectedCategory = categorySelect ? categorySelect.value.toLowerCase() : '';
-    const selectedStatus = statusSelect ? statusSelect.value.toLowerCase() : '';
+    const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    
+    // Normalize selected status value (forces lowercase and trims spaces)
+    const selectedStatus = statusSelect ? statusSelect.value.toLowerCase().trim() : '';
+
+    // Resolve Category Filters (Supports BOTH Checkboxes OR standard Dropdown options)
+    let selectedCategories = [];
+    const checkboxes = document.querySelectorAll('.category-checkbox');
+    
+    if (checkboxes.length > 0) {
+        selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked'))
+                                  .map(cb => cb.value.toLowerCase().trim());
+    } else if (categorySelect) {
+        const dropdownValue = categorySelect.value.toLowerCase().trim();
+        if (dropdownValue && dropdownValue !== 'all') {
+            selectedCategories = [dropdownValue];
+        }
+    }
 
     // Retrieve locally saved proof-submitted items array
     const submittedClaims = JSON.parse(localStorage.getItem("submittedClaims") || "[]");
 
-    // Apply conditional text, category selector, & status filters
+    // Apply filters
     const filtered = lostItemsCache.filter(item => {
         const itemName = (item.name || '').toLowerCase();
         const itemLocation = (item.foundLocation || '').toLowerCase();
         const itemCategory = (item.category || '').toLowerCase();
         const itemDate = (item.foundDate || item.createdAt || '').toLowerCase();
-        const itemStatus = (item.status || 'available').toLowerCase();
+        
+        // Normalize database status, defaulting to "available" if it is empty/undefined
+        const itemStatus = (item.status || 'available').toLowerCase().trim();
 
+        // Search text matching
         const matchesSearch = itemName.includes(searchQuery) || 
                               itemLocation.includes(searchQuery) || 
                               itemCategory.includes(searchQuery) ||
                               itemDate.includes(searchQuery);
-
-        const matchesCategory = !selectedCategory || selectedCategory === 'all' || itemCategory === selectedCategory;
         
-        // Status Filtering Check
-        const matchesStatus = !selectedStatus || selectedStatus === 'all' || itemStatus === selectedStatus;
+        // Status matching (Handles "all", empty selection, or explicit matches like "available" / "claimed")
+        const matchesStatus = !selectedStatus || 
+                              selectedStatus === 'all' || 
+                              itemStatus === selectedStatus;
 
-        return matchesSearch && matchesCategory && matchesStatus;
+        // Category matching (shows all elements if no conditions are checked)
+        const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(itemCategory);
+
+        return matchesSearch && matchesStatus && matchesCategory;
     });
 
     container.innerHTML = "";
@@ -186,15 +206,13 @@ function viewItemDetails(identifier) {
     const itemStatus = item.status || "Available";
     const itemDescription = item.description || "No description provided.";
     
-    // Exact mapping from your database response structure:
     const reporterId = item.founder || "N/A";
 
     const formattedDate = itemDate !== "N/A" 
         ? new Date(itemDate).toLocaleDateString(undefined, { dateStyle: 'medium' }) 
         : "N/A";
 
-    // Helper functions to give correct layout background colors inside info sheet
-    let statusBg = "#0056b3"; // available
+    let statusBg = "#0056b3"; 
     if (itemStatus.toLowerCase() === 'claimed') statusBg = "#ff8c00";
     if (itemStatus.toLowerCase() === 'approved') statusBg = "#28a745";
     if (itemStatus.toLowerCase() === 'rejected') statusBg = "#dc3545";
@@ -232,7 +250,6 @@ function viewItemDetails(identifier) {
                     <span>${formattedDate}</span>
                 </div>
 
-                <!-- Verified Founder & Item reference panel -->
                 <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; background: #f8fafc; margin-top: 10px;">
                     <strong style="display: block; color: purple; font-size: 0.95rem; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">
                         <i class="fa-solid fa-user-tag"></i> Founder & Item Identity Reference
@@ -368,24 +385,29 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchAndDisplayLostItems();
 
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
-    const categorySelect = document.getElementById('dashboardCategoryFilter') || document.querySelector('.search-top select');
-    // Target status element
-    const statusSelect = document.getElementById('dashboardStatusFilter');
+    const statusSelect = document.getElementById('dashboardStatusFilter') || document.querySelector('.search-top select');
+    const categorySelect = document.getElementById('dashboardCategoryFilter');
     const searchBtn = document.getElementById('dashboardSearchBtn') || document.querySelector('.search-top button');
 
     if (searchInput) {
         searchInput.addEventListener("input", renderFilteredItems);
     }
-    if (categorySelect) {
-        categorySelect.addEventListener("change", renderFilteredItems);
-    }
-    // Handle state change for status filter drop-down
     if (statusSelect) {
         statusSelect.addEventListener("change", renderFilteredItems);
+    }
+    if (categorySelect) {
+        categorySelect.addEventListener("change", renderFilteredItems);
     }
     if (searchBtn) {
         searchBtn.addEventListener("click", renderFilteredItems);
     }
+
+    // Capture dynamic checkbox selection changes cleanly
+    document.addEventListener("change", (e) => {
+        if (e.target && e.target.classList.contains("category-checkbox")) {
+            renderFilteredItems();
+        }
+    });
 
     const form = document.getElementById("proofForm");
     if (form) {

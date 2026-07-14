@@ -24,7 +24,7 @@
           <div class="options">
             <a href="./user-management.html"> Users</a>
             <a href="./admin-items.html"> Items</a>
-            <a href="./new-verify.html">Verify Claims</a>
+            <a href="./admin-verify.html">Verify Claims</a>
             <a href="#" id="logout">Logout</a>
             <button>Generate Report</button>
           </div> 
@@ -45,13 +45,9 @@
 
         <div class="box">
             <span id="countLost">0</span>
-            <span>Lost Items</span>
+            <span>Items</span>
         </div>
 
-        <div class="box">
-            <span id="countFound">0</span>
-            <span>Found Items</span>
-        </div>
 
         <div class="box">
             <span id="countPending">0</span>
@@ -61,7 +57,7 @@
 
     <h3>Recently Reported</h3>
     <div class="recenty-reported">
-        <button class="view-btn" onclick="window.location.href='./admin-manage-items.html'">View All</button>
+        <button class="view-btn" onclick="window.location.href='./admin-items.html'">View All</button>
         
         <!-- 🛒 Dynamic target element where recent rows load -->
         <div id="recentItemsContainer">
@@ -71,47 +67,19 @@
 </section>
       
 
-  <div class="bottom-nav">
-    <a href="#" class="nav-item active">
-      <i class="fa fa-home"></i>
-      <span>Dashboard</span>
-    </a>
+ 
 
-    <a href="#" class="nav-item">
-      <i class="fa fa-search"></i>
-      <span>Lost</span>
-    </a>
-
-    <a href="#" class="nav-item">
-      <i class="fa fa-plus-circle"></i>
-      <span>Post</span>
-    </a>
-    <a href="#" class="nav-item ">
-      <i class="fa fa-ellipsis-h"></i>
-      <span>More</span>
-    </a>
-
-  </div>
-  <script>
-const admin = JSON.parse(localStorage.getItem("adminSession"));
-
-if (!admin) {
-    alert("Please login first.");
-    window.location.replace("admin-log.html"); // Replace with your login page name
-}
-</script>
 <script>
-document.getElementById("logout").addEventListener("click", function(e){
+document.getElementById("logout").addEventListener("click", function (e) {
     e.preventDefault();
 
-    if(confirm("Are you sure you want to logout?")){
+    if (confirm("Are you sure you want to logout?")) {
 
-        // End Session
-        localStorage.removeItem("adminSession");
+        sessionStorage.clear();
 
         alert("Logged out successfully.");
 
-        window.location.replace("admin-log.html"); // Your login page
+        window.location.replace("admin-log.html");
     }
 });
 </script>
@@ -124,6 +92,7 @@ window.onpopstate = function () {
 };
 </script>
 <script src="../script/admin-dashboard.js"></script>
+<script src="../script/admin-session.js"></script>
 </body>
 
 </html>

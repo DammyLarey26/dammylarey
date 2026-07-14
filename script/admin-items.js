@@ -75,45 +75,29 @@ async function loadLostItems() {
                 "Unnamed Item";
 
             const category =
-                item.category ||
-                "N/A";
+    item.category ||
+    item.itemCategory ||
+    "General";
 
             const description =
                 item.description ||
                 "No description";
 
             const location =
-                item.locationLost ||
-                item.location ||
-                "Unknown";
+            item.foundLocation ||
+            item.locationLost ||
+            item.location ||
+            "Unknown";
 
             const dateLost =
-                item.dateLost ||
-                item.createdAt;
+            item.foundDate ||
+            item.dateLost ||
+            item.createdAt;
 
-            const reporter =
-                item.user?.fullname ||
-                item.fullname ||
-                item.reporter ||
-                "N/A";
-
-            const email =
-                item.user?.email ||
-                item.email ||
-                "N/A";
-
-            const userId =
-                item.user?._id ||
-                item.user?.id ||
-                item.userId ||
-                item.user ||
-                "N/A";
-
-            const phone =
-                item.user?.phone ||
-                item.phone ||
-                "N/A";
-
+            // ==============================================================
+            // RESOLVING FOUNDER/REPORTER PROFILE FOR BOTH USERS AND ADMINS
+            // ==============================================================
+            const reporter = item.founder || "N/A";
             const status =
                 item.status ||
                 "Pending";
@@ -156,25 +140,12 @@ async function loadLostItems() {
 
                         <span><strong>Reporter:</strong>&nbsp;${reporter}</span>
 
-                        <span><strong>Email:</strong>&nbsp;${email}</span>
-
-                        <span><strong>ID:</strong>&nbsp;${userId}</span>
-
-                        <span><strong>Phone:</strong>&nbsp;${phone}</span>
 
                     </div>
 
                 </div>
 
-                <div class="user-det-btn">
-
-                    <button
-                        class="accept viewBtn"
-                        data-id="${id}">
-                        View Details
-                    </button>
-
-                </div>
+                
 
             </div>
 
@@ -190,55 +161,57 @@ async function loadLostItems() {
 
             const keyword = this.value.toLowerCase();
 
-            const filtered = allItems.filter(item =>
+            const filtered = allItems.filter(item => {
+                const userObj = item.user || item.claimedBy?.user || item.claimedBy || item.founder || item.reportedBy || {};
+                
+                return (
+                    (item.itemName || item.name || "")
+                        .toLowerCase()
+                        .includes(keyword)
 
-                (item.itemName || item.name || "")
-                    .toLowerCase()
-                    .includes(keyword)
+                    ||
 
-                ||
+                    (item.category || "")
+                        .toLowerCase()
+                        .includes(keyword)
 
-                (item.category || "")
-                    .toLowerCase()
-                    .includes(keyword)
+                    ||
 
-                ||
+                    (item.locationLost || item.location || "")
+                        .toLowerCase()
+                        .includes(keyword)
 
-                (item.locationLost || item.location || "")
-                    .toLowerCase()
-                    .includes(keyword)
+                    ||
 
-                ||
+                    (item.description || "")
+                        .toLowerCase()
+                        .includes(keyword)
 
-                (item.description || "")
-                    .toLowerCase()
-                    .includes(keyword)
+                    ||
 
-                ||
+                    (userObj.fullname || userObj.name || item.fullname || item.reporter || "")
+                        .toLowerCase()
+                        .includes(keyword)
 
-                (item.user?.fullname || item.fullname || "")
-                    .toLowerCase()
-                    .includes(keyword)
+                    ||
 
-                ||
+                    (userObj.email || item.email || "")
+                        .toLowerCase()
+                        .includes(keyword)
 
-                (item.user?.email || item.email || "")
-                    .toLowerCase()
-                    .includes(keyword)
+                    ||
 
-                ||
-
-                String(
-                    item.user?._id ||
-                    item.user?.id ||
-                    item.userId ||
-                    item.user ||
-                    ""
-                )
-                    .toLowerCase()
-                    .includes(keyword)
-
-            );
+                    String(
+                        userObj._id ||
+                        userObj.id ||
+                        item.userId ||
+                        item.user ||
+                        ""
+                    )
+                        .toLowerCase()
+                        .includes(keyword)
+                );
+            });
 
             displayItems(filtered);
 
