@@ -78,7 +78,7 @@ function renderFilteredItems() {
     // Grab live values from your HTML layout elements safely
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
     const categorySelect = document.getElementById('dashboardCategoryFilter') || document.querySelector('.search-top select');
-    // ✨ Target status dropdown filter dynamically
+    // Target status dropdown filter dynamically
     const statusSelect = document.getElementById('dashboardStatusFilter');
 
     const searchQuery = searchInput ? searchInput.value.toLowerCase() : '';
@@ -90,10 +90,10 @@ function renderFilteredItems() {
 
     // Apply conditional text, category selector, & status filters
     const filtered = lostItemsCache.filter(item => {
-        const itemName = (item.name || item.itemName || '').toLowerCase();
-        const itemLocation = (item.locationFound || item.location || item.foundLocation || '').toLowerCase();
+        const itemName = (item.name || '').toLowerCase();
+        const itemLocation = (item.foundLocation || '').toLowerCase();
         const itemCategory = (item.category || '').toLowerCase();
-        const itemDate = (item.dateFound || item.createdAt || '').toLowerCase();
+        const itemDate = (item.foundDate || item.createdAt || '').toLowerCase();
         const itemStatus = (item.status || 'available').toLowerCase();
 
         const matchesSearch = itemName.includes(searchQuery) || 
@@ -103,7 +103,7 @@ function renderFilteredItems() {
 
         const matchesCategory = !selectedCategory || selectedCategory === 'all' || itemCategory === selectedCategory;
         
-        // ✨ New Status Filtering Check
+        // Status Filtering Check
         const matchesStatus = !selectedStatus || selectedStatus === 'all' || itemStatus === selectedStatus;
 
         return matchesSearch && matchesCategory && matchesStatus;
@@ -122,8 +122,8 @@ function renderFilteredItems() {
     // Build the gallery view cards mapping matches
     filtered.forEach((item, index) => {
         const itemImg = item.imgUrl || "../images/Laptop.png";
-        const itemName = item.name || item.itemName || "Unnamed Item";
-        const finderName = item.founderName || item.reporterName || "Anonymous";
+        const itemName = item.name || "Unnamed Item";
+        const finderId = item.founder || "Anonymous";
         const status = item.status || "Available";
         const idString = item._id || index.toString();
 
@@ -141,7 +141,7 @@ function renderFilteredItems() {
                 </div>
 
                 <h2>${itemName}</h2>
-                <span>${finderName}</span>
+                <span style="font-size: 0.8rem; color: gray; font-family: monospace;">Founder ID: ${finderId.substring(0, 8)}...</span>
             </div>
 
             <button
@@ -165,7 +165,7 @@ function renderFilteredItems() {
 }
 
 // ===================================================
-// VIEW DETAILS (ADAPTED FOR YOUR CSS CLASSES)
+// VIEW DETAILS (MATCHED WITH YOUR API PROPERTIES)
 // ===================================================
 function viewItemDetails(identifier) {
     const item = lostItemsCache.find(
@@ -179,15 +179,19 @@ function viewItemDetails(identifier) {
     if (!bottomSheet || !overlay) return;
 
     const itemImg = item.imgUrl || "../images/Laptop.png";
-    const itemName = item.name || item.itemName || "Unnamed Item";
+    const itemName = item.name || "Unnamed Item";
     const itemCategory = item.category || "General";
-    const itemLocation = item.locationFound || item.location || "Unknown Location";
-    const itemDate = item.dateFound || item.createdAt || "N/A";
+    const itemLocation = item.foundLocation || "Unknown Location";
+    const itemDate = item.foundDate || item.createdAt || "N/A";
     const itemStatus = item.status || "Available";
     const itemDescription = item.description || "No description provided.";
-    const reporterId = item.reportedBy || item.createdBy || item.userId || "Anonymous";
+    
+    // Exact mapping from your database response structure:
+    const reporterId = item.founder || "N/A";
 
-    const formattedDate = new Date(itemDate).toLocaleDateString(undefined, { dateStyle: 'medium' });
+    const formattedDate = itemDate !== "N/A" 
+        ? new Date(itemDate).toLocaleDateString(undefined, { dateStyle: 'medium' }) 
+        : "N/A";
 
     // Helper functions to give correct layout background colors inside info sheet
     let statusBg = "#0056b3"; // available
@@ -228,11 +232,16 @@ function viewItemDetails(identifier) {
                     <span>${formattedDate}</span>
                 </div>
 
-                <div class="sheet-content-par" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-                    <strong style="color: #555;">Reporter ID:</strong>
-                    <span style="font-family: monospace; font-size: 0.85rem; background: #f4f4f6; padding: 6px 10px; border-radius: 6px; width: 100%; box-sizing: border-box; word-break: break-all;">
-                        ${reporterId}
-                    </span>
+                <!-- Verified Founder & Item reference panel -->
+                <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; background: #f8fafc; margin-top: 10px;">
+                    <strong style="display: block; color: purple; font-size: 0.95rem; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">
+                        <i class="fa-solid fa-user-tag"></i> Founder & Item Identity Reference
+                    </strong>
+                    <div style="display: grid; gap: 6px; font-size: 0.85rem; color: #4a5568;">
+                        <div><strong>Founder ID (Database):</strong> <span style="font-family: monospace; background: #eaeaea; padding: 2px 6px; border-radius: 4px; word-break: break-all;">${reporterId}</span></div>
+                        <div><strong>Logged Item Name:</strong> <span>${itemName}</span></div>
+                        <div><strong>Recovery Location:</strong> <span>${itemLocation}</span></div>
+                    </div>
                 </div>
 
                 <div style="border-top: 1px dashed #e2e8f0; padding-top: 15px; margin-top: 5px;">
@@ -360,7 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
     const categorySelect = document.getElementById('dashboardCategoryFilter') || document.querySelector('.search-top select');
-    // ✨ Target status element
+    // Target status element
     const statusSelect = document.getElementById('dashboardStatusFilter');
     const searchBtn = document.getElementById('dashboardSearchBtn') || document.querySelector('.search-top button');
 
@@ -370,7 +379,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (categorySelect) {
         categorySelect.addEventListener("change", renderFilteredItems);
     }
-    // ✨ Handle state change for status filter drop-down
+    // Handle state change for status filter drop-down
     if (statusSelect) {
         statusSelect.addEventListener("change", renderFilteredItems);
     }
