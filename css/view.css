@@ -1,79 +1,262 @@
-.search-top{
+/* ==========================================================================
+   SEARCH & FILTER BAR
+   ========================================================================== */
+.search-top {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 10px;
     margin: auto;
     height: fit-content;
     width: 100%;
 }
-input, select  {
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-input, textarea {
-  width: 100%;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-.search-top button, .items-box-item button{
-    margin-top: 30px;
-    padding: 12px 25px;
-    border: none;
-    color: white;
-    border-radius: 8px;
+
+input, select {
     margin: 8px 0;
-    cursor: pointer;
-    height: fit-content;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
 }
-.search-top button, .view-btn{
-    background-color: black;
+
+input, textarea {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 0.95rem;
 }
-button:hover {
-    background-color: #ccc;
-    
-}
-.items-box{
+
+/* ==========================================================================
+   LOST ITEMS CONTAINER & CARDS
+   ========================================================================== */
+/* Maps directly to your #lostItemsContainer */
+#lostItemsContainer {
     background-color: rgb(251, 251, 243);
     margin-bottom: 30px;
     padding: 15px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     overflow-y: auto;
     height: fit-content;
     justify-content: center;
-    align-items: center;
+    align-items: stretch; /* Cards will stretch to uniform height */
+    border-radius: 12px;
 }
-.items-box-item{
+
+.items-box-item {
     background-color: white;
-    padding: 30px;
-    width: fit-content;
+    padding: 24px;
     text-align: center;
-    margin: 20px;
+    margin: 15px;
     border-radius: 20px;
-    box-shadow: 0 0 15px rgb(64, 62, 62);
+    box-shadow: 0 4px 15px rgba(64, 62, 62, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
 }
-.items-details{
-    display: block;
-    gap: 5px;
+
+.items-box-item:hover {
+    transform: translateY(-5px);
 }
-.item-img{
-    width: 200px;
-    height: 100px;
-    border-radius: 20px;
+
+.items-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Image Container with side-by-side layout for Image and Status badge */
+.item-img {
+    width: 100%;
+    max-width: 220px;
+    height: 110px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center; /* Center the main item image */
+    align-items: center;
+    background-color: rgb(251, 251, 243);
+    padding: 8px;
+    box-sizing: border-box;
+    position: relative; /* 🌟 Crucial: This anchors the absolute status badge */
+    border: 1px solid #eaeaea;
+}
+
+/* Make sure the item image sits nicely in the center of its container */
+.item-img img {
+    max-width: 80%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* ==========================================================================
+   ABSOLUTE STATUS BADGE (TOP RIGHT CORNER)
+   ========================================================================== */
+.status {
+    position: absolute; /* 🌟 Absolutely position relative to .item-img */
+    top: 8px;           /* Offset slightly from the top boundary */
+    right: 8px;         /* Offset slightly from the right boundary */
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px; /* Fully rounded pill-shape */
+    color: white;
+    margin: 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Soft shadow to pop off the image */
+    z-index: 2; /* Ensures it renders above the item image */
+}
+
+.status.available { background-color: #0056b3; }
+.status.claimed { background-color: #ff8c00; }
+.status.approved { background-color: #28a745; }
+.status.rejected { background-color: #dc3545; }
+
+/* Card Typography */
+.items-details h2 {
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    margin: 10px 0 2px 0;
+}
+
+.items-details span {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   BUTTONS (PRESERVING YOUR PALETTE)
+   ========================================================================== */
+.search-top button, .items-box-item button {
+    padding: 12px 25px;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    margin: 6px 0;
+    cursor: pointer;
+    height: fit-content;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.search-top button, .view-btn {
+    background-color: black;
+}
+
+/* View Details (Open Button) style */
+.open-btn {
+    background-color: #eaeaea;
+    color: #333 !important;
+}
+
+.open-btn:hover {
+    background-color: #d8d8d8 !important;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Disabled Requested Claims State */
+.view-btn:disabled {
+    background-color: #ccc !important;
+    color: #666 !important;
+    cursor: not-allowed !important;
+}
+
+/* ==========================================================================
+   BOTTOM DETAILS SHEET (SLIDE-UP EFFECT)
+   ========================================================================== */
+#bottomSheet {
+    position: fixed;
+    bottom: -100%; /* Invisible below viewport */
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+    z-index: 1000;
+    transition: bottom 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-sizing: border-box;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    display: none;
+}
+
+.sheet-header {
     display: flex;
     justify-content: space-between;
-    background-color: rgb(251, 251, 243);
+    align-items: center;
 }
-.item-img img{
-    width: 50%;
-    height: 100%;
+
+.sheet-header .close-btn {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #888;
+    line-height: 1;
 }
+
+.sheet-header .close-btn:hover {
+    color: #000;
+}
+
+.sheet-content-par {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   CLAIM REQUEST MODAL (POP-UP)
+   ========================================================================== */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 480px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 1001;
+    display: none;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
 @media screen and (max-width: 768px) {
-    .items-box-item{
+    .items-box-item {
+        margin: 10px;
+    }
+    .search-top {
         flex-direction: column;
+        align-items: stretch;
     }
 }
