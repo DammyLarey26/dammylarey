@@ -1,6 +1,7 @@
 // Local cache array to store the fetched user claims data
 let userClaimsCache = [];
 const API_URL = "https://ooulostandfoundportal.onrender.com";
+// const API_URL = "http://localhost:5030";
 
 // ===================================================
 // AUTH TOKEN EXTRACTION
@@ -77,7 +78,7 @@ async function fetchUserClaims() {
 function calculateAndSetStats(claimsArray, stats) {
     const total = stats.total
     const approved = stats.approved
-    const rejected = stats.rejected
+    const rejected = stats.declined
     const pending = stats.pending
 
     document.getElementById("totalClaimsCount").textContent = total;
