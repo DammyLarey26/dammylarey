@@ -45,26 +45,16 @@ async function loadClaims() {
 
         const {success, request, total} = await res.json();
 
-<<<<<<< HEAD
         if (request.length === 0) {
             container.innerHTML = "<p>No claim requests found.</p>";
-=======
-        // Check if the API returned an error or if the data array is empty
-        if (!result.success || !result.data || result.data.length === 0) {
-            showEmptyMessage();
->>>>>>> e89017ed82e21e5029fe06a8dc63f5fba723f4e2
             return;
         }
 
         container.innerHTML = "";
 
-<<<<<<< HEAD
         request.forEach(claim => {
             const item = claim.item
             const claimer = claim.claimer
-=======
-        result.data.forEach(claim => {
->>>>>>> e89017ed82e21e5029fe06a8dc63f5fba723f4e2
             const card = document.createElement("main");
             card.className = "user";
 

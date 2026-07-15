@@ -123,7 +123,6 @@ function renderFilteredItems() {
 
         container.appendChild(card);
     });
-<<<<<<< HEAD
 }
 
 // ===================================================
@@ -356,6 +355,3 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", submitProof);
     }
 });
-=======
-}
->>>>>>> e89017ed82e21e5029fe06a8dc63f5fba723f4e2

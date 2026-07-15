@@ -78,39 +78,20 @@ async function loadLostItems() {
                 "No description";
 
             const location =
-<<<<<<< HEAD
             item.foundLocation 
 
             const dateLost =
             item.foundDate ||
             item.createdAt;
-=======
-                item.foundLocation ||
-                item.locationLost ||
-                item.location ||
-                "Unknown";
-
-            const dateLost =
-                item.foundDate ||
-                item.dateLost ||
-                item.createdAt;
->>>>>>> e89017ed82e21e5029fe06a8dc63f5fba723f4e2
 
             // ==============================================================
             // RESOLVING FOUNDER/REPORTER PROFILE FOR BOTH USERS AND ADMINS
             // ==============================================================
-<<<<<<< HEAD
             const founder = item.founder
             const reporter = founder.name;
             const status =
                 item.status ||
                 "Pending";
-=======
-            const reporter = item.founder || "N/A";
-            
-            // Extract and normalize the status property
-            const status = item.status || "Pending";
->>>>>>> e89017ed82e21e5029fe06a8dc63f5fba723f4e2
 
             const id =
                 item._id ;
