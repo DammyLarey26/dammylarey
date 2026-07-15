@@ -1,79 +1,18 @@
-// Local cache array to store the fetched items payload
-let lostItemsCache = [];
-const API_URL = "https://ooulostandfoundportal.onrender.com";
-
-// ===================================================
-// AUTH TOKEN
-// ===================================================
-function getSessionToken() {
-    let token = localStorage.getItem("token");
-
-    if (!token && localStorage.getItem("cuser")) {
-        const parsedUser = JSON.parse(localStorage.getItem("cuser"));
-        token = parsedUser.token || parsedUser.accessToken;
-    }
-
-    return token;
-}
-
-// ===================================================
-// FETCH LOST ITEMS
-// ===================================================
-async function fetchAndDisplayLostItems() {
-    const container = document.querySelector("#lostItemsContainer");
-    const token = getSessionToken();
-
-    if (!token) {
-        container.innerHTML =
-            `<p style="color:red;text-align:center;width:100%;">
-                Authentication required. Please log in.
-            </p>`;
-        return;
-    }
-
-    try {
-        container.innerHTML = `<p style="text-align:center;color:gray;width:100%;">Loading available items...</p>`;
-        
-        const response = await fetch(`${API_URL}/user/lost-items`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        });
-
-        const result = await response.json();
-        const itemsList = result.data || result.items || result;
-
-        if (!Array.isArray(itemsList)) {
-            container.innerHTML =
-                `<p style="color:orange;text-align:center;width:100%;">
-                    Invalid response from server.
-                </p>`;
-            return;
-        }
-
-        // Save items to local cache for search processing
-        lostItemsCache = itemsList;
-        
-        // Initial render execution
-        renderFilteredItems();
-
-    } catch (error) {
-        console.error(error);
-        container.innerHTML =
-            `<p style="color:red;text-align:center;width:100%;">
-                Unable to connect to server.
-            </p>`;
-    }
-}
-
 // ===================================================
 // RENDER ENGINE WITH FILTERING LOGIC
 // ===================================================
 function renderFilteredItems() {
     const container = document.querySelector("#lostItemsContainer");
     if (!container) return;
+
+    // 1. Check if the initial database payload is completely empty
+    if (lostItemsCache.length === 0) {
+        container.innerHTML =
+            `<p style="text-align:center;color:gray;width:100%;padding:20px;">
+                No available items found.
+            </p>`;
+        return;
+    }
 
     // Grab inputs safely
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
@@ -91,7 +30,7 @@ function renderFilteredItems() {
     
     if (checkboxes.length > 0) {
         selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked'))
-                                  .map(cb => cb.value.toLowerCase().trim());
+                                      .map(cb => cb.value.toLowerCase().trim());
     } else if (categorySelect) {
         const dropdownValue = categorySelect.value.toLowerCase().trim();
         if (dropdownValue && dropdownValue !== 'all') {
@@ -131,6 +70,7 @@ function renderFilteredItems() {
 
     container.innerHTML = "";
 
+    // 2. Check if items exist but were hidden by search filters
     if (filtered.length === 0) {
         container.innerHTML =
             `<p style="text-align:center;color:gray;width:100%;padding:20px;">
@@ -175,7 +115,7 @@ function renderFilteredItems() {
                 class="view-btn"
                 data-item-id="${idString}"
                 onclick="openRequestModal('${idString}')"
-                ${isClaimed ? 'disabled style="background: #ccc; cursor: not-allowed;"' : ''}>
+                ${isClaimed ? 'disabled style="background:#ccc;cursor:not-allowed;"' : ''}>
                 <i class="fa-solid ${isClaimed ? 'fa-lock' : 'fa-check'}"></i>
                 ${isClaimed ? 'Requested' : 'Request'}
             </button>
@@ -183,6 +123,7 @@ function renderFilteredItems() {
 
         container.appendChild(card);
     });
+<<<<<<< HEAD
 }
 
 // ===================================================
@@ -415,3 +356,6 @@ document.addEventListener("DOMContentLoaded", () => {
         form.addEventListener("submit", submitProof);
     }
 });
+=======
+}
+>>>>>>> e89017ed82e21e5029fe06a8dc63f5fba723f4e2

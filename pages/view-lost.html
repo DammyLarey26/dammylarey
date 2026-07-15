@@ -25,24 +25,8 @@
         </div>
     </header>
 
-    <div class="sidebar" id="sidebar">
-    <button class="close-btn" id="closeBtn">&times;</button>
-        <button class="backbtn" onclick="history.back()">&#8592</button>
-        <div class="user-options">
-            <div class="dash-logo">
-            <img src="../images/download.png" alt="">
-        </div>
-            <a href="../index.html">Home</a>
-            <a href="./profile.html">Profile</a>
-            <a class="active" href="">Dashboard</a>
-        </div>
-        <div class="right-handside">
-            <i class="fa-solid fa-bell"></i>
-            <i class="fa-solid fa-cog"></i>
-        </div>
-    </div>
     
-    <main class="main-content">
+    <main class=>
     <div class="body-container">
     <div class="search-top">
     <!-- Text Search input -->
@@ -50,7 +34,6 @@
     <button id="dashboardSearchBtn">Search</button>
 
     <!-- Status Dropdown Sorting Component -->
-    <label for="dashboardStatusFilter">Status:</label>
     <select id="dashboardStatusFilter">
         <option value="all">All Statuses</option>
         <option value="available">Available</option>
@@ -58,14 +41,6 @@
         <option value="approved">Approved</option>
     </select>
 
-    <!-- Checkbox Category Component -->
-    <div class="category-checkbox-container" style="margin-top: 10px; display: flex; gap: 15px;">
-        <strong>Categories:</strong>
-        <label><input type="checkbox" class="category-checkbox" value="electronics"> Electronics</label>
-        <label><input type="checkbox" class="category-checkbox" value="documents"> Documents</label>
-        <label><input type="checkbox" class="category-checkbox" value="books"> Books</label>
-        <label><input type="checkbox" class="category-checkbox" value="clothing"> Clothing</label>
-    </div>
 </div>
     
     <div class="items-box-wrapper">
@@ -136,33 +111,7 @@
         </div>
     </div>
 </div></div></main>
-<div class="prof-det">
-            <div class="passport">
-        <img id="img" src="../images/lekan.jpg" alt="">
-      </div>
-        
 
-  <div class="bottom-nav">
-    <a href="./dashboard.html" class="nav-item">
-      <i class="fa fa-home"></i>
-      <span>Dashboard</span>
-    </a>
-
-    <a href="./view-lost.html" class="nav-item active">
-      <i class="fa fa-search"></i>
-      <span>Lost</span>
-    </a>
-
-    <a href="./report.html" class="nav-item">
-      <i class="fa fa-plus-circle"></i>
-      <span>Report</span>
-    </a>
-    <a href="./view-found.html" class="nav-item ">
-      <i class="fa fa-ellipsis-h"></i>
-      <span>Found</span>
-    </a>
-
-  </div>
   <script src="../script/faq.js"></script>
   <script src="../script/upload.js"></script>
   <script src="../script/bottom-modal.js"></script>
@@ -180,7 +129,6 @@
         sidebar.classList.remove("active");
     });
   </script>
-  <script src="../script/session.js"></script>
 </body>
 
 </html>

@@ -1,8 +1,5 @@
 async function loadLostItems() {
 
-    // 🚀 BYPASS: Authentication deactivated
-    const token = localStorage.getItem("token") || "GUEST_ACCESS_MODE";
-
     const itemsContainer = document.querySelector("#lostItemsContainer");
     const loading = document.querySelector("#loading");
     const emptyState = document.querySelector("#emptyState");
@@ -16,13 +13,9 @@ async function loadLostItems() {
         if (itemsContainer) itemsContainer.innerHTML = "";
         if (emptyState) emptyState.style.display = "none";
 
+        // Fetched publicly from the endpoint
         const response = await fetch(
-            "https://ooulostandfoundportal.onrender.com/user/lost-items",
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }
+            "https://ooulostandfoundportal.onrender.com/user/lost-items"
         );
 
         const result = await response.json();
@@ -75,35 +68,63 @@ async function loadLostItems() {
                 "Unnamed Item";
 
             const category =
-    item.category ||
-    item.itemCategory ||
-    "General";
+                item.category ||
+                item.itemCategory ||
+                "General";
 
             const description =
+                item.description ||
                 item.description ||
                 "No description";
 
             const location =
+<<<<<<< HEAD
             item.foundLocation 
 
             const dateLost =
             item.foundDate ||
             item.createdAt;
+=======
+                item.foundLocation ||
+                item.locationLost ||
+                item.location ||
+                "Unknown";
+
+            const dateLost =
+                item.foundDate ||
+                item.dateLost ||
+                item.createdAt;
+>>>>>>> e89017ed82e21e5029fe06a8dc63f5fba723f4e2
 
             // ==============================================================
             // RESOLVING FOUNDER/REPORTER PROFILE FOR BOTH USERS AND ADMINS
             // ==============================================================
+<<<<<<< HEAD
             const founder = item.founder
             const reporter = founder.name;
             const status =
                 item.status ||
                 "Pending";
+=======
+            const reporter = item.founder || "N/A";
+            
+            // Extract and normalize the status property
+            const status = item.status || "Pending";
+>>>>>>> e89017ed82e21e5029fe06a8dc63f5fba723f4e2
 
             const id =
                 item._id ;
 
-            itemsContainer.innerHTML += `
+            // Map status to visual badge colors
+            let statusColor = "#f0ad4e"; // default orange-yellow for pending
+            if (status.toLowerCase() === "claimed" || status.toLowerCase() === "resolved") {
+                statusColor = "#5cb85c"; // green
+            } else if (status.toLowerCase() === "lost" || status.toLowerCase() === "active") {
+                statusColor = "#0275d8"; // blue
+            }
 
+            // Using your exact HTML structure to display items and their statuses
+            itemsContainer.innerHTML += `
             <div class="user-box-item">
 
                 <div class="user-details">
@@ -130,21 +151,22 @@ async function loadLostItems() {
                                 : "N/A"
                         }</span>
 
-                        <span><strong>Status:</strong>&nbsp;${status}</span>
+                        <span>
+                            <strong>Status:</strong>&nbsp;
+                            <span style="color: ${statusColor}; font-weight: bold; text-transform: uppercase;">
+                                ${status}
+                            </span>
+                        </span>
 
                         <br>
 
                         <span><strong>Reporter:</strong>&nbsp;${reporter}</span>
 
-
                     </div>
 
                 </div>
 
-                
-
             </div>
-
             `;
 
         });

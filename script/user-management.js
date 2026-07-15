@@ -64,7 +64,7 @@ function renderUserCards(users) {
                 <div class="user-img" style="background-image: url('${avatar}'); background-size: cover; background-position: center; border-radius: 50%;"></div>
                 <div class="user-det">
                     <h3>${user.name || "Unknown"}</h3>
-                    <span style="font-size: 0.75rem; color: white; display: block; margin-bottom: 2px;">ID: ${user._id || "N/A"}</span>
+                    <span style="font-size: 0.75rem; color: black; display: block; margin-bottom: 2px;">ID: ${user._id || "N/A"}</span>
                     <span>${user.matric || "N/A"}</span>
                     <span>${user.level ? user.level + ' Level' : "N/A"}</span>
                 </div>

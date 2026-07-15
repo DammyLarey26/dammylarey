@@ -45,7 +45,14 @@ async function fetchUserClaims() {
 
         const result = await response.json();
         // Standardize different possible payload structural layouts safely
+<<<<<<< HEAD
         const claimsList = result.items
+=======
+        const claimsList = result.data 
+        console.log (claimsList)
+
+        return
+>>>>>>> e89017ed82e21e5029fe06a8dc63f5fba723f4e2
 
         if (!Array.isArray(claimsList)) {
             container.innerHTML = `
