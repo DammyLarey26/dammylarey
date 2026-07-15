@@ -42,17 +42,18 @@ async function loadClaims() {
             }
         });
 
-        const result = await res.json();
+        const {success, request, total} = await res.json();
 
-        if (!result.success) {
+        if (request.length === 0) {
             container.innerHTML = "<p>No claim requests found.</p>";
             return;
         }
 
         container.innerHTML = "";
 
-        result.data.forEach(claim => {
-
+        request.forEach(claim => {
+            const item = claim.item
+            const claimer = claim.claimer
             const card = document.createElement("main");
             card.className = "user";
 
@@ -63,7 +64,7 @@ async function loadClaims() {
 
                         <div class="faq-question">
                             <h>Claim Request</h>
-                            <p>${claim._id}</p>
+                            <p>${item.name}</p>
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
 

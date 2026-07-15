@@ -35,7 +35,7 @@ async function fetchUserClaims() {
                 Loading your submitted claims log...
             </p>`;
         
-        const response = await fetch(`${API_URL}/user/my-claims`, {
+        const response = await fetch(`${API_URL}/user/my_claims`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -45,7 +45,7 @@ async function fetchUserClaims() {
 
         const result = await response.json();
         // Standardize different possible payload structural layouts safely
-        const claimsList = result.data || result.claims || result;
+        const claimsList = result.items
 
         if (!Array.isArray(claimsList)) {
             container.innerHTML = `
@@ -59,7 +59,7 @@ async function fetchUserClaims() {
         userClaimsCache = claimsList;
         
         // Render statistics panels and grid cards
-        calculateAndSetStats(userClaimsCache);
+        calculateAndSetStats(userClaimsCache, result.stats);
         renderClaimsEngine();
 
     } catch (error) {
@@ -74,11 +74,11 @@ async function fetchUserClaims() {
 // ===================================================
 // DYNAMIC LIVE STATS ENGINE
 // ===================================================
-function calculateAndSetStats(claimsArray) {
-    const total = claimsArray.length;
-    const pending = claimsArray.filter(c => (c.status || 'pending').toLowerCase() === 'pending').length;
-    const approved = claimsArray.filter(c => (c.status || '').toLowerCase() === 'approved').length;
-    const rejected = claimsArray.filter(c => (c.status || '').toLowerCase() === 'rejected').length;
+function calculateAndSetStats(claimsArray, stats) {
+    const total = stats.total
+    const approved = stats.approved
+    const rejected = stats.rejected
+    const pending = stats.pending
 
     document.getElementById("totalClaimsCount").textContent = total;
     document.getElementById("pendingClaimsCount").textContent = pending;

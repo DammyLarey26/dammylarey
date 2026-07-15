@@ -141,11 +141,12 @@ function renderFilteredItems() {
 
     // Build the gallery view cards mapping matches
     filtered.forEach((item, index) => {
+        const founder = item.founder
         const itemImg = item.imgUrl || "../images/Laptop.png";
-        const itemName = item.name || "Unnamed Item";
-        const finderId = item.founder || "Anonymous";
-        const status = item.status || "Available";
-        const idString = item._id || index.toString();
+        const itemName = item.name;
+        const finderId = founder.name;
+        const status = item.status;
+        const idString = item._id;
 
         // Check if proof has already been submitted for this item
         const isClaimed = submittedClaims.includes(idString);
@@ -161,7 +162,7 @@ function renderFilteredItems() {
                 </div>
 
                 <h2>${itemName}</h2>
-                <span style="font-size: 0.8rem; color: gray; font-family: monospace;">Founder ID: ${finderId.substring(0, 8)}...</span>
+                <span style="font-size: 0.8rem; color: gray; font-family: monospace;">Founder: ${finderId.substring(0, 10)}...</span>
             </div>
 
             <button
@@ -199,14 +200,14 @@ function viewItemDetails(identifier) {
     if (!bottomSheet || !overlay) return;
 
     const itemImg = item.imgUrl || "../images/Laptop.png";
-    const itemName = item.name || "Unnamed Item";
+    const itemName = item.name;
     const itemCategory = item.category || "General";
     const itemLocation = item.foundLocation || "Unknown Location";
-    const itemDate = item.foundDate || item.createdAt || "N/A";
-    const itemStatus = item.status || "Available";
+    const itemDate = item.foundDate || item.createdAt;
+    const itemStatus = item.status;
     const itemDescription = item.description || "No description provided.";
     
-    const reporterId = item.founder || "N/A";
+    const reporter = item.founder.name;
 
     const formattedDate = itemDate !== "N/A" 
         ? new Date(itemDate).toLocaleDateString(undefined, { dateStyle: 'medium' }) 
@@ -255,7 +256,7 @@ function viewItemDetails(identifier) {
                         <i class="fa-solid fa-user-tag"></i> Founder & Item Identity Reference
                     </strong>
                     <div style="display: grid; gap: 6px; font-size: 0.85rem; color: #4a5568;">
-                        <div><strong>Founder ID (Database):</strong> <span style="font-family: monospace; background: #eaeaea; padding: 2px 6px; border-radius: 4px; word-break: break-all;">${reporterId}</span></div>
+                        <div><strong>Founder :</strong> <span style="font-family: monospace; background: #eaeaea; padding: 2px 6px; border-radius: 4px; word-break: break-all;">${reporter}</span></div>
                         <div><strong>Logged Item Name:</strong> <span>${itemName}</span></div>
                         <div><strong>Recovery Location:</strong> <span>${itemLocation}</span></div>
                     </div>

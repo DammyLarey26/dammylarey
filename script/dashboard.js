@@ -41,7 +41,7 @@ async function loadDashboardProfile() {
 
     try {
         // Fetching the user list from your Render database backend
-        const response = await fetch('https://ooulostandfoundportal.onrender.com/admin/get-users', {
+        const response = await fetch('https://ooulostandfoundportal.onrender.com/user/profile', {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
@@ -49,26 +49,31 @@ async function loadDashboardProfile() {
         });
         const result = await response.json();
 
-        if (result.success && Array.isArray(result.data)) {
+        if (result) {
             
             // 🕵️‍♂️ FIND THE SPECIFIC USER MATCHING THE LOGGED-IN EMAIL
-            const currentUser = result.data.find(user => user.email === loggedInEmail); 
+            const currentUser = result.user
 
             if (currentUser) {
                 // Save it locally as backup
                 localStorage.setItem('cuser', JSON.stringify(currentUser));
 
                 // Send the actual account data directly to your HTML elements
-                if (nameElem && currentUser.name) nameElem.innerText = currentUser.name;
-                if (idElem && currentUser.matric) idElem.innerText = currentUser.matric;
+                // if (nameElem && currentUser.name) nameElem.innerText = currentUser.name;
+                // if (idElem && currentUser.matric) idElem.innerText = currentUser.matric;
+                nameElem.innerText = currentUser.name;
+                idElem.innerText = currentUser.matric;
+
                 
                 if (imgElem) {
                     imgElem.src = currentUser.imgUrl || "https://officialpurpled.github.io/online-voting-system/images/avatar.jpg";
                 }
                 return;
             }
+        } 
+        if (!result) {
+            fallbackToDefaults(nameElem, idElem);
         }
-        fallbackToDefaults(nameElem, idElem);
     } catch (error) {
         console.error("Database connection failed:", error);
         fallbackToDefaults(nameElem, idElem);
