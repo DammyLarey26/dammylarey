@@ -1,3 +1,75 @@
+// Local cache array to store the fetched items payload
+let lostItemsCache = [];
+const API_URL = "https://ooulostandfoundportal.onrender.com";
+
+// ===================================================
+// AUTH TOKEN
+// ===================================================
+function getSessionToken() {
+    let token = localStorage.getItem("token");
+
+    if (!token && localStorage.getItem("cuser")) {
+        const parsedUser = JSON.parse(localStorage.getItem("cuser"));
+        token = parsedUser.token || parsedUser.accessToken;
+    }
+
+    return token;
+}
+
+// ===================================================
+// FETCH LOST ITEMS
+// ===================================================
+async function fetchAndDisplayLostItems() {
+    const container = document.querySelector("#lostItemsContainer");
+    const token = getSessionToken();
+
+    if (!token) {
+        container.innerHTML =
+            `<p style="color:red;text-align:center;width:100%;">
+                Authentication required. Please log in.
+            </p>`;
+        return;
+    }
+
+    try {
+        container.innerHTML = `<p style="text-align:center;color:gray;width:100%;">Loading available items...</p>`;
+        
+        const response = await fetch(`${API_URL}/user/lost-items`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        const result = await response.json();
+        const itemsList = result.data || result.items || result;
+
+        if (!Array.isArray(itemsList)) {
+            container.innerHTML =
+                `<p style="color:orange;text-align:center;width:100%;">
+                    Invalid response from server.
+                </p>`;
+            return;
+        }
+
+        // Save items to local cache for search processing
+        lostItemsCache = itemsList;
+        
+        // Initial render execution
+        renderFilteredItems();
+
+    } catch (error) {
+        console.error(error);
+        container.innerHTML =
+            `<p style="color:red;text-align:center;width:100%;">
+                Unable to connect to server.
+            </p>`;
+    }
+}
+
+// 
+
 // ===================================================
 // RENDER ENGINE WITH FILTERING LOGIC
 // ===================================================
@@ -29,8 +101,7 @@ function renderFilteredItems() {
     const checkboxes = document.querySelectorAll('.category-checkbox');
     
     if (checkboxes.length > 0) {
-        selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked'))
-                                      .map(cb => cb.value.toLowerCase().trim());
+        selectedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value.toLowerCase().trim());
     } else if (categorySelect) {
         const dropdownValue = categorySelect.value.toLowerCase().trim();
         if (dropdownValue && dropdownValue !== 'all') {
