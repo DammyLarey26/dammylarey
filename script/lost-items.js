@@ -1,6 +1,7 @@
 // Local cache array to store the fetched items payload
 let lostItemsCache = [];
 const API_URL = "https://ooulostandfoundportal.onrender.com";
+// const API_URL = "http://localhost:5030"
 
 // ===================================================
 // AUTH TOKEN
@@ -239,7 +240,7 @@ function viewItemDetails(identifier) {
             <div style="display: grid; grid-template-columns: 1fr; gap: 20px; max-height: 65vh; overflow-y: auto; padding-right: 4px;">
                 
                 <div style="position: relative; width: 100%; height: 200px; border-radius: 12px; overflow: hidden; background: #fafafa; display: flex; align-items: center; justify-content: center; border: 1px solid #eaeaea;">
-                    <img src="${itemImg}" alt="${itemName}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                    <img src="${itemImg || "../images/Laptop.png"}" alt="${itemName}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                     <span style="position: absolute; top: 12px; right: 12px; padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; background: ${statusBg}; color: #ffffff;">
                         ${itemStatus}
                     </span>
@@ -330,38 +331,31 @@ async function submitProof(e) {
     const modalItemIdInput = document.getElementById('modalItemId');
     const descriptionInput = document.getElementById('proofDescription');
     const additionalInput = document.getElementById('proofAdditional');
-    const placeholderFile = "https://placehold.co/600x400?text=No+Image+Provided";
+    const imgInput = document.getElementById('proofFile');
+
+    let imgFile = imgInput.files[0];
+    console.log('Image added', imgFile);
     
     const submitBtn = document.querySelector("#proofForm button[type='submit']");
     const itemId = modalItemIdInput.value;
 
-    const matchedItem = lostItemsCache.find(item => item._id === itemId);
-    const actualItemName = matchedItem ? (matchedItem.name || matchedItem.itemName) : "Unknown Item";
-
-    let actualClaimerName = "Registered User";
-    if (localStorage.getItem("cuser")) {
-        const parsedUser = JSON.parse(localStorage.getItem("cuser"));
-        actualClaimerName = parsedUser.name || parsedUser.username || parsedUser.fullName || "Registered User";
-    }
-
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
+
+    const formData = new FormData();
+
+    formData.append('itemId', itemId)
+    formData.append('description', descriptionInput.value)
+    formData.append('additional', additionalInput.value)
+    formData.append('image', imgFile)
 
     try {
         const response = await fetch(`${API_URL}/user/claim-item`, {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
+                "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify({
-                itemId: itemId,
-                itemName: actualItemName,      
-                claimerName: actualClaimerName, 
-                description: descriptionInput.value,
-                file: placeholderFile, 
-                additional: additionalInput.value
-            })
+            body: formData
         });
 
         const result = await response.json();
