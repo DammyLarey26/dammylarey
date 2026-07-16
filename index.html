@@ -27,8 +27,7 @@
 		<div class="showname">
 			<h>Lost And Found Management System For Olabisi Onabanjo University Community</h><br>
 			<i>Helping you reunite with your lost items</i><br>
-			<button class="shownamebtn1" id="js-show">SIGN IN/UP</button>
-			<button class="shownamebtn2" >Learn More</button>
+<button class="shownamebtn1" onclick="goToLogin()">SIGN IN/UP</button>			<button onclick="goToSection()" class="shownamebtn2" >Learn More</button>
 		</div>
 	</div>
 
@@ -60,7 +59,7 @@
 	</section>
 	<!-- Font Awesome -->
 
-	<section class="mid">
+	<section id="mid" class="mid">
 		<h2>HOW IT WORKS</h2>
 		<div class="steps">
 			<div class="step">
@@ -165,6 +164,17 @@
 			});
 		});
 	</script>
+	<script>
+		function goToLogin() {
+    window.location.href = "./pages/login.html";
+}
+function goToSection() {
+    document.getElementById("mid").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+</script>
 	
 </body>
 
