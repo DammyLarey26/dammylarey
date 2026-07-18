@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     claimsBtn.id = 'claimsTabBtn';
     claimsBtn.className = 'tab-btn';
     claimsBtn.innerText = 'My Claims';
-    claimsBtn.style.marginleft = '10px'; // Matching your horizontal flow spacing
+    claimsBtn.style.marginLeft = '10px'; // Matching your horizontal flow spacing
     claimsBtn.addEventListener('click', () => switchTab('claims'));
     tabContainer.appendChild(claimsBtn);
   }
@@ -50,6 +50,22 @@ function getSessionToken() {
   return token;
 }
 
+// --- HELPER: ROBUST USER EXTRACTOR ---
+function getLoggedUserData() {
+  const keys = ['user', 'cuser', 'userData'];
+  for (const key of keys) {
+    const stored = localStorage.getItem(key);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        const userObj = parsed.user || parsed.data || parsed;
+        if (userObj) return userObj;
+      } catch (e) {}
+    }
+  }
+  return null;
+}
+
 // --- FETCH METHOD CONTROLLER ---
 async function fetchUserHistory() {
   const container = document.querySelector('#historyCardsContainer');
@@ -61,19 +77,20 @@ async function fetchUserHistory() {
     return;
   }
 
-  const cachedUser = localStorage.getItem('user') || localStorage.getItem('cuser');
-  if (!cachedUser) {
+  const loggedUser = getLoggedUserData();
+  if (!loggedUser) {
     container.innerHTML = `<p style="color: #ef4444; text-align: center; padding: 20px; font-weight: 500;">User profile missing. Please log in again.</p>`;
     return;
   }
-  
-  const currentUser = JSON.parse(cachedUser);
-  const currentUserId = currentUser._id || currentUser.id;
 
+  // Extract all identifiers to match against
+  const myId = String(loggedUser._id || loggedUser.id || '').trim();
+  const myEmail = String(loggedUser.email || '').toLowerCase().trim();
+  
   try {
     container.innerHTML = `<p style="text-align: center; color: #64748b; padding: 20px;">Loading history records...</p>`;
 
-    // 1. FETCH USER'S REPORTED ITEMS (LOST/FOUND)
+    // 1. FETCH ALL REPORTED ITEMS
     const itemsResponse = await fetch(`${API_KEY}/user/lost-items`, {
       method: 'GET',
       headers: {
@@ -81,13 +98,47 @@ async function fetchUserHistory() {
         'Content-Type': 'application/json'
       }
     });
+    
     const itemsData = await itemsResponse.json();
     if (itemsResponse.ok || itemsData.success) {
-      const allItems = itemsData.data || itemsData.items || [];
-      reportedItemsList = allItems.filter(item => item.founder === currentUserId);
+      const allItems = itemsData.data || itemsData.items || itemsData || [];
+      
+      // 🌟 DIAGNOSTIC LOGGER: Inspect structure in DevTools
+      console.log("Logged User Identity Details:", { myId, myEmail });
+      console.log("Raw Server Items Example:", allItems[0]);
+
+      // FILTER FOR REPORTED ITEMS
+      reportedItemsList = allItems.filter(item => {
+        if (!item) return false;
+
+        // Collect all properties the backend might be using to reference ownership
+        const propertiesToTest = [
+          item.founder, 
+          item.userId, 
+          item.reporterId, 
+          item.user, 
+          item.reportedBy, 
+          item.createdBy
+        ];
+
+        return propertiesToTest.some(prop => {
+          if (!prop) return false;
+
+          // If the property value is an object (populated query response)
+          if (typeof prop === 'object') {
+            const propId = String(prop._id || prop.id || '').trim();
+            const propEmail = String(prop.email || '').toLowerCase().trim();
+            return (myId && propId === myId) || (myEmail && propEmail === myEmail);
+          }
+
+          // Plain string comparisons
+          const stringVal = String(prop).trim();
+          return (myId && stringVal === myId) || (myEmail && stringVal.toLowerCase() === myEmail);
+        });
+      });
     }
 
-    // 2. FETCH USER'S SUBMITTED CLAIM REQUESTS
+    // 2. FETCH SUBMITTED CLAIM REQUESTS
     try {
       const claimsResponse = await fetch(`${API_KEY}/admin/claim-request`, {
         method: 'GET',
@@ -99,7 +150,20 @@ async function fetchUserHistory() {
       const claimsData = await claimsResponse.json();
       if (claimsResponse.ok) {
         const allClaims = claimsData.data || claimsData.claims || claimsData || [];
-        claimedItemsList = allClaims;
+        
+        claimedItemsList = allClaims.filter(claim => {
+          if (!claim) return false;
+          const userField = claim.userId || claim.user || claim.claimer;
+          
+          if (typeof userField === 'object' && userField !== null) {
+            const fieldId = String(userField._id || userField.id || '').trim();
+            const fieldEmail = String(userField.email || '').toLowerCase().trim();
+            return (myId && fieldId === myId) || (myEmail && fieldEmail === myEmail);
+          }
+          
+          const val = String(userField || '').trim();
+          return (myId && val === myId) || (myEmail && val.toLowerCase() === myEmail);
+        });
       }
     } catch (claimErr) {
       console.error("Could not populate claim history metrics:", claimErr);
@@ -159,7 +223,7 @@ function renderFilteredHistory() {
       const rawStatus = (claim.status || 'pending').toLowerCase();
       const matchesStatus = selectedStatus === 'all' || rawStatus === selectedStatus;
 
-      const itemNameStr = (claim.itemName || '').toLowerCase();
+      const itemNameStr = (claim.itemName || claim.name || '').toLowerCase();
       const itemDescStr = (claim.description || '').toLowerCase();
       const matchesSearch = itemNameStr.includes(searchQuery) || itemDescStr.includes(searchQuery);
 
@@ -175,10 +239,9 @@ function renderFilteredHistory() {
       const rawStatus = claim.status || 'Pending';
       const cleanStatus = rawStatus.toLowerCase();
       
-      // Match with your CSS file's class names
       let badgeClass = 'claimed'; 
-      if (cleanStatus === 'approved' || cleanStatus === 'verified') badgeClass = 'approved';
-      if (cleanStatus === 'rejected' || cleanStatus === 'denied') badgeClass = 'rejected';
+      if (cleanStatus === 'approved' || cleanStatus === 'verified' || cleanStatus === 'success') badgeClass = 'approved';
+      if (cleanStatus === 'rejected' || cleanStatus === 'denied' || cleanStatus === 'failed') badgeClass = 'rejected';
       if (cleanStatus === 'available') badgeClass = 'available';
 
       return `
@@ -187,9 +250,9 @@ function renderFilteredHistory() {
             <span class="status ${badgeClass}">
               Claim: ${rawStatus}
             </span>
-            <h3 style="margin: 0 0 6px 0; color: #1e293b; font-size: 18px; margin-top: 6px;">${claim.itemName || "Claimed Item"}</h3>
-            <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>📝 Submitted Proof:</strong> ${claim.description}</p>
-            <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>ℹ️ Additional Info:</strong> ${claim.additional || "None Provided"}</p>
+            <h3 style="margin: 0 0 6px 0; color: #1e293b; font-size: 18px; margin-top: 6px;">${claim.itemName || claim.name || "Claimed Item"}</h3>
+            <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>📝 Submitted Proof:</strong> ${claim.description || 'No description provided'}</p>
+            <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>ℹ️ Additional Info:</strong> ${claim.additional || claim.additionalInfo || "None Provided"}</p>
           </div>
           <div class="card-actions">
             <button style="background: #e2e8f0; border: none; color: #475569; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: not-allowed;" disabled>
@@ -220,7 +283,7 @@ function renderFilteredHistory() {
 
     const itemNameStr = (item.name || '').toLowerCase();
     const itemDescStr = (item.description || '').toLowerCase();
-    const itemLocStr = (item.foundLocation || '').toLowerCase();
+    const itemLocStr = (item.foundLocation || item.location || '').toLowerCase();
     const matchesSearch = itemNameStr.includes(searchQuery) || 
                           itemDescStr.includes(searchQuery) || 
                           itemLocStr.includes(searchQuery);
@@ -240,29 +303,27 @@ function renderFilteredHistory() {
     const rawStatus = item.status || 'Pending';
     const cleanStatus = rawStatus.toLowerCase();
     
-    // Exact color maps as specified in your CSS
-    let badgeClass = 'claimed'; // fallback status defaults to Orange style
+    let badgeClass = 'claimed'; 
     
     if (cleanStatus === 'available') {
-      badgeClass = 'available'; // Blue style
+      badgeClass = 'available'; 
     } else if (cleanStatus === 'claimed' || cleanStatus === 'pending') {
-      badgeClass = 'claimed'; // Orange style
+      badgeClass = 'claimed'; 
     } else if (cleanStatus === 'approved' || cleanStatus === 'found') {
-      badgeClass = 'approved'; // Green style
+      badgeClass = 'approved'; 
     } else if (cleanStatus === 'rejected' || cleanStatus === 'closed') {
-      badgeClass = 'rejected'; // Red style
+      badgeClass = 'rejected'; 
     }
 
     return `
       <div class="history-card" style="border: 1px solid #e2e8f0; padding: 16px; border-radius: 10px; margin-bottom: 12px; background: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
         <div class="card-details">
           <h3 style="margin: 0 0 6px 0; color: #1e293b; font-size: 18px;">${item.name}</h3>
-          <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>📍 Location:</strong> ${item.foundLocation || "Not Specified"}</p>
-          <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>📅 Date Logged:</strong> ${item.foundDate ? item.foundDate.split('T')[0] : 'N/A'}</p>
-          <p class="item-description" style="margin: 6px 0 0 0; font-size: 13px; color: #475569; font-style: italic;">"${item.description}"</p>
+          <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>📍 Location:</strong> ${item.foundLocation || item.location || "Not Specified"}</p>
+          <p style="margin: 3px 0; font-size: 14px; color: #64748b;"><strong>📅 Date Logged:</strong> ${item.foundDate || item.createdAt ? (item.foundDate || item.createdAt).split('T')[0] : 'N/A'}</p>
+          <p class="item-description" style="margin: 6px 0 0 0; font-size: 13px; color: #475569; font-style: italic;">"${item.description || 'No description provided'}"</p>
         </div>
         <div class="card-actions">
-          <!-- Replaced the old delete button with the actual status badge styled with your CSS -->
           <span class="status ${badgeClass}">
             ${rawStatus}
           </span>

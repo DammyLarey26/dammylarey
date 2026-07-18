@@ -1,10 +1,9 @@
 // Local cache array to store the fetched items payload
 let lostItemsCache = [];
 const API_URL = "https://ooulostandfoundportal.onrender.com";
-// const API_URL = "http://localhost:5030"
 
 // ===================================================
-// AUTH TOKEN
+// AUTH TOKEN & USER ID EXTRACTION
 // ===================================================
 function getSessionToken() {
     let token = localStorage.getItem("token");
@@ -15,6 +14,20 @@ function getSessionToken() {
     }
 
     return token;
+}
+
+function getCurrentUserId() {
+    const cachedUser = localStorage.getItem('user') || localStorage.getItem('cuser');
+    if (cachedUser) {
+        try {
+            const parsedData = JSON.parse(cachedUser);
+            const userProfile = parsedData.user || parsedData;
+            return userProfile._id || userProfile.id || userProfile.userId || null;
+        } catch (e) {
+            console.error("Error reading profile data from storage:", e);
+        }
+    }
+    return null;
 }
 
 // ===================================================
@@ -54,10 +67,7 @@ async function fetchAndDisplayLostItems() {
             return;
         }
 
-        // Save items to local cache for search processing
         lostItemsCache = itemsList;
-        
-        // Initial render execution
         renderFilteredItems();
 
     } catch (error) {
@@ -69,8 +79,6 @@ async function fetchAndDisplayLostItems() {
     }
 }
 
-// 
-
 // ===================================================
 // RENDER ENGINE WITH FILTERING LOGIC
 // ===================================================
@@ -78,7 +86,6 @@ function renderFilteredItems() {
     const container = document.querySelector("#lostItemsContainer");
     if (!container) return;
 
-    // 1. Check if the initial database payload is completely empty
     if (lostItemsCache.length === 0) {
         container.innerHTML =
             `<p style="text-align:center;color:gray;width:100%;padding:20px;">
@@ -87,17 +94,11 @@ function renderFilteredItems() {
         return;
     }
 
-    // Grab inputs safely
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
-    const statusSelect = document.getElementById('dashboardStatusFilter') || document.querySelector('.search-top select');
     const categorySelect = document.getElementById('dashboardCategoryFilter');
 
     const searchQuery = searchInput ? searchInput.value.toLowerCase().trim() : '';
-    
-    // Normalize selected status value (forces lowercase and trims spaces)
-    const selectedStatus = statusSelect ? statusSelect.value.toLowerCase().trim() : '';
 
-    // Resolve Category Filters (Supports BOTH Checkboxes OR standard Dropdown options)
     let selectedCategories = [];
     const checkboxes = document.querySelectorAll('.category-checkbox');
     
@@ -110,58 +111,85 @@ function renderFilteredItems() {
         }
     }
 
-    // Retrieve locally saved proof-submitted items array
-    const submittedClaims = JSON.parse(localStorage.getItem("submittedClaims") || "[]");
+    const currentUserId = getCurrentUserId();
+    const submittedClaims = JSON.parse(localStorage.getItem(`submittedClaims_${currentUserId}`) || "[]");
 
-    // Apply filters
+    // Filter down array
     const filtered = lostItemsCache.filter(item => {
+        const itemStatus = (item.status || 'available').toLowerCase().trim();
+
+        // 🌟 RULE 1: ONLY remove permanently if globally approved or claimed
+        if (itemStatus === 'approved' || itemStatus === 'claimed') {
+            return false;
+        }
+
+        // 🌟 RULE 2: HIDE from this specific user if their claim was rejected/declined
+        if (Array.isArray(item.claims) && currentUserId) {
+            const userHasDeclinedClaim = item.claims.some(claim => {
+                const claimUser = claim.user || claim.userId || claim.claimerId;
+                const claimUserId = typeof claimUser === 'object' ? claimUser._id : claimUser;
+                const claimStatus = (claim.status || '').toLowerCase().trim();
+                
+                return String(claimUserId) === String(currentUserId) && 
+                       (claimStatus === 'rejected' || claimStatus === 'declined');
+            });
+
+            if (userHasDeclinedClaim) {
+                return false; 
+            }
+        }
+
         const itemName = (item.name || '').toLowerCase();
         const itemLocation = (item.foundLocation || '').toLowerCase();
         const itemCategory = (item.category || '').toLowerCase();
         const itemDate = (item.foundDate || item.createdAt || '').toLowerCase();
-        
-        // Normalize database status, defaulting to "available" if it is empty/undefined
-        const itemStatus = (item.status || 'available').toLowerCase().trim();
 
-        // Search text matching
         const matchesSearch = itemName.includes(searchQuery) || 
                               itemLocation.includes(searchQuery) || 
                               itemCategory.includes(searchQuery) ||
                               itemDate.includes(searchQuery);
-        
-        // Status matching (Handles "all", empty selection, or explicit matches like "available" / "claimed")
-        const matchesStatus = !selectedStatus || 
-                              selectedStatus === 'all' || 
-                              itemStatus === selectedStatus;
 
-        // Category matching (shows all elements if no conditions are checked)
         const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(itemCategory);
 
-        return matchesSearch && matchesStatus && matchesCategory;
+        return matchesSearch && matchesCategory;
     });
 
     container.innerHTML = "";
 
-    // 2. Check if items exist but were hidden by search filters
     if (filtered.length === 0) {
         container.innerHTML =
             `<p style="text-align:center;color:gray;width:100%;padding:20px;">
-                No items match your search criteria.
+                No available items match your search criteria.
             </p>`;
         return;
     }
 
-    // Build the gallery view cards mapping matches
-    filtered.forEach((item, index) => {
-        const founder = item.founder
+    filtered.forEach((item) => {
         const itemImg = item.imgUrl || "../images/Laptop.png";
-        const itemName = item.name;
-        const finderId = founder.name;
-        const status = item.status;
+        const itemName = item.name || "Unnamed Item";
         const idString = item._id;
 
-        // Check if proof has already been submitted for this item
-        const isClaimed = submittedClaims.includes(idString);
+        let finderDisplayName = "Anonymous";
+        if (item.reporterName) {
+            finderDisplayName = item.reporterName;
+        } else if (item.founder && typeof item.founder === 'object' && item.founder.name) {
+            finderDisplayName = item.founder.name;
+        } else if (typeof item.founder === 'string') {
+            finderDisplayName = item.founder;
+        }
+
+        // Check backend database claims to see if this user has already requested it
+        let backendRequested = false;
+        if (Array.isArray(item.claims) && currentUserId) {
+            backendRequested = item.claims.some(claim => {
+                const claimUser = claim.user || claim.userId || claim.claimerId;
+                const claimUserId = typeof claimUser === 'object' ? claimUser._id : claimUser;
+                return String(claimUserId) === String(currentUserId);
+            });
+        }
+
+        // 🌟 COMBINED CLAIMS STATE: Button shows "Requested" ONLY if this specific user has requested it
+        const isClaimed = submittedClaims.includes(idString) || backendRequested;
 
         const card = document.createElement("div");
         card.className = "items-box-item";
@@ -170,11 +198,11 @@ function renderFilteredItems() {
             <div class="items-details">
                 <div class="item-img">
                     <img src="${itemImg}" alt="${itemName}">
-                    <p class="status ${status.toLowerCase()}">${status}</p>
+                    <p class="status available">Available</p>
                 </div>
 
                 <h2>${itemName}</h2>
-                <span style="font-size: 0.8rem; color: gray; font-family: monospace;">Founder: ${finderId.substring(0, 10)}...</span>
+                <span style="font-size: 0.8rem; color: gray; font-family: monospace;">Founder: ${finderDisplayName.substring(0, 10)}...</span>
             </div>
 
             <button
@@ -198,13 +226,10 @@ function renderFilteredItems() {
 }
 
 // ===================================================
-// VIEW DETAILS (MATCHED WITH YOUR API PROPERTIES)
+// VIEW DETAILS
 // ===================================================
 function viewItemDetails(identifier) {
-    const item = lostItemsCache.find(
-        (u, index) => u._id === identifier || index.toString() === identifier
-    );
-
+    const item = lostItemsCache.find(u => u._id === identifier);
     if (!item) return;
 
     const bottomSheet = document.getElementById("bottomSheet");
@@ -212,23 +237,18 @@ function viewItemDetails(identifier) {
     if (!bottomSheet || !overlay) return;
 
     const itemImg = item.imgUrl || "../images/Laptop.png";
-    const itemName = item.name;
+    const itemName = item.name || "Unnamed Item";
     const itemCategory = item.category || "General";
     const itemLocation = item.foundLocation || "Unknown Location";
     const itemDate = item.foundDate || item.createdAt;
-    const itemStatus = item.status;
     const itemDescription = item.description || "No description provided.";
     
-    const reporter = item.founder.name;
+    let reporterName = item.reporterName || "Anonymous";
+    let reporterContact = item.reporterPhone || item.reporterEmail || "Not Provided";
 
-    const formattedDate = itemDate !== "N/A" 
+    const formattedDate = itemDate && itemDate !== "N/A" 
         ? new Date(itemDate).toLocaleDateString(undefined, { dateStyle: 'medium' }) 
         : "N/A";
-
-    let statusBg = "#0056b3"; 
-    if (itemStatus.toLowerCase() === 'claimed') statusBg = "#ff8c00";
-    if (itemStatus.toLowerCase() === 'approved') statusBg = "#28a745";
-    if (itemStatus.toLowerCase() === 'rejected') statusBg = "#dc3545";
 
     bottomSheet.innerHTML = `
         <div style="padding: 24px;">
@@ -240,9 +260,9 @@ function viewItemDetails(identifier) {
             <div style="display: grid; grid-template-columns: 1fr; gap: 20px; max-height: 65vh; overflow-y: auto; padding-right: 4px;">
                 
                 <div style="position: relative; width: 100%; height: 200px; border-radius: 12px; overflow: hidden; background: #fafafa; display: flex; align-items: center; justify-content: center; border: 1px solid #eaeaea;">
-                    <img src="${itemImg || "../images/Laptop.png"}" alt="${itemName}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                    <span style="position: absolute; top: 12px; right: 12px; padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; background: ${statusBg}; color: #ffffff;">
-                        ${itemStatus}
+                    <img src="${itemImg}" alt="${itemName}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                    <span style="position: absolute; top: 12px; right: 12px; padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; background: #28a745; color: #ffffff;">
+                        Available
                     </span>
                 </div>
 
@@ -268,8 +288,8 @@ function viewItemDetails(identifier) {
                         <i class="fa-solid fa-user-tag"></i> Founder & Item Identity Reference
                     </strong>
                     <div style="display: grid; gap: 6px; font-size: 0.85rem; color: #4a5568;">
-                        <div><strong>Founder :</strong> <span style="font-family: monospace; background: #eaeaea; padding: 2px 6px; border-radius: 4px; word-break: break-all;">${reporter}</span></div>
-                        <div><strong>Logged Item Name:</strong> <span>${itemName}</span></div>
+                        <div><strong>Founder Name:</strong> <span>${reporterName}</span></div>
+                        <div><strong>Contact Reference:</strong> <span>${reporterContact}</span></div>
                         <div><strong>Recovery Location:</strong> <span>${itemLocation}</span></div>
                     </div>
                 </div>
@@ -301,9 +321,6 @@ function closeSheet() {
     if (overlay) overlay.style.display = "none";
 }
 
-// ===================================================
-// CLAIM MODAL
-// ===================================================
 window.openRequestModal = function (itemId) {
     document.getElementById("modalItemId").value = itemId;
     document.getElementById("proofModal").style.display = "block";
@@ -315,13 +332,12 @@ window.closeModal = function () {
 };
 
 // ===================================================
-// SUBMIT CLAIM (WITH AUTOMATIC REDIRECT)
+// SUBMIT CLAIM
 // ===================================================
 async function submitProof(e) {
     e.preventDefault();
 
     const token = getSessionToken();
-
     if (!token) {
         alert("Please login.");
         window.location = './login.html';
@@ -331,10 +347,6 @@ async function submitProof(e) {
     const modalItemIdInput = document.getElementById('modalItemId');
     const descriptionInput = document.getElementById('proofDescription');
     const additionalInput = document.getElementById('proofAdditional');
-    const imgInput = document.getElementById('proofFile');
-
-    let imgFile = imgInput.files[0];
-    console.log('Image added', imgFile);
     
     const submitBtn = document.querySelector("#proofForm button[type='submit']");
     const itemId = modalItemIdInput.value;
@@ -342,19 +354,12 @@ async function submitProof(e) {
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
 
-    const formData = new FormData();
-
-    formData.append('itemId', itemId)
-    formData.append('description', descriptionInput.value)
-    formData.append('additional', additionalInput.value)
-    formData.append('image', imgFile)
-
     const dataForm = {
         itemId,
         description: descriptionInput.value,
         additional: additionalInput.value,
         file: "https://placehold.co/600x400?text=No+Image+Provided"
-    }
+    };
 
     try {
         const response = await fetch(`${API_URL}/user/claim-item`, {
@@ -374,14 +379,15 @@ async function submitProof(e) {
 
         alert(result.message || "Proof submitted successfully!");
         
-        const submittedClaims = JSON.parse(localStorage.getItem("submittedClaims") || "[]");
+        const currentUserId = getCurrentUserId();
+        const submittedClaims = JSON.parse(localStorage.getItem(`submittedClaims_${currentUserId}`) || "[]");
         if (!submittedClaims.includes(itemId)) {
             submittedClaims.push(itemId);
-            localStorage.setItem("submittedClaims", JSON.stringify(submittedClaims));
+            localStorage.setItem(`submittedClaims_${currentUserId}`, JSON.stringify(submittedClaims));
         }
 
         closeModal();
-        // window.location.href = "./my-claims.html";
+        fetchAndDisplayLostItems(); 
 
     } catch (err) {
         console.error(err);
@@ -399,24 +405,15 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchAndDisplayLostItems();
 
     const searchInput = document.getElementById('dashboardSearch') || document.querySelector('.search-top input[type="search"]');
-    const statusSelect = document.getElementById('dashboardStatusFilter') || document.querySelector('.search-top select');
     const categorySelect = document.getElementById('dashboardCategoryFilter');
-    const searchBtn = document.getElementById('dashboardSearchBtn') || document.querySelector('.search-top button');
 
     if (searchInput) {
         searchInput.addEventListener("input", renderFilteredItems);
     }
-    if (statusSelect) {
-        statusSelect.addEventListener("change", renderFilteredItems);
-    }
     if (categorySelect) {
         categorySelect.addEventListener("change", renderFilteredItems);
     }
-    if (searchBtn) {
-        searchBtn.addEventListener("click", renderFilteredItems);
-    }
 
-    // Capture dynamic checkbox selection changes cleanly
     document.addEventListener("change", (e) => {
         if (e.target && e.target.classList.contains("category-checkbox")) {
             renderFilteredItems();

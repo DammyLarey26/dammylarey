@@ -187,6 +187,57 @@ body{
     height:220px;
     object-fit:cover;
 }
+.claim-card .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* Base button layouts */
+.claim-card .buttons .view,
+.claim-card .buttons .contact-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
+    height: 42px;
+}
+
+/* Specific styling for the WhatsApp Contact Button */
+.claim-card .buttons .contact-btn {
+    background-color: #25D366; /* Official WhatsApp Green */
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 6px rgba(37, 211, 102, 0.15);
+}
+
+/* Hover & Active States */
+.claim-card .buttons .contact-btn:hover {
+    background-color: #20ba59;
+    box-shadow: 0 6px 12px rgba(37, 211, 102, 0.25);
+    transform: translateY(-1px);
+}
+
+.claim-card .buttons .contact-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(37, 211, 102, 0.15);
+}
+
+/* Icon specific size adjustment */
+.claim-card .buttons .contact-btn i {
+    font-size: 1.15rem;
+}
 
 .content{
     padding:20px;

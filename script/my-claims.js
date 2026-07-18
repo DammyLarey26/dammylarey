@@ -46,7 +46,7 @@ async function fetchUserClaims() {
 
         const result = await response.json();
         // Standardize different possible payload structural layouts safely
-        const claimsList = result.items
+        const claimsList = result.items || result.request;
 
         if (!Array.isArray(claimsList)) {
             container.innerHTML = `
@@ -76,15 +76,16 @@ async function fetchUserClaims() {
 // DYNAMIC LIVE STATS ENGINE
 // ===================================================
 function calculateAndSetStats(claimsArray, stats) {
-    const total = stats.total
-    const approved = stats.approved
-    const rejected = stats.declined
-    const pending = stats.pending
+    // Standard fallbacks if stats object isn't directly calculated by backend
+    const total = stats ? stats.total : claimsArray.length;
+    const approved = stats ? stats.approved : claimsArray.filter(c => c.status === 'approved').length;
+    const rejected = stats ? (stats.declined || stats.rejected) : claimsArray.filter(c => c.status === 'declined' || c.status === 'rejected').length;
+    const pending = stats ? stats.pending : claimsArray.filter(c => c.status === 'pending').length;
 
-    document.getElementById("totalClaimsCount").textContent = total;
-    document.getElementById("pendingClaimsCount").textContent = pending;
-    document.getElementById("approvedClaimsCount").textContent = approved;
-    document.getElementById("rejectedClaimsCount").textContent = rejected;
+    if(document.getElementById("totalClaimsCount")) document.getElementById("totalClaimsCount").textContent = total;
+    if(document.getElementById("pendingClaimsCount")) document.getElementById("pendingClaimsCount").textContent = pending;
+    if(document.getElementById("approvedClaimsCount")) document.getElementById("approvedClaimsCount").textContent = approved;
+    if(document.getElementById("rejectedClaimsCount")) document.getElementById("rejectedClaimsCount").textContent = rejected;
 }
 
 // ===================================================
@@ -108,7 +109,10 @@ function renderClaimsEngine() {
 
         const itemName = (targetItem.itemName || targetItem.name || '').toLowerCase();
         const itemLocation = (targetItem.locationFound || targetItem.foundLocation || targetItem.location || '').toLowerCase();
-        const claimStatus = (claim.status || 'pending').toLowerCase();
+        
+        // Map backend state 'declined' to 'rejected' filtering logic seamlessly
+        let claimStatus = (claim.status || 'pending').toLowerCase();
+        if (claimStatus === 'declined') claimStatus = 'rejected';
 
         const matchesSearch = itemName.includes(searchQuery) || itemLocation.includes(searchQuery);
         const matchesStatus = (selectedStatus === 'all') || (claimStatus === selectedStatus);
@@ -135,28 +139,50 @@ function renderClaimsEngine() {
         const itemName = targetItem.itemName || targetItem.name || "Unnamed Item";
         const itemLocation = targetItem.locationFound || targetItem.foundLocation || targetItem.location || "Not Specified";
         
-        // Formatting status badges accurately
+        // Formatting status badges accurately (declined mapped into rejected class names)
         const rawStatus = (claim.status || 'Pending').toLowerCase();
         let displayStatusText = "Pending Verification";
-        if (rawStatus === 'approved') displayStatusText = "Approved";
-        if (rawStatus === 'rejected') displayStatusText = "Rejected";
+        let badgeClass = rawStatus;
+
+        if (rawStatus === 'approved') {
+            displayStatusText = "Approved";
+        } else if (rawStatus === 'declined' || rawStatus === 'rejected') {
+            displayStatusText = "Rejected";
+            badgeClass = "rejected"; // Apply uniform CSS styling for custom rejection templates
+        }
 
         // Date calculation fallbacks
         const dateFoundRaw = targetItem.foundDate || targetItem.dateFound || targetItem.createdAt || new Date();
-        const dateClaimedRaw = claim.claimedDate || claim.createdAt || new Date();
+        const dateClaimedRaw = claim.createdAt || claim.updatedAt || new Date();
 
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const formattedFoundDate = new Date(dateFoundRaw).toLocaleDateString('en-US', options);
         const formattedClaimedDate = new Date(dateClaimedRaw).toLocaleDateString('en-US', options);
 
+        // Dynamic functional UI actions component rendering variables
+        let actionButtons = `
+            <button class="view" onclick="alert('Viewing specifications for item ID: ${claim._id || targetItem._id}')">
+                View Details
+            </button>
+        `;
+
+        // Check if item is approved and contains a dynamic root level WhatsApp link
+        if (rawStatus === "approved" && claim.link) {
+            actionButtons += `
+                <a href="${claim.link}" target="_blank" class="contact-btn">
+                    <i class="fab fa-whatsapp"></i> Contact Finder
+                </a>
+            `;
+        }
+
         const card = document.createElement("div");
-        card.className = "claim-card";
+        card.className = `claim-card status-${badgeClass}`;
 
         card.innerHTML = `
             <img src="${itemImg}" alt="${itemName}">
             <div class="content">
                 <h3>${itemName}</h3>
-                <span class="badge ${rawStatus}">${displayStatusText}</span>
+                <span class="badge ${badgeClass}">${displayStatusText}</span>
                 
                 <p>
                     <i class="fa-solid fa-location-dot"></i>
@@ -171,9 +197,7 @@ function renderClaimsEngine() {
                     Claimed: ${formattedClaimedDate}
                 </p>
                 <div class="buttons">
-                    <button class="view" onclick="alert('Viewing specifications for item ID: ${targetItem._id || targetItem.id || claim._id}')">
-                        View Details
-                    </button>
+                    ${actionButtons}
                 </div>
             </div>
         `;
