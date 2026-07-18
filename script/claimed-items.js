@@ -20,7 +20,7 @@ async function fetchFoundItems() {
             return;
         }
 
-        const response = await fetch("https://ooulostandfoundportal.onrender.com/user/found-items", {
+        const response = await fetch("https://ooulostandfoundportal.onrender.com/admin/found-items", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
