@@ -168,6 +168,13 @@ function renderFilteredItems() {
         const itemImg = item.imgUrl || "../images/Laptop.png";
         const itemName = item.name || "Unnamed Item";
         const idString = item._id;
+        const itemLocation = item.foundLocation || "Not Specified";
+        const itemCategory = item.category || "General";
+        
+        const rawDate = item.foundDate || item.createdAt;
+        const formattedDate = rawDate && rawDate !== "N/A" 
+            ? new Date(rawDate).toLocaleDateString(undefined, { dateStyle: 'medium' }) 
+            : "Not Specified";
 
         let finderDisplayName = "Anonymous";
         if (item.reporterName) {
@@ -192,33 +199,32 @@ function renderFilteredItems() {
         const isClaimed = submittedClaims.includes(idString) || backendRequested;
 
         const card = document.createElement("div");
-        card.className = "items-box-item";
+        card.className = "claim-card";
 
         card.innerHTML = `
-            <div class="items-details">
-                <div class="item-img">
-                    <img src="${itemImg}" alt="${itemName}">
-                    <p class="status available">Available</p>
-                </div>
-
-                <h2>${itemName}</h2>
-                <span style="font-size: 0.8rem; color: gray; font-family: monospace;">Founder: ${finderDisplayName.substring(0, 10)}...</span>
+            <img src="${itemImg}" alt="${itemName}">
+            <div class="content">
+                <h3>${itemName}</h3>
+                <span class="badge ${isClaimed ? 'pending' : 'approved'}">${isClaimed ? 'Requested' : 'Available'}</span>
+                
+                <p><i class="fa-solid fa-location-dot"></i> ${itemLocation}</p>
+                <p><i class="fa-solid fa-calendar-days"></i> Found: ${formattedDate}</p>
+                <p><i class="fa-solid fa-user"></i> Founder: ${finderDisplayName}</p>
             </div>
 
-            <button
-                onclick="viewItemDetails('${idString}')"
-                class="open-btn">
-                View Details
-            </button>
-
-            <button
-                class="view-btn"
-                data-item-id="${idString}"
-                onclick="openRequestModal('${idString}')"
-                ${isClaimed ? 'disabled style="background:#ccc;cursor:not-allowed;"' : ''}>
-                <i class="fa-solid ${isClaimed ? 'fa-lock' : 'fa-check'}"></i>
-                ${isClaimed ? 'Requested' : 'Request'}
-            </button>
+            <div class="buttons">
+                <button onclick="viewItemDetails('${idString}')" class="view">
+                    View Details
+                </button>
+                <button 
+                    class="contact" 
+                    data-item-id="${idString}" 
+                    onclick="openRequestModal('${idString}')"
+                    ${isClaimed ? 'disabled style="background:#ccc;cursor:not-allowed;"' : ''}>
+                    <i class="fa-solid ${isClaimed ? 'fa-lock' : 'fa-check'}"></i>
+                    ${isClaimed ? 'Requested' : 'Request'}
+                </button>
+            </div>
         `;
 
         container.appendChild(card);

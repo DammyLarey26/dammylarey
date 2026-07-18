@@ -1,17 +1,17 @@
 /*==========================================================================
     GLOBAL STYLES & CORE RESET
 ==========================================================================*/
-* { 
-    box-sizing: border-box;
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    background-color: beige;
+    background: beige;
     padding: 0;
-    padding-top: 50px;
-    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
 }
 
 html {
@@ -28,6 +28,11 @@ button {
 
 button:hover {
     transform: scale(1.05);
+}
+
+.container {
+    max-width: 1300px;
+    margin: auto;
 }
 
 /*==========================================================================
@@ -50,6 +55,7 @@ button:hover {
     margin-left: 270px;
     padding: 20px;
     transition: 0.3s ease;
+    margin-top: 50px;
 }
 
 .body-container {
@@ -61,7 +67,7 @@ button:hover {
 }
 
 /*==========================================================================
-    HEADER & NAVIGATION APP UI
+    HEADER, NAVIGATION & ACTIONS APP UI
 ==========================================================================*/
 .user-header {
     background-color: black;
@@ -76,7 +82,6 @@ button:hover {
     right: 0;
     z-index: 998;
     height: 60px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .user-header marquee {
@@ -92,6 +97,42 @@ button:hover {
     color: beige;
     font-size: x-large;
     padding: 15px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 35px;
+    margin-top: 40px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    color: #111;
+    margin-bottom: 5px;
+}
+
+.page-header p {
+    color: #6d6d6d;
+}
+
+.history-btn {
+    padding: 14px 25px;
+    border: none;
+    border-radius: 10px;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .3s;
+}
+
+.history-btn:hover {
+    background: #D6C3A5;
+    color: #111;
 }
 
 .user-options {
@@ -155,14 +196,138 @@ button:hover {
 }
 
 /*==========================================================================
-    COMPACT ITEMS CARD GRID SYSTEM (UPDATED FOR TWIN BUTTONS)
+    STATISTICS PANELS
 ==========================================================================*/
-#itemsContainer, #historyCardsContainer, .claims-grid {
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background: #fff;
+    border: 1px solid #E8DED1;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 18px rgba(0,0,0,.05);
+    transition: .3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card i {
+    font-size: 35px;
+    color: #D6C3A5;
+    margin-bottom: 15px;
+}
+
+.stat-card h2 {
+    font-size: 35px;
+    color: #111;
+    margin-bottom: 5px;
+}
+
+.stat-card span {
+    color: #666;
+}
+
+.stat-card.pending i { color: #C89D3C; }
+.stat-card.approved i { color: #2E7D32; }
+.stat-card.rejected i { color: #C62828; }
+
+/*==========================================================================
+    TOOLBAR & FILTERS SYSTEM
+==========================================================================*/
+.history-header {
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.filters-row {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filters-row input,
+.search-box input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 50%;
+    border-radius: 10px;
+}
+
+.search-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #E8DED1;
+    border-radius: 10px;
+    padding: 12px 15px;
+}
+
+.search-box i {
+    color: #D6C3A5;
+    font-size: 16px;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    font-size: 14px;
+    background: transparent;
+}
+
+.toolbar select,
+#statusFilter {
+    min-width: 180px;
+    border: 1px solid #E8DED1;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    outline: none;
+    cursor: pointer;
+}
+
+#statusFilter {
+    padding: 10px;
+    border: none;
+    background-color: black;
+    color: beige;
+    border-radius: 5px;
+}
+
+/*==========================================================================
+    COMPACT ITEM BOX CARDS (TWIN-BUTTON SYSTEM WITH HIGHER SPACING)
+==========================================================================*/
+#itemsContainer, #historyCardsContainer, #lostItemsContainer, .claims-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 15px;
-    padding: 10px 0;
+    gap: 24px; /* Distinct grid spacing gap configuration */
+    padding: 15px 0;
     width: 100%;
+}
+
+#historyCardsContainer {
+    padding: 20px;
+    overflow-x: auto;
 }
 
 .claim-card {
@@ -186,17 +351,16 @@ button:hover {
     height: 130px;
     object-fit: cover;
     background: #e0e0e0;
-    border-radius: 10px 10px 0 0;
 }
 
-.claim-card .content {
+.content {
     padding: 12px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-.claim-card .content h3 {
+.content h3 {
     color: #111;
     margin-bottom: 4px;
     font-size: 15px;
@@ -206,7 +370,7 @@ button:hover {
     text-overflow: ellipsis;
 }
 
-.claim-card .content p {
+.content p {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -219,12 +383,13 @@ button:hover {
     text-align: left;
 }
 
-.claim-card .content p i {
-    color: black;
+.content p i {
+    color: #D6C3A5;
     width: 14px;
     font-size: 12px;
 }
 
+/* Dual Button Row Layout Inside Content */
 .claim-card .buttons {
     margin-top: auto;
     padding: 0 12px 12px 12px;
@@ -234,7 +399,8 @@ button:hover {
 }
 
 .claim-card .buttons .view,
-.claim-card .buttons .contact { 
+.claim-card .buttons .contact,
+.claim-card .buttons .contact-btn {
     flex: 1;
     display: inline-flex;
     align-items: center;
@@ -264,12 +430,15 @@ button:hover {
     color: #111;
 }
 
-.claim-card .buttons .contact {
+.claim-card .buttons .contact,
+.claim-card .buttons .contact-btn {
     background: #25D366;
     color: white;
+    box-shadow: 0 2px 4px rgba(37, 211, 102, 0.1);
 }
 
-.claim-card .buttons .contact:hover {
+.claim-card .buttons .contact:hover,
+.claim-card .buttons .contact-btn:hover {
     background: #128C7E;
 }
 
@@ -281,39 +450,7 @@ button:hover {
 }
 
 /*==========================================================================
-    FILTERS ROW SYSTEMS
-==========================================================================*/
-.history-header {
-    padding: 20px 0;
-    margin-top: 40px;
-}
-
-.filters-row {
-    width: 100%;
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.filters-row input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    width: 50%;
-    border-radius: 10px;
-}
-
-#statusFilter {
-    padding: 10px;
-    border: none;
-    background-color: black;
-    color: beige;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/*==========================================================================
-    STATUS BADGES & MAPPINGS
+    STATUS BADGES
 ==========================================================================*/
 .status {
     color: #ffffff !important;
@@ -350,460 +487,186 @@ button:hover {
 .badge.approved { background: #E8F5E9; color: #2E7D32; }
 .badge.rejected { background: #FDECEC; color: #C62828; }
 .badge.claimed { background: #FFF4DE; color: #ff8c00; }
+.badge.returned { background: #E3F2FD; color: #1565C0; }
+
+#loadingStatus, #statusMessage {
+    text-align: center;
+    padding: 30px;
+    font-size: 14px;
+    color: #666;
+    grid-column: 1 / -1;
+}
 
 /*==========================================================================
-    MODAL LAYOUT SYSTEM
+    EMPTY DISPLAY STATES
+==========================================================================*/
+.empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.empty i {
+    font-size: 80px;
+    color: #D6C3A5;
+    margin-bottom: 20px;
+}
+
+.empty h2 { color: #111; margin-bottom: 10px; }
+.empty p { color: #666; }
+
+/*==========================================================================
+    MODAL LAYOUT SYSTEM (COMPACT PROOF CARD SYSTEM)
 ==========================================================================*/
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .6);
     display: none;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
     z-index: 9999;
 }
 
 .modal-content {
     background: #fff;
     width: 100%;
-    max-width: 500px;
-    border-radius: 12px;
-    padding: 20px;
-    max-height: 90vh;
+    max-width: 380px; /* Reduced to match smaller compact proof dimensions */
+    border-radius: 10px;
+    padding: 18px;
+    max-height: 85vh;
     overflow-y: auto;
-    animation: pop .25s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    animation: pop .25s ease-out;
 }
 
 @keyframes pop {
-    from { transform: scale(.9); opacity: 0; }
+    from { transform: scale(.95); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
 
-.modal-content h2 { margin-bottom: 15px; font-size: 20px; color: #111; }
+.modal-content h2 { margin-bottom: 4px; font-size: 16px; color: #111; font-weight: 700; }
 .modal-content img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
 .modal-content h4 { margin: 15px 0 5px; color: #111; font-size: 14px; }
-.modal-content p { margin: 6px 0; color: #555; font-size: 13px; text-align: left; }
+.modal-content p { margin: 0 0 14px 0; color: #666; font-size: 12px; text-align: left; }
 .modal-divider { margin: 12px 0; border: 0; border-top: 1px solid #eee; }
-.close { float: right; font-size: 24px; cursor: pointer; color: #999; }
+.close { float: right; font-size: 20px; cursor: pointer; color: #999; line-height: 1; }
 .close:hover { color: red; }
 .modal-content button.view { width: 100%; margin-top: 15px; height: 38px; background: black; color: white; border: none; border-radius: 5px; cursor: pointer; }
 
-/*==========================================================================
-    USER PROFILE DETAILS & FORMS
-==========================================================================*/
-.prof-det {
-    position: fixed;
-    right: 0;
-    display: flex;
-    background-color: beige;
-    border: none;
-    padding: 10px;
-    top: 52px;
-    margin: 10px;
-    z-index: 999;
-}
-
-.prof-det span {
-    display: block;
-    margin-left: 10px;
-}
-
-.passport {
-    width: 50px;
-    height: 50px;
-    border: none;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-.passport img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.dar {
-    margin: auto;
-}
-
-.passport:hover {
-    cursor: pointer;
-}
-
-form {
-    padding: 20px;
-}
-
-form input {
-    padding: 10px;
-    background-color: beige;
-    display: flex;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    flex-direction: column;
-    border-radius: 0;
-    width: fit-content;
-    margin: auto;
-}
-
-.damilare {
-    width: fit-content;
-    margin: auto;
-    margin-bottom: 100px;
-}
-
-.fjh {
-    margin-bottom: 30px;
-}
-
-.reg-btn {
-    padding: 10px;
-    width: 100%;
-    color: white;
-    background-color: black;
-    border-radius: 5px;
-}
-
-.prof-btn1, .prof-btn2 {
-    padding: 5px;
-    color: white;
-    background-color: green;
-    border: none;
-    margin: 10px;
-    width: fit-content;
-}
-
-.prof-btn2 {
-    background-color: orange;
-}
-
-/*==========================================================================
-    HERO, INFRASTRUCTURE & SECTIONS
-==========================================================================*/
-.header2 {
-    height: 50%;
-    background-image: url('../images/adewunmi.jpg');
-    border-bottom: 30px solid;
-    background-position: center;
-    background-size: cover;
-    max-width: 100%;
-}
-
-.showname {
-    width: 45%;
-    padding: 40px;
-    margin-bottom: 40px;
-}
-
-.showname h {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 30px;
-}
-
-.showname i {
-    width: fit-content;
-}
-
-.shownamebtn1 {
-    color: white;
-    padding: 10px;
-    border-radius: 2px;
-    background-color: black;
-}
-
-.shownamebtn2 {
-    color: black;
-    padding: 10px;
-    border-radius: 2px;
-    background-color: beige;
-    border: 2px solid;
-}
-
-.log a {
-    color: black;
-    text-decoration: none;
+/* Form Component Resizing Layouts inside Proof Cards */
+#proofForm {
     padding: 0;
-}
-
-a:hover {
-    cursor: pointer;
-}
-
-.mid {
-    background-color: rgb(42, 31, 31);
-    text-align: center;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
-.mid h2 {
-    color: beige;
+#proofForm label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.steps {
+#proofForm input[type="file"],
+#proofForm textarea {
+    width: 100% !important;
+    margin: 0 0 12px 0 !important;
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+    border: 1px solid #dcdcdc !important;
+    border-radius: 5px !important;
+    background-color: #fafafa !important;
+    font-family: inherit !important;
+    box-sizing: border-box;
+}
+
+#proofForm textarea {
+    resize: vertical;
+    min-height: 60px;
+    height: 60px;
+}
+
+#proofForm textarea#proofAdditional {
+    min-height: 45px;
+    height: 45px;
+}
+
+#proofForm input[type="file"] {
+    padding: 6px 8px !important;
+    cursor: pointer;
+}
+
+#proofForm .submit-btn {
+    width: 100%;
     padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    width: 100%;
-    margin: 30px;
-    text-align: center;
-}
-
-.stepflex {
-    display: flex;
-}
-
-.step {
-    width: 100%;
-    max-width: 80%;    
-}
-
-.step h1 {
-    font-size: 40px;
-    color: beige;
-    text-align: center;
-    transform: rotate(-90deg);    
-}
-
-.step h3 {
-    font-size: 18px;
-    color: beige;
-}
-
-.step p {
-    font-size: 14px;
-    color: beige;
-}
-
-.benefits-section {
-    background: linear-gradient(135deg, beige 0%, black 100%);
-    color: white;
-    padding: 40px;
-    width: 100%;
-}
-
-.benefits-section h4 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    color: black;
-}
-
-.benefits-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.benefit-item {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid white;
-}
-
-.benefit-item strong {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 1.1em;
-    color: black;
-}
-
-/*==========================================================================
-    AUTHENTICATION COMPONENT UI
-==========================================================================*/
-.login {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    transition: all 0.3s ease;
-    border-radius: 20px;
-    color: beige;
-    margin: auto;
-    position: relative;
-    width: fit-content;
-}
-
-.login a {
-    color: beige;
-}
-
-.log-form {
-    width: 300px;
-    padding: 12px;
-    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #111;
     border: none;
-    outline: none;
-    background: rgba(255,255,255,0.2);
-    color: beige;
-    text-align: center;
-    display: flex;
-    margin-bottom: 20px;
-}
-
-.log-form::placeholder {
-    color: beige;
-}
-
-.fle {
-    display: flex;
-    justify-content: space-between;
-    font-size: 15px;
-    margin-bottom: 15px;
-}
-
-.fle a {
-    color: black;
-    text-decoration: none;
-}
-
-.btn2 {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #323132, beige);
-    color: beige;
+    border-radius: 5px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    transition: 0.3s;
+    margin-top: 4px;
+    transition: background-color 0.2s;
 }
 
-.btn2:hover {
-    transform: scale(1.03);
-}
-
-.spinner {
-    display: none;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #fff;
-    border-top: 2px solid transparent;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.btn2.loading .spinner {
-    display: inline-block;
-}
-
-.btn2.loading .btn-text {
-    opacity: 0.7;
+#proofForm .submit-btn:hover {
+    background-color: #25D366;
+    transform: none;
 }
 
 /*==========================================================================
-    FOOTER MODULE
+    CUSTOM SCROLLBARS
 ==========================================================================*/
-.footer {
-    background: black;
-    color: beige;
-    text-align: center;
-    padding: 25px;
-}
-
-.footer-icons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.footer-icons img {
-    width: 30px;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.footer-icons img:hover {
-    transform: scale(1.2);
-}
-
-.footer p {
-    margin: 5px 0;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #D6C3A5; border-radius: 10px; }
+::-webkit-scrollbar-track { background: #f5f5f5; }
 
 /*==========================================================================
-    ANIMATIONS ENGINE MODULES
+    RESPONSIVE BREAKPOINTS & MEDIA DRAWER OVERRIDES
 ==========================================================================*/
-.user-header, .top {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 3s ease forwards;
-}
-
-.showname h, .showname i, .showname button {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 5s ease forwards;
-}
-
-.showname, .logo {
-    animation: float 2s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.showname i { animation-delay: 0.3s; }
-.showname button { animation-delay: 0.6s; }
-
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.benefit-item, .step, .mid-box {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.6s ease;
-}
-
-.benefit-item.show, .step.show, .mid-box.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/*==========================================================================
-    RESPONSIVE MEDIA DRAWER LAYOUT OVERRIDES
-==========================================================================*/
-.bottom-nav {
-    display: none;
-}
-
-@media screen and (max-width: 1024px) {
-    .flex {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-    .mid {
-        flex-direction: column;
-    }
-}
-
 @media screen and (max-width: 768px) {
-    body {
+    body { 
+        padding: 15px; 
         font-size: small;
     }
 
+    .page-header { 
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
+
+    .page-header h1 { 
+        font-size: 26px; 
+    }
+
+    .toolbar { 
+        flex-direction: column; 
+    }
+
+    .toolbar select { 
+        width: 100%; 
+    }
+
+    .history-btn { 
+        width: 100%; 
+    }
+
     .sidebar {
-        left: -280px;   /* Tracking offscreen hidden layout position */
+        left: -280px;   /* Offscreen layout anchor position */
         z-index: 1000;
     }
 
     .sidebar.active {
-        left: 0;        /* Drawer sliding activation alignment toggle */
+        left: 0;        /* Drawer sliding activation toggle interface */
         margin: auto;
     }
 
@@ -818,9 +681,9 @@ a:hover {
         min-height: 100vh;
     }
 
-    #itemsContainer, #historyCardsContainer, .claims-grid {
+    #itemsContainer, #historyCardsContainer, #lostItemsContainer, .claims-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 10px;
+        gap: 16px; /* Maintained responsive separation distance gaps */
     }
 
     .backbtn {
@@ -830,7 +693,7 @@ a:hover {
     .menu-btn {
         display: block;
         position: fixed;
-        top: 10px;
+        top: 1px;
         left: 15px;
         z-index: 1100;
         font-size: 28px;
@@ -854,67 +717,10 @@ a:hover {
     .filters-row input {
         width: 100%;
     }
+}
 
-    .header2 {
-        height: 35%;
-        margin: auto;
-        width: fit-content;
-    }
-
-    h2 { font-size: 24px; }
-    p { font-size: 20px; }
-
-    .log {
-        width: 90%;
-        padding: 20px;
-        margin: 10px auto;
-    }
-
-    .btn2 {
-        margin-left: 0;
-        width: 80%;
-    }
-
-    .bottom-nav {
-        position: fixed;
-        margin-top: 40px;
-        bottom: 0;
-        width: 100%;
-        height: fit-content;
-        background: beige;
-        border-top: 1px solid #ddd;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        z-index: 999;
-    }
-
-    .nav-item {
-        text-decoration: none;
-        color: black;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 12px;
-        padding: 5px;
-    }
-
-    .nav-item.active i {
-        background-color: black;
-        color: white;
-        border-radius: 50%;
-        padding: 5px;
-    }
-
-    .showname {
-        width: 70%;
-    }
-
-    .footer p {
-        font-size: small;
-    }
-
-    .footer-icons img {
-        width: 25px;
-    }
+@media screen and (max-width: 500px) {
+    .claim-card img { height: 120px; }
+    .content h3 { font-size: 14px; }
+    .stat-card h2 { font-size: 28px; }
 }

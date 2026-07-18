@@ -70,31 +70,127 @@ transform:rotate(360deg);
 a{
     text-decoration: none;
 }
+
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    z-index: 9999;
 }
 
 .modal-content {
-  background: #fff;
-  width: 90%;
-  max-width: 400px;
-  margin: 10% auto;
-  padding: 20px;
-  border-radius: 12px;
+    background: #fff;
+    width: 100%;
+    max-width: 380px; /* Reduced from 500px to make it sleek and small */
+    border-radius: 10px;
+    padding: 18px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    animation: pop 0.25s ease-out;
+}
+
+@keyframes pop {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .close {
-  float: right;
-  font-size: 22px;
-  cursor: pointer;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+    line-height: 1;
 }
+
+.close:hover {
+    color: #dc3545;
+}
+
+.modal-content h2 { 
+    margin-bottom: 4px; 
+    font-size: 16px; 
+    color: #111; 
+    font-weight: 700;
+}
+
+.modal-content p { 
+    margin: 0 0 14px 0; 
+    color: #666; 
+    font-size: 12px; 
+    text-align: left; 
+}
+
+/* Compact Forms Structure Overrides */
+#proofForm {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#proofForm label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#proofForm input[type="file"],
+#proofForm textarea {
+    width: 100% !important;
+    margin: 0 0 12px 0 !important;
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+    border: 1px solid #dcdcdc !important;
+    border-radius: 5px !important;
+    background-color: #fafafa !important;
+    font-family: inherit !important;
+    box-sizing: border-box;
+}
+
+#proofForm textarea {
+    resize: vertical;
+    min-height: 60px; /* Shorter initial height for description blocks */
+    height: 60px;
+}
+
+#proofForm textarea#proofAdditional {
+    min-height: 45px;
+    height: 45px;
+}
+
+#proofForm input[type="file"] {
+    padding: 6px 8px !important;
+    cursor: pointer;
+}
+
+/* Compact Submit Button */
+#proofForm .submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #111;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background-color 0.2s;
+}
+
+#proofForm .submit-btn:hover {
+    background-color: #25D366; /* Changes green on successful hover state */
+    transform: none;
+}
+
 .det{
   display: grid;
 }
