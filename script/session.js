@@ -22,14 +22,18 @@ function endSession(message = "Your session has expired. Please log in again.") 
     if (window.__sessionEnded) return;
     window.__sessionEnded = true;
 
-    // Clear all session data
-    sessionStorage.clear();
-    localStorage.removeItem("token");
-    localStorage.removeItem("cuser");
-
-    // Disable page interaction
+    // Disable page interaction immediately
     document.body.style.pointerEvents = "none";
     document.body.style.opacity = "0.6";
+
+    // Save the current page path so login.html knows where to send them back
+    // Using window.location.pathname captures the relative path nicely
+    sessionStorage.setItem("redirectAfterLogin", window.location.pathname + window.location.search);
+
+    // Clear all OTHER session data (keep redirectAfterLogin temporarily)
+    sessionStorage.removeItem("loggedIn");
+    localStorage.removeItem("token");
+    localStorage.removeItem("cuser");
 
     alert(message);
 
@@ -47,20 +51,17 @@ function startSessionTimer() {
 
 // Reset timer whenever user interacts
 function resetSessionTimer() {
-
     if (!isAuthenticated()) {
         endSession("Your session has ended. Please log in again.");
         return;
     }
-
     startSessionTimer();
 }
 
 // Protect page immediately
 (function () {
-
     if (!isAuthenticated()) {
-        window.location.replace(LOGIN_PAGE);
+        endSession("Your session has ended. Please log in again.");
         return;
     }
 
@@ -84,5 +85,4 @@ function resetSessionTimer() {
             endSession("Your session has ended. Please log in again.");
         }
     }, 5000);
-
 })();

@@ -1,4 +1,4 @@
-const API_KEY = "https://ooulostandfoundportal.onrender.com"
+const API_KEY = "https://ooulostandfoundportal.onrender.com";
 // const API_KEY = "http://localhost:5030"  
 
 async function login() {
@@ -26,7 +26,7 @@ async function login() {
       body: JSON.stringify({ email: email.value, password: password.value })
     });
 
-   const data = await response.json();
+    const data = await response.json();
 
     // Checks both status 200 or a success flag from your backend
     if (data.status !== 200 && data.success !== true) {
@@ -38,6 +38,21 @@ async function login() {
       return;
     }
 
+    // Helper function to handle redirection dynamically
+    const handleNavigation = () => {
+      const redirectUrl = sessionStorage.getItem("redirectAfterLogin");
+      
+      if (redirectUrl) {
+        // Clear the key immediately so it doesn't break future logins
+        sessionStorage.removeItem("redirectAfterLogin");
+        // Redirect back to the page they were kicked off from
+        window.location.replace(redirectUrl);
+      } else {
+        // Fallback default page
+        window.location.replace('./dashboard.html');
+      }
+    };
+
     // 💾 SAVE THE AUTHENTICATION TOKEN
     if (data.token) {
         localStorage.setItem('token', data.token);
@@ -45,14 +60,14 @@ async function login() {
         sessionStorage.setItem("loggedIn", "true");
         
         alert("Login successfully!");
-        window.location.href = './dashboard.html';
+        handleNavigation();
     } else {
         // Fallback warning if backend configuration changes unexpectedly
         alert("Login succeeded, but no authorization token was received.");
         console.log("Full backend response:", data);
         
         sessionStorage.setItem("loggedIn", "true");
-        window.location.href = './dashboard.html';
+        handleNavigation();
     }
 
   } catch (err) {
