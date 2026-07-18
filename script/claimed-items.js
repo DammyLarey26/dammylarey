@@ -1,23 +1,22 @@
 let allItems = [];
-const container = document.getElementById('itemsContainer');
-const loadingStatus = document.getElementById('loadingStatus');
-const statusMessage = document.getElementById('statusMessage');
-const searchInput = document.getElementById('searchInput');
 
 // API Operations Engine
 async function fetchFoundItems() {
+    const container = document.getElementById('itemsContainer');
+    
+    // Safety check in case the ID is missing from the page
+    if (!container) return;
+
     try {
-        loadingStatus.style.display = 'block';
-        statusMessage.style.display = 'none';
+        // Clear previous state and show clean simple text loader
+        container.innerHTML = `<div style="text-align: center; padding: 30px; font-size: 14px; color: #666; width: 100%;">Querying server database context...</div>`;
 
         const token = localStorage.getItem('token'); 
 
         if (!token) {
-            loadingStatus.style.display = 'none';
-            statusMessage.style.display = 'block';
-            statusMessage.innerHTML = `<span style="color:red; font-weight:bold;">
+            container.innerHTML = `<div style="text-align: center; padding: 30px; font-size: 14px; width: 100%; color:red; font-weight:bold;">
                 Access Denied. Please <a href="login.html" style="color:#111; text-decoration:underline;">login</a> to view items.
-            </span>`;
+            </div>`;
             return;
         }
 
@@ -30,7 +29,6 @@ async function fetchFoundItems() {
         });
 
         const result = await response.json();
-        loadingStatus.style.display = 'none';
 
         if (!response.ok) {
             throw new Error(result.message || "Failed to load portal items.");
@@ -38,9 +36,6 @@ async function fetchFoundItems() {
 
         const dataArray = result.data || result.items || result || [];
         
-        // Dynamically compute dashboard numbers into top stat panels
-        updateStatisticsCounters(dataArray);
-
         // Filter array elements matching finalized approved verification states
         allItems = dataArray.filter(item => {
             const status = (item.status || "").toLowerCase();
@@ -51,65 +46,35 @@ async function fetchFoundItems() {
 
     } catch (error) {
         console.error(error);
-        loadingStatus.style.display = 'none';
-        statusMessage.style.display = 'block';
-        statusMessage.innerHTML = `<span style="color:red;">Error: ${error.message}</span>`;
+        container.innerHTML = `<div style="text-align: center; padding: 30px; font-size: 14px; width: 100%; color:red;">Error: ${error.message}</div>`;
     }
-}
-
-// Stats counter logic
-function updateStatisticsCounters(items) {
-    let pendingCount = 0;
-    let approvedCount = 0;
-    let rejectedCount = 0;
-
-    items.forEach(item => {
-        const s = (item.status || "").toLowerCase();
-        if (s === "pending") pendingCount++;
-        else if (s === "approved" || s === "claimed" || s === "resolved") approvedCount++;
-        else if (s === "rejected") rejectedCount++;
-    });
-
-    const pendingEl = document.querySelector('.stat-card.pending h2');
-    const approvedEl = document.querySelector('.stat-card.approved h2');
-    const rejectedEl = document.querySelector('.stat-card.rejected h2');
-
-    if (pendingEl) pendingEl.innerText = pendingCount;
-    if (approvedEl) approvedEl.innerText = approvedCount;
-    if (rejectedEl) rejectedEl.innerText = rejectedCount;
 }
 
 // Compact Item Card Grid Component Renderer
 function renderGrid(items) {
-    const existingCards = container.querySelectorAll('.claim-card');
-    existingCards.forEach(card => card.remove());
+    const container = document.getElementById('itemsContainer');
+    if (!container) return;
+    
+    // Clear out container contents entirely
+    container.innerHTML = '';
 
     if (items.length === 0) {
-        statusMessage.style.display = 'block';
-        statusMessage.innerText = "No approved items match your search details.";
+        container.innerHTML = `<div style="text-align: center; padding: 30px; font-size: 14px; color: #666; width: 100%;">No approved items found matching your search details.</div>`;
         return;
     }
 
-    statusMessage.style.display = 'none';
-
+    // Dynamic inner layout injection module
     items.forEach(item => {
         const image = item.imgUrl || "https://placeholder.co/400x300?text=No+Image+Provided";
         const name = item.name || "Unnamed Item";
-        const description = item.description || "No description provided.";
-        const category = item.category || "General";
         const location = item.foundLocation || "Not Specified";
         const status = item.status || "Approved";
         
-        const founder = item.founder || {};
-        const founderName = founder.name || "Anonymous";
-        const founderMatric = founder.matric || "N/A";
-
         const rawDate = item.foundDate || item.createdAt;
         const displayDate = rawDate ? new Date(rawDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : "N/A";
         
         const approvalRaw = item.updatedAt || item.createdAt;
         const approvalDate = approvalRaw ? new Date(approvalRaw).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : "N/A";
-        const approvalTime = approvalRaw ? new Date(approvalRaw).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : "N/A";
 
         const cardElement = document.createElement('div');
         cardElement.className = 'claim-card';
@@ -129,64 +94,14 @@ function renderGrid(items) {
             </div>
         `;
 
+        // Event listener for view action trigger framework details
         cardElement.querySelector('.view-btn').addEventListener('click', () => {
-            openModal(
-                name, image, category, location, displayDate, description, 
-                founderName, founderMatric, approvalDate, approvalTime
-            );
+            alert(`Item: ${name}\nLocation: ${location}\nDate Found: ${displayDate}\nStatus: ${status}`);
         });
 
         container.appendChild(cardElement);
     });
 }
 
-// Modal Controllers
-function openModal(title, image, category, location, dateFound, description, founder, founderId, approvedDate, approvedTime) {
-    document.getElementById("modal").style.display = "flex";
-    document.getElementById("mTitle").innerHTML = title;
-    document.getElementById("mImage").src = image;
-    document.getElementById("mCategory").innerHTML = category;
-    document.getElementById("mLocation").innerHTML = location;
-    document.getElementById("mDateFound").innerHTML = dateFound;
-    document.getElementById("mDescription").innerHTML = description;
-    document.getElementById("mFinder").innerHTML = founder;
-    document.getElementById("mFinderId").innerHTML = founderId;
-    document.getElementById("mApproveDate").innerHTML = approvedDate;
-    document.getElementById("mApproveTime").innerHTML = approvedTime;
-}
-
-function closeModal() {
-    document.getElementById("modal").style.display = "none";
-}
-
-document.getElementById("closeModalBtn").addEventListener('click', closeModal);
-document.getElementById("modalCloseBtn").addEventListener('click', closeModal);
-
-window.onclick = function(e) {
-    if (e.target == document.getElementById("modal")) {
-        closeModal();
-    }
-}
-
-// Live Search Filter Handler
-if (searchInput) {
-    searchInput.addEventListener("input", function () {
-        const keyword = this.value.toLowerCase();
-
-        const filtered = allItems.filter(item => {
-            const founder = item.founder || {};
-            return (
-                (item.name || "").toLowerCase().includes(keyword) ||
-                (item.foundLocation || "").toLowerCase().includes(keyword) ||
-                (item.category || "").toLowerCase().includes(keyword) ||
-                (item.description || "").toLowerCase().includes(keyword) ||
-                (founder.name || "").toLowerCase().includes(keyword) ||
-                (founder.matric || "").toLowerCase().includes(keyword)
-            );
-        });
-
-        renderGrid(filtered);
-    });
-}
-
+// Global invocation event hook configurations
 document.addEventListener("DOMContentLoaded", fetchFoundItems);

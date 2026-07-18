@@ -5,83 +5,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Claims</title>
-    <link rel="stylesheet" href="../css/my-claims.css">
+    <!-- Icons Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Master Shared Layout CSS Files -->
+    <link rel="stylesheet" href="../css/prof.css">
+    <link rel="stylesheet" href="../css/my-claims.css">
 </head>
 
 <body>
-
-<div class="container">
-
-    <!-- HEADER -->
-    <div class="page-header">
-        <div>
-            <h1>My Claims</h1>
-            <p>Track every item you've claimed.</p>
+    <!-- Main Top Layout Bar Header Structure -->
+    <header class="user-header">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="marquee">
+            <marquee behavior="" direction="left">
+                <h2>My Claims Portfolio</h2>
+            </marquee>
         </div>
-        <button class="history-btn" onclick="window.location.href='./history.html'">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            Claim History
-        </button>
-    </div>
+    </header>
 
-    <!-- STATS (IDs added for targeting metrics) -->
-    <div class="stats">
-        <div class="stat-card">
-            <i class="fa-solid fa-file-circle-check"></i>
-            <h2 id="totalClaimsCount">0</h2>
-            <span>Total Claims</span>
+    <!-- Navigation Drawer Sidebar Panel Layout -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" id="closeBtn">&times;</button>
+        <button class="backbtn" onclick="history.back()">&#8592;</button>
+        <div class="user-options">
+            <div class="dash-logo">
+                <img src="../images/download.png" alt="Logo">
+            </div>
+            <a href="../index.html">Home</a>
+            <a href="">Profile</a>
+            <a href="./dashboard.html">Dashboard</a>
         </div>
-
-        <div class="stat-card pending">
-            <i class="fa-solid fa-clock"></i>
-            <h2 id="pendingClaimsCount">0</h2>
-            <span>Pending</span>
-        </div>
-
-        <div class="stat-card approved">
-            <i class="fa-solid fa-circle-check"></i>
-            <h2 id="approvedClaimsCount">0</h2>
-            <span>Approved</span>
-        </div>
-
-        <div class="stat-card rejected">
-            <i class="fa-solid fa-circle-xmark"></i>
-            <h2 id="rejectedClaimsCount">0</h2>
-            <span>Rejected</span>
+        <div class="right-handside">
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-cog"></i>
         </div>
     </div>
 
-    <!-- TOOLBAR (IDs added for filters) -->
-    <div class="toolbar">
-        <div class="search-box">
-            <i class="fa-solid fa-search"></i>
-            <input type="text" id="claimsSearchInput" placeholder="Search item...">
+    <!-- Core App Interface Main Body Content Frame Grid Container Wrapper -->
+    <main class="main-content">
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="page-header">
+            <div>
+                <h1>My Claims</h1>
+                <p>Track every item you've claimed.</p>
+            </div>
+            <button class="history-btn" onclick="window.location.href='./history.html'">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                Claim History
+            </button>
         </div>
 
-        <select id="claimsStatusFilter">
-            <option value="all">All Status</option>
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-        </select>
+        <!-- STATS -->
+        <div class="stats">
+            <div class="stat-card">
+                <i class="fa-solid fa-file-circle-check"></i>
+                <h2 id="totalClaimsCount">0</h2>
+                <span>Total Claims</span>
+            </div>
+
+            <div class="stat-card pending">
+                <i class="fa-solid fa-clock"></i>
+                <h2 id="pendingClaimsCount">0</h2>
+                <span>Pending</span>
+            </div>
+
+            <div class="stat-card approved">
+                <i class="fa-solid fa-circle-check"></i>
+                <h2 id="approvedClaimsCount">0</h2>
+                <span>Approved</span>
+            </div>
+
+            <div class="stat-card rejected">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <h2 id="rejectedClaimsCount">0</h2>
+                <span>Rejected</span>
+            </div>
+        </div>
+
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+            <div class="search-box">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="claimsSearchInput" placeholder="Search item...">
+            </div>
+
+            <select id="claimsStatusFilter">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+        </div>
+
+        <!-- DYNAMIC GRID PANELS (This is where the grid target actually belongs!) -->
+        <div class="claims-grid" id="claimsGridContainer">
+            <!-- JS inserts layout maps here dynamically via my-claims.js -->
+        </div>
+
+        <!-- EMPTY STATE BOX -->
+        <div class="empty" id="emptyClaimsState" style="display: none;">
+            <i class="fa-regular fa-folder-open"></i>
+            <h2>No Claims Found</h2>
+            <p>You haven't claimed any item matching this category yet.</p>
+        </div>
+
     </div>
+</main>
 
-    <!-- DYNAMIC GRID PANELS -->
-    <div class="claims-grid" id="claimsGridContainer">
-        <!-- JS inserts layout maps here dynamically -->
-    </div>
+    <!-- Script Subsystem Drivers Injection Pipeline Execution Binding Configuration Sequence -->
+    <script>
+        // Inline UI Event Sidebar Action Bindings Integration Hook Configuration Layout Block
+        const sidebar = document.getElementById("sidebar");
+        const menuBtn = document.getElementById("menuBtn");
+        const closeBtn = document.getElementById("closeBtn");
 
-    <!-- EMPTY STATE BOX -->
-    <div class="empty" id="emptyClaimsState" style="display: none;">
-        <i class="fa-regular fa-folder-open"></i>
-        <h2>No Claims Found</h2>
-        <p>You haven't claimed any item matching this category yet.</p>
-    </div>
+        menuBtn.addEventListener("click", () => {
+            sidebar.classList.add("active");
+        });
 
-</div>
-
-<!-- Linked Script Engine -->
-<script src="../script/my-claims.js"></script>
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.remove("active");
+        });
+    </script>
+    <script src="../script/session.js"></script>
+    <script src="../script/my-claims.js"></script>
 </body>
+
 </html>

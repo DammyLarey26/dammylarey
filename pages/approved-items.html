@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/prof.css">
+</head>
+
+<body>
+    <header class="user-header">
+       <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="marquee">
+            <marquee behavior="" direction="left">
+                <h2>Profile</h2>
+            </marquee>
+        </div>
+    </header>
+
+     <div class="sidebar" id="sidebar">
+    <button class="close-btn" id="closeBtn">&times;</button>
+        <button class="backbtn" onclick="history.back()">&#8592</button>
+        <div class="user-options">
+            <div class="dash-logo">
+            <img src="../images/download.png" alt="">
+        </div>
+            <a href="../index.html">Home</a>
+            <a href="./profile.html">Profile</a>
+            <a href="./dashboard.html">Dashboard</a>
+        </div>
+        <div class="right-handside">
+            <i class="fa-solid fa-bell"></i>
+            <i class="fa-solid fa-cog"></i>
+        </div>
+    </div>
+
+    <!-- target id matching container variable in script.js applied below -->
+    <main class="main-content" id="itemsContainer">
+        <!-- The JS script will automatically inject the approved item cards right here -->
+    </main>
+
+
+    <script src="../script/claimed-items.js"></script>
+    <script>
+    const sidebar = document.getElementById("sidebar");
+const menuBtn = document.getElementById("menuBtn");
+const closeBtn = document.getElementById("closeBtn");
+
+menuBtn.addEventListener("click", () => {
+    sidebar.classList.add("active");
+});
+
+closeBtn.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+});
+  </script>
+  <script src="../script/session.js"></script>
+</body>
+
+</html>
