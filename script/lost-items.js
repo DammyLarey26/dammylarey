@@ -349,13 +349,21 @@ async function submitProof(e) {
     formData.append('additional', additionalInput.value)
     formData.append('image', imgFile)
 
+    const dataForm = {
+        itemId,
+        description: descriptionInput.value,
+        additional: additionalInput.value,
+        file: "https://placehold.co/600x400?text=No+Image+Provided"
+    }
+
     try {
         const response = await fetch(`${API_URL}/user/claim-item`, {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
             },
-            body: formData
+            body: JSON.stringify(dataForm)
         });
 
         const result = await response.json();
@@ -373,7 +381,7 @@ async function submitProof(e) {
         }
 
         closeModal();
-        window.location.href = "./my-claims.html";
+        // window.location.href = "./my-claims.html";
 
     } catch (err) {
         console.error(err);
