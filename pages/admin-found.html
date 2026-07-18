@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminItems</title>
-
+    <title>Admin Approved Items</title>
     <link rel="stylesheet" href="../css/new-admin.css">
-
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
 
@@ -18,39 +15,30 @@
     <div class="sidebar">
 
         <div class="logo">
-            <img src="../images/download.png">
+            <img src="../images/download.png" alt="Logo">
         </div>
 
         <h3>ADMIN PANEL</h3>
 
         <nav-bar>
-
             <a href="./admin.html">
                 <i class="fa-solid fa-chart-line"></i>
                 Dashboard
             </a>
-
             <a href="./user-management.html"><i class="fas fa-users"></i> Users</a>
-
-<a href="./admin-verify.html"><i class="fas fa-check-circle"></i> Verify Claims</a>
-
-<button><i class="fas fa-file-pdf"></i> Generate Report</button>
-
+            <a href="./admin-verify.html"><i class="fas fa-check-circle"></i> Verify Claims</a>
+            <a href="./admin-approved.html" class="active"><i class="fas fa-thumbs-up"></i> Approved Items</a>
+            <button><i class="fas fa-file-pdf"></i> Generate Report</button>
         </nav-bar>
 
     </div>
 
     <!-- Main Content -->
-
     <div class="det-top">
 
         <div class="admin-top">
-
-            <h2>Items</h2>
-            <a style="text-decoration: none; font-weight: bolder;" class="active" href="./admin-found.html">Approved Items</a>
-
+            <h2>Approved / Found Items</h2>
             <span id="adminName">Administrator</span>
-
         </div>
 
         <br>
@@ -58,7 +46,7 @@
         <input
             type="text"
             id="searchInput"
-            placeholder="Search Lost Item..."
+            placeholder="Search Approved Items..."
             style="
                 width:100%;
                 padding:12px;
@@ -68,24 +56,22 @@
             ">
 
         <div id="loading">
-            <h3 style="text-align:center;">Loading...</h3>
+            <h3 style="text-align:center;">Loading Approved Items...</h3>
         </div>
 
         <div id="emptyState" style="display:none;text-align:center;">
-            No Lost Items Found.
+            No Approved Items Found.
         </div>
 
         <div id="lostItemsContainer">
-
             <!-- JavaScript will insert items here -->
-
         </div>
 
     </div>
 
 </div>
 
-<script src="../script/admin-items.js"></script>
+<script src="../script/admin-approved-items.js"></script>
 
 </body>
 </html>
