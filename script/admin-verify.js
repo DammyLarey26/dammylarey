@@ -53,8 +53,8 @@ async function loadClaims() {
         container.innerHTML = "";
 
         request.forEach(claim => {
-            const item = claim.item
-            const claimer = claim.claimer
+            const item = claim.item || {};
+            const claimer = claim.claimer || {};
             const card = document.createElement("main");
             card.className = "user";
 
@@ -62,26 +62,37 @@ async function loadClaims() {
                 <div class="faq-container">
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h>Claim Request</h>
-                            <p>${item.name}</p>
+                            <div class="faq-headline">
+                                <h>Claim Request</h>
+                                <p><strong>Item:</strong> ${item.name || "Unknown"}</p>
+                                <p class="meta-info"><strong>Item ID:</strong> ${item._id || "N/A"}</p>
+                            </div>
+                            <div class="item-thumbnail">
+                                <img src="${item.itemImg || item.image || ''}" alt="Item Image" onerror="this.style.display='none'">
+                            </div>
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <h2>Proof of Ownership</h2>
+                            <h3>Proof of Ownership</h3>
                             <div class="itembox dare">
                                 <div class="itembox-proof">
+                                    <div class="itembox-proof-items">
+                                        <h3>Claimer Details</h3>
+                                        <p><strong>Name:</strong> ${claimer.name || "N/A"}</p>
+                                        <p><strong>Claimer ID:</strong> ${claimer._id || "N/A"}</p>
+                                    </div>
                                     <div class="itembox-proof-items">
                                         <h3>Description</h3>
                                         <p>${claim.description || "-"}</p>
                                     </div>
                                     <div class="itembox-proof-items">
-                                        <h3>Image / Receipt</h3>
+                                        <h3>Image</h3>
                                         <div class="img">
-                                            <img src="${claim.proofImg}" style="width:100%;border-radius:8px;">
+                                            <img src="${claim.proofImg}" style="width:100px; margin: auto; border-radius:10px;">
                                         </div>
                                     </div>
                                     <div class="itembox-proof-items">
-                                        <h3>Additional Information</h3>
+                                        <h3>More Info</h3>
                                         <p>${claim.moreInfo || "-"}</p>
                                     </div>
                                 </div>

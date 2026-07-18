@@ -139,6 +139,11 @@
     padding: 20px;
     
 }
+.itembox-proof{
+    display: flex;
+    gap: 10px;
+}
+
 .item-action button{
     padding: 15px;
     border: none;
