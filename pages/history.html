@@ -1,167 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<script>
-    // 1. Core Authentication Check (Token & Session Safe)
-    if (sessionStorage.getItem("loggedIn") !== "true" || !localStorage.getItem("token")) {
-        window.location.replace('./login.html'); 
-    }
-
-    // 2. Inactivity Timeout (15 minutes of no movement)
-    let idleTimeout;
-    const TIMEOUT_LIMIT = 15 * 60 * 1000;
-
-    function resetIdleTimer() {
-        clearTimeout(idleTimeout);
-        idleTimeout = setTimeout(() => {
-            sessionStorage.clear();
-            localStorage.removeItem("token");
-            localStorage.removeItem("cuser");
-
-            alert("Your session has expired due to inactivity. Please log in again.");
-            window.location.replace('./login.html');
-        }, TIMEOUT_LIMIT);
-    }
-
-    window.onload = resetIdleTimer;
-    window.onmousemove = resetIdleTimer;
-    window.onmousedown = resetIdleTimer;
-    window.ontouchstart = resetIdleTimer;
-    window.onclick = resetIdleTimer;
-    window.onkeydown = resetIdleTimer;
-</script>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>History</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<link rel="stylesheet" href="../css/actions.css">
-<link rel="stylesheet" href="../css/user.css">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/prof.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - Lost & Found</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
+    <link rel="stylesheet" href="../css/prof.css">
 </head>
 
 <body>
+    <!-- Top Navigation Header -->
+    <header class="user-header">
+        <button class="menu-btn" id="menuBtn">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
-<header class="user-header">
-    <button class="menu-btn" id="menuBtn">☰</button>
+        <div class="marquee">
+            <marquee direction="left">
+                <h2>History - Lost & Found</h2>
+            </marquee>
+        </div>
+    </header>
 
-    <div class="marquee">
-        <marquee direction="left">
-            <h2>HISTORY</h2>
-        </marquee>
+    <!-- Sidebar Drawer System -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" id="closeBtn">&times;</button>
+        <button class="backbtn" onclick="history.back()">&#8592;</button>
+
+        <div class="user-options">
+            <div class="dash-logo">
+                <img src="../images/download.png" alt="Dashboard Logo">
+            </div>
+
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="./profile.html">Profile</a>
+                <a href="./dashboard.html">Dashboard</a>
+            </nav>
+        </div>
     </div>
-</header>
 
-<div class="sidebar" id="sidebar">
-
-    <button class="close-btn" id="closeBtn">&times;</button>
-
-    <button class="backbtn" onclick="history.back()">&#8592;</button>
-
-    <div class="user-options">
-
-        <div class="dash-logo">
-            <img src="../images/download.png" alt="">
+    <!-- Main Application Content -->
+    <main class="main-content">
+        
+        <!-- Page Header -->
+        <div class="page-header history-header">
+            <div>
+                <h1>Your History</h1>
+                <p>View and monitor all the items you have reported to the Lost & Found system.</p>
+            </div>
         </div>
 
-        <a href="../index.html">Home</a>
-        <a href="./profile.html">Profile</a>
-        <a href="./dashboard.html">Dashboard</a>
+        <!-- Filter & Search Toolbar -->
+        <div class="toolbar">
+            <div class="search-box" style="flex: 2;">
+                <i class="fa-solid fa-search"></i>
+                <input 
+                    type="text" 
+                    id="searchBar" 
+                    placeholder="Search by item name, location or description...">
+            </div>
 
-    </div>
-
-    <div class="right-handside">
-        <i class="fa-solid fa-bell"></i>
-        <i class="fa-solid fa-cog"></i>
-    </div>
-
-</div>
-
-<main class="main-content">
-
-    <div class="history-header">
-        <p>
-            View and monitor all the items you have reported to the Lost & Found system.
-        </p>
-    </div>
-
-    <div class="filters-row">
-
-        <input
-            type="text"
-            id="searchBar"
-            placeholder="Search by item name, location or description...">
-
-        <select id="statusFilter">
-
-            <option value="all">All Status</option>
-
-            <option value="pending">Pending</option>
-
-            <option value="approved">Approved</option>
-
-            <option value="found">Found</option>
-
-            <option value="claimed">Claimed</option>
-
-            <option value="returned">Returned</option>
-
-            <option value="rejected">Rejected</option>
-
-            <option value="closed">Closed</option>
-
-        </select>
-
-    </div>
-
-    <div
-        id="historyCardsContainer"
-        class="history-cards-list">
-
-    </div>
-
-    <div class="prof-det">
-
-        <div class="passport">
-            <img id="img" src="../images/lekan.jpg" alt="">
+            <select id="statusFilter" style="flex: 1;">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="found">Found</option>
+                <option value="claimed">Claimed</option>
+                <option value="returned">Returned</option>
+                <option value="rejected">Rejected</option>
+                <option value="closed">Closed</option>
+            </select>
         </div>
 
-        <div class="prof-detname">
-            <span id="name">Loading...</span>
-            <span id="userId">Loading...</span>
+        <!-- Dynamic Items Grid Container -->
+        <div id="historyCardsContainer" class="claims-grid">
+            <!-- JavaScript will inject .claim-card items here -->
         </div>
 
-    </div>
+    </main>
 
-</main>
+    <!-- Application Scripts -->
+    <script type="module" src="../script/history.js"></script>
+    <script src="../script/faq.js"></script>
+    <script src="../script/dashboard.js"></script>
 
-<script type="module" src="../script/history.js"></script>
+    <!-- Sidebar UI Controller -->
+    <script>
+        const sidebar = document.getElementById("sidebar");
+        const menuBtn = document.getElementById("menuBtn");
+        const closeBtn = document.getElementById("closeBtn");
 
-<script src="../script/faq.js"></script>
-<script src="../script/dashboard.js"></script>
+        menuBtn.addEventListener("click", () => {
+            sidebar.classList.add("active");
+        });
 
-<script>
-
-const sidebar = document.getElementById("sidebar");
-const menuBtn = document.getElementById("menuBtn");
-const closeBtn = document.getElementById("closeBtn");
-
-menuBtn.addEventListener("click", () => {
-    sidebar.classList.add("active");
-});
-
-closeBtn.addEventListener("click", () => {
-    sidebar.classList.remove("active");
-});
-
-</script>
-
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.remove("active");
+        });
+    </script>
 </body>
-
 </html>
