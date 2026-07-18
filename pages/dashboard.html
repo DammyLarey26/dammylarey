@@ -5,170 +5,171 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Kept the latest version of Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="../css/actions.css">
   <link rel="stylesheet" href="../css/user.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/prof.css">
 </head>
+
 <body>
-    <header class="user-header">
-       <button class="menu-btn" id="menuBtn">☰</button>
-        <div class="marquee">
-            <marquee behavior="" direction="left">
-                <h2>DASHBOARD</h2>
-            </marquee>
-        </div>
-    </header>
-    
-    <div class="sidebar" id="sidebar">
+  <header class="user-header">
+    <button class="menu-btn" id="menuBtn">☰</button>
+    <div class="marquee">
+      <marquee behavior="" direction="left">
+        <h2>DASHBOARD</h2>
+      </marquee>
+    </div>
+  </header>
+
+  <div class="sidebar" id="sidebar">
     <button class="close-btn" id="closeBtn">&times;</button>
-        <button class="backbtn" onclick="history.back()">&#8592</button>
-        <div class="user-options">
-            <div class="dash-logo">
-            <img src="../images/download.png" alt="">
+    <button class="backbtn" onclick="history.back()">&#8592;</button> <!-- Fixed semicolon -->
+    <div class="user-options">
+      <div class="dash-logo">
+        <img src="../images/download.png" alt="Logo">
+      </div>
+      <a href="../index.html">Home</a>
+      <a href="./profile.html">Profile</a>
+      <a class="active" href="">Dashboard</a>
+      <a href="#" onclick="forceLogout(event)">Logout</a>
+    </div>
+  </div>
+
+  <main class="main-content">
+    <div class="user-new">
+      <div class="user-lhs">
+  <h1>Quick Actions</h1>
+  <div class="overview-el">
+    
+    <!-- Report Item: Megaphone/Bullhorn Icon -->
+    <div class="overview-items coloruser">
+      <i class="fa-solid fa-bullhorn"></i>
+      <div class="overview-itemsfig">
+        <div class="fig">
+          <a href="./report-lost.html">Report Item</a>
         </div>
-            <a href="../index.html">Home</a>
-			<a href="./profile.html">Profile</a>
-			<a class="active" href="">Dashboard</a>
-			<a href="#" onclick="forceLogout(event)">Logout</a>
-        </div>
+      </div>
     </div>
 
-    <main class="main-content">
-        <div class="user-new">
-        <div class="user-lhs">
-            <h1>Quick Actions</h1>
-             <div class="overview-el">
-                <div class="overview-items coloruser">
-                    <i class="fa-solid fa-briefcase"></i>
-                <div class="overview-itemsfig">
-                    <div class="fig">
-                        <a href="./report-lost.html">Report Item</a>
-                    </div>
-                </div>
-                </div>
-                <div class="overview-items colorlost">
-          <i class="fa-solid fa-screwdriver-wrench"></i>
-          <div class="overview-itemsfig">
-            <div class="fig">
-              <a href="./approved-items.html">Approved Items</a>
-            </div>
-          </div>
+    <!-- Approved Items: Check Circle Icon -->
+    <div class="overview-items colorlost">
+      <i class="fa-solid fa-circle-check"></i>
+      <div class="overview-itemsfig">
+        <div class="fig">
+          <a href="./approved-items.html">Approved Items</a>
         </div>
-        <div class="overview-items colorlost">
-          <i class="fa-solid fa-eye"></i>
-          <div class="overview-itemsfig">
-            <div class="fig center">
-              <a href="./view-lost.html">View Items</a>
-            </div>
-          </div>
-        </div>
-        <div class="overview-items colorfound">
-          <i class="fa-solid fa-eye"></i>
-          <div class="overview-itemsfig">
-            <div class="fig center">
-              <a href="./my-claims.html">My Claims</a>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
 
-            </div>
+    <!-- View Items: Search/Magnifying Glass Icon -->
+    <div class="overview-items colorlost">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <div class="overview-itemsfig">
+        <div class="fig center">
+          <a href="./view-lost.html">View Items</a>
         </div>
+      </div>
+    </div>
 
-        <div class="prof-det">
+    <!-- My Claims: Hand Holding Hand/Claim Icon -->
+    <div class="overview-items colorfound">
+      <i class="fa-solid fa-hand-holding-hand"></i>
+      <div class="overview-itemsfig">
+        <div class="fig center">
+          <a href="./my-claims.html">My Claims</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+      <div class="prof-det">
         <div class="prof-detname">
           <span style="font-weight: bolder; font-size: large;" id="name">Loading...</span>
-          <span id="userId">Loading...</span> 
+          <span id="userId">Loading...</span>
         </div>
         <div class="passport">
-        <img id="img" src="../images/lekan.jpg" alt="">
-      </div>
-      </div>
-    <div class="user-rhs">
-    <div class="body-container damilare">
-      <div class="faq-container">
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <span><a href="./dashboard.html"><i class="fa-solid fa-home"></i> Dashboard</a></span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-
-          <div class="faq-answer">
-            Serves as the main control panel of the system.
-          </div>
-        </div>
-
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <span><a href="./view-lost.html"><i class="fa-solid fa-list"></i> Items</a></span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-
-          <div class="faq-answer">
-            Displays all items reported as lost.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <span><a href="./view-found.html"><i class="fa-solid fa-folder"></i> Approved Items</a></span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-
-          <div class="faq-answer">
-        </div>
-
-
-        <div class="faq-item">
-          <div class="faq-question">
-            <span><a href="./profile.html"><i class="fa-solid fa-user"></i> Profile</a></span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-
-          <div class="faq-answer">
-            Allows users to view and manage their personal information such as name, matric/staff ID, department, phone
-            number, and email.
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            <span><a href="./history.html" id="logoutBtn"><i class="fa-solid fa-arrow-left-from-bracket"></i> History</a></span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-
-          <div class="faq-answer">
+          <img id="img" src="../images/lekan.jpg" alt="Profile Passport">
         </div>
       </div>
 
+      <div class="user-rhs">
+        <div class="body-container damilare">
+          <div class="faq-container">
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span><a href="./dashboard.html"><i class="fa-solid fa-home"></i> Dashboard</a></span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Serves as the main control panel of the system.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span><a href="./view-lost.html"><i class="fa-solid fa-list"></i> Items</a></span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Displays all items reported as lost.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span><a href="./view-found.html"><i class="fa-solid fa-folder"></i> Approved Items</a></span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Displays items that have been verified and approved.
+              </div>
+            </div> <!-- Fixed missing closing tags here -->
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span><a href="./profile.html"><i class="fa-solid fa-user"></i> Profile</a></span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                Allows users to view and manage their personal information such as name, matric/staff ID, department, phone number, and email.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-question">
+                <span><a href="./history.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a></span> <!-- Removed confusing id="logoutBtn" -->
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="faq-answer">
+                View your previous interactions and logs.
+              </div>
+            </div> <!-- Fixed missing closing tags here -->
+
+          </div>
+        </div>
+      </div>
     </div>
+  </main>
 
-        </div>
-    </div>
-
-
-    </main>
-    
-
-    
   <script src="../script/faq.js"></script>
   <script src="../script/dashboard.js"></script>
-  
   <script>
     const sidebar = document.getElementById("sidebar");
-const menuBtn = document.getElementById("menuBtn");
-const closeBtn = document.getElementById("closeBtn");
+    const menuBtn = document.getElementById("menuBtn");
+    const closeBtn = document.getElementById("closeBtn");
 
-menuBtn.addEventListener("click", () => {
-    sidebar.classList.add("active");
-});
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.add("active");
+    });
 
-closeBtn.addEventListener("click", () => {
-    sidebar.classList.remove("active");
-});
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("active");
+    });
   </script>
   <script src="../script/session.js"></script>
 </body>
