@@ -458,7 +458,7 @@ button:hover {
     font-size: small;
 }
 
-.status.available { background-color: #0056b3 !important; }
+.status.available { background-color: #283747 !important; }
 .status.claimed { background-color: #ff8c00 !important; }
 .status.approved { background-color: #28a745 !important; }
 .status.rejected { background-color: #dc3545 !important; }

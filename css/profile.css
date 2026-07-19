@@ -1,9 +1,8 @@
 /* ================= PROFILE PAGE ================= */
 
 .profile-card{
-    width:700px;
     max-width:100%;
-    margin:40px auto;
+    margin:10px auto;
     background:#fff;
     border-radius:15px;
     padding:30px;
@@ -42,24 +41,26 @@
     font-size:18px;
     font-weight:600;
     color:#4b0d0d;
+    overflow: hidden;
 }
 
 .det-btn{
     display:flex;
-    gap:20px;
+    gap:10px;
     margin-top:15px;
 }
 
 .det-btn button{
     flex:1;
-    padding:15px;
+    padding:10px;
     border:none;
     border-radius:8px;
     background:#5b1111;
     color:#fff;
-    font-size:16px;
+    font-size:10px;
     cursor:pointer;
     transition:.3s;
+
 }
 
 .det-btn button:hover{

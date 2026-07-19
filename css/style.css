@@ -8,12 +8,12 @@ body{
         padding: 0;
 }
 .body-container{
-    padding: 10px 40px 10px 30px;
+    padding: 10px;
     border-radius: 12px;
-    margin: 20px;
     border-radius: 10px;
     background-color: white;
     box-shadow: 0 0 15px rgb(64, 62, 62);
+    overflow: hidden;
 }
 .status{
     color: beige;
