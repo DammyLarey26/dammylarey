@@ -294,8 +294,7 @@ function viewItemDetails(identifier) {
                         <i class="fa-solid fa-user-tag"></i> Founder & Item Identity Reference
                     </strong>
                     <div style="display: grid; gap: 6px; font-size: 0.85rem; color: #4a5568;">
-                        <div><strong>Founder Name:</strong> <span>${reporterName}</span></div>
-                        <div><strong>Contact Reference:</strong> <span>${reporterContact}</span></div>
+                        <div><strong>Founder Name:</strong> <span>${item.founder.name}</span></div>
                         <div><strong>Recovery Location:</strong> <span>${itemLocation}</span></div>
                     </div>
                 </div>

@@ -61,7 +61,6 @@ button:hover {
 .body-container {
     padding: 10px 40px 10px 30px;
     border-radius: 12px;
-    margin: 20px;
     background-color: white;
     box-shadow: 0 0 15px rgb(64, 62, 62);
 }
@@ -320,7 +319,7 @@ button:hover {
 #itemsContainer, #historyCardsContainer, #lostItemsContainer, .claims-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 24px; /* Distinct grid spacing gap configuration */
+    gap: 24px;
     padding: 15px 0;
     width: 100%;
 }
@@ -389,7 +388,6 @@ button:hover {
     font-size: 12px;
 }
 
-/* Dual Button Row Layout Inside Content */
 .claim-card .buttons {
     margin-top: auto;
     padding: 0 12px 12px 12px;
@@ -442,15 +440,8 @@ button:hover {
     background: #128C7E;
 }
 
-.itembox-proof-items {
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    background-color: white;
-}
-
 /*==========================================================================
-    STATUS BADGES
+    STATUS BADGES & INTERFACES
 ==========================================================================*/
 .status {
     color: #ffffff !important;
@@ -519,7 +510,7 @@ button:hover {
 .empty p { color: #666; }
 
 /*==========================================================================
-    MODAL LAYOUT SYSTEM (COMPACT PROOF CARD SYSTEM)
+    MODAL LAYOUT SYSTEM
 ==========================================================================*/
 .modal {
     position: fixed;
@@ -535,7 +526,7 @@ button:hover {
 .modal-content {
     background: #fff;
     width: 100%;
-    max-width: 380px; /* Reduced to match smaller compact proof dimensions */
+    max-width: 380px;
     border-radius: 10px;
     padding: 18px;
     max-height: 85vh;
@@ -558,7 +549,6 @@ button:hover {
 .close:hover { color: red; }
 .modal-content button.view { width: 100%; margin-top: 15px; height: 38px; background: black; color: white; border: none; border-radius: 5px; cursor: pointer; }
 
-/* Form Component Resizing Layouts inside Proof Cards */
 #proofForm {
     padding: 0;
     display: flex;
@@ -631,6 +621,123 @@ button:hover {
 ::-webkit-scrollbar-track { background: #f5f5f5; }
 
 /*==========================================================================
+    ADMIN ACCORDION ADJUSTMENTS OVERRIDES (NEW LAYOUT SYSTEM)
+==========================================================================*/
+.faq-answer {
+    display: none;
+    padding: 20px 15px;
+    background: #fafafa;
+    border-top: 1px solid #E8DED1;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+/* Split content cards side-by-side inside the accordion drop-down */
+.itembox-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.itembox-proof-items {
+    background-color: white;
+    border: 1px solid #E8DED1;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 0;
+    flex: 1 1 calc(50% - 16px);
+    min-width: 280px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.itembox-proof-items h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #777;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #f5f5f5;
+    padding-bottom: 4px;
+    font-weight: bold;
+}
+
+.itembox-proof-items p {
+    font-size: 14px;
+    color: #222;
+    line-height: 1.5;
+}
+
+/* Reduced size implementation for the Proof image wrapper element */
+.itembox-proof-items .img {
+    width: 100px !important;
+    height: 100px !important;
+    overflow: hidden;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    margin-top: 8px;
+    background: #fdfdfd;
+}
+
+.itembox-proof-items .img img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 6px !important;
+}
+
+/* Refactored Dashboard Button Layout */
+.dare-btn {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 16px;
+}
+
+.dare-btn button {
+    flex: 1;
+    height: 42px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.dare-btn button.reject {
+    background: #FDECEC !important;
+    color: #C62828 !important;
+    border: 1px solid #f8cbcb !important;
+}
+
+.dare-btn button.reject:hover {
+    background: #C62828 !important;
+    color: #FFF !important;
+    transform: translateY(-2px);
+}
+
+.dare-btn button.accept {
+    background: #E8F5E9 !important;
+    color: #2E7D32 !important;
+    border: 1px solid #c8e6c9 !important;
+}
+
+.dare-btn button.accept:hover {
+    background: #2E7D32 !important;
+    color: #FFF !important;
+    transform: translateY(-2px);
+}
+
+/*==========================================================================
     RESPONSIVE BREAKPOINTS & MEDIA DRAWER OVERRIDES
 ==========================================================================*/
 @media screen and (max-width: 768px) {
@@ -661,12 +768,12 @@ button:hover {
     }
 
     .sidebar {
-        left: -280px;   /* Offscreen layout anchor position */
+        left: -280px;
         z-index: 1000;
     }
 
     .sidebar.active {
-        left: 0;        /* Drawer sliding activation toggle interface */
+        left: 0;
         margin: auto;
     }
 
@@ -683,7 +790,7 @@ button:hover {
 
     #itemsContainer, #historyCardsContainer, #lostItemsContainer, .claims-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-        gap: 16px; /* Maintained responsive separation distance gaps */
+        gap: 16px;
     }
 
     .backbtn {
@@ -717,10 +824,15 @@ button:hover {
     .filters-row input {
         width: 100%;
     }
+
+    .itembox-proof-items {
+        flex: 1 1 100%;
+    }
 }
 
 @media screen and (max-width: 500px) {
     .claim-card img { height: 120px; }
     .content h3 { font-size: 14px; }
     .stat-card h2 { font-size: 28px; }
+    .dare-btn { flex-direction: column-reverse; }
 }

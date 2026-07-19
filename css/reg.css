@@ -1,43 +1,72 @@
 .cont-reg {
-    margin: 40px auto; 
-    width: fit-content;
+    width: 90%;          
+    max-width: 900px;    
+    margin: 40px auto;
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px;
     background-color: white;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
 .cont-main {
-    text-align: center;
-    margin: auto;
+    width: 100%;
 }
 
 .header-cont {
+    text-align: center;
     background-color: beige;
     padding: 15px;
     border-radius: 5px;
-    margin: auto;
-}
-.body-cont {
-    display: flex;
-    padding: 20px;
-    margin: auto;
-    gap: 10px;
-}
-.img{
-    width: 100%;
-}
-img{
-    width: 100%;
-    height: 100%;
+    margin-bottom: 20px;
 }
 
-.container {
-    text-align: left;
+/* 3. Form Grid Layout */
+.body-cont {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two side-by-side columns */
+    gap: 30px;
     width: 100%;
 }
+
+/* 4. Form Controls */
+.container {
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.input-form, select {
+    width: 100%; /* Force inputs to full width of their container */
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    margin-top: 5px;
+    display: block;
+}
+
+/* 5. Upload Box */
+.upload-container {
+    margin-top: 15px;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    cursor: pointer;
+    min-height: 150px;
+    width: 100%;
+}
+
 .plus {
     width: 50px;
     height: 50px;
@@ -45,61 +74,43 @@ img{
     color: white;
     font-size: 30px;
     border-radius: 50%;
+    text-align: center;
     line-height: 50px;
-    margin: 0 auto 10px;
+    margin-bottom: 10px;
 }
 
-label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-.input-form {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-}
-
-select {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    height: fit-content;
-}
-
-.passport-input{
-    font-size: larger;
-    width: 100%;
-    height: 100%;
-}
-
-.radio-group {
-    display: flex;
-    gap: 15px;
-    margin: auto;
-}
+/* 6. Button Styling */
 .submit {
+    width: 100%;
     margin-top: 30px;
-    padding: 12px 25px;
+    padding: 15px;
     border: none;
     background-color: black;
     color: white;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #ccc;
-}
-@media screen and (max-width: 768px) {
-.body-cont{
-    display: grid;
-}
-.cont-reg{
-    margin-top: 70px;
+    background-color: #333;
 }
 
+/* 7. Image Handling (Avoids distortion) */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 8. Responsive Mobile View */
+@media screen and (max-width: 768px) {
+    .body-cont {
+        grid-template-columns: 1fr; /* Switch to single column on mobile */
+    }
+    
+    .cont-reg {
+        width: 100%;
+        margin-top: 60px;
+    }
 }

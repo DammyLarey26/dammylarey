@@ -170,7 +170,7 @@ function renderClaimsEngine() {
         if (rawStatus === "approved" && claim.link) {
             actionButtons += `
                 <a href="${claim.link}" target="_blank" class="contact-btn">
-                    <i class="fab fa-whatsapp"></i> Contact Finder
+                    <i class="fab fa-whatsapp"></i> Finder
                 </a>
             `;
         }
