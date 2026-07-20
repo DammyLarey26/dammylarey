@@ -14,8 +14,7 @@ if (user) {
   <span>🆔 <span id="pMatric">${user.matricNumber || user.matric || 'N/A'}</span></span>
   <span>💼 <span id="pFaculty">${user.faculty ? (user.faculty.toUpperCase()[0] + user.faculty.slice(1)) : 'N/A'}</span></span>
   <span>📞 <span id="pPhone">${user.phone || 'N/A'}</span></span>
-  <span>📩 <span id="pEmail">${user.email}</span></span>
-
+  <span style="display: flex; flex-wrap: wrap;">📩 <span id="pEmail" style="word-break: break-all;">${user.email}</span></span>
   <div class="det-btn">
     <button id="editBtn">🖍 Edit Profile</button>
     <button id="passwordBtn">⚙ Change Password</button>

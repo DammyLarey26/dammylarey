@@ -17,8 +17,7 @@ function isAuthenticated() {
 
 // End session
 function endSession(message = "Your session has expired. Please log in again.") {
-
-    // Prevent multiple alerts
+    // Prevent multiple executions on the same page
     if (window.__sessionEnded) return;
     window.__sessionEnded = true;
 
@@ -27,15 +26,21 @@ function endSession(message = "Your session has expired. Please log in again.") 
     document.body.style.opacity = "0.6";
 
     // Save the current page path so login.html knows where to send them back
-    // Using window.location.pathname captures the relative path nicely
     sessionStorage.setItem("redirectAfterLogin", window.location.pathname + window.location.search);
 
-    // Clear all OTHER session data (keep redirectAfterLogin temporarily)
+    // Capture the auth status BEFORE we clear the tokens
+    const wasStillAuthenticated = isAuthenticated();
+
+    // Clear session data
     sessionStorage.removeItem("loggedIn");
     localStorage.removeItem("token");
     localStorage.removeItem("cuser");
 
-    alert(message);
+    // Only alert if the session was active on THIS tab before this function ran.
+    // If they already logged out in another tab, wasStillAuthenticated will be false.
+    if (wasStillAuthenticated) {
+        alert(message);
+    }
 
     window.location.replace(LOGIN_PAGE);
 }
@@ -61,7 +66,9 @@ function resetSessionTimer() {
 // Protect page immediately
 (function () {
     if (!isAuthenticated()) {
-        endSession("Your session has ended. Please log in again.");
+        // If they land on a protected page and aren't logged in at all, 
+        // redirect silently without a disruptive alert.
+        endSession(""); 
         return;
     }
 
@@ -79,7 +86,7 @@ function resetSessionTimer() {
         document.addEventListener(event, resetSessionTimer, true);
     });
 
-    // Also check every 5 seconds in case token/session disappears
+    // Cross-tab sync: Check every 5 seconds if token/session was cleared elsewhere
     setInterval(() => {
         if (!isAuthenticated()) {
             endSession("Your session has ended. Please log in again.");
