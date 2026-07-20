@@ -127,7 +127,6 @@ async function loadAdminDashboardData() {
                     <div class="item-name"><h3>${itemName}</h3></div>
                     <div class="item-ID"><span>Ref: ${itemId}</span></div>
                     <div class="item-loc"><span>📍 ${itemLoc}</span></div>
-                    <div class="user-ID"><span>Founder ID: ${item.founder.id}</span></div>
                     <div class="date-rep"><span>${dateString}</span></div>
                   </div>
                 </div>
