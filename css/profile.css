@@ -41,7 +41,15 @@
     font-size:18px;
     font-weight:600;
     color:#4b0d0d;
-    overflow: hidden;
+    
+    /* FIX: Align emoji icons with text */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    /* FIX: Force long text/emails to wrap onto new lines */
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .det-btn{
@@ -60,7 +68,16 @@
     font-size:10px;
     cursor:pointer;
     transition:.3s;
-
+    
+    /* FIX: Align button emoji icons vertically with text */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    
+    /* Ensures button text wraps to a new line if it gets too narrow */
+    white-space: normal; 
+    word-wrap: break-word;
 }
 
 .det-btn button:hover{
@@ -72,25 +89,41 @@
 
 @media(max-width:768px){
 
-.main-content{
-    margin-left:0;
-    padding:20px;
-}
+    .main-content{
+        margin-left:0;
+        padding:20px;
+    }
 
-.profile-card{
-    flex-direction:column;
-    text-align:center;
-    gap:20px;
-}
+    .profile-card{
+        flex-direction:column;
+        text-align:center;
+        gap:20px;
+    }
 
-.det{
-    width:100%;
-}
+    .det{
+        width:100%;
+    }
 
-.det span{
-    font-size:16px;
-}
+    .det span{
+        font-size:16px;
+        /* MOBILE FIX: Allow items to wrap downward cleanly if long, aligning left */
+        display: flex;
+        flex-wrap: wrap; 
+        text-align: left; 
+    }
 
-
-
+    /* MOBILE FIX: Keeps buttons horizontal while managing tight screen space */
+    .det-btn {
+        flex-direction: row; 
+        gap: 6px;
+        width: 100%;
+    }
+    
+    .det-btn button {
+        font-size: 11px; /* Slightly adjusted to fit text perfectly side-by-side */
+        padding: 10px 4px; 
+        /* MOBILE FIX: Centers text and wraps nicely inside buttons */
+        flex-direction: column; 
+        gap: 4px;
+    }
 }

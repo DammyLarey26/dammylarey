@@ -329,6 +329,40 @@ button:hover {
     overflow-x: auto;
 }
 
+/* Extracted history card container template layout styling definitions */
+.history-card {
+    position: relative;
+    border: 1px solid #e2e8f0;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: white;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.history-card .card-details {
+    padding-right: 120px;
+}
+
+.history-card .card-details h3 {
+    margin: 0 0 6px 0;
+    color: #1e293b;
+    font-size: 18px;
+}
+
+.history-card .card-details p {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.history-card .item-description {
+    margin: 6px 0 0 0;
+    font-size: 13px;
+    color: #475569;
+    font-style: italic;
+}
+
 .claim-card {
     background: #fff;
     border: 1px solid #E8DED1;
@@ -452,13 +486,18 @@ button:hover {
     display: inline-block;
     height: fit-content;
     width: fit-content;
+    /* Absolute Layout placement positioning overrides */
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    text-transform: lowercase;
 }
 
 .status p {
     font-size: small;
 }
 
-.status.available { background-color: #283747 !important; }
+.status.available { background-color: #878d94 !important; }
 .status.claimed { background-color: #ff8c00 !important; }
 .status.approved { background-color: #28a745 !important; }
 .status.rejected { background-color: #dc3545 !important; }

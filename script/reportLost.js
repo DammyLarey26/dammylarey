@@ -1,7 +1,8 @@
 const API_KEY = "https://ooulostandfoundportal.onrender.com";
 
 // --- PRIMARY VALIDATION & SUBMISSION ENGINE ---
-async function handleReportSubmission(reportType) {
+// 💡 Added submitBtn parameter to manage loading state directly
+async function handleReportSubmission(reportType, submitBtn) {
   // Target DOM Nodes dynamically
   const itemName = document.querySelector('#itemName');
   const itemCategory = document.querySelector('#itemCategory');
@@ -42,11 +43,8 @@ async function handleReportSubmission(reportType) {
   if (cachedUser) {
     try {
       const parsedData = JSON.parse(cachedUser);
-      
-      // Detour logic: check if data is nested inside a ".user" object, otherwise use root
       const userProfile = parsedData.user || parsedData;
 
-      // Map out your real data fields cleanly
       reporterId = userProfile._id || userProfile.id || userProfile.userId; 
       reporterName = userProfile.name || userProfile.fullName || userProfile.username || "";
       reporterEmail = userProfile.email || "";
@@ -62,23 +60,27 @@ async function handleReportSubmission(reportType) {
     name: itemName.value.trim(),
     description: itemDescription?.value || "No description provided.",
     imgUrl: "https://placehold.co/600x400?text=No+Image+Provided", 
-    
-    // 🔑 Identity mapping
     founder: reporterId, 
     reporterId: reporterId,
-    
-    // ✨ Real User Meta Details
     reporterName: reporterName,
     reporterEmail: reporterEmail,
     reporterMatricId: reporterMatricId,
     reporterPhone: reporterPhone,
-
     foundLocation: itemLocation?.value || "Unknown Location", 
     foundDate: itemDate?.value || new Date().toISOString().split('T')[0], 
     category: itemCategory.value,
     type: reportType, 
     status: "Available" 
   };
+
+  // 🔄 Set Loading State
+  let originalBtnText = "";
+  if (submitBtn) {
+    originalBtnText = submitBtn.textContent || submitBtn.value;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting... Please wait";
+    submitBtn.style.opacity = "0.7"; // Optional visual cue
+  }
 
   try {
     const response = await fetch(`${API_KEY}/user/report`, {
@@ -101,6 +103,13 @@ async function handleReportSubmission(reportType) {
   } catch (error) {
     console.error("Transmission Failure:", error);
     alert('Network transmission failed.');
+  } finally {
+    // ↩️ Reset Loading State (Runs whether request succeeds or fails)
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+      submitBtn.style.opacity = "1";
+    }
   }
 }
 
@@ -109,18 +118,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const lostBtn = document.querySelector('#submitLostBtn');
   const foundBtn = document.querySelector('#submitFoundBtn');
 
-  // Naming your event handlers explicitly removes the "(anonymous)" tag from the stack!
   if (lostBtn) {
     lostBtn.addEventListener('click', function submitLostForm(e) {
       e.preventDefault();
-      handleReportSubmission('lost');
+      handleReportSubmission('lost', lostBtn); // 👈 Passed button context
     });
   }
 
   if (foundBtn) {
     foundBtn.addEventListener('click', function submitFoundForm(e) {
       e.preventDefault();
-      handleReportSubmission('found');
+      handleReportSubmission('found', foundBtn); // 👈 Passed button context
     });
   }
 });
